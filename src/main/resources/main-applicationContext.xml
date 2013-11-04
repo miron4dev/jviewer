@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <import resource="jdbc-applicationContext.xml"/>
+
+    <!--Controllers-->
+    <bean id="registrationController" class="ru.spb.herzen.jviewer.controller.RegistrationControllerImpl">
+        <property name="validationService" ref="validationService"/>
+        <property name="registrationService" ref="registrationService"/>
+        <property name="userModel" ref="studentModel"/>
+    </bean>
+
+    <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
+        <property name="validationService" ref="validationService"/>
+        <property name="loginService" ref="loginService"/>
+        <property name="userModel" ref="studentModel"/>
+    </bean>
+
+    <bean id="screenController" class="ru.spb.herzen.jviewer.controller.ScreenControllerImpl">
+        <property name="displayModel" ref="screenModel"/>
+    </bean>
+
+    <!--Services-->
+    <bean id="registrationService" class="ru.spb.herzen.jviewer.service.RegistrationServiceImpl">
+        <property name="validationDao" ref="validationDao"/>
+        <property name="registrationDao" ref="registrationDao"/>
+    </bean>
+
+    <bean id="loginService" class="ru.spb.herzen.jviewer.service.LoginServiceImpl">
+        <property name="loginDao" ref="loginDao"/>
+        <property name="validationDao" ref="validationDao"/>
+    </bean>
+
+    <bean id="validationService" class="ru.spb.herzen.jviewer.service.ValidationServiceImpl"/>
+
+    <!--Dao-->
+    <bean id="registrationDao" class="ru.spb.herzen.jviewer.dao.RegistrationDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="loginDao" class="ru.spb.herzen.jviewer.dao.LoginDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="validationDao" class="ru.spb.herzen.jviewer.dao.ValidationDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--Models-->
+    <bean id="studentModel" class="ru.spb.herzen.jviewer.model.StudentModel" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="screenModel" class="ru.spb.herzen.jviewer.model.ScreenModel"/>
+
+    <!--Filters-->
+    <!--<bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter">-->
+        <!--<property name="userModel" ref="studentModel"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="roleFilter" class="ru.spb.herzen.jviewer.filter.RoleFilter">-->
+        <!--<property name="userModel" ref="studentModel"/>-->
+    <!--</bean>-->
+
+</beans>

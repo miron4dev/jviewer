@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: eugene
+  Date: 11/2/13
+  Time: 8:14 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>JViewer Main Page</title>
+    <h:outputStylesheet name="main.css"/>
+    <h:outputStylesheet name="styles.css"/>
+</h:head>
+
+<h:body>
+    <div>
+        <h:form id="editor">
+            Hello, <h:outputText value="#{studentModel.name}"/>
+            <p:commandButton value="Logout" action="#{loginController.logout}"/>
+            <h:inputTextarea id="input" value="#{screenModel.input}" rows="20" cols="165" disabled="true"/>
+            <br/>
+            <br/>
+            <h:outputText id="output" value="#{screenModel.output}" escape="false"/>
+            <p:poll interval="1" update="editor"/>
+        </h:form>
+    </div>
+</h:body>
+
+</html>

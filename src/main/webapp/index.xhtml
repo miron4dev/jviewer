@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: eugene
+  Date: 11/2/13
+  Time: 3:16 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Welcome to JViewer</title>
+    <h:outputStylesheet name="main.css"/>
+    <h:outputStylesheet name="styles.css"/>
+</h:head>
+
+<h:body>
+    <div style="text-align: center; margin-top: 10%;">
+        <h:form id="loginForm">
+            <p>
+                <h:message class="alert" for="name"/>
+                <br/>
+                <p:outputLabel for="name">Full Name: </p:outputLabel>
+                <p:inputText id="name" value="#{studentModel.name}">
+                </p:inputText>
+            </p>
+
+            <p>
+                <h:message class="alert" for="password"/>
+                <br/>
+                <p:outputLabel for="password">Password: </p:outputLabel>
+                <p:password id="password" value="#{studentModel.password}">
+                </p:password>
+            </p>
+            <p:commandButton value="Login" action="#{loginController.login}" update="@form"/>
+        </h:form>
+        <h:form>
+            <p:commandButton value="Sign up" action="registration?faces-redirect=true"/>
+        </h:form>
+    </div>
+</h:body>
+
+</html>
