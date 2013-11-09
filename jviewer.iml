@@ -36,6 +36,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Glassfish 3.1.2.2" level="application_server_libraries" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-web-api:6.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.faces:javax.faces-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:4.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:bootstrap:1.0.10" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.extensions:primefaces-extensions:0.7.1" level="project" />
