@@ -11,4 +11,6 @@ public interface ScreenController {
 
     void executeCode();
     void updateInput();
+    void clearIO();
+    boolean documentTagExist();
 }

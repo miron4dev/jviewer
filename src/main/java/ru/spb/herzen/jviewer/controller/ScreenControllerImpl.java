@@ -2,6 +2,8 @@ package ru.spb.herzen.jviewer.controller;
 
 import ru.spb.herzen.jviewer.model.DisplayModel;
 
+import java.util.regex.Pattern;
+
 /**
  * Created with IntelliJ IDEA.
  * User: eugene
@@ -17,12 +19,26 @@ public class ScreenControllerImpl implements ScreenController {
     @Override
     public void executeCode() {
         updateInput();
+        while(documentTagExist()){
+            input = input.replace("document.write", "document.getElementById('displayForm:output').innerHTML = document.getElementById('displayForm:output').innerHTML + ");
+        }
         displayModel.setOutput(input);
     }
 
     @Override
     public void updateInput() {
         input = displayModel.getInput();
+    }
+
+    @Override
+    public void clearIO() {
+        displayModel.setInput("");
+        displayModel.setOutput("");
+    }
+
+    @Override
+    public boolean documentTagExist() {
+        return input.contains("document.write");
     }
 
     public void setDisplayModel(DisplayModel displayModel) {

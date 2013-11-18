@@ -32,10 +32,10 @@ public class LoginControllerImpl implements LoginController{
             else {
                 user.setOnline(true);
                 if(user.getRole().equals("user")){
-                    return "main?faces-redirect=true";
+                    return "main.xhtml?faces-redirect=true";
                 }
                 else if(user.getRole().equals("admin")){
-                    return "display?faces-redirect=true";
+                    return "display.xhtml?faces-redirect=true";
                 }
                 else throw new RuntimeException("Hack attack to LoginController");
             }

@@ -25,7 +25,7 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
     public String regProfile() {
         if (validationService.checkUser(userModel, "registrationForm")) {
             if (registrationService.regProfile(userModel)) {
-                return "index?faces-redirect=true";
+                return "index.xhtml?faces-redirect=true";
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage("registrationForm:name", new FacesMessage("User with that name is already exist."));

@@ -21,14 +21,13 @@
 
 <h:body>
     <div>
-        <h:form id="editor">
+        <h:form id="displayForm">
             Hello, <h:outputText value="#{studentModel.name}"/>
             <p:commandButton value="Logout" action="#{loginController.logout}"/>
-            <h:inputTextarea id="input" value="#{screenModel.input}" rows="20" cols="165" disabled="true"/>
-            <br/>
+            <pre>#{screenModel.input}</pre>
             <br/>
             <h:outputText id="output" value="#{screenModel.output}" escape="false"/>
-            <p:poll interval="1" update="editor"/>
+            <p:poll interval="1" update="displayForm"/>
         </h:form>
     </div>
 </h:body>

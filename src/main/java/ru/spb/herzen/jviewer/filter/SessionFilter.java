@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -19,18 +20,12 @@ import java.util.StringTokenizer;
 public class SessionFilter implements Filter {
 
     private UserModel userModel;
-    private ArrayList<String> urlList;
+    private List<String> urlList;
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        String urls = filterConfig.getInitParameter("not-avoid-urls");
-        StringTokenizer token = new StringTokenizer(urls, ",");
-
+    public void init() {
         urlList = new ArrayList<String>();
-
-        while (token.hasMoreTokens()) {
-            urlList.add(token.nextToken());
-        }
+        urlList.add("/display.xhtml");
+        urlList.add("/main.xhtml");
     }
 
     @Override
@@ -40,13 +35,17 @@ public class SessionFilter implements Filter {
         String url = request.getServletPath();
 
         if (urlList.contains(url) && !userModel.isOnline()){
-            response.sendRedirect(request.getContextPath() + "/index.jsf");
+            response.sendRedirect(request.getContextPath() + "/index.xhtml");
         }
         else filterChain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     public void setUserModel(UserModel userModel) {

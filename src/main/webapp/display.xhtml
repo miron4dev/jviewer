@@ -21,16 +21,15 @@
 </h:head>
 
 <h:body>
-    <div>
         <h:form id="displayForm">
             <p:commandButton value="Execute" actionListener="#{screenController.executeCode}" update="displayForm:output"/>
-            <p:commandButton value="Screen turn off" action="#{loginController.logout}"/>
+            <p:commandButton value="Clear IO" actionListener="#{screenController.clearIO}" update="displayForm"/>
+            <p:commandButton value="Logout" action="#{loginController.logout}"/>
             <h:inputTextarea value="#{screenModel.input}" rows="20" cols="165"/>
             <br/>
             <h:outputText id="output" value="#{screenModel.output}" escape="false"/>
             <p:poll interval="1" listener="#{screenController.updateInput}"/>
         </h:form>
-    </div>
 </h:body>
 
 </html>

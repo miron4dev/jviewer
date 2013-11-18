@@ -19,19 +19,20 @@ public class RoleFilter implements Filter{
     private UserModel userModel;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
-
-    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getServletPath();
 
-        if (url.equals("/display.jsf") && !userModel.getRole().equals("admin") || url.equals("/main.jsf") && !userModel.getRole().equals("user")){
-            response.sendRedirect(request.getContextPath() + "/index.jsf");
+        if (url.equals("/display.xhtml") && !userModel.getRole().equals("admin") || url.equals("/main.xhtml") && !userModel.getRole().equals("user")){
+            response.sendRedirect(request.getContextPath() + "/index.xhtml");
         }
         else filterChain.doFilter(request, response);
+    }
+
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override

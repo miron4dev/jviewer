@@ -60,7 +60,7 @@
     <bean id="screenModel" class="ru.spb.herzen.jviewer.model.ScreenModel"/>
 
     <!--Filters-->
-    <!--<bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter">-->
+    <!--<bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter" init-method="init">-->
         <!--<property name="userModel" ref="studentModel"/>-->
     <!--</bean>-->
 
