@@ -21,4 +21,8 @@ public interface UserModel {
     void setOnline(boolean online);
     String getTemp();
     void setTemp(String temp);
+    String getInvitationID();
+    void setInvitationID(String invitationID);
+    String getFaculty();
+    void setFaculty(String faculty);
 }

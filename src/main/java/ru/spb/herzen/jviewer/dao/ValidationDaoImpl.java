@@ -13,32 +13,12 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 public class ValidationDaoImpl extends JdbcDaoSupport implements ValidationDao {
 
     @Override
-    public boolean checkUser(String name) {
-        String sql = "select name from user where name = ?";
-        try{
-            String currentName = getJdbcTemplate().queryForObject(sql, new Object[]{name}, String.class);
-            if(name.equals(currentName)){
-                return false;
-            }
-        }
-        catch (EmptyResultDataAccessException e){
-            return true;
-        }
-        return true;
+    public void checkUser(String name) throws EmptyResultDataAccessException{
+        getJdbcTemplate().queryForObject("select name from user where name = ?", new Object[]{name}, String.class);
     }
 
     @Override
-    public boolean validateData(String name, String password) {
-        String sql = "select password from user where name = ?";
-        try{
-            String currentPassword = getJdbcTemplate().queryForObject(sql, new Object[]{name}, String.class);
-            if(password.equals(currentPassword)){
-                return true;
-            }
-        }
-        catch (EmptyResultDataAccessException e){
-            return false;
-        }
-        return false;
+    public String getUserPassword(String name) throws EmptyResultDataAccessException{
+        return getJdbcTemplate().queryForObject("select password from user where name = ?", new Object[]{name}, String.class);
     }
 }

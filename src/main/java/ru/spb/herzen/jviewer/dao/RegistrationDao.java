@@ -12,4 +12,5 @@ import ru.spb.herzen.jviewer.model.UserModel;
 public interface RegistrationDao {
 
     void regProfile(UserModel userModel);
+    String getInvitationID();
 }

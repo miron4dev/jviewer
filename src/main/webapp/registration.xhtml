@@ -19,34 +19,68 @@
 </h:head>
 
 <h:body>
-    <div style="text-align: center; margin-top: 10%;">
+    <div style="text-align: center; margin-top: 5%;">
+        <p:panel header="Enter your data" style="width:350px; height:490px; position:relative; left:500px">
             <h:form id="registrationForm">
                 <p>
                     <h:message class="alert" for="name"/>
                     <br/>
-                    <p:outputLabel for="name">Full Name: </p:outputLabel>
-                    <p:inputText id="name" value="#{studentModel.name}">
+                    <p:watermark for="name" value="Full Name:"/>
+                    <p:inputText id="name" value="#{studentModel.name}" required="true"
+                                 requiredMessage="Field cannot be empty."
+                                 validatorMessage="Full name should consist from first and last name, and they should begin with a capital letter.">
+                        <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
                     </p:inputText>
                 </p>
 
                 <p>
                     <h:message class="alert" for="password"/>
                     <br/>
-                    <p:outputLabel for="password">Password: </p:outputLabel>
-                    <p:password id="password" value="#{studentModel.password}">
+                    <p:watermark for="password" value="Password:"/>
+                    <p:password id="password" value="#{studentModel.password}" required="true"
+                                requiredMessage="Field cannot be empty."
+                                validatorMessage="Password should be less than 6 characters."
+                                binding="#{passwordComponent}">
+                        <f:validateLength minimum="6"/>
                     </p:password>
                 </p>
 
                 <p>
                     <h:message class="alert" for="rtPassword"/>
                     <br/>
-                    <p:outputLabel for="rtPassword">Retype password: </p:outputLabel>
-                    <p:password id="rtPassword" value="#{studentModel.temp}">
+                    <p:watermark for="rtPassword" value="Retype password:"/>
+                    <p:password id="rtPassword" value="#{studentModel.temp}" required="true"
+                                requiredMessage="Field cannot be empty.">
+                        <f:validator validatorId="rtPassValidation"/>
+                        <f:attribute name="passwordComponent" value="#{passwordComponent}"/>
                     </p:password>
                 </p>
-                <p:commandButton value="Create account" action="#{registrationController.regProfile}" update="@form"/>
+
+                <p>
+                    <h:message class="alert" for="inviteID"/>
+                    <br/>
+                    <p:watermark for="inviteID" value="Invitation ID (for professors only):"/>
+                    <p:password id="inviteID" value="#{studentModel.invitationID}"/>
+                </p>
+                <br/>
+                <p:watermark for="facultyList" value="Faculty"/>
+                <p:selectOneMenu id="facultyList" value="#{studentModel.faculty}"  >
+                    <f:selectItems value="#{systemModel.facultyList}"/>
+                    <p:ajax event="change" update="@this"/>
+                </p:selectOneMenu>
+                <br/>
+                <br/>
+                <h:message class="alert" for="captcha"/>
+                <p:captcha id="captcha" language="en" theme="white" label="Captcha" validatorMessage="Captcha is wrong."
+                           requiredMessage="Captcha should be entered."/>
+                <br/>
+                <p:commandButton ajax="false" value="Create account" action="#{registrationController.regProfile}"
+                                 update="@form"/>
             </h:form>
-            <p:commandButton value="Go back" action="index?faces-redirect=true"/>
+            <h:form>
+                <p:commandButton value="Go back" action="index?faces-redirect=true"/>
+            </h:form>
+        </p:panel>
     </div>
 </h:body>
 

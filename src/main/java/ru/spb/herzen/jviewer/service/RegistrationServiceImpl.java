@@ -1,7 +1,9 @@
 package ru.spb.herzen.jviewer.service;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.dao.RegistrationDao;
 import ru.spb.herzen.jviewer.dao.ValidationDao;
+import ru.spb.herzen.jviewer.messages.RegistrationMsg;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 import java.io.Serializable;
@@ -19,14 +21,26 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     private RegistrationDao registrationDao;
 
     @Override
-    public boolean regProfile(UserModel userModel) {
-        if(validationDao.checkUser(userModel.getName())){
+    public RegistrationMsg regProfile(UserModel userModel) {
+        try{
+            validationDao.checkUser(userModel.getName());
+            return RegistrationMsg.EXIST;
+        } catch (EmptyResultDataAccessException e){
+            return checkUserData(userModel);
+        }
+    }
+
+    private RegistrationMsg checkUserData(UserModel userModel){
+        if(userModel.getInvitationID().isEmpty() || registrationDao.getInvitationID().equals(userModel.getInvitationID())){
+            if(userModel.getInvitationID().isEmpty()){
+                userModel.setRole("user");
+            } else{
+                userModel.setRole("admin");
+            }
             registrationDao.regProfile(userModel);
-            return true;
+            return RegistrationMsg.SUCCESS;
         }
-        else {
-            return false;
-        }
+        return RegistrationMsg.INVITATION_ID;
     }
 
     public void setValidationDao(ValidationDao validationDao) {

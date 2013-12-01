@@ -18,13 +18,8 @@ import java.util.List;
 public class LoginDaoImpl extends JdbcDaoSupport implements LoginDao {
 
     @Override
-    public UserModel getData(String name) {
-        String sql = "select * from user where name = ?";
-        try {
-            List<StudentModel> userModel = getJdbcTemplate().query(sql, new Object[]{name}, new BeanPropertyRowMapper<StudentModel>(StudentModel.class));
-            return userModel.get(0);
-        } catch (EmptyResultDataAccessException e){
-            return null;
-        }
+    public UserModel getData(String name) throws EmptyResultDataAccessException{
+        return getJdbcTemplate().query("select * from user where name = ?", new Object[]{name},
+                new BeanPropertyRowMapper<StudentModel>(StudentModel.class)).get(0);
     }
 }

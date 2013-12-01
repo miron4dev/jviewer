@@ -9,6 +9,6 @@ package ru.spb.herzen.jviewer.dao;
  */
 public interface ValidationDao {
 
-    boolean checkUser(String name);
-    boolean validateData(String name, String password);
+    void checkUser(String name);
+    String getUserPassword(String name);
 }

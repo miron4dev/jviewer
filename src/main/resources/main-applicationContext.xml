@@ -11,13 +11,11 @@
 
     <!--Controllers-->
     <bean id="registrationController" class="ru.spb.herzen.jviewer.controller.RegistrationControllerImpl">
-        <property name="validationService" ref="validationService"/>
         <property name="registrationService" ref="registrationService"/>
         <property name="userModel" ref="studentModel"/>
     </bean>
 
     <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
-        <property name="validationService" ref="validationService"/>
         <property name="loginService" ref="loginService"/>
         <property name="userModel" ref="studentModel"/>
     </bean>
@@ -36,8 +34,6 @@
         <property name="loginDao" ref="loginDao"/>
         <property name="validationDao" ref="validationDao"/>
     </bean>
-
-    <bean id="validationService" class="ru.spb.herzen.jviewer.service.ValidationServiceImpl"/>
 
     <!--Dao-->
     <bean id="registrationDao" class="ru.spb.herzen.jviewer.dao.RegistrationDaoImpl">
@@ -59,6 +55,8 @@
 
     <bean id="screenModel" class="ru.spb.herzen.jviewer.model.ScreenModel"/>
 
+    <bean id="systemModel" class="ru.spb.herzen.jviewer.model.SystemModel"/>
+
     <!--Filters-->
     <!--<bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter" init-method="init">-->
         <!--<property name="userModel" ref="studentModel"/>-->
@@ -67,5 +65,8 @@
     <!--<bean id="roleFilter" class="ru.spb.herzen.jviewer.filter.RoleFilter">-->
         <!--<property name="userModel" ref="studentModel"/>-->
     <!--</bean>-->
+
+    <!--Options-->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
 </beans>

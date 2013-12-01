@@ -14,7 +14,12 @@ public class RegistrationDaoImpl extends JdbcDaoSupport implements RegistrationD
 
     @Override
     public void regProfile(UserModel userModel) {
-        String sql = "insert into user (name, password) values (?, ?)";
-        getJdbcTemplate().update(sql, userModel.getName(), userModel.getPassword());
+        getJdbcTemplate().update("insert into user (name, password, role, faculty) values (?, ?, ?, ?)", userModel.getName(), userModel.getPassword(),
+                userModel.getRole(), userModel.getFaculty());
+    }
+
+    @Override
+    public String getInvitationID() {
+        return getJdbcTemplate().queryForObject("select invitationID from properties", String.class);
     }
 }

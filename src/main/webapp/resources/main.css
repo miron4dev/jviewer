@@ -5,3 +5,13 @@
     color: red;
     text-align: center;
 }
+form{
+    display: inline;
+    float: inherit;
+}
+div{
+    clear:both;
+}
+.ui-selectonemenu{
+    width: 43% !important;
+}
