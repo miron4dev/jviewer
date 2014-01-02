@@ -13,24 +13,35 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
+<f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>Welcome to JViewer</title>
-    <h:outputStylesheet name="main.css"/>
-    <h:outputStylesheet name="styles.css"/>
+    <title>#{msg['indexTitle']}</title>
+    <h:outputStylesheet name="css/main.css"/>
+    <h:outputStylesheet name="css/styles.css"/>
 </h:head>
 
 <h:body>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('en')}">
+            <h:graphicImage value="resources/images/us_logo.png"/>
+        </h:commandLink>
+    </h:form>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('ru')}">
+            <h:graphicImage value="resources/images/ru_logo.png"/>
+        </h:commandLink>
+    </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="Welcome to JViewer" style="width:350px; height:200px; position:relative; left:500px">
+        <p:panel header="#{msg['indexTitle']}" style="width:350px; height:200px; position:relative; left:500px">
             <h:form id="loginForm">
                 <p>
                     <h:outputText styleClass="alert" value="#{flash['success']}"/>
                     <h:message class="alert" for="name"/>
                     <br/>
-                    <p:watermark for="name" value="Full Name:"/>
+                    <p:watermark for="name" value="#{msg['name']}"/>
                     <p:inputText id="name" value="#{studentModel.name}" required="true"
-                                 requiredMessage="Field cannot be empty."
-                                 validatorMessage="Full name should consist from first and last name, and they should begin with a capital letter.">
+                                 requiredMessage="#{msg['requiredMessage']}"
+                                 validatorMessage="#{msg['validatorNameMessage']}">
                         <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
                     </p:inputText>
                 </p>
@@ -38,18 +49,18 @@
                 <p>
                     <h:message class="alert" for="password"/>
                     <br/>
-                    <p:watermark for="password" value="Password:"/>
+                    <p:watermark for="password" value="#{msg['password']}"/>
                     <p:password id="password" value="#{studentModel.password}" required="true"
-                                requiredMessage="Field cannot be empty."
-                                validatorMessage="Password should be less than 6 characters.">
+                                requiredMessage="#{msg['requiredMessage']}"
+                                validatorMessage="#{msg['validatorPasswordMessage']}">
                         <f:validateLength minimum="6"/>
                     </p:password>
                 </p>
                 <br/>
-                <p:commandButton value="Login" action="#{loginController.login}" update="@form"/>
+                <p:commandButton value="#{msg['loginButton']}" action="#{loginController.login}" update="@form"/>
             </h:form>
             <h:form>
-                <p:commandButton value="Sign up" action="registration?faces-redirect=true"/>
+                <p:commandButton value="#{msg['signUpButton']}" action="registration?faces-redirect=true"/>
             </h:form>
         </p:panel>
     </div>

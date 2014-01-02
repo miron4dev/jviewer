@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.5.32-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.25 ( Revision: ${bzr.revision-id} )" uuid="b7edcb1b-12f7-4f5a-be4e-67e7d0826fb2">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/jviewer</jdbc-url>
+    <user-name>eugene</user-name>
+    <user-password>df9adf80dfdfdfcfdfeadfc3dfc5dfc9</user-password>
+    <schema-pattern>jviewer.*</schema-pattern>
+    <default-schemas>jviewer.*</default-schemas>
+    <default-dialect>MySQL</default-dialect>
+    <libraries>
+      <library>
+        <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar!/</url>
+      </library>
+    </libraries>
+    <schema name="" catalog="jviewer" />
+    <table name="properties" schema="" catalog="jviewer" type="TABLE">
+      <column name="invitationID" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12" />
+    </table>
+    <table name="user" schema="" catalog="jviewer" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
+      <column name="password" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
+      <column name="role" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="J3VzZXIn" />
+      <column name="faculty" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="unique_id" unique="true" columns="id" />
+      <index name="unique_name" unique="true" columns="name" />
+    </table>
+  </data-source>
+</component>

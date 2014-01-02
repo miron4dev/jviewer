@@ -8,13 +8,14 @@
           <element id="module-output" name="jviewer" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax:javaee-web-api:6.0" />
           <element id="library" level="project" name="Maven: javax.faces:javax.faces-api:2.1" />
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:4.0" />
           <element id="library" level="project" name="Maven: org.primefaces.themes:bootstrap:1.0.10" />
           <element id="library" level="project" name="Maven: org.primefaces.extensions:primefaces-extensions:0.7.1" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
-          <element id="library" level="project" name="Maven: org.primefaces.extensions:resources-ckeditor:0.7.1" />
+          <element id="library" level="project" name="Maven: org.primefaces.extensions:resources-codemirror:1.2.0" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.25" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:3.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:3.1.4.RELEASE" />
@@ -27,6 +28,9 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-context:3.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:3.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:3.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:3.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: cglib:cglib:2.2" />
           <element id="library" level="project" name="Maven: asm:asm:3.1" />
         </element>

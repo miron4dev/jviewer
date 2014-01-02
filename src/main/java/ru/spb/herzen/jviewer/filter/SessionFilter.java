@@ -22,7 +22,7 @@ public class SessionFilter implements Filter {
     private UserModel userModel;
     private List<String> urlList;
 
-    public void init() {
+    public void init(){
         urlList = new ArrayList<String>();
         urlList.add("/display.xhtml");
         urlList.add("/main.xhtml");

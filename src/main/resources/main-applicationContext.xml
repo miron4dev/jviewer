@@ -55,16 +55,16 @@
 
     <bean id="screenModel" class="ru.spb.herzen.jviewer.model.ScreenModel"/>
 
-    <bean id="systemModel" class="ru.spb.herzen.jviewer.model.SystemModel"/>
+    <bean id="localeModel" class="ru.spb.herzen.jviewer.model.LocaleModel" scope="session"/>
 
     <!--Filters-->
-    <!--<bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter" init-method="init">-->
-        <!--<property name="userModel" ref="studentModel"/>-->
-    <!--</bean>-->
+    <bean id="sessionFilter" class="ru.spb.herzen.jviewer.filter.SessionFilter" init-method="init">
+        <property name="userModel" ref="studentModel"/>
+    </bean>
 
-    <!--<bean id="roleFilter" class="ru.spb.herzen.jviewer.filter.RoleFilter">-->
-        <!--<property name="userModel" ref="studentModel"/>-->
-    <!--</bean>-->
+    <bean id="roleFilter" class="ru.spb.herzen.jviewer.filter.RoleFilter">
+        <property name="userModel" ref="studentModel"/>
+    </bean>
 
     <!--Options-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
