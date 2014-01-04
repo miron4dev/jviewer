@@ -33,9 +33,9 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     private RegistrationMsg checkUserData(UserModel userModel){
         if(userModel.getInvitationID().isEmpty() || registrationDao.getInvitationID().equals(userModel.getInvitationID())){
             if(userModel.getInvitationID().isEmpty()){
-                userModel.setRole("user");
+                userModel.setRole("ROLE_USER");
             } else{
-                userModel.setRole("admin");
+                userModel.setRole("ROLE_ADMIN");
             }
             registrationDao.regProfile(userModel);
             return RegistrationMsg.SUCCESS;

@@ -18,12 +18,21 @@
     <table name="properties" schema="" catalog="jviewer" type="TABLE">
       <column name="invitationID" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12" />
     </table>
-    <table name="user" schema="" catalog="jviewer" type="TABLE">
+    <table name="rooms" schema="" catalog="jviewer" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="name" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" />
+      <column name="password" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="unique_id" unique="true" columns="id" />
+      <index name="unique_name" unique="true" columns="name" />
+    </table>
+    <table name="users" schema="" catalog="jviewer" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
       <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="password" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="role" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="J3VzZXIn" />
       <column name="faculty" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
+      <column name="enabled" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ==" />
       <primary-key name="PRIMARY" columns="id" />
       <index name="unique_id" unique="true" columns="id" />
       <index name="unique_name" unique="true" columns="name" />

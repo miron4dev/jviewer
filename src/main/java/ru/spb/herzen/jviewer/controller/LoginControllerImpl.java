@@ -1,5 +1,9 @@
 package ru.spb.herzen.jviewer.controller;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.service.LoginService;
 
@@ -16,38 +20,28 @@ import javax.faces.context.FacesContext;
 public class LoginControllerImpl implements LoginController {
 
     private UserModel userModel;
-    private LoginService loginService;
+    private AuthenticationManager authenticationManager;
 
     @Override
     public String login() {
-        UserModel user = loginService.getData(userModel);
-        if (user == null) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("loginForm:name", new FacesMessage("Invalid data or user is not exist."));
-            return null;
-        } else {
-            user.setOnline(true);
-            if (user.getRole().equals("user")) {
-                return "main.xhtml?faces-redirect=true";
-            } else if (user.getRole().equals("admin")) {
-                return "display.xhtml?faces-redirect=true";
-            } else throw new RuntimeException("Hack attack to LoginController");
-        }
+        Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
+        Authentication result = authenticationManager.authenticate(request);
+        SecurityContextHolder.getContext().setAuthentication(result);
+        return "viewer?faces-redirect=true";
     }
 
     @Override
-    public String logout() {
+    public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        userModel.setOnline(false);
-
+        SecurityContextHolder.getContext().setAuthentication(null);
         return "index?faces-redirect=true";
-    }
-
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
     }
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
+    }
+
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 }

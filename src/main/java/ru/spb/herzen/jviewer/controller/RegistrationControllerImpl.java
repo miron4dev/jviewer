@@ -26,7 +26,7 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
         if (result == RegistrationMsg.SUCCESS) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Registration was successful, " +
                     "now you can login.");
-            return "index.xhtml?faces-redirect=true";
+            return "index?faces-redirect=true";
         } else {
             FacesContext context = FacesContext.getCurrentInstance();
             if (result == RegistrationMsg.EXIST) {

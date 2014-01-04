@@ -82,7 +82,7 @@
                 <br/>
                 <br/>
                 <h:message class="alert" for="captcha"/>
-                <p:captcha id="captcha" language="en" theme="white" label="Captcha" validatorMessage="#{msg['captchaMessage']}"
+                <p:captcha id="captcha" language="#{localeModel.currentLocale.toString()}" theme="white" label="Captcha" validatorMessage="#{msg['captchaMessage']}"
                            requiredMessage="#{msg['requiredMessage']}"/>
                 <br/>
                 <p:commandButton ajax="false" value="#{msg['createAccountButton']}" action="#{registrationController.regProfile}"

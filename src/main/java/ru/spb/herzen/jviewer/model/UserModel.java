@@ -17,12 +17,12 @@ public interface UserModel {
     void setPassword(String password);
     String getRole();
     void setRole(String role);
-    boolean isOnline();
-    void setOnline(boolean online);
     String getTemp();
     void setTemp(String temp);
     String getInvitationID();
     void setInvitationID(String invitationID);
     String getFaculty();
     void setFaculty(String faculty);
+    boolean isEnabled();
+    void setEnabled(boolean enabled);
 }

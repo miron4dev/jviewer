@@ -14,11 +14,11 @@ public class ValidationDaoImpl extends JdbcDaoSupport implements ValidationDao {
 
     @Override
     public void checkUser(String name) throws EmptyResultDataAccessException{
-        getJdbcTemplate().queryForObject("select name from user where name = ?", new Object[]{name}, String.class);
+        getJdbcTemplate().queryForObject("select name from users where name = ?", new Object[]{name}, String.class);
     }
 
     @Override
     public String getUserPassword(String name) throws EmptyResultDataAccessException{
-        return getJdbcTemplate().queryForObject("select password from user where name = ?", new Object[]{name}, String.class);
+        return getJdbcTemplate().queryForObject("select password from users where name = ?", new Object[]{name}, String.class);
     }
 }

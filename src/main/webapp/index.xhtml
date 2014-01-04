@@ -11,7 +11,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
@@ -33,13 +34,19 @@
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="#{msg['indexTitle']}" style="width:350px; height:200px; position:relative; left:500px">
-            <h:form id="loginForm">
+            <h:form id="loginForm" prependId="false">
+                <c:if test="${not empty error}">
+                    <div class="errorblock">
+                        Your login attempt was not successful, try again.<br /> Caused :
+                        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+                    </div>
+                </c:if>
                 <p>
                     <h:outputText styleClass="alert" value="#{flash['success']}"/>
-                    <h:message class="alert" for="name"/>
+                    <h:message class="alert" for="j_username"/>
                     <br/>
-                    <p:watermark for="name" value="#{msg['name']}"/>
-                    <p:inputText id="name" value="#{studentModel.name}" required="true"
+                    <p:watermark for="j_username" value="#{msg['name']}"/>
+                    <p:inputText id="j_username" value="#{studentModel.name}" required="true"
                                  requiredMessage="#{msg['requiredMessage']}"
                                  validatorMessage="#{msg['validatorNameMessage']}">
                         <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
@@ -47,10 +54,10 @@
                 </p>
 
                 <p>
-                    <h:message class="alert" for="password"/>
+                    <h:message class="alert" for="j_password"/>
                     <br/>
-                    <p:watermark for="password" value="#{msg['password']}"/>
-                    <p:password id="password" value="#{studentModel.password}" required="true"
+                    <p:watermark for="j_password" value="#{msg['password']}"/>
+                    <p:password id="j_password" value="#{studentModel.password}" required="true"
                                 requiredMessage="#{msg['requiredMessage']}"
                                 validatorMessage="#{msg['validatorPasswordMessage']}">
                         <f:validateLength minimum="6"/>

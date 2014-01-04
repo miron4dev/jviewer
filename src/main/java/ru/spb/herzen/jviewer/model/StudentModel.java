@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.model;
 
+import javax.inject.Named;
 import java.io.Serializable;
 
 /**
@@ -15,10 +16,10 @@ public class StudentModel implements UserModel, Serializable {
     private String name;
     private String password;
     private String role;
-    private boolean online;
     private String temp;
     private String invitationID;
     private String faculty;
+    private boolean enabled;
 
     @Override
     public int getId() {
@@ -61,16 +62,6 @@ public class StudentModel implements UserModel, Serializable {
     }
 
     @Override
-    public boolean isOnline() {
-        return online;
-    }
-
-    @Override
-    public void setOnline(boolean online) {
-        this.online = online;
-    }
-
-    @Override
     public String getTemp() {
         return temp;
     }
@@ -90,11 +81,23 @@ public class StudentModel implements UserModel, Serializable {
         this.invitationID = invitationID;
     }
 
+    @Override
     public String getFaculty() {
         return faculty;
     }
 
+    @Override
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Properties;
  * Time: 4:34 AM
  * To change this template use File | Settings | File Templates.
  */
-public class LocaleModel {
+public class LocaleModel implements Serializable {
 
     private Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
     private List<String> facultyList;
