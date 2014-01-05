@@ -1,1 +1,4 @@
-This file was created by IntelliJ IDEA 12.1.6 for binding GitHub repository
+JViewer. Java EE application for Herzen University. 
+Goals: 
+- html, javascript, css rendering at part of page.
+- realtime viewing a code typing from moderator to students.
