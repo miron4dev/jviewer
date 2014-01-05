@@ -1,11 +1,13 @@
 package ru.spb.herzen.jviewer.controller;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.service.LoginService;
+import ru.spb.herzen.jviewer.service.SecurityService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,11 +25,22 @@ public class LoginControllerImpl implements LoginController {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public String login() {
-        Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
-        Authentication result = authenticationManager.authenticate(request);
-        SecurityContextHolder.getContext().setAuthentication(result);
-        return "viewer?faces-redirect=true";
+    public String loginUser() {
+        try{
+            authentication();
+            return "viewer?faces-redirect=true";
+        } catch (BadCredentialsException e){
+            return null;
+        }
+    }
+
+    public String loginAdmin() {
+        try{
+            authentication();
+            return "editor?faces-redirect=true";
+        } catch (BadCredentialsException e){
+            return null;
+        }
     }
 
     @Override
@@ -35,6 +48,12 @@ public class LoginControllerImpl implements LoginController {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.getContext().setAuthentication(null);
         return "index?faces-redirect=true";
+    }
+
+    private void authentication(){
+        Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
+        Authentication result = authenticationManager.authenticate(request);
+        SecurityContextHolder.getContext().setAuthentication(result);
     }
 
     public void setUserModel(UserModel userModel) {

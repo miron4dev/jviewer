@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.service;
 
+import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 /**
@@ -11,5 +12,5 @@ import ru.spb.herzen.jviewer.model.UserModel;
  */
 public interface LoginService {
 
-    UserModel getData(UserModel userModel);
+    UserModel getData(RequestModel requestModel);
 }

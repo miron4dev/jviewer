@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.dao;
 
+import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 /**
@@ -11,6 +12,6 @@ import ru.spb.herzen.jviewer.model.UserModel;
  */
 public interface RegistrationDao {
 
-    void regProfile(UserModel userModel);
+    void regProfile(String name, String password, String role, String faculty);
     String getInvitationID();
 }

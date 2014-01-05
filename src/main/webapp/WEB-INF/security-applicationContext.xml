@@ -9,6 +9,7 @@
 
     <security:http auto-config="true">
         <security:intercept-url pattern="/viewer.xhtml" access="ROLE_USER"/>
+        <security:intercept-url pattern="/editor.xhtml" access="ROLE_ADMIN"/>
         <security:form-login login-page="/index.xhtml"/>
         <security:logout logout-success-url="/index.xhtml" />
     </security:http>
@@ -19,6 +20,7 @@
 
     <bean id="securityService" class="ru.spb.herzen.jviewer.service.SecurityService">
         <property name="loginService" ref="loginService"/>
+        <property name="requestModel" ref="requestModel"/>
         <property name="userModel" ref="studentModel"/>
     </bean>
 </beans>

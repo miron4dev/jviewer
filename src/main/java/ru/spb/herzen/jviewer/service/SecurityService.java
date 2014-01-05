@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 import javax.faces.application.FacesMessage;
@@ -24,28 +25,30 @@ import java.util.List;
 public class SecurityService implements AuthenticationProvider {
 
     private LoginService loginService;
+    private RequestModel requestModel;
     private UserModel userModel;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        UserModel user = loginService.getData(userModel);
+        UserModel user = loginService.getData(requestModel);
 
         if (user == null) {
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Username not found.");
-            throw new BadCredentialsException("Username not found.");
-            //TODO logging
-        }
-
-        if (!password.equals(user.getPassword())) {
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Wrong password.");
-            throw new BadCredentialsException("Wrong password.");
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
+            throw new BadCredentialsException("Data is invalid.");
             //TODO logging
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        userModel.setEnabled(user.isEnabled());
+        userModel.setRole(user.getRole());
+        userModel.setFaculty(user.getFaculty());
+        userModel.setId(user.getId());
+        userModel.setInvitationID(user.getInvitationID());
+        userModel.setName(user.getName());
+        userModel.setPassword(user.getPassword());
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
 
@@ -56,6 +59,10 @@ public class SecurityService implements AuthenticationProvider {
 
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;
+    }
+
+    public void setRequestModel(RequestModel requestModel) {
+        this.requestModel = requestModel;
     }
 
     public void setUserModel(UserModel userModel) {

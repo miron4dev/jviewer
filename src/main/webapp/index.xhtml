@@ -35,18 +35,12 @@
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="#{msg['indexTitle']}" style="width:350px; height:200px; position:relative; left:500px">
             <h:form id="loginForm" prependId="false">
-                <c:if test="${not empty error}">
-                    <div class="errorblock">
-                        Your login attempt was not successful, try again.<br /> Caused :
-                        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-                    </div>
-                </c:if>
                 <p>
                     <h:outputText styleClass="alert" value="#{flash['success']}"/>
                     <h:message class="alert" for="j_username"/>
                     <br/>
                     <p:watermark for="j_username" value="#{msg['name']}"/>
-                    <p:inputText id="j_username" value="#{studentModel.name}" required="true"
+                    <p:inputText id="j_username" value="#{requestModel.name}" required="true"
                                  requiredMessage="#{msg['requiredMessage']}"
                                  validatorMessage="#{msg['validatorNameMessage']}">
                         <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
@@ -57,14 +51,15 @@
                     <h:message class="alert" for="j_password"/>
                     <br/>
                     <p:watermark for="j_password" value="#{msg['password']}"/>
-                    <p:password id="j_password" value="#{studentModel.password}" required="true"
+                    <p:password id="j_password" value="#{requestModel.password}" required="true"
                                 requiredMessage="#{msg['requiredMessage']}"
                                 validatorMessage="#{msg['validatorPasswordMessage']}">
                         <f:validateLength minimum="6"/>
                     </p:password>
                 </p>
                 <br/>
-                <p:commandButton value="#{msg['loginButton']}" action="#{loginController.login}" update="@form"/>
+                <p:commandButton icon="ui-icon-person" action="#{loginController.loginAdmin}"/>
+                <p:commandButton value="#{msg['loginButton']}" action="#{loginController.loginUser}" update="@form"/>
             </h:form>
             <h:form>
                 <p:commandButton value="#{msg['signUpButton']}" action="registration?faces-redirect=true"/>

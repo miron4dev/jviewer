@@ -1,6 +1,7 @@
 package ru.spb.herzen.jviewer.dao;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 /**
@@ -13,9 +14,9 @@ import ru.spb.herzen.jviewer.model.UserModel;
 public class RegistrationDaoImpl extends JdbcDaoSupport implements RegistrationDao {
 
     @Override
-    public void regProfile(UserModel userModel) {
-        getJdbcTemplate().update("insert into users (name, password, role, faculty) values (?, ?, ?, ?)", userModel.getName(), userModel.getPassword(),
-                userModel.getRole(), userModel.getFaculty());
+    public void regProfile(String name, String password, String role, String faculty) {
+        getJdbcTemplate().update("insert into users (name, password, role, faculty) values (?, ?, ?, ?)", name, password,
+                role, faculty);
     }
 
     @Override

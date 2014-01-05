@@ -9,6 +9,7 @@ package ru.spb.herzen.jviewer.controller;
  */
 public interface LoginController {
 
-    String login();
+    String loginUser();
+    String loginAdmin();
     String logout();
 }

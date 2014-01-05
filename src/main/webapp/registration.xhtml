@@ -37,7 +37,7 @@
                     <h:message class="alert" for="name"/>
                     <br/>
                     <p:watermark for="name" value="#{msg['name']}"/>
-                    <p:inputText id="name" value="#{studentModel.name}" required="true"
+                    <p:inputText id="name" value="#{requestModel.name}" required="true"
                                  requiredMessage="#{msg['requiredMessage']}"
                                  validatorMessage="#{msg['validatorNameMessage']}">
                         <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
@@ -48,7 +48,7 @@
                     <h:message class="alert" for="password"/>
                     <br/>
                     <p:watermark for="password" value="#{msg['password']}"/>
-                    <p:password id="password" value="#{studentModel.password}" required="true"
+                    <p:password id="password" value="#{requestModel.password}" required="true"
                                 requiredMessage="#{msg['requiredMessage']}"
                                 validatorMessage="#{msg['validatorPasswordMessage']}"
                                 binding="#{passwordComponent}">
@@ -60,7 +60,7 @@
                     <h:message class="alert" for="rtPassword"/>
                     <br/>
                     <p:watermark for="rtPassword" value="#{msg['rtPassword']}"/>
-                    <p:password id="rtPassword" value="#{studentModel.temp}" required="true"
+                    <p:password id="rtPassword" value="#{requestModel.temp}" required="true"
                                 requiredMessage="#{msg['requiredMessage']}">
                         <f:validator validatorId="rtPassValidation"/>
                         <f:attribute name="passwordComponent" value="#{passwordComponent}"/>
@@ -71,11 +71,11 @@
                     <h:message class="alert" for="inviteID"/>
                     <br/>
                     <p:watermark for="inviteID" value="#{msg['inviteID']}"/>
-                    <p:password id="inviteID" value="#{studentModel.invitationID}"/>
+                    <p:password id="inviteID" value="#{requestModel.invitationID}"/>
                 </p>
                 <br/>
                 <p:watermark for="facultyList" value="#{msg['faculty']}"/>
-                <p:selectOneMenu id="facultyList" value="#{studentModel.faculty}"  >
+                <p:selectOneMenu id="facultyList" value="#{requestModel.faculty}"  >
                     <f:selectItems value="#{localeModel.facultyList}"/>
                     <p:ajax event="change" update="@this"/>
                 </p:selectOneMenu>

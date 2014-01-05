@@ -10,12 +10,12 @@
     <!--Controllers-->
     <bean id="registrationController" class="ru.spb.herzen.jviewer.controller.RegistrationControllerImpl">
         <property name="registrationService" ref="registrationService"/>
-        <property name="userModel" ref="studentModel"/>
+        <property name="requestModel" ref="requestModel"/>
     </bean>
 
     <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
-        <property name="userModel" ref="studentModel"/>
         <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="userModel" ref="studentModel"/>
     </bean>
 
     <bean id="screenController" class="ru.spb.herzen.jviewer.controller.ScreenControllerImpl">
@@ -54,6 +54,10 @@
     <bean id="screenModel" class="ru.spb.herzen.jviewer.model.ScreenModel"/>
 
     <bean id="localeModel" class="ru.spb.herzen.jviewer.model.LocaleModel" scope="session"/>
+
+    <bean id="requestModel" class="ru.spb.herzen.jviewer.model.RequestModel" scope="request">
+        <aop:scoped-proxy/>
+    </bean>
 
     <!--Options-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />

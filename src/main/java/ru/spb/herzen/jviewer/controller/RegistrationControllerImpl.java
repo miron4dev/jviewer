@@ -1,6 +1,7 @@
 package ru.spb.herzen.jviewer.controller;
 
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
+import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.service.RegistrationService;
 
@@ -17,12 +18,12 @@ import java.io.Serializable;
  */
 public class RegistrationControllerImpl implements RegistrationController, Serializable {
 
-    private UserModel userModel;
+    private RequestModel requestModel;
     private RegistrationService registrationService;
 
     @Override
     public String regProfile() {
-        RegistrationMsg result = registrationService.regProfile(userModel);
+        RegistrationMsg result = registrationService.regProfile(requestModel);
         if (result == RegistrationMsg.SUCCESS) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Registration was successful, " +
                     "now you can login.");
@@ -38,8 +39,8 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
         }
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setRequestModel(RequestModel requestModel) {
+        this.requestModel = requestModel;
     }
 
     public void setRegistrationService(RegistrationService registrationService) {

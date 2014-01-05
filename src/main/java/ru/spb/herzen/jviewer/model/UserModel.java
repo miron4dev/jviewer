@@ -17,8 +17,6 @@ public interface UserModel {
     void setPassword(String password);
     String getRole();
     void setRole(String role);
-    String getTemp();
-    void setTemp(String temp);
     String getInvitationID();
     void setInvitationID(String invitationID);
     String getFaculty();
