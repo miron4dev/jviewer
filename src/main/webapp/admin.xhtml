@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Evgeny
+  Date: 1/7/14
+  Time: 1:24 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Room management page</title>
+    <h:outputStylesheet name="css/main.css"/>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+
+<h:body>
+    <div style="text-align: center; margin-top: 5%;">
+        <p:panel header="Room management page" style="width:350px; height:185px; position:relative; left:500px">
+            <p>Welcome back, #{studentModel.name}</p>
+            <p>What are you want to do?</p>
+            <br/>
+            <h:form>
+                <h:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}">
+                    <f:selectItems value="#{roomModel.rooms}" />
+                    <p:ajax event="change" update="@this"/>
+                </h:selectOneMenu>
+            </h:form>
+            <br/>
+            <br/>
+            <h:form id="create"><p:commandButton action="newroom?faces-redirect=true" value="Create new room" /></h:form>
+            <h:form id="delete"><p:commandButton action="delroom?faces-redirect=true" value="Delete" /></h:form>
+            <h:form id="login"><p:commandButton action="#{loginController.pageRedirect('editor')}" value="Login" /></h:form>
+            <h:form id="logout"><p:commandButton action="#{loginController.logout}" value="Logout" /></h:form>
+        </p:panel>
+    </div>
+</h:body>
+
+</html>

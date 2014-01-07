@@ -1,25 +1,34 @@
 package ru.spb.herzen.jviewer.model;
 
-import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:31 PM
+ * User: Evgeny
+ * Date: 1/7/14
+ * Time: 1:30 PM
  * To change this template use File | Settings | File Templates.
  */
-public class StudentModel implements UserModel, Serializable {
+public class RoomModelImpl implements RoomModel, Serializable {
 
     private int id;
     private String name;
     private String password;
-    private String role;
-    private String invitationID;
-    private String faculty;
-    private boolean enabled;
+    private List<String> rooms;
     private String currentRoom;
+
+    @Override
+    public String addRoom() {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public String removeRoom() {
+        //TODO
+        return null;
+    }
 
     @Override
     public int getId() {
@@ -52,48 +61,21 @@ public class StudentModel implements UserModel, Serializable {
     }
 
     @Override
-    public String getRole() {
-        return role;
+    public List getRooms() {
+        return rooms;
     }
 
     @Override
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Override
-    public String getInvitationID() {
-        return invitationID;
-    }
-
-    @Override
-    public void setInvitationID(String invitationID) {
-        this.invitationID = invitationID;
-    }
-
-    @Override
-    public String getFaculty() {
-        return faculty;
-    }
-
-    @Override
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setRooms(List rooms) {
+        this.rooms = rooms;
     }
 
     @Override
     public String getCurrentRoom() {
-        return currentRoom;
+        if(rooms != null){
+            currentRoom = rooms.get(0);
+        }
+        return currentRoom == null ? "" : currentRoom;
     }
 
     @Override

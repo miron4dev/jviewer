@@ -3,6 +3,7 @@ package ru.spb.herzen.jviewer.dao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import ru.spb.herzen.jviewer.model.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.StudentModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
@@ -20,6 +21,11 @@ public class LoginDaoImpl extends JdbcDaoSupport implements LoginDao {
     @Override
     public UserModel getData(String name) throws EmptyResultDataAccessException{
         return getJdbcTemplate().query("select * from users where name = ?", new Object[]{name},
-                new BeanPropertyRowMapper<StudentModel>(StudentModel.class)).get(0);
+                new BeanPropertyRowMapper<>(StudentModel.class)).get(0);
+    }
+
+    @Override
+    public List<RoomModelImpl> getRooms() {
+        return getJdbcTemplate().query("select * from rooms", new BeanPropertyRowMapper<>(RoomModelImpl.class));
     }
 }

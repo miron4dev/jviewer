@@ -16,6 +16,8 @@
     <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="userModel" ref="studentModel"/>
+        <property name="loginService" ref="loginService"/>
+        <property name="roomModel" ref="roomModel"/>
     </bean>
 
     <bean id="screenController" class="ru.spb.herzen.jviewer.controller.ScreenControllerImpl">
@@ -58,6 +60,8 @@
     <bean id="requestModel" class="ru.spb.herzen.jviewer.model.RequestModel" scope="request">
         <aop:scoped-proxy/>
     </bean>
+
+    <bean id="roomModel" class="ru.spb.herzen.jviewer.model.RoomModelImpl"/>
 
     <!--Options-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />

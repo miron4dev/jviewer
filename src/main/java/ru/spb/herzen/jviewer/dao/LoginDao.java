@@ -1,6 +1,9 @@
 package ru.spb.herzen.jviewer.dao;
 
+import ru.spb.herzen.jviewer.model.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,4 +15,5 @@ import ru.spb.herzen.jviewer.model.UserModel;
 public interface LoginDao {
 
     UserModel getData(String name);
+    List<RoomModelImpl> getRooms();
 }

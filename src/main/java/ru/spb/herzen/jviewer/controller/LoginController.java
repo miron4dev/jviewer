@@ -12,4 +12,5 @@ public interface LoginController {
     String loginUser();
     String loginAdmin();
     String logout();
+    String pageRedirect(String page);
 }

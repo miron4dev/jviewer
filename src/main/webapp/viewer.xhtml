@@ -32,15 +32,16 @@
             <h:graphicImage value="resources/images/ru_logo.png"/>
         </h:commandLink>
     </h:form>
-        #{msg['welcomeMessage']}, <h:outputText value="#{studentModel.name}"/>
+        Current room: <h:outputText value="#{studentModel.currentRoom}"/>
 
     <h:form id="displayForm">
+            <p:commandButton value="Rooms" action="rooms?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
             <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{screenModel.input}"/>
             <br/>
             <h:outputText id="output" value="#{screenModel.output}" escape="false"/>
             <p:poll interval="1" update="displayForm"/>
-        </h:form>
+    </h:form>
 </h:body>
 
 </html>

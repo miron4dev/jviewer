@@ -1,13 +1,15 @@
 package ru.spb.herzen.jviewer.model;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:27 PM
+ * User: Evgeny
+ * Date: 1/7/14
+ * Time: 1:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface UserModel {
+public interface RoomModel {
 
     int getId();
     void setId(int id);
@@ -15,14 +17,10 @@ public interface UserModel {
     void setName(String name);
     String getPassword();
     void setPassword(String password);
-    String getRole();
-    void setRole(String role);
-    String getInvitationID();
-    void setInvitationID(String invitationID);
-    String getFaculty();
-    void setFaculty(String faculty);
-    boolean isEnabled();
-    void setEnabled(boolean enabled);
+    List getRooms();
+    void setRooms(List rooms);
     String getCurrentRoom();
     void setCurrentRoom(String currentRoom);
+    String addRoom();
+    String removeRoom();
 }

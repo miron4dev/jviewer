@@ -4,7 +4,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.dao.LoginDao;
 import ru.spb.herzen.jviewer.dao.ValidationDao;
 import ru.spb.herzen.jviewer.model.RequestModel;
+import ru.spb.herzen.jviewer.model.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +31,15 @@ public class LoginServiceImpl implements LoginService {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public List<RoomModelImpl> getRooms() {
+        try{
+            return loginDao.getRooms();
+        } catch(EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     public void setValidationDao(ValidationDao validationDao) {

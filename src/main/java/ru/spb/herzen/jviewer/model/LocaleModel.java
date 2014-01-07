@@ -33,7 +33,7 @@ public class LocaleModel implements Serializable {
             FileInputStream fis = new FileInputStream(new File(this.getClass().getClassLoader().getResource(fileName).toURI()));
             props.load(fis);
         } catch (IOException | URISyntaxException | NullPointerException e) {
-            //TODO logging
+            //TODO: logging
             e.printStackTrace();
         }
 

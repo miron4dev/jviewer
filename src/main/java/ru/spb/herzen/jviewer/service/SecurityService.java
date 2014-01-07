@@ -37,7 +37,7 @@ public class SecurityService implements AuthenticationProvider {
         if (user == null) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
             throw new BadCredentialsException("Data is invalid.");
-            //TODO logging
+            //TODO: logging
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();

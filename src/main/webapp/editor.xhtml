@@ -33,6 +33,7 @@
         </h:commandLink>
     </h:form>
         <h:form id="displayForm">
+            Current room: <h:outputText value="#{studentModel.currentRoom} "/>
             <p:commandButton value="#{msg['executeButton']}" actionListener="#{screenController.executeCode}" update="displayForm:output"/>
             <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{screenController.clearIO}" update="displayForm"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
