@@ -12,6 +12,8 @@
         <security:intercept-url pattern="/rooms.xhtml" access="ROLE_USER"/>
         <security:intercept-url pattern="/editor.xhtml" access="ROLE_ADMIN"/>
         <security:intercept-url pattern="/admin.xhtml" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/newroom.xhtml" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/delroom.xhtml" access="ROLE_ADMIN"/>
         <security:form-login login-page="/index.xhtml"/>
         <security:logout logout-success-url="/index.xhtml" />
     </security:http>

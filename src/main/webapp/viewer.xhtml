@@ -11,8 +11,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:pe="http://primefaces.org/ui/extensions" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
@@ -37,9 +38,9 @@
     <h:form id="displayForm">
             <p:commandButton value="Rooms" action="rooms?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{screenModel.input}"/>
+            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{roomModel.displayModel.input}"/>
             <br/>
-            <h:outputText id="output" value="#{screenModel.output}" escape="false"/>
+            <h:outputText id="output" value="#{roomModel.displayModel.output}" escape="false"/>
             <p:poll interval="1" update="displayForm"/>
     </h:form>
 </h:body>

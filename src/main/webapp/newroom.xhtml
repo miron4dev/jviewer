@@ -10,14 +10,34 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Create new room</title>
+    <h:outputStylesheet name="css/main.css"/>
+    <h:outputStylesheet name="css/styles.css"/>
 </h:head>
 
 <h:body>
-    Place your content here
+    <div style="text-align: center; margin-top: 5%;">
+        <p:panel header="Enter new room data" style="width:350px; height:165px; position:relative; left:500px">
+            <br/>
+            <h:form id="createForm">
+                <p:inputText id="name" value="#{roomModel.name}" required="true" requiredMessage="#{msg['requiredMessage']}"/>
+                <p:watermark value="#{msg['name']}" for="name"/>
+                <br/>
+                <br/>
+                <p:password id="password" value="#{roomModel.password}"/>
+                <p:watermark value="#{msg['password']}" for="password"/>
+                <br/>
+                <br/>
+                <p:commandButton action="#{roomModel.createRoom}" value="Create" />
+            </h:form>
+            <h:form id="cancelForm"><p:commandButton action="delroom?faces-redirect=true" value="Go back" /></h:form>
+        </p:panel>
+    </div>
 </h:body>
 
 </html>

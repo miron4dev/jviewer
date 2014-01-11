@@ -9,6 +9,9 @@ package ru.spb.herzen.jviewer.model;
  */
 public interface DisplayModel {
 
+    void executeCode();
+    void updateInput();
+    void clearIO();
     String getInput();
     void setInput(String input);
     String getOutput();

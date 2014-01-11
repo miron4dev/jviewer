@@ -1,6 +1,10 @@
 package ru.spb.herzen.jviewer.model;
 
+import ru.spb.herzen.jviewer.service.LoginService;
+import ru.spb.herzen.jviewer.service.ManagementService;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,17 +21,37 @@ public class RoomModelImpl implements RoomModel, Serializable {
     private String password;
     private List<String> rooms;
     private String currentRoom;
+    private DisplayModel displayModel;
+
+    private ManagementService managementService;
+    private LoginService loginService;
 
     @Override
-    public String addRoom() {
-        //TODO
-        return null;
+    public String createRoom() {
+        managementService.createRoom(name, password);
+        refreshRooms();
+        return "admin?faces-redirect=true";
     }
 
     @Override
     public String removeRoom() {
-        //TODO
-        return null;
+        managementService.removeRoom(currentRoom);
+        refreshRooms();
+        return "admin?faces-redirect=true";
+    }
+
+    @Override
+    public void refreshRooms(){
+        this.rooms = loadNames(loginService.getRooms());
+    }
+
+    private List<String> loadNames(List<RoomModelImpl> roomModelList){
+        List<String> names = new ArrayList<>();
+        for (RoomModelImpl aRoomModelList : roomModelList) {
+            names.add(aRoomModelList.getName());
+        }
+
+        return names;
     }
 
     @Override
@@ -61,25 +85,38 @@ public class RoomModelImpl implements RoomModel, Serializable {
     }
 
     @Override
-    public List getRooms() {
+    public List<String> getRooms() {
         return rooms;
     }
 
     @Override
-    public void setRooms(List rooms) {
+    public void setRooms(List<String> rooms) {
         this.rooms = rooms;
     }
 
     @Override
     public String getCurrentRoom() {
-        if(rooms != null){
-            currentRoom = rooms.get(0);
-        }
-        return currentRoom == null ? "" : currentRoom;
+        return currentRoom;
     }
 
     @Override
     public void setCurrentRoom(String currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    public void setManagementService(ManagementService managementService) {
+        this.managementService = managementService;
+    }
+
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    public DisplayModel getDisplayModel() {
+        return displayModel;
+    }
+
+    public void setDisplayModel(DisplayModel displayModel) {
+        this.displayModel = displayModel;
     }
 }

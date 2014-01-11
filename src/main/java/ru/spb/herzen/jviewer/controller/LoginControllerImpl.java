@@ -28,13 +28,13 @@ public class LoginControllerImpl implements LoginController {
     private UserModel userModel;
     private RoomModel roomModel;
     private AuthenticationManager authenticationManager;
-    private LoginService loginService;
 
     @Override
     public String loginUser() {
         try{
             authentication();
-            roomModel.setRooms(loadNames(loginService.getRooms())); //TODO: architect solution is bad
+            roomModel.refreshRooms(); //TODO: bad architect solution
+            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
             return "rooms?faces-redirect=true";
         } catch (BadCredentialsException e){
             return null;
@@ -45,7 +45,8 @@ public class LoginControllerImpl implements LoginController {
     public String loginAdmin() {
         try{
             authentication();
-            roomModel.setRooms(loadNames(loginService.getRooms()));
+            roomModel.refreshRooms(); //TODO: bad architect solution
+            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
             return "admin?faces-redirect=true";
         } catch (BadCredentialsException e){
             return null;
@@ -61,6 +62,9 @@ public class LoginControllerImpl implements LoginController {
 
     @Override
     public String pageRedirect(String page){
+        if(roomModel.getCurrentRoom() == null || roomModel.getCurrentRoom().isEmpty()){
+            return null;
+        }
         userModel.setCurrentRoom(roomModel.getCurrentRoom());
         return page + "?faces-redirect=true";
     }
@@ -71,14 +75,7 @@ public class LoginControllerImpl implements LoginController {
         SecurityContextHolder.getContext().setAuthentication(result);
     }
 
-    private List<String> loadNames(List<RoomModelImpl> roomModelList){
-        List<String> names = new ArrayList<>();
-        for (RoomModelImpl aRoomModelList : roomModelList) {
-            names.add(aRoomModelList.getName());
-        }
 
-        return names;
-    }
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
@@ -86,18 +83,6 @@ public class LoginControllerImpl implements LoginController {
 
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-    }
-
-    public LoginService getLoginService() {
-        return loginService;
-    }
-
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
-    }
-
-    public RoomModel getRoomModel() {
-        return roomModel;
     }
 
     public void setRoomModel(RoomModel roomModel) {

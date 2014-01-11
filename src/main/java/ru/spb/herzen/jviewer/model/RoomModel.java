@@ -17,10 +17,13 @@ public interface RoomModel {
     void setName(String name);
     String getPassword();
     void setPassword(String password);
-    List getRooms();
-    void setRooms(List rooms);
+    List<String> getRooms();
+    void setRooms(List<String> rooms);
     String getCurrentRoom();
     void setCurrentRoom(String currentRoom);
-    String addRoom();
+    DisplayModel getDisplayModel();
+    void setDisplayModel(DisplayModel displayModel);
+    String createRoom();
     String removeRoom();
+    void refreshRooms();
 }

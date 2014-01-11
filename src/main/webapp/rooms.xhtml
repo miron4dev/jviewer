@@ -10,7 +10,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Room management page</title>
@@ -23,15 +25,15 @@
         <p:panel style="width:350px; height:150px; position:relative; left:500px">
             <p>#{msg['welcomeMessage']}, #{studentModel.name}</p>
             <p>Select necessary room</p>
-            <h:form>
-                <h:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}">
+            <h:form id="loginForm">
+                <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}">
                     <f:selectItems value="#{roomModel.rooms}" />
                     <p:ajax event="change" update="@this"/>
-                </h:selectOneMenu>
+                </p:selectOneMenu>
+                <br/>
+                <br/>
+                <p:commandButton action="#{loginController.pageRedirect('viewer')}" value="Login" />
             </h:form>
-            <br/>
-            <br/>
-            <h:form id="login"><p:commandButton action="#{loginController.pageRedirect('viewer')}" value="Login" /></h:form>
             <h:form id="logout"><p:commandButton action="#{loginController.logout}" value="Logout" /></h:form>
         </p:panel>
     </div>
