@@ -23,44 +23,65 @@ public class LocaleModel implements Serializable {
 
     private Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
     private List<String> facultyList;
+    private Properties localeFile;
 
     @PostConstruct
     public void init(){
-        facultyList = new ArrayList<String>();
-        Properties props = new Properties();
+        facultyList = new ArrayList<>();
+        localeFile = new Properties();
         String fileName = loadFileName();
         try {
             FileInputStream fis = new FileInputStream(new File(this.getClass().getClassLoader().getResource(fileName).toURI()));
-            props.load(fis);
+            localeFile.load(fis);
         } catch (IOException | URISyntaxException | NullPointerException e) {
             //TODO: logging
             e.printStackTrace();
         }
 
-        facultyList.add(props.getProperty("ItFaculty"));
-        facultyList.add(props.getProperty("MathFaculty"));
-        facultyList.add(props.getProperty("ChildhoodFaculty"));
-        facultyList.add(props.getProperty("PsychoFaculty"));
-        facultyList.add(props.getProperty("FineArtsFaculty"));
-        facultyList.add(props.getProperty("LanguageFaculty"));
-        facultyList.add(props.getProperty("PedagogyFaculty"));
-        facultyList.add(props.getProperty("MusicFaculty"));
-        facultyList.add(props.getProperty("SocialFaculty"));
-        facultyList.add(props.getProperty("PhysicsFaculty"));
-        facultyList.add(props.getProperty("CultureFaculty"));
-        facultyList.add(props.getProperty("PhilosophyFaculty"));
-        facultyList.add(props.getProperty("ChemistryFaculty"));
-        facultyList.add(props.getProperty("RussianFaculty"));
-        facultyList.add(props.getProperty("TechnologyFaculty"));
-        facultyList.add(props.getProperty("GeoFaculty"));
-        facultyList.add(props.getProperty("LifeFaculty"));
-        facultyList.add(props.getProperty("ManagementFaculty"));
-        facultyList.add(props.getProperty("VyborgFaculty"));
-        facultyList.add(props.getProperty("EconomicsFaculty"));
-        facultyList.add(props.getProperty("LawFaculty"));
-        facultyList.add(props.getProperty("ElectiveFaculty"));
-        facultyList.add(props.getProperty("BiologyFaculty"));
-        facultyList.add(props.getProperty("PhilologyFaculty"));
+        facultyList.add(localeFile.getProperty("ItFaculty"));
+        facultyList.add(localeFile.getProperty("MathFaculty"));
+        facultyList.add(localeFile.getProperty("ChildhoodFaculty"));
+        facultyList.add(localeFile.getProperty("PsychoFaculty"));
+        facultyList.add(localeFile.getProperty("FineArtsFaculty"));
+        facultyList.add(localeFile.getProperty("LanguageFaculty"));
+        facultyList.add(localeFile.getProperty("PedagogyFaculty"));
+        facultyList.add(localeFile.getProperty("MusicFaculty"));
+        facultyList.add(localeFile.getProperty("SocialFaculty"));
+        facultyList.add(localeFile.getProperty("PhysicsFaculty"));
+        facultyList.add(localeFile.getProperty("CultureFaculty"));
+        facultyList.add(localeFile.getProperty("PhilosophyFaculty"));
+        facultyList.add(localeFile.getProperty("ChemistryFaculty"));
+        facultyList.add(localeFile.getProperty("RussianFaculty"));
+        facultyList.add(localeFile.getProperty("TechnologyFaculty"));
+        facultyList.add(localeFile.getProperty("GeoFaculty"));
+        facultyList.add(localeFile.getProperty("LifeFaculty"));
+        facultyList.add(localeFile.getProperty("ManagementFaculty"));
+        facultyList.add(localeFile.getProperty("VyborgFaculty"));
+        facultyList.add(localeFile.getProperty("EconomicsFaculty"));
+        facultyList.add(localeFile.getProperty("LawFaculty"));
+        facultyList.add(localeFile.getProperty("ElectiveFaculty"));
+        facultyList.add(localeFile.getProperty("BiologyFaculty"));
+        facultyList.add(localeFile.getProperty("PhilologyFaculty"));
+    }
+
+    public String switchLocale(String locale){
+        currentLocale = new Locale(locale);
+        init();
+
+        return FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath() + "?faces-redirect=true";
+    }
+
+    private String loadFileName(){
+        if(currentLocale.equals(new Locale("en"))){
+            return "locale/output/language.properties";
+        }
+        else {
+            return "locale/output/language_ru.properties";
+        }
+    }
+
+    public Locale getCurrentLocale() {
+        return currentLocale;
     }
 
     public List<String> getFacultyList() {
@@ -71,23 +92,7 @@ public class LocaleModel implements Serializable {
         this.facultyList = facultyList;
     }
 
-    public String switchLocale(String locale){
-        currentLocale = new Locale(locale);
-        init();
-
-        return FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath() + "?faces-redirect=true";
-    }
-
-    public Locale getCurrentLocale() {
-        return currentLocale;
-    }
-
-    private String loadFileName(){
-        if(currentLocale.equals(new Locale("en"))){
-            return "locale/output/language.properties";
-        }
-        else {
-            return "locale/output/language_ru.properties";
-        }
+    public Properties getLocaleFile(){
+        return localeFile;
     }
 }

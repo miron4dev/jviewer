@@ -34,15 +34,15 @@
         </h:commandLink>
     </h:form>
         <h:form id="displayForm">
-            Current room: <h:outputText value="#{roomModel.currentRoom} "/>
-            <p:commandButton value="#{msg['executeButton']}" actionListener="#{roomModel.displayModel.executeCode}" update="displayForm:output"/>
-            <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{roomModel.displayModel.clearIO}" update="displayForm"/>
-            <p:commandButton value="Rooms" action="admin?faces-redirect=true"/>
+            #{msg['currentRoomMessage']}: <h:outputText value="#{studentModel.currentRoom} "/>
+            <p:commandButton value="#{msg['executeButton']}" actionListener="#{systemModel.getCurrentScreen(studentModel.currentRoom).executeCode}" update="displayForm:output"/>
+            <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{systemModel.getCurrentScreen(studentModel.currentRoom).clearIO}" update="displayForm"/>
+            <p:commandButton value="#{msg['roomsButton']}" action="admin?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{roomModel.displayModel.input}"/>
+            <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).input}"/>
             <br/>
-            <h:outputText id="output" value="#{roomModel.displayModel.output}" escape="false"/>
-            <p:poll interval="1" listener="#{roomModel.displayModel.updateInput}"/>
+            <h:outputText id="output" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).output}" escape="false"/>
+            <p:poll interval="1" listener="#{systemModel.getCurrentScreen(studentModel.currentRoom).updateInput}"/>
         </h:form>
 </h:body>
 

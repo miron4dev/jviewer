@@ -21,8 +21,6 @@ public interface RoomModel {
     void setRooms(List<String> rooms);
     String getCurrentRoom();
     void setCurrentRoom(String currentRoom);
-    DisplayModel getDisplayModel();
-    void setDisplayModel(DisplayModel displayModel);
     String createRoom();
     String removeRoom();
     void refreshRooms();

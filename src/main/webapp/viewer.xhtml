@@ -33,14 +33,13 @@
             <h:graphicImage value="resources/images/ru_logo.png"/>
         </h:commandLink>
     </h:form>
-        Current room: <h:outputText value="#{studentModel.currentRoom}"/>
-
+    #{msg['currentRoomMessage']}: <h:outputText value="#{studentModel.currentRoom}"/>
     <h:form id="displayForm">
-            <p:commandButton value="Rooms" action="rooms?faces-redirect=true"/>
+            <p:commandButton value="#{msg['roomsButton']}" action="rooms?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{roomModel.displayModel.input}"/>
+            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).input}"/>
             <br/>
-            <h:outputText id="output" value="#{roomModel.displayModel.output}" escape="false"/>
+            <h:outputText id="output" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).output}" escape="false"/>
             <p:poll interval="1" update="displayForm"/>
     </h:form>
 </h:body>

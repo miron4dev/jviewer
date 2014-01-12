@@ -14,17 +14,28 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
+<f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>Room management page</title>
+    <title>#{msg['roomManagementTitle']}</title>
     <h:outputStylesheet name="css/main.css"/>
     <h:outputStylesheet name="css/styles.css"/>
 </h:head>
 
 <h:body>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('en')}">
+            <h:graphicImage value="resources/images/us_logo.png"/>
+        </h:commandLink>
+    </h:form>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('ru')}">
+            <h:graphicImage value="resources/images/ru_logo.png"/>
+        </h:commandLink>
+    </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="Room management page" style="width:350px; height:185px; position:relative; left:500px">
-            <p>Welcome back, #{studentModel.name}</p>
-            <p>What are you want to do?</p>
+        <p:panel header="#{msg['roomManagementMessage']}" style="width:400px; height:190px; position:relative; left:500px">
+            <p>#{msg['welcomeMessage']}, #{studentModel.name}</p>
+            <p>#{msg['actionQuestionMessage']}</p>
             <br/>
             <h:form id="roomsForm">
                 <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}">
@@ -34,10 +45,10 @@
             </h:form>
             <br/>
             <br/>
-            <h:form id="createForm"><p:commandButton action="newroom?faces-redirect=true" value="Create new room" /></h:form>
-            <h:form id="deleteForm"><p:commandButton action="delroom?faces-redirect=true" value="Delete" /></h:form>
-            <h:form id="loginForm"><p:commandButton action="#{loginController.pageRedirect('editor')}" value="Login" /></h:form>
-            <h:form id="logoutForm"><p:commandButton action="#{loginController.logout}" value="Logout" /></h:form>
+            <h:form id="createForm"><p:commandButton action="newroom?faces-redirect=true" value="#{msg['createRoomButton']}" /></h:form>
+            <h:form id="deleteForm"><p:commandButton action="delroom?faces-redirect=true" value="#{msg['deleteRoomButton']}" /></h:form>
+            <h:form id="loginForm"><p:commandButton action="#{loginController.pageRedirect('editor')}" value="#{msg['loginButton']}" /></h:form>
+            <h:form id="logoutForm"><p:commandButton action="#{loginController.logout}" value="#{msg['logoutButton']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

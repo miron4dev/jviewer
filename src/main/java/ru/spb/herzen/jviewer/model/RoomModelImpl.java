@@ -5,6 +5,7 @@ import ru.spb.herzen.jviewer.service.ManagementService;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class RoomModelImpl implements RoomModel, Serializable {
     private String password;
     private List<String> rooms;
     private String currentRoom;
-    private DisplayModel displayModel;
+    private SystemModel systemModel;
 
     private ManagementService managementService;
     private LoginService loginService;
@@ -42,7 +43,18 @@ public class RoomModelImpl implements RoomModel, Serializable {
 
     @Override
     public void refreshRooms(){
-        this.rooms = loadNames(loginService.getRooms());
+        HashMap<String, DisplayModel> map = new HashMap<>();
+        rooms = loadNames(loginService.getRooms());
+        for(String room: rooms){
+            map.put(room, new DisplayModelImpl());
+        }
+        systemModel.setCurrentState(map);
+        if(rooms.size() != 0){
+            currentRoom = rooms.get(0);
+        }
+        else {
+            currentRoom = "";
+        }
     }
 
     private List<String> loadNames(List<RoomModelImpl> roomModelList){
@@ -112,11 +124,7 @@ public class RoomModelImpl implements RoomModel, Serializable {
         this.loginService = loginService;
     }
 
-    public DisplayModel getDisplayModel() {
-        return displayModel;
-    }
-
-    public void setDisplayModel(DisplayModel displayModel) {
-        this.displayModel = displayModel;
+    public void setSystemModel(SystemModel systemModel) {
+        this.systemModel = systemModel;
     }
 }

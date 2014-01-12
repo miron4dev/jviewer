@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.spb.herzen.jviewer.model.RoomModel;
 import ru.spb.herzen.jviewer.model.RoomModelImpl;
+import ru.spb.herzen.jviewer.model.SystemModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.service.LoginService;
 import ru.spb.herzen.jviewer.service.SecurityService;
@@ -32,9 +33,7 @@ public class LoginControllerImpl implements LoginController {
     @Override
     public String loginUser() {
         try{
-            authentication();
-            roomModel.refreshRooms(); //TODO: bad architect solution
-            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
+            prepareUser();
             return "rooms?faces-redirect=true";
         } catch (BadCredentialsException e){
             return null;
@@ -44,9 +43,7 @@ public class LoginControllerImpl implements LoginController {
     @Override
     public String loginAdmin() {
         try{
-            authentication();
-            roomModel.refreshRooms(); //TODO: bad architect solution
-            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
+            prepareUser();
             return "admin?faces-redirect=true";
         } catch (BadCredentialsException e){
             return null;
@@ -69,13 +66,22 @@ public class LoginControllerImpl implements LoginController {
         return page + "?faces-redirect=true";
     }
 
+    private void prepareUser(){
+        authentication();
+        roomModel.refreshRooms();
+        if(roomModel.getRooms().size() != 0){
+            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
+        }
+        else {
+            roomModel.setCurrentRoom("");
+        }
+    }
+
     private void authentication(){
         Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
         Authentication result = authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(result);
     }
-
-
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;

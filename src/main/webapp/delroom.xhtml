@@ -11,21 +11,33 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
+<f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>Delete selected room</title>
+    <title>#{msg['deleteRoomTitle']}</title>
     <h:outputStylesheet name="css/main.css"/>
     <h:outputStylesheet name="css/styles.css"/>
 </h:head>
 
 <h:body>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('en')}">
+            <h:graphicImage value="resources/images/us_logo.png"/>
+        </h:commandLink>
+    </h:form>
+    <h:form>
+        <h:commandLink action="#{localeModel.switchLocale('ru')}">
+            <h:graphicImage value="resources/images/ru_logo.png"/>
+        </h:commandLink>
+    </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="Room management page" style="width:350px; height:115px; position:relative; left:500px">
-            <p>Are you sure you want to delete #{roomModel.currentRoom} room?</p>
+        <p:panel header="#{msg['roomManagementMessage']}" style="width:400px; height:120px; position:relative; left:500px">
+            <p>#{msg['deleteQuestionMessage']} #{roomModel.currentRoom}?</p>
             <br/>
-            <h:form id="deleteForm"><p:commandButton action="#{roomModel.removeRoom}" value="Yes" /></h:form>
-            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="No" /></h:form>
+            <h:form id="deleteForm"><p:commandButton action="#{roomModel.removeRoom}" value="#{msg['yesButton']}" /></h:form>
+            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="#{msg['noButton']}" /></h:form>
         </p:panel>
     </div>
 </h:body>
