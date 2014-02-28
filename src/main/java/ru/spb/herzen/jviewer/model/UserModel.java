@@ -1,11 +1,8 @@
 package ru.spb.herzen.jviewer.model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:27 PM
- * To change this template use File | Settings | File Templates.
+ * User model interface.
+ * @author Evgeny Mironenko
  */
 public interface UserModel {
 

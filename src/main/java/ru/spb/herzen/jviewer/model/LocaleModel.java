@@ -2,22 +2,15 @@ package ru.spb.herzen.jviewer.model;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URISyntaxException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/2/14
- * Time: 4:34 AM
- * To change this template use File | Settings | File Templates.
+ * Locale model implementation.
+ * @author Evgeny Mironenko
  */
 public class LocaleModel implements Serializable {
 
@@ -25,15 +18,18 @@ public class LocaleModel implements Serializable {
     private List<String> facultyList;
     private Properties localeFile;
 
+    /**
+     * Generates faculty list from current *.properties file.
+     */
     @PostConstruct
     public void init(){
         facultyList = new ArrayList<>();
         localeFile = new Properties();
         String fileName = loadFileName();
         try {
-            FileInputStream fis = new FileInputStream(new File(this.getClass().getClassLoader().getResource(fileName).toURI()));
+            InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             localeFile.load(fis);
-        } catch (IOException | URISyntaxException | NullPointerException e) {
+        } catch (IOException | NullPointerException e) {
             //TODO: logging
             e.printStackTrace();
         }
@@ -64,6 +60,11 @@ public class LocaleModel implements Serializable {
         facultyList.add(localeFile.getProperty("PhilologyFaculty"));
     }
 
+    /**
+     * Switches to another locale.
+     * @param locale locale name.
+     * @return current URL with another locale.
+     */
     public String switchLocale(String locale){
         currentLocale = new Locale(locale);
         init();
@@ -71,6 +72,10 @@ public class LocaleModel implements Serializable {
         return FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath() + "?faces-redirect=true";
     }
 
+    /**
+     * Loads the *.properties file name.
+     * @return
+     */
     private String loadFileName(){
         if(currentLocale.equals(new Locale("en"))){
             return "locale/output/language.properties";
@@ -79,6 +84,10 @@ public class LocaleModel implements Serializable {
             return "locale/output/language_ru.properties";
         }
     }
+
+    //
+    // Getters and setters.
+    //
 
     public Locale getCurrentLocale() {
         return currentLocale;
@@ -96,3 +105,4 @@ public class LocaleModel implements Serializable {
         return localeFile;
     }
 }
+

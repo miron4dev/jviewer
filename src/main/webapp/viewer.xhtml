@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: eugene
-  Date: 11/2/13
-  Time: 8:14 PM
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -18,28 +9,28 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['mainTitle']}</title>
-    <h:outputStylesheet name="css/main.css"/>
-    <h:outputStylesheet name="css/styles.css"/>
+    <h:outputStylesheet library="styles" name="main.css"/>
+    <h:outputStylesheet library="styles" name="jviewer.css"/>
 </h:head>
 
 <h:body>
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('en')}">
-            <h:graphicImage value="resources/images/us_logo.png"/>
+            <h:graphicImage library="images" name="us_logo.png"/>
         </h:commandLink>
     </h:form>
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('ru')}">
-            <h:graphicImage value="resources/images/ru_logo.png"/>
+            <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['currentRoomMessage']}: <h:outputText value="#{studentModel.currentRoom}"/>
+    #{msg['currentRoomMessage']}: <h:outputText value="#{userModel.currentRoom}"/>
     <h:form id="displayForm">
             <p:commandButton value="#{msg['roomsButton']}" action="rooms?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).input}"/>
+            <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).input}"/>
             <br/>
-            <h:outputText id="output" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).output}" escape="false"/>
+            <h:outputText id="output" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).output}" escape="false"/>
             <p:poll interval="1" update="displayForm"/>
     </h:form>
 </h:body>

@@ -1,17 +1,23 @@
 package ru.spb.herzen.jviewer.dao;
 
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.UserModel;
-
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:26 PM
- * To change this template use File | Settings | File Templates.
+ * Registration Data Access Object interface.
+ * @author Evgeny Mironenko
  */
 public interface RegistrationDao {
 
+    /**
+     * Adds new user to database.
+     * @param name name of profile.
+     * @param password password of profile.
+     * @param role role of profile. Default is USER_ROLE.
+     * @param faculty faculty of profile.
+     */
     void regProfile(String name, String password, String role, String faculty);
+
+    /**
+     * Gets invitation ID for professor registration from database.
+     * @return invitation ID.
+     */
     String getInvitationID();
 }

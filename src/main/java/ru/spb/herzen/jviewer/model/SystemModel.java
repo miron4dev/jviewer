@@ -3,16 +3,22 @@ package ru.spb.herzen.jviewer.model;
 import java.util.HashMap;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/12/14
- * Time: 1:32 AM
- * To change this template use File | Settings | File Templates.
+ * System model interface.
+ * @author Evgeny Mironenko
  */
 public interface SystemModel {
 
-    HashMap<String, DisplayModel> getCurrentState();
+    /**
+     * Loads the current display model for showing.
+     * @param room name of room
+     * @return current display model
+     */
+    DisplayModel loadCurrentScreen(String room);
+
+    /**
+     * Sets the current state of the system model.
+     * @param currentState current state of the system model
+     */
     void setCurrentState(HashMap<String, DisplayModel> currentState);
-    DisplayModel getCurrentScreen(String room);
 
 }

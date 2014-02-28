@@ -8,14 +8,21 @@ import ru.spb.herzen.jviewer.model.UserModel;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:27 PM
- * To change this template use File | Settings | File Templates.
+ * Login service interface.
+ * @author Evgeny Mironenko
  */
 public interface LoginService {
 
+    /**
+     * Gets user data from request model.
+     * @param requestModel current request model
+     * @return user data object.
+     */
     UserModel getData(RequestModel requestModel);
+
+    /**
+     * Gets list of all available rooms.
+     * @return list of rooms.
+     */
     List<RoomModelImpl> getRooms();
 }

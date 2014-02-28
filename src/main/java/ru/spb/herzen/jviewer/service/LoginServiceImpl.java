@@ -10,17 +10,18 @@ import ru.spb.herzen.jviewer.model.UserModel;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 5:55 PM
- * To change this template use File | Settings | File Templates.
+ * Login service implementation.
+ * @author Evgeny Mironenko
  */
 public class LoginServiceImpl implements LoginService {
 
     private ValidationDao validationDao;
     private LoginDao loginDao;
 
+    /**
+     * @see ru.spb.herzen.jviewer.service.LoginService#getData(ru.spb.herzen.jviewer.model.RequestModel)
+     * If validation will be failed, return null.
+     */
     @Override
     public UserModel getData(RequestModel userModel) {
         try{
@@ -33,6 +34,10 @@ public class LoginServiceImpl implements LoginService {
         return null;
     }
 
+    /**
+     * @see ru.spb.herzen.jviewer.service.LoginService#getRooms()
+     * If list of rooms will be empty, return null.
+     */
     @Override
     public List<RoomModelImpl> getRooms() {
         try{
@@ -41,6 +46,10 @@ public class LoginServiceImpl implements LoginService {
             return null;
         }
     }
+
+    //
+    // Setters for Dependency Injection.
+    //
 
     public void setValidationDao(ValidationDao validationDao) {
         this.validationDao = validationDao;

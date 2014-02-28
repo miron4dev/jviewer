@@ -16,11 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/5/14
- * Time: 2:46 AM
- * To change this template use File | Settings | File Templates.
+ * Implementation of Spring Security service.
+ * @author Evgeny Mironenko
  */
 public class SecurityService implements AuthenticationProvider {
 
@@ -28,6 +25,9 @@ public class SecurityService implements AuthenticationProvider {
     private RequestModel requestModel;
     private UserModel userModel;
 
+    /**
+     * @see org.springframework.security.authentication.AuthenticationProvider#authenticate(org.springframework.security.core.Authentication)
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -52,10 +52,17 @@ public class SecurityService implements AuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
 
+    /**
+     * @see org.springframework.security.authentication.AuthenticationProvider#supports(Class)
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return true;
     }
+
+    //
+    // Setters for Dependency Injection.
+    //
 
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;

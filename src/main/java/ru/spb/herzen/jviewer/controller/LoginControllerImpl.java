@@ -18,11 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 5:55 PM
- * To change this template use File | Settings | File Templates.
+ * Login controller implementation.
+ * @author Evgeny Mironenko
  */
 public class LoginControllerImpl implements LoginController {
 
@@ -30,6 +27,10 @@ public class LoginControllerImpl implements LoginController {
     private RoomModel roomModel;
     private AuthenticationManager authenticationManager;
 
+    /**
+     * Prepares user for login to system.
+     * @return URL for redirect. In BadCredentialsException cases return null and show error message.
+     */
     @Override
     public String loginUser() {
         try{
@@ -40,6 +41,10 @@ public class LoginControllerImpl implements LoginController {
         }
     }
 
+    /**
+     * Prepares admin for login to system.
+     * @return URL for redirect. In BadCredentialsException cases return null and show error message.
+     */
     @Override
     public String loginAdmin() {
         try{
@@ -50,6 +55,10 @@ public class LoginControllerImpl implements LoginController {
         }
     }
 
+    /**
+     * Invalidate current session and logout user from system.
+     * @return main page URL for redirect.
+     */
     @Override
     public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -57,6 +66,10 @@ public class LoginControllerImpl implements LoginController {
         return "index?faces-redirect=true";
     }
 
+    /**
+     * @see ru.spb.herzen.jviewer.controller.LoginController#pageRedirect(String)
+     * Cancels redirect, if no one rooms was selected.
+     */
     @Override
     public String pageRedirect(String page){
         if(roomModel.getCurrentRoom() == null || roomModel.getCurrentRoom().isEmpty()){
@@ -66,6 +79,9 @@ public class LoginControllerImpl implements LoginController {
         return page + "?faces-redirect=true";
     }
 
+    /**
+     * Prepares any type of user for login to system.
+     */
     private void prepareUser(){
         authentication();
         roomModel.refreshRooms();
@@ -77,11 +93,19 @@ public class LoginControllerImpl implements LoginController {
         }
     }
 
-    private void authentication(){
+    /**
+     * User authentication.
+     * @throws BadCredentialsException if authentication was failed.
+     */
+    private void authentication() throws BadCredentialsException{
         Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
         Authentication result = authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(result);
     }
+
+    //
+    // Setters for Dependency Injection.
+    //
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;

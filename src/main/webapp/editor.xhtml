@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: eugene
-  Date: 11/2/13
-  Time: 9:58 PM
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -18,31 +9,31 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['displayTitle']}</title>
-    <h:outputStylesheet name="css/main.css"/>
-    <h:outputStylesheet name="css/styles.css"/>
+    <h:outputStylesheet library="styles" name="main.css"/>
+    <h:outputStylesheet library="styles" name="jviewer.css"/>
 </h:head>
 
 <h:body>
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('en')}">
-            <h:graphicImage value="resources/images/us_logo.png"/>
+            <h:graphicImage library="images" name="us_logo.png"/>
         </h:commandLink>
     </h:form>
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('ru')}">
-            <h:graphicImage value="resources/images/ru_logo.png"/>
+            <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
         <h:form id="displayForm">
-            #{msg['currentRoomMessage']}: <h:outputText value="#{studentModel.currentRoom} "/>
-            <p:commandButton value="#{msg['executeButton']}" actionListener="#{systemModel.getCurrentScreen(studentModel.currentRoom).executeCode}" update="displayForm:output"/>
-            <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{systemModel.getCurrentScreen(studentModel.currentRoom).clearIO}" update="displayForm"/>
+            #{msg['currentRoomMessage']}: <h:outputText value="#{userModel.currentRoom} "/>
+            <p:commandButton value="#{msg['executeButton']}" actionListener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).executeCode}" update="output"/>
+            <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).clearIO}" update="output, input"/>
             <p:commandButton value="#{msg['roomsButton']}" action="admin?faces-redirect=true"/>
             <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).input}"/>
+            <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).input}"/>
             <br/>
-            <h:outputText id="output" value="#{systemModel.getCurrentScreen(studentModel.currentRoom).output}" escape="false"/>
-            <p:poll interval="1" listener="#{systemModel.getCurrentScreen(studentModel.currentRoom).updateInput}"/>
+            <h:outputText id="output" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).output}" escape="false"/>
+            <p:poll interval="1" listener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).updateInput}"/>
         </h:form>
 </h:body>
 

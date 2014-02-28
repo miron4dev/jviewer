@@ -25,6 +25,6 @@
     <bean id="securityService" class="ru.spb.herzen.jviewer.service.SecurityService">
         <property name="loginService" ref="loginService"/>
         <property name="requestModel" ref="requestModel"/>
-        <property name="userModel" ref="studentModel"/>
+        <property name="userModel" ref="userModel"/>
     </bean>
 </beans>

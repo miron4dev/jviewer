@@ -1,11 +1,8 @@
 package ru.spb.herzen.jviewer.model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/5/14
- * Time: 9:17 PM
- * To change this template use File | Settings | File Templates.
+ * Request model implementation. Used on the JSF pages for sending requests.
+ * @author Evgeny Mironenko
  */
 public class RequestModel {
 

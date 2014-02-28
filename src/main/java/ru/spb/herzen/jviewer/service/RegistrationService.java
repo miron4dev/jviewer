@@ -5,13 +5,15 @@ import ru.spb.herzen.jviewer.model.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:27 PM
- * To change this template use File | Settings | File Templates.
+ * Registration service interface.
+ * @author Evgeny Mironenko
  */
 public interface RegistrationService {
 
+    /**
+     * Creates new profile from request model.
+     * @param userModel current request model
+     * @return message about result of registration
+     */
     RegistrationMsg regProfile(RequestModel userModel);
 }

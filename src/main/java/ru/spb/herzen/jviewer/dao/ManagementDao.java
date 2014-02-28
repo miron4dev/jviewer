@@ -1,14 +1,25 @@
 package ru.spb.herzen.jviewer.dao;
 
+import org.springframework.dao.DataAccessException;
+
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/11/14
- * Time: 6:52 PM
- * To change this template use File | Settings | File Templates.
+ * Management Data Access Object interface.
+ * @author Evgeny Mironenko
  */
 public interface ManagementDao {
 
-    void createRoom(String name, String password);
-    void removeRoom(String name);
+    /**
+     * Adds new room to database.
+     * @param name name of room.
+     * @param password password for room. Default is null.
+     * @throws DataAccessException if room is already exist.
+     */
+    void createRoom(String name, String password) throws DataAccessException;
+
+    /**
+     * Removes chosen room from database.
+     * @param name name of room.
+     * @throws DataAccessException if room is not exist.
+     */
+    void removeRoom(String name) throws DataAccessException;
 }

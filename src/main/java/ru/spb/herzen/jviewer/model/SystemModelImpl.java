@@ -4,26 +4,24 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/12/14
- * Time: 1:30 AM
- * To change this template use File | Settings | File Templates.
+ * System model implementation.
+ * @author Evgeny Mironenko
  */
 public class SystemModelImpl implements SystemModel, Serializable {
 
     private HashMap<String, DisplayModel> currentState;
 
+    /**
+     * @see ru.spb.herzen.jviewer.model.SystemModel#loadCurrentScreen(String)
+     */
     @Override
-    public DisplayModel getCurrentScreen(String room) {
+    public DisplayModel loadCurrentScreen(String room) {
         return currentState.get(room);
     }
 
-    @Override
-    public HashMap<String, DisplayModel> getCurrentState() {
-        return currentState;
-    }
-
+    /**
+     * @see ru.spb.herzen.jviewer.model.SystemModel#setCurrentState(java.util.HashMap)
+     */
     @Override
     public void setCurrentState(HashMap<String, DisplayModel> currentState) {
         this.currentState = currentState;

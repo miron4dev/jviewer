@@ -10,17 +10,17 @@ import ru.spb.herzen.jviewer.model.UserModel;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:44 PM
- * To change this template use File | Settings | File Templates.
+ * Registration service implementation.
+ * @author Evgeny Mironenko
  */
 public class RegistrationServiceImpl implements RegistrationService, Serializable {
 
     private ValidationDao validationDao;
     private RegistrationDao registrationDao;
 
+    /**
+     * @see ru.spb.herzen.jviewer.service.RegistrationService#regProfile(ru.spb.herzen.jviewer.model.RequestModel)
+     */
     @Override
     public RegistrationMsg regProfile(RequestModel requestModel) {
         try{
@@ -31,7 +31,12 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
         }
     }
 
-    private RegistrationMsg checkUserData(RequestModel requestModel){
+    /**
+     * Checks user data and creates new profile, or returns error message.
+     * @param requestModel request model of current user
+     * @return message about success of registration
+     */
+    private RegistrationMsg checkUserData(RequestModel requestModel) {
         if(requestModel.getInvitationID().isEmpty() || registrationDao.getInvitationID().equals(requestModel.getInvitationID())){
             if(requestModel.getInvitationID().isEmpty()){
                 requestModel.setRole("ROLE_USER");
@@ -43,6 +48,10 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
         }
         return RegistrationMsg.INVITATION_ID;
     }
+
+    //
+    // Setters for Dependency Injection.
+    //
 
     public void setValidationDao(ValidationDao validationDao) {
         this.validationDao = validationDao;

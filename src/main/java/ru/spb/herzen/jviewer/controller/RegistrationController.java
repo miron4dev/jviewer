@@ -1,13 +1,14 @@
 package ru.spb.herzen.jviewer.controller;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:27 PM
- * To change this template use File | Settings | File Templates.
+ * Registration management interface.
+ * @author Evgeny Mironenko
  */
 public interface RegistrationController {
 
+    /**
+     * Creates new profile.
+     * @return redirect URL.
+     */
     String regProfile();
 }

@@ -1,14 +1,23 @@
 package ru.spb.herzen.jviewer.service;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/11/14
- * Time: 6:58 PM
- * To change this template use File | Settings | File Templates.
+ * Management service interface.
+ * @author Evgeny Mironenko
  */
 public interface ManagementService {
 
+    /**
+     * Creates new room.
+     * @param room name of room.
+     * @param password password for room. Default is null.
+     * @return result of creation.
+     */
     boolean createRoom(String room, String password);
+
+    /**
+     * Removes chosen room.
+     * @param room name of room.
+     * @return result of removing.
+     */
     boolean removeRoom(String room);
 }

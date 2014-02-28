@@ -16,7 +16,7 @@
 
     <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
         <property name="authenticationManager" ref="authenticationManager"/>
-        <property name="userModel" ref="studentModel"/>
+        <property name="userModel" ref="userModel"/>
         <property name="roomModel" ref="roomModel"/>
     </bean>
 
@@ -53,7 +53,7 @@
     </bean>
 
     <!--Models-->
-    <bean id="studentModel" class="ru.spb.herzen.jviewer.model.StudentModel" scope="session">
+    <bean id="userModel" class="ru.spb.herzen.jviewer.model.UserModelImpl" scope="session">
         <aop:scoped-proxy/>
     </bean>
 

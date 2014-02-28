@@ -3,14 +3,31 @@ package ru.spb.herzen.jviewer.model;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/7/14
- * Time: 1:16 PM
- * To change this template use File | Settings | File Templates.
+ * Room model interface.
+ * @author Evgeny Mironenko
  */
 public interface RoomModel {
 
+    /**
+     * Creates new room.
+     * @return URL to admin page menu.
+     */
+    String createRoom();
+
+    /**
+     * Removes chosen room.
+     * @return URL to admin page menu.
+     */
+    String removeRoom();
+
+    /**
+     * Refreshes list of rooms.
+     */
+    void refreshRooms();
+
+    //
+    // Getters and setters.
+    //
     int getId();
     void setId(int id);
     String getName();
@@ -21,7 +38,4 @@ public interface RoomModel {
     void setRooms(List<String> rooms);
     String getCurrentRoom();
     void setCurrentRoom(String currentRoom);
-    String createRoom();
-    String removeRoom();
-    void refreshRooms();
 }

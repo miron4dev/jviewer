@@ -11,11 +11,8 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:35 PM
- * To change this template use File | Settings | File Templates.
+ * Registration controller implementation.
+ * @author Evgeny Mironenko
  */
 public class RegistrationControllerImpl implements RegistrationController, Serializable {
 
@@ -23,6 +20,10 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
     private LocaleModel localeModel;
     private RegistrationService registrationService;
 
+    /**
+     * Creates new profile.
+     * @return URL for redirection, if registration was successful, and null, if registration failed.
+     */
     @Override
     public String regProfile() {
         RegistrationMsg result = registrationService.regProfile(requestModel);
@@ -39,6 +40,10 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
             return null;
         }
     }
+
+    //
+    // Setters for Dependency Injection.
+    //
 
     public void setRequestModel(RequestModel requestModel) {
         this.requestModel = requestModel;

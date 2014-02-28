@@ -1,16 +1,12 @@
 package ru.spb.herzen.jviewer.model;
 
-import javax.inject.Named;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: eugene
- * Date: 11/2/13
- * Time: 3:31 PM
- * To change this template use File | Settings | File Templates.
+ * User model implementation.
+ * @author Evgeny Mironenko
  */
-public class StudentModel implements UserModel, Serializable {
+public class UserModelImpl implements UserModel, Serializable {
 
     private int id;
     private String name;

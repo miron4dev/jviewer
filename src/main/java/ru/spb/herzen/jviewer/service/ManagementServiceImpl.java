@@ -4,16 +4,16 @@ import org.springframework.dao.DataAccessException;
 import ru.spb.herzen.jviewer.dao.ManagementDao;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/11/14
- * Time: 6:59 PM
- * To change this template use File | Settings | File Templates.
+ * Management service implementation.
+ * @author Evgeny Mironenko
  */
 public class ManagementServiceImpl implements ManagementService {
 
     private ManagementDao managementDao;
 
+    /**
+     * @see ru.spb.herzen.jviewer.service.ManagementService#createRoom(String, String)
+     */
     @Override
     public boolean createRoom(String room, String password) {
         try{
@@ -25,6 +25,9 @@ public class ManagementServiceImpl implements ManagementService {
         }
     }
 
+    /**
+     * @see ru.spb.herzen.jviewer.service.ManagementService#removeRoom(String)
+     */
     @Override
     public boolean removeRoom(String room) {
         try{
@@ -35,6 +38,10 @@ public class ManagementServiceImpl implements ManagementService {
             return false;
         }
     }
+
+    //
+    // Setter for Dependency Injection.
+    //
 
     public void setManagementDao(ManagementDao managementDao) {
         this.managementDao = managementDao;

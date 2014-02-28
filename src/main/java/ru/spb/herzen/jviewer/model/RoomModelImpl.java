@@ -9,11 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 1/7/14
- * Time: 1:30 PM
- * To change this template use File | Settings | File Templates.
+ * Room model implementation.
+ * @author Evgeny Mironenko
  */
 public class RoomModelImpl implements RoomModel, Serializable {
 
@@ -27,6 +24,9 @@ public class RoomModelImpl implements RoomModel, Serializable {
     private ManagementService managementService;
     private LoginService loginService;
 
+    /**
+     * @see ru.spb.herzen.jviewer.model.RoomModel#createRoom()
+     */
     @Override
     public String createRoom() {
         managementService.createRoom(name, password);
@@ -34,6 +34,9 @@ public class RoomModelImpl implements RoomModel, Serializable {
         return "admin?faces-redirect=true";
     }
 
+    /**
+     * @see ru.spb.herzen.jviewer.model.RoomModel#removeRoom()
+     */
     @Override
     public String removeRoom() {
         managementService.removeRoom(currentRoom);
@@ -41,6 +44,9 @@ public class RoomModelImpl implements RoomModel, Serializable {
         return "admin?faces-redirect=true";
     }
 
+    /**
+     * @see ru.spb.herzen.jviewer.model.RoomModel#refreshRooms()
+     */
     @Override
     public void refreshRooms(){
         HashMap<String, DisplayModel> map = new HashMap<>();
@@ -57,6 +63,11 @@ public class RoomModelImpl implements RoomModel, Serializable {
         }
     }
 
+    /**
+     * Loads the list of room names.
+     * @param roomModelList list of room objects.
+     * @return list of room names.
+     */
     private List<String> loadNames(List<RoomModelImpl> roomModelList){
         List<String> names = new ArrayList<>();
         for (RoomModelImpl aRoomModelList : roomModelList) {
@@ -65,6 +76,10 @@ public class RoomModelImpl implements RoomModel, Serializable {
 
         return names;
     }
+
+    //
+    // Getters and setters.
+    //
 
     @Override
     public int getId() {

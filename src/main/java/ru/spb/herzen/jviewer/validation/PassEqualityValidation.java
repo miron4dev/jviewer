@@ -9,15 +9,19 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Evgeny
- * Date: 11/30/13
- * Time: 5:28 PM
- * To change this template use File | Settings | File Templates.
+ * Custom UI validator, which checks password and retryPassword fields.
+ * @author Evgeny Mironenko
  */
 @FacesValidator("rtPassValidation")
 public class PassEqualityValidation implements Validator {
 
+    /**
+     * Checks password and retryPassword fields. They should be equals and not empty.
+     * @param facesContext current FacesContext
+     * @param uiComponent password UI component
+     * @param o retryPassword UI object
+     * @throws ValidatorException if something goes wrong
+     */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         UIInput passwordComponent = (UIInput) uiComponent.getAttributes().get("passwordComponent");
