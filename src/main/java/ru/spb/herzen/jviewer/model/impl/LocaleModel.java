@@ -1,4 +1,4 @@
-package ru.spb.herzen.jviewer.model;
+package ru.spb.herzen.jviewer.model.impl;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;

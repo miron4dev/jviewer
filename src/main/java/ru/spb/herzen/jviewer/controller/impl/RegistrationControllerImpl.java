@@ -1,9 +1,9 @@
-package ru.spb.herzen.jviewer.controller;
+package ru.spb.herzen.jviewer.controller.impl;
 
+import ru.spb.herzen.jviewer.controller.RegistrationController;
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
-import ru.spb.herzen.jviewer.model.LocaleModel;
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.model.impl.LocaleModel;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
 import ru.spb.herzen.jviewer.service.RegistrationService;
 
 import javax.faces.application.FacesMessage;

@@ -22,7 +22,7 @@
         <security:authentication-provider ref="securityService"/>
     </security:authentication-manager>
 
-    <bean id="securityService" class="ru.spb.herzen.jviewer.service.SecurityService">
+    <bean id="securityService" class="ru.spb.herzen.jviewer.service.impl.SecurityService">
         <property name="loginService" ref="loginService"/>
         <property name="requestModel" ref="requestModel"/>
         <property name="userModel" ref="userModel"/>

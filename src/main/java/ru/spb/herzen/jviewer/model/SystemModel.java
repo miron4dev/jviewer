@@ -1,6 +1,6 @@
 package ru.spb.herzen.jviewer.model;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * System model interface.
@@ -19,6 +19,6 @@ public interface SystemModel {
      * Sets the current state of the system model.
      * @param currentState current state of the system model
      */
-    void setCurrentState(HashMap<String, DisplayModel> currentState);
+    void setCurrentState(Map<String, DisplayModel> currentState);
 
 }

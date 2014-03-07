@@ -1,7 +1,8 @@
-package ru.spb.herzen.jviewer.service;
+package ru.spb.herzen.jviewer.service.impl;
 
 import org.springframework.dao.DataAccessException;
 import ru.spb.herzen.jviewer.dao.ManagementDao;
+import ru.spb.herzen.jviewer.service.ManagementService;
 
 /**
  * Management service implementation.

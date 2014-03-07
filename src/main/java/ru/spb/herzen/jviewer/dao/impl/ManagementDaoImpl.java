@@ -1,7 +1,8 @@
-package ru.spb.herzen.jviewer.dao;
+package ru.spb.herzen.jviewer.dao.impl;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import ru.spb.herzen.jviewer.dao.ManagementDao;
 
 /**
  * Management Data Access Object implementation.

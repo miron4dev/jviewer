@@ -1,43 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jviewer</groupId>
+    <groupId>ru.spb.herzen</groupId>
     <artifactId>jviewer</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>jviewer</name>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <spring.version>4.0.0.RELEASE</spring.version>
-        <spring-security.version>3.2.0.RELEASE</spring-security.version>
-        <primefaces.version>4.0</primefaces.version>
-        <mysql.version>5.1.25</mysql.version>
-        <faces.version>2.1</faces.version>
-        <primefaces-theme.version>1.0.10</primefaces-theme.version>
-        <primefaces-extensions.version>0.7.1</primefaces-extensions.version>
-    </properties>
 
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
+    <description>JViewer Application</description>
+
+    <developers>
+        <developer>
+            <name>Evgeny Mironenko</name>
+            <email>rustock@lna.org.ru</email>
+        </developer>
+    </developers>
+
+    <inceptionYear>2013</inceptionYear>
 
     <dependencies>
+        <!-- UI -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>javax.faces-api</artifactId>
-            <version>${faces.version}</version>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>${jsf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -59,11 +45,13 @@
             <artifactId>resources-codemirror</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!-- Database -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -104,7 +92,25 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
-
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,7 +124,36 @@
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
+            <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>sonar-maven-plugin</artifactId>
+               <version>2.1</version>
+            </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <spring.version>4.0.0.RELEASE</spring.version>
+        <spring-security.version>3.2.0.RELEASE</spring-security.version>
+        <primefaces.version>4.0</primefaces.version>
+        <mysql.version>5.1.25</mysql.version>
+        <jsf.version>2.2.5</jsf.version>
+        <primefaces-theme.version>1.0.10</primefaces-theme.version>
+        <primefaces-extensions.version>0.7.1</primefaces-extensions.version>
+        <junit.version>4.11</junit.version>
+        <easymock.version>3.2</easymock.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 
 </project>

@@ -1,10 +1,11 @@
-package ru.spb.herzen.jviewer.dao;
+package ru.spb.herzen.jviewer.dao.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import ru.spb.herzen.jviewer.model.RoomModelImpl;
-import ru.spb.herzen.jviewer.model.UserModelImpl;
+import ru.spb.herzen.jviewer.dao.LoginDao;
+import ru.spb.herzen.jviewer.model.impl.RoomModelImpl;
+import ru.spb.herzen.jviewer.model.impl.UserModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 import java.util.List;

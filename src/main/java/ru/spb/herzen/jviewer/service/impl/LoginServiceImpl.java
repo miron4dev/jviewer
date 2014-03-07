@@ -1,11 +1,12 @@
-package ru.spb.herzen.jviewer.service;
+package ru.spb.herzen.jviewer.service.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.dao.LoginDao;
 import ru.spb.herzen.jviewer.dao.ValidationDao;
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.RoomModelImpl;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
+import ru.spb.herzen.jviewer.model.impl.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.service.LoginService;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
     private LoginDao loginDao;
 
     /**
-     * @see ru.spb.herzen.jviewer.service.LoginService#getData(ru.spb.herzen.jviewer.model.RequestModel)
+     * @see ru.spb.herzen.jviewer.service.LoginService#getData(ru.spb.herzen.jviewer.model.impl.RequestModel)
      * If validation will be failed, return null.
      */
     @Override

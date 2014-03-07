@@ -1,5 +1,8 @@
-package ru.spb.herzen.jviewer.model;
+package ru.spb.herzen.jviewer.model.impl;
 
+import ru.spb.herzen.jviewer.model.DisplayModel;
+import ru.spb.herzen.jviewer.model.RoomModel;
+import ru.spb.herzen.jviewer.model.SystemModel;
 import ru.spb.herzen.jviewer.service.LoginService;
 import ru.spb.herzen.jviewer.service.ManagementService;
 
@@ -7,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Room model implementation.
@@ -49,7 +53,7 @@ public class RoomModelImpl implements RoomModel, Serializable {
      */
     @Override
     public void refreshRooms(){
-        HashMap<String, DisplayModel> map = new HashMap<>();
+        Map<String, DisplayModel> map = new HashMap<>();
         rooms = loadNames(loginService.getRooms());
         for(String room: rooms){
             map.put(room, new DisplayModelImpl());

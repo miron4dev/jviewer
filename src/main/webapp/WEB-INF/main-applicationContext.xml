@@ -8,73 +8,73 @@
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--Controllers-->
-    <bean id="registrationController" class="ru.spb.herzen.jviewer.controller.RegistrationControllerImpl">
+    <bean id="registrationController" class="ru.spb.herzen.jviewer.controller.impl.RegistrationControllerImpl">
         <property name="registrationService" ref="registrationService"/>
         <property name="requestModel" ref="requestModel"/>
         <property name="localeModel" ref="localeModel"/>
     </bean>
 
-    <bean id="loginController" class="ru.spb.herzen.jviewer.controller.LoginControllerImpl">
+    <bean id="loginController" class="ru.spb.herzen.jviewer.controller.impl.LoginControllerImpl">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="userModel" ref="userModel"/>
         <property name="roomModel" ref="roomModel"/>
     </bean>
 
     <!--Services-->
-    <bean id="registrationService" class="ru.spb.herzen.jviewer.service.RegistrationServiceImpl">
+    <bean id="registrationService" class="ru.spb.herzen.jviewer.service.impl.RegistrationServiceImpl">
         <property name="validationDao" ref="validationDao"/>
         <property name="registrationDao" ref="registrationDao"/>
     </bean>
 
-    <bean id="loginService" class="ru.spb.herzen.jviewer.service.LoginServiceImpl">
+    <bean id="loginService" class="ru.spb.herzen.jviewer.service.impl.LoginServiceImpl">
         <property name="loginDao" ref="loginDao"/>
         <property name="validationDao" ref="validationDao"/>
     </bean>
 
-    <bean id="managementService" class="ru.spb.herzen.jviewer.service.ManagementServiceImpl">
+    <bean id="managementService" class="ru.spb.herzen.jviewer.service.impl.ManagementServiceImpl">
         <property name="managementDao" ref="managementDao"/>
     </bean>
 
     <!--Dao-->
-    <bean id="registrationDao" class="ru.spb.herzen.jviewer.dao.RegistrationDaoImpl">
+    <bean id="registrationDao" class="ru.spb.herzen.jviewer.dao.impl.RegistrationDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="loginDao" class="ru.spb.herzen.jviewer.dao.LoginDaoImpl">
+    <bean id="loginDao" class="ru.spb.herzen.jviewer.dao.impl.LoginDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="validationDao" class="ru.spb.herzen.jviewer.dao.ValidationDaoImpl">
+    <bean id="validationDao" class="ru.spb.herzen.jviewer.dao.impl.ValidationDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="managementDao" class="ru.spb.herzen.jviewer.dao.ManagementDaoImpl">
+    <bean id="managementDao" class="ru.spb.herzen.jviewer.dao.impl.ManagementDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!--Models-->
-    <bean id="userModel" class="ru.spb.herzen.jviewer.model.UserModelImpl" scope="session">
+    <bean id="userModel" class="ru.spb.herzen.jviewer.model.impl.UserModelImpl" scope="session">
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="localeModel" class="ru.spb.herzen.jviewer.model.LocaleModel" scope="session">
+    <bean id="localeModel" class="ru.spb.herzen.jviewer.model.impl.LocaleModel" scope="session">
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="requestModel" class="ru.spb.herzen.jviewer.model.RequestModel" scope="request">
+    <bean id="requestModel" class="ru.spb.herzen.jviewer.model.impl.RequestModel" scope="request">
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="roomModel" class="ru.spb.herzen.jviewer.model.RoomModelImpl" scope="session">
+    <bean id="roomModel" class="ru.spb.herzen.jviewer.model.impl.RoomModelImpl" scope="session">
         <property name="managementService" ref="managementService"/>
         <property name="loginService" ref="loginService"/>
         <property name="systemModel" ref="systemModel"/>
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="displayModel" class="ru.spb.herzen.jviewer.model.DisplayModelImpl"/>
+    <bean id="displayModel" class="ru.spb.herzen.jviewer.model.impl.DisplayModelImpl"/>
 
-    <bean id="systemModel" class="ru.spb.herzen.jviewer.model.SystemModelImpl"/>
+    <bean id="systemModel" class="ru.spb.herzen.jviewer.model.impl.SystemModelImpl"/>
 
     <!--Options-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />

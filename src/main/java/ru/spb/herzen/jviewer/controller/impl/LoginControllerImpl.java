@@ -1,21 +1,15 @@
-package ru.spb.herzen.jviewer.controller;
+package ru.spb.herzen.jviewer.controller.impl;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import ru.spb.herzen.jviewer.controller.LoginController;
 import ru.spb.herzen.jviewer.model.RoomModel;
-import ru.spb.herzen.jviewer.model.RoomModelImpl;
-import ru.spb.herzen.jviewer.model.SystemModel;
 import ru.spb.herzen.jviewer.model.UserModel;
-import ru.spb.herzen.jviewer.service.LoginService;
-import ru.spb.herzen.jviewer.service.SecurityService;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Login controller implementation.

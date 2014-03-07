@@ -1,4 +1,4 @@
-package ru.spb.herzen.jviewer.service;
+package ru.spb.herzen.jviewer.service.impl;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -7,10 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import ru.spb.herzen.jviewer.model.RequestModel;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
 import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.service.LoginService;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;

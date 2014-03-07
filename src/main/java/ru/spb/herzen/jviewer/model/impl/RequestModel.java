@@ -1,4 +1,4 @@
-package ru.spb.herzen.jviewer.model;
+package ru.spb.herzen.jviewer.model.impl;
 
 /**
  * Request model implementation. Used on the JSF pages for sending requests.

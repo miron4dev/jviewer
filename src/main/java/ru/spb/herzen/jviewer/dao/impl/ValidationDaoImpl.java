@@ -1,7 +1,8 @@
-package ru.spb.herzen.jviewer.dao;
+package ru.spb.herzen.jviewer.dao.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import ru.spb.herzen.jviewer.dao.ValidationDao;
 
 /**
  * Validation Data Access Object implementation.

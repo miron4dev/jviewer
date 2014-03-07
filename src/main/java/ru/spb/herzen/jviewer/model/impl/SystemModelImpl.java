@@ -1,7 +1,10 @@
-package ru.spb.herzen.jviewer.model;
+package ru.spb.herzen.jviewer.model.impl;
+
+import ru.spb.herzen.jviewer.model.DisplayModel;
+import ru.spb.herzen.jviewer.model.SystemModel;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * System model implementation.
@@ -9,7 +12,7 @@ import java.util.HashMap;
  */
 public class SystemModelImpl implements SystemModel, Serializable {
 
-    private HashMap<String, DisplayModel> currentState;
+    private Map<String, DisplayModel> currentState;
 
     /**
      * @see ru.spb.herzen.jviewer.model.SystemModel#loadCurrentScreen(String)
@@ -20,10 +23,10 @@ public class SystemModelImpl implements SystemModel, Serializable {
     }
 
     /**
-     * @see ru.spb.herzen.jviewer.model.SystemModel#setCurrentState(java.util.HashMap)
+     * @see ru.spb.herzen.jviewer.model.SystemModel#setCurrentState(java.util.Map)
      */
     @Override
-    public void setCurrentState(HashMap<String, DisplayModel> currentState) {
+    public void setCurrentState(Map<String, DisplayModel> currentState) {
         this.currentState = currentState;
     }
 

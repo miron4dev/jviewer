@@ -1,8 +1,7 @@
-package ru.spb.herzen.jviewer.dao;
+package ru.spb.herzen.jviewer.dao.impl;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.dao.RegistrationDao;
 
 /**
  * Registration Data Access Object implementation.

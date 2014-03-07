@@ -1,4 +1,6 @@
-package ru.spb.herzen.jviewer.model;
+package ru.spb.herzen.jviewer.model.impl;
+
+import ru.spb.herzen.jviewer.model.UserModel;
 
 import java.io.Serializable;
 

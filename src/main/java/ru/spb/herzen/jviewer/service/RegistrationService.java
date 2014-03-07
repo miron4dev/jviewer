@@ -1,8 +1,7 @@
 package ru.spb.herzen.jviewer.service;
 
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
 
 /**
  * Registration service interface.

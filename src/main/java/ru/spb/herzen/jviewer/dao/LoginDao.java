@@ -1,7 +1,7 @@
 package ru.spb.herzen.jviewer.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
-import ru.spb.herzen.jviewer.model.RoomModelImpl;
+import ru.spb.herzen.jviewer.model.impl.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package ru.spb.herzen.jviewer.service;
 
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.RoomModel;
-import ru.spb.herzen.jviewer.model.RoomModelImpl;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
+import ru.spb.herzen.jviewer.model.impl.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
 
 import java.util.List;

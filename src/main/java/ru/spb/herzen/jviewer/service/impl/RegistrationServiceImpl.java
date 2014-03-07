@@ -1,11 +1,11 @@
-package ru.spb.herzen.jviewer.service;
+package ru.spb.herzen.jviewer.service.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.dao.RegistrationDao;
 import ru.spb.herzen.jviewer.dao.ValidationDao;
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
-import ru.spb.herzen.jviewer.model.RequestModel;
-import ru.spb.herzen.jviewer.model.UserModel;
+import ru.spb.herzen.jviewer.model.impl.RequestModel;
+import ru.spb.herzen.jviewer.service.RegistrationService;
 
 import java.io.Serializable;
 
@@ -19,7 +19,7 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     private RegistrationDao registrationDao;
 
     /**
-     * @see ru.spb.herzen.jviewer.service.RegistrationService#regProfile(ru.spb.herzen.jviewer.model.RequestModel)
+     * @see ru.spb.herzen.jviewer.service.RegistrationService#regProfile(ru.spb.herzen.jviewer.model.impl.RequestModel)
      */
     @Override
     public RegistrationMsg regProfile(RequestModel requestModel) {
