@@ -2,6 +2,8 @@ package ru.spb.herzen.jviewer.model.impl;
 
 import ru.spb.herzen.jviewer.model.UserModel;
 
+import static ru.spb.herzen.jviewer.model.impl.CommonModel.*;
+
 import java.io.Serializable;
 
 /**
@@ -18,6 +20,18 @@ public class UserModelImpl implements UserModel, Serializable {
     private String faculty;
     private boolean enabled;
     private String currentRoom;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof UserModelImpl) {
+            UserModelImpl user = (UserModelImpl)obj;
+            return id == user.id && enabled == user.isEnabled() && equalsString(name, user.getName()) &&
+                    equalsString(password, user.getPassword()) && equalsString(role, user.getRole()) &&
+                    equalsString(invitationID, user.getInvitationID()) && equalsString(faculty, user.getFaculty()) &&
+                    equalsString(currentRoom, user.getCurrentRoom());
+        }
+        return false;
+    }
 
     @Override
     public int getId() {
@@ -98,4 +112,5 @@ public class UserModelImpl implements UserModel, Serializable {
     public void setCurrentRoom(String currentRoom) {
         this.currentRoom = currentRoom;
     }
+
 }

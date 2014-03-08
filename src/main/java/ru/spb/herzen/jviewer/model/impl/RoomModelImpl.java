@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ru.spb.herzen.jviewer.model.impl.CommonModel.equalsString;
+
 /**
  * Room model implementation.
  * @author Evgeny Mironenko
@@ -79,6 +81,18 @@ public class RoomModelImpl implements RoomModel, Serializable {
         }
 
         return names;
+    }
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof RoomModelImpl) {
+            RoomModelImpl room = (RoomModelImpl)obj;
+            return id == room.getId() && equalsString(name, room.getName()) && equalsString(password, room.getPassword()) &&
+                    equalsString(currentRoom, room.getCurrentRoom());
+        }
+        return false;
     }
 
     //

@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 INSERT INTO `users` (`id`, `name`, `password`, `role`, `faculty`, `enabled`) VALUES
-(1, 'Evgeny Mironenko', '0*ue@ioc', 'ROLE_USER', 'Faculty of Information Technology', b'1'),
+(1, 'Evgeny Mironenko', 'qwerty', 'ROLE_USER', 'Faculty of Information Technology', b'1'),
 (2, 'Admin Admin', 'admin1234+', 'ROLE_ADMIN', 'Faculty of Information Technology', b'1');

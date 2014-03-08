@@ -14,15 +14,17 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
      * @see ru.spb.herzen.jviewer.dao.ManagementDao#createRoom(String, String)
      */
     @Override
-    public void createRoom(String name, String password) throws DataAccessException {
+    public boolean createRoom(String name, String password) throws DataAccessException {
         getJdbcTemplate().update("insert into rooms (name, password) values (?, ?)", name, password);
+        return true;
     }
 
     /**
      * @see ru.spb.herzen.jviewer.dao.ManagementDao#removeRoom(String)
      */
     @Override
-    public void removeRoom(String name) throws DataAccessException {
+    public boolean removeRoom(String name) throws DataAccessException {
         getJdbcTemplate().update("delete from rooms where name = ?", name);
+        return true;
     }
 }

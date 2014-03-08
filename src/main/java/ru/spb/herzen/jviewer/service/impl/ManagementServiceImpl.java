@@ -18,8 +18,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public boolean createRoom(String room, String password) {
         try{
-            managementDao.createRoom(room, password);
-            return true;
+            return managementDao.createRoom(room, password);
         } catch(DataAccessException e){
             //TODO logging
             return false;
@@ -32,8 +31,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Override
     public boolean removeRoom(String room) {
         try{
-            managementDao.removeRoom(room);
-            return true;
+            return managementDao.removeRoom(room);
         } catch(DataAccessException e){
             //TODO logging
             return false;

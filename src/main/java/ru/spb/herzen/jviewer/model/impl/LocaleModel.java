@@ -74,7 +74,7 @@ public class LocaleModel implements Serializable {
 
     /**
      * Loads the *.properties file name.
-     * @return
+     * @return path to file
      */
     private String loadFileName(){
         if(currentLocale.equals(new Locale("en"))){

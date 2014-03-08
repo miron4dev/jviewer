@@ -14,7 +14,6 @@
         <servlet-name>JSF Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>JSF Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>

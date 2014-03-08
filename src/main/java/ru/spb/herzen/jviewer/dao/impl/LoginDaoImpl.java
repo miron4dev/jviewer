@@ -21,8 +21,8 @@ public class LoginDaoImpl extends JdbcDaoSupport implements LoginDao {
      */
     @Override
     public UserModel getData(String name) throws EmptyResultDataAccessException{
-        return getJdbcTemplate().query("select * from users where name = ?", new Object[]{name},
-                new BeanPropertyRowMapper<>(UserModelImpl.class)).get(0);
+        return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{name},
+                new BeanPropertyRowMapper<>(UserModelImpl.class));
     }
 
     /**

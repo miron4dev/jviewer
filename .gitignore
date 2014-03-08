@@ -1,6 +1,6 @@
 #Idea
 .idea/
-jviewer.iml
+*.iml
 
 #Maven
 target/

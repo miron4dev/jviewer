@@ -7,25 +7,25 @@ package ru.spb.herzen.jviewer.controller;
 public interface LoginController {
 
     /**
-     * Login user to JViewer.
+     * Login user.
      * @return user URL.
      */
     String loginUser();
 
     /**
-     * Login admin to JViewer.
+     * Login admin.
      * @return admin URL.
      */
     String loginAdmin();
 
     /**
-     * Logout user from JViewer.
+     * Logout any profile.
      * @return index URL.
      */
     String logout();
 
     /**
-     * Redirect user to some page.
+     * Redirect profile to some page.
      * @param page page value.
      * @return URL for redirect.
      */

@@ -1,5 +1,7 @@
 package ru.spb.herzen.jviewer.dao;
 
+import org.springframework.dao.DataAccessException;
+
 /**
  * Registration Data Access Object interface.
  * @author Evgeny Mironenko
@@ -12,8 +14,9 @@ public interface RegistrationDao {
      * @param password password of profile.
      * @param role role of profile. Default is USER_ROLE.
      * @param faculty faculty of profile.
+     * @throws DataAccessException if user with this name is already exist.
      */
-    void regProfile(String name, String password, String role, String faculty);
+    void regProfile(String name, String password, String role, String faculty) throws DataAccessException;
 
     /**
      * Gets invitation ID for professor registration from database.

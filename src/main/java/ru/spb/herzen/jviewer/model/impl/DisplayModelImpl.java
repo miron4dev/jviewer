@@ -46,7 +46,7 @@ public class DisplayModelImpl implements DisplayModel, Serializable{
 
     /**
      * Checks input field on the "document.write" existence.
-     * @return
+     * @return boolean value
      */
     private boolean documentTagExist() {
         return input.contains("document.write");
