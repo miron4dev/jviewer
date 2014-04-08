@@ -25,7 +25,7 @@ public class ValidationDaoImplTest {
     }
 
     @Test(expected = EmptyResultDataAccessException.class)
-    public void testCheckUserFailed() throws Exception {
+    public void testCheckUserFail() throws Exception {
         validationDao.checkUser("Test Account");
     }
 

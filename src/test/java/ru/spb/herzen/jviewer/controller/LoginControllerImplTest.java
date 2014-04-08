@@ -1,17 +1,18 @@
 package ru.spb.herzen.jviewer.controller;
 
+import org.apache.shale.test.mock.MockFacesContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.authentication.AuthenticationManager;
-import ru.spb.herzen.jviewer.common.MockFacesContext;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import ru.spb.herzen.jviewer.controller.impl.LoginControllerImpl;
 import ru.spb.herzen.jviewer.model.RoomModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.model.impl.UserModelImpl;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import java.util.List;
 
 import static org.easymock.EasyMock.*;
@@ -26,12 +27,15 @@ public class LoginControllerImplTest {
     private UserModel userModel;
     private RoomModel roomModel;
     private AuthenticationManager authenticationManager;
-    private FacesContext facesContext;
+    private MockFacesContext facesContext;
 
     @Before
     public void init() throws Exception {
+        facesContext = new MockFacesContext();
         loginController = new LoginControllerImpl();
         userModel = new UserModelImpl();
+        userModel.setName("testLogin");
+        userModel.setPassword("testPassword");
         roomModel = createStrictMock(RoomModel.class);
         authenticationManager = createStrictMock(AuthenticationManager.class);
         loginController.setUserModel(userModel);
@@ -49,15 +53,29 @@ public class LoginControllerImplTest {
     }
 
     @Test
-    public void testLoginUser() throws Exception {
-        prepareUser();
+    public void testLoginUserSuccess() throws Exception {
+        prepareUserSuccess();
         assertEquals(loginController.loginUser(), "rooms?faces-redirect=true");
         verify(roomModel);
     }
 
     @Test
+    public void testLoginUserFail() throws Exception {
+        prepareUserFail();
+        assertEquals(loginController.loginUser(), null);
+        verify(authenticationManager);
+    }
+
+    @Test
+    public void testLoginAdminFail() throws Exception {
+        prepareUserFail();
+        assertEquals(loginController.loginAdmin(), null);
+        verify(authenticationManager);
+    }
+
+    @Test
     public void testLoginAdmin() throws Exception {
-        prepareUser();
+        prepareUserSuccessNonEmptyRoomList();
         assertEquals(loginController.loginAdmin(), "admin?faces-redirect=true");
         verify(roomModel);
     }
@@ -65,18 +83,15 @@ public class LoginControllerImplTest {
     @Test
     public void testLogout() throws Exception {
         ExternalContext externalContext = createMock(ExternalContext.class);
-        facesContext = MockFacesContext.createStrictMock();
-        expect(facesContext.getExternalContext()).andReturn(externalContext);
-        replay(facesContext);
         externalContext.invalidateSession();
         expectLastCall();
         replay(externalContext);
+        facesContext.setExternalContext(externalContext);
         assertEquals(loginController.logout(), "index?faces-redirect=true");
-        verify(facesContext);
     }
 
     @Test
-    public void testPageRedirect() throws Exception {
+     public void testPageRedirectSuccess() throws Exception {
         String page = "test";
         expect(roomModel.getCurrentRoom()).andReturn(page).times(3);
         replay(roomModel);
@@ -84,7 +99,16 @@ public class LoginControllerImplTest {
         verify(roomModel);
     }
 
-    private void prepareUser() throws Exception {
+    @Test
+    public void testPageRedirectFail() throws Exception {
+        String page = "test";
+        expect(roomModel.getCurrentRoom()).andReturn(null);
+        replay(roomModel);
+        assertEquals(loginController.pageRedirect(page), null);
+        verify(roomModel);
+    }
+
+    private void prepareUserSuccess() throws Exception {
         List<String> rooms = createMock(List.class);
         roomModel.refreshRooms();
         expectLastCall();
@@ -94,6 +118,26 @@ public class LoginControllerImplTest {
         roomModel.setCurrentRoom("");
         expectLastCall();
         replay(roomModel);
+    }
+
+    private void prepareUserSuccessNonEmptyRoomList() throws Exception {
+        List<String> rooms = createMock(List.class);
+        String roomName = "Test room";
+        roomModel.refreshRooms();
+        expectLastCall();
+        expect(roomModel.getRooms()).andReturn(rooms).times(2);
+        expect(rooms.size()).andReturn(1);
+        expect(rooms.get(0)).andReturn(roomName);
+        replay(rooms);
+        roomModel.setCurrentRoom(roomName);
+        expectLastCall();
+        replay(roomModel);
+    }
+
+    private void prepareUserFail() {
+        expect(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("testLogin", "testPassword")))
+            .andThrow(new BadCredentialsException("Failed login"));
+        replay(authenticationManager);
     }
 
 }

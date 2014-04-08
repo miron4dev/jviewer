@@ -19,6 +19,7 @@
     <inceptionYear>2013</inceptionYear>
 
     <dependencies>
+
         <!-- UI -->
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -45,12 +46,14 @@
             <artifactId>resources-codemirror</artifactId>
             <version>1.2.0</version>
         </dependency>
+
         <!-- Database -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -92,6 +95,7 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -109,6 +113,12 @@
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shale</groupId>
+            <artifactId>shale-test</artifactId>
+            <version>${shale.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -140,8 +150,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <jsf.version>2.2.5</jsf.version>
         <primefaces.version>4.0</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
@@ -151,6 +161,7 @@
         <spring-security.version>3.2.0.RELEASE</spring-security.version>
         <junit.version>4.11</junit.version>
         <easymock.version>3.2</easymock.version>
+        <shale.version>1.0.5</shale.version>
         <el.api.version>3.0.0</el.api.version>
     </properties>
 

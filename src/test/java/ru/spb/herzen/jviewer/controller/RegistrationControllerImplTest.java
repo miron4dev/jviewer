@@ -1,9 +1,9 @@
 package ru.spb.herzen.jviewer.controller;
 
+import org.apache.shale.test.mock.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.spb.herzen.jviewer.common.MockFacesContext;
 import ru.spb.herzen.jviewer.controller.impl.RegistrationControllerImpl;
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
 import ru.spb.herzen.jviewer.model.impl.LocaleModel;
@@ -28,10 +28,11 @@ public class RegistrationControllerImplTest {
     private RequestModel requestModel;
     private RegistrationService registrationService;
     private LocaleModel localeModel;
-    private FacesContext facesContext;
+    private MockFacesContext facesContext;
 
     @Before
     public void init() throws Exception {
+        facesContext = new MockFacesContext();
         registrationController = new RegistrationControllerImpl();
         requestModel = new RequestModel();
         localeModel = createMock(LocaleModel.class);
@@ -43,41 +44,43 @@ public class RegistrationControllerImplTest {
 
     @After
     public void destroy() throws Exception {
+        facesContext = null;
         registrationController = null;
         requestModel = null;
         registrationService = null;
         localeModel = null;
-        facesContext = null;
     }
 
     @Test
     public void testRegProfileSuccess() throws Exception {
-        FacesContext facesContext = null;
         ExternalContext externalContext = createMock(ExternalContext.class);
         Flash flash = createMock(Flash.class);
-        Properties properties = createMock(Properties.class);
-        expect(registrationService.regProfile(requestModel)).andReturn(RegistrationMsg.SUCCESS);
-        replay(registrationService);
-        facesContext = MockFacesContext.createMock();
-        expect(facesContext.getExternalContext()).andReturn(externalContext);
-        replay(facesContext);
         expect(externalContext.getFlash()).andReturn(flash);
         replay(externalContext);
-        expect(localeModel.getLocaleFile()).andReturn(properties);
+        expect(registrationService.regProfile(requestModel)).andReturn(RegistrationMsg.SUCCESS);
+        replay(registrationService);
+        expect(localeModel.getLocaleFile()).andReturn(new Properties());
         replay(localeModel);
-        expect(properties.getProperty("registrationSuccessfulMessage")).andReturn(null);
-        replay(properties);
-        expect(flash.put("success", null)).andReturn("smth");
-        replay(flash);
+        facesContext.setExternalContext(externalContext);
         assertEquals(registrationController.regProfile(), "index?faces-redirect=true");
         verify(registrationService);
     }
 
     @Test
-    public void testRegProfileFailed() throws Exception {
-        expect(registrationService.regProfile(requestModel)).andReturn(null);
+    public void testRegProfileFailUserExist() throws Exception {
+        testRegProfileFail(RegistrationMsg.EXIST);
+    }
+
+    @Test
+    public void testRegProfileFailWrongId() throws Exception {
+        testRegProfileFail(RegistrationMsg.INVITATION_ID);
+    }
+
+    private void testRegProfileFail(RegistrationMsg result) {
+        expect(registrationService.regProfile(requestModel)).andReturn(result);
         replay(registrationService);
-        facesContext = MockFacesContext.createMock();
+        expect(localeModel.getLocaleFile()).andReturn(new Properties());
+        replay(localeModel);
         assertEquals(registrationController.regProfile(), null);
         verify(registrationService);
     }

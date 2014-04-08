@@ -51,7 +51,7 @@ public class PassEqualityValidationTest {
     }
 
     @Test(expected = ValidatorException.class)
-    public void testValidateFailed() throws Exception {
+    public void testValidateFail() throws Exception {
         Map<String, Object> attributes = createMock(Map.class);
         String password = "123456";
         String retypePassword = "654321";

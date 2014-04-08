@@ -39,7 +39,7 @@ public class RegistrationServiceImplTest {
     }
 
     @Test
-    public void testRegProfileSuccess() throws Exception {
+    public void testRegProfileUser() throws Exception {
         RequestModel model = new RequestModel();
         String name = "TestUser";
         String role = "ROLE_USER";
@@ -57,7 +57,26 @@ public class RegistrationServiceImplTest {
     }
 
     @Test
-    public void testRegProfileFailed() throws Exception {
+    public void testRegProfileAdmin() throws Exception {
+        RequestModel model = new RequestModel();
+        String name = "TestAdmin";
+        String role = "ROLE_ADMIN";
+        model.setName(name);
+        model.setInvitationID("12345");
+        validationDao.checkUser(name);
+        expectLastCall().andThrow(new EmptyResultDataAccessException(0));
+        replay(validationDao);
+        expect(registrationDao.getInvitationID()).andReturn(model.getInvitationID());
+        registrationDao.regProfile(name, null, role, null);
+        expectLastCall();
+        replay(registrationDao);
+        assertEquals(RegistrationMsg.SUCCESS, registrationService.regProfile(model));
+        verify(validationDao);
+        verify(registrationDao);
+    }
+
+    @Test
+    public void testRegProfileFail() throws Exception {
         RequestModel model = new RequestModel();
         String name = "TestUser";
         model.setName(name);

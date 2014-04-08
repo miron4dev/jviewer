@@ -27,15 +27,15 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
     @Override
     public String regProfile() {
         RegistrationMsg result = registrationService.regProfile(requestModel);
+        FacesContext currentInstance = FacesContext.getCurrentInstance();
         if (result == RegistrationMsg.SUCCESS) {
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", localeModel.getLocaleFile().getProperty("registrationSuccessfulMessage"));
+            currentInstance.getExternalContext().getFlash().put("success", localeModel.getLocaleFile().getProperty("registrationSuccessfulMessage"));
             return "index?faces-redirect=true";
         } else {
-            FacesContext context = FacesContext.getCurrentInstance();
             if (result == RegistrationMsg.EXIST) {
-                context.addMessage("registrationForm:name", new FacesMessage(localeModel.getLocaleFile().getProperty("userExistMessage")));
+                currentInstance.addMessage("registrationForm:name", new FacesMessage(localeModel.getLocaleFile().getProperty("userExistMessage")));
             } else if (result == RegistrationMsg.INVITATION_ID) {
-                context.addMessage("registrationForm:inviteID", new FacesMessage(localeModel.getLocaleFile().getProperty("badInvitationIdMessage")));
+                currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(localeModel.getLocaleFile().getProperty("badInvitationIdMessage")));
             }
             return null;
         }

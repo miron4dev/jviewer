@@ -3,6 +3,7 @@ package ru.spb.herzen.jviewer.service;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.dao.LoginDao;
 import ru.spb.herzen.jviewer.dao.ValidationDao;
 import ru.spb.herzen.jviewer.model.UserModel;
@@ -18,7 +19,7 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 /**
- * Created by Eugen Mironenko on 08.03.14.
+ * @author Evgeny Mironenko
  */
 public class LoginServiceImplTest {
 
@@ -43,7 +44,7 @@ public class LoginServiceImplTest {
     }
 
     @Test
-    public void testGetData() throws Exception {
+    public void testGetDataSuccess() throws Exception {
         UserModel userModel = new UserModelImpl();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
@@ -60,11 +61,25 @@ public class LoginServiceImplTest {
     }
 
     @Test
-    public void testGetRooms() throws Exception {
+    public void testGetDataFail() throws Exception {
+        RequestModel requestModel = new RequestModel();
+        String userName = "Test Test";
+        String password = "password1234+";
+        requestModel.setName(userName);
+        requestModel.setPassword(password);
+        expect(validationDao.getUserPassword(userName)).andThrow(new EmptyResultDataAccessException(1));
+        replay(validationDao);
+        assertEquals(null, loginService.getData(requestModel));
+        verify(validationDao);
+    }
+
+    @Test
+    public void testGetRoomsSuccess() throws Exception {
         List<RoomModelImpl> roomModelList = new ArrayList<>();
         expect(loginDao.getRooms()).andReturn(roomModelList);
         replay(loginDao);
         assertEquals(roomModelList, loginService.getRooms());
         verify(loginDao);
     }
+
 }

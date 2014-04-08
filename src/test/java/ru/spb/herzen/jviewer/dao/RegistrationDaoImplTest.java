@@ -30,7 +30,7 @@ public class RegistrationDaoImplTest {
     }
 
     @Test(expected = DataAccessException.class)
-    public void testRegProfileFailed() throws Exception {
+    public void testRegProfileFail() throws Exception {
         registrationDao.regProfile("Evgeny Mironenko", "blabla", "test_role" ,"IT");
     }
 

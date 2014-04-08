@@ -38,7 +38,7 @@ public class LoginDaoImplTest {
     }
 
     @Test
-    public void testGetDataFailed() throws Exception {
+    public void testGetDataFail() throws Exception {
         UserModel userModel = new UserModelImpl();
         userModel.setId(999);
         assertNotEquals(loginDao.getData("Evgeny Mironenko"), userModel);

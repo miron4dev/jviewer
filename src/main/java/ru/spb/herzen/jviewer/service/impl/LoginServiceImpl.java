@@ -41,11 +41,7 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public List<RoomModelImpl> getRooms() {
-        try{
-            return loginDao.getRooms();
-        } catch(EmptyResultDataAccessException e){
-            return null;
-        }
+        return loginDao.getRooms();
     }
 
     //

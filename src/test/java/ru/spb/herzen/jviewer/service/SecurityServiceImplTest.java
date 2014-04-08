@@ -1,8 +1,10 @@
 package ru.spb.herzen.jviewer.service;
 
+import org.apache.shale.test.mock.MockFacesContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +14,8 @@ import ru.spb.herzen.jviewer.model.impl.RequestModel;
 import ru.spb.herzen.jviewer.model.impl.UserModelImpl;
 import ru.spb.herzen.jviewer.service.impl.SecurityService;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.Flash;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +57,7 @@ public class SecurityServiceImplTest {
     }
 
     @Test
-    public void testAuthenticate() throws Exception {
+    public void testAuthenticateSuccess() throws Exception {
         String name = "user";
         String password = "password";
         expect(authentication.getName()).andReturn(name);
@@ -62,6 +66,26 @@ public class SecurityServiceImplTest {
         expect(loginService.getData(requestModel)).andReturn(userModel);
         replay(loginService);
         assertEquals(securityService.authenticate(authentication), getAuthentication(name, password));
+        verify(authentication);
+        verify(loginService);
+    }
+
+    @Test(expected = BadCredentialsException.class)
+    public void testAuthenticateFail() throws Exception {
+        MockFacesContext facesContext = new MockFacesContext();
+        ExternalContext externalContext = createMock(ExternalContext.class);
+        Flash flash = createMock(Flash.class);
+        expect(externalContext.getFlash()).andReturn(flash);
+        replay(externalContext);
+        facesContext.setExternalContext(externalContext);
+        String name = "user";
+        String password = "password";
+        expect(authentication.getName()).andReturn(name);
+        expect(authentication.getCredentials()).andReturn(password);
+        replay(authentication);
+        expect(loginService.getData(requestModel)).andReturn(null);
+        replay(loginService);
+        securityService.authenticate(authentication);
         verify(authentication);
         verify(loginService);
     }
