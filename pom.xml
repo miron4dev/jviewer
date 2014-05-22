@@ -152,13 +152,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jsf.version>2.2.5</jsf.version>
-        <primefaces.version>4.0</primefaces.version>
+        <jsf.version>2.2.6</jsf.version>
+        <primefaces.version>5.0</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
         <primefaces-extensions.version>0.7.1</primefaces-extensions.version>
-        <mysql.version>5.1.25</mysql.version>
-        <spring.version>4.0.0.RELEASE</spring.version>
-        <spring-security.version>3.2.0.RELEASE</spring-security.version>
+        <mysql.version>5.1.30</mysql.version>
+        <spring.version>4.0.5.RELEASE</spring.version>
+        <spring-security.version>3.2.4.RELEASE</spring-security.version>
         <junit.version>4.11</junit.version>
         <easymock.version>3.2</easymock.version>
         <shale.version>1.0.5</shale.version>
