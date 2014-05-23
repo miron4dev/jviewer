@@ -27,6 +27,12 @@
             <version>${jsf.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>${jsf.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
@@ -44,7 +50,7 @@
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>resources-codemirror</artifactId>
-            <version>1.2.0</version>
+            <version>${primefaces-codemirror.version}</version>
         </dependency>
 
         <!-- Database -->
@@ -140,9 +146,9 @@
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
-	    <plugin>
+            <plugin>
                 <groupId>org.codehaus.sonar</groupId>
-                <artifactId>sonar-maven3-plugin</artifactId>
+                <artifactId>sonar-maven-plugin</artifactId>
                 <version>4.3</version>
             </plugin>
         </plugins>
@@ -155,7 +161,8 @@
         <jsf.version>2.2.6</jsf.version>
         <primefaces.version>5.0</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
-        <primefaces-extensions.version>0.7.1</primefaces-extensions.version>
+        <primefaces-extensions.version>2.0.0</primefaces-extensions.version>
+        <primefaces-codemirror.version>1.2.0</primefaces-codemirror.version>
         <mysql.version>5.1.30</mysql.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <spring-security.version>3.2.4.RELEASE</spring-security.version>
