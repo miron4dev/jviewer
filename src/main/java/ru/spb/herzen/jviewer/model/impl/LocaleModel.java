@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public class LocaleModel implements Serializable {
 
-    private Locale currentLocale;
+    private Locale currentLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     private List<String> facultyList;
     private Properties localeFile;
 
@@ -25,7 +25,6 @@ public class LocaleModel implements Serializable {
     public void init(){
         facultyList = new ArrayList<>();
         localeFile = new Properties();
-        currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         String fileName = loadFileName();
         try {
             InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
