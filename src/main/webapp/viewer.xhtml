@@ -11,6 +11,7 @@
     <title>#{msg['mainTitle']}</title>
     <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="jviewer.css"/>
+    <h:outputScript library="scripts" name="chat_user.js"/>
 </h:head>
 
 <h:body>
@@ -31,7 +32,7 @@
             <pe:codeMirror id="input" mode="xml" readOnly="true" theme="eclipse" lineNumbers="true" lineWrapping="true" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).input}"/>
             <br/>
             <h:outputText id="output" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).output}" escape="false"/>
-            <p:poll interval="1" update="displayForm"/>
+            <p:remoteCommand name="refreshForm" update="displayForm"/>
     </h:form>
 </h:body>
 
