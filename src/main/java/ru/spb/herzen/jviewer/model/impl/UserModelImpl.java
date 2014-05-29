@@ -10,7 +10,7 @@ import java.io.Serializable;
  * User model implementation.
  * @author Evgeny Mironenko
  */
-public class UserModelImpl implements UserModel, Serializable {
+public class UserModelImpl implements UserModel {
 
     private int id;
     private String name;

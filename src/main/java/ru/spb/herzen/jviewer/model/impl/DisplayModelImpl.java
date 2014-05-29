@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Display model implementation.
  * @author Evgeny Mironenko
  */
-public class DisplayModelImpl implements DisplayModel, Serializable{
+public class DisplayModelImpl implements DisplayModel {
 
     private String input = "";
     private String output = "";
@@ -19,7 +19,7 @@ public class DisplayModelImpl implements DisplayModel, Serializable{
      */
     @Override
     public void executeCode() {
-        updateInput();
+//        updateInput();
         while(documentTagExist()){
             input = input.replace("document.write", "document.getElementById('displayForm:output').innerHTML = document.getElementById('displayForm:output').innerHTML + ");
         }

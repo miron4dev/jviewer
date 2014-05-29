@@ -1,12 +1,13 @@
 package ru.spb.herzen.jviewer.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * System model interface.
  * @author Evgeny Mironenko
  */
-public interface SystemModel {
+public interface SystemModel extends Serializable {
 
     /**
      * Loads the current display model for showing.

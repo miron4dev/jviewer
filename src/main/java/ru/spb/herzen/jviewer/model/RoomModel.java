@@ -1,12 +1,13 @@
 package ru.spb.herzen.jviewer.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Room model interface.
  * @author Evgeny Mironenko
  */
-public interface RoomModel {
+public interface RoomModel extends Serializable {
 
     /**
      * Creates new room.

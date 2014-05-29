@@ -10,7 +10,7 @@ import java.util.Map;
  * System model implementation.
  * @author Evgeny Mironenko
  */
-public class SystemModelImpl implements SystemModel, Serializable {
+public class SystemModelImpl implements SystemModel {
 
     private Map<String, DisplayModel> currentState;
 

@@ -34,7 +34,7 @@
             <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).input}"/>
             <br/>
             <h:outputText id="output" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).output}" escape="false"/>
-            <p:poll interval="1" listener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).updateInput}"/>
+
         </h:form>
 </h:body>
 

@@ -18,7 +18,7 @@ import static ru.spb.herzen.jviewer.model.impl.CommonModel.equalsString;
  * Room model implementation.
  * @author Evgeny Mironenko
  */
-public class RoomModelImpl implements RoomModel, Serializable {
+public class RoomModelImpl implements RoomModel {
 
     private int id;
     private String name;

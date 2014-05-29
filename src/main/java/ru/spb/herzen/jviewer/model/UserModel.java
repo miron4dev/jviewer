@@ -1,10 +1,12 @@
 package ru.spb.herzen.jviewer.model;
 
+import java.io.Serializable;
+
 /**
  * User model interface.
  * @author Evgeny Mironenko
  */
-public interface UserModel {
+public interface UserModel extends Serializable {
 
     /**
      * Gets user id in database.

@@ -1,10 +1,12 @@
 package ru.spb.herzen.jviewer.model;
 
+import java.io.Serializable;
+
 /**
  * Display model interface.
  * @author Evgeny Mironenko
  */
-public interface DisplayModel {
+public interface DisplayModel extends Serializable {
 
     /**
      * Interprets current code.
