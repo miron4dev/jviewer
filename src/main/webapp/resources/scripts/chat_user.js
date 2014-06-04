@@ -2,8 +2,27 @@
  * Client-side javascript for providing WebSocket implementation for recipients.
  */
 
-var socket = new WebSocket("ws://jviewer:8080/chat");
+var socket;
+var serviceLocation = "ws://localhost:8080/jviewer/chat/";
 
-socket.onmessage = function (event) {
-    refreshForm();
-};
+$(document).ready(function() {
+    socket = new WebSocket(serviceLocation + $('#currentRoom').text());
+
+    socket.onmessage = function (event) {
+        var msg = event.data;
+        if (msg === '/execute') {
+            $('#result').attr('src', 'data:text/html;charset=utf-8,' + escape(editor.getValue()));
+        }
+        else if (msg === '/clear') {
+            editor.setValue('');
+            $('#result').attr('src', '');
+        }
+        else {
+            editor.setValue(msg);
+        }
+    };
+});
+
+function leaveRoom() {
+    socket.close();
+}

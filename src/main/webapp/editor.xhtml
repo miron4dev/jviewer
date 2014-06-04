@@ -3,15 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:p="http://primefaces.org/ui">
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['displayTitle']}</title>
     <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="jviewer.css"/>
-    <h:outputScript library="scripts" name="char_admin.js"/>
+    <h:outputStylesheet library="styles" name="codemirror.css"/>
+
+    <h:outputScript library="scripts" name="codemirror/codemirror.js"/>
+    <h:outputScript library="scripts" name="codemirror/javascript.js"/>
+    <h:outputScript library="scripts" name="codemirror/css.js"/>
+    <h:outputScript library="scripts" name="codemirror/xml.js"/>
+    <h:outputScript library="scripts" name="codemirror/htmlmixed.js"/>
+
+    <h:outputScript library="scripts" name="chat_admin.js"/>
 </h:head>
 
 <h:body>
@@ -25,15 +32,24 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
+    #{msg['currentRoomMessage']}: <h:outputText id="currentRoom" value="#{userModel.currentRoom}"/>
         <h:form id="displayForm">
-            #{msg['currentRoomMessage']}: <h:outputText value="#{userModel.currentRoom} "/>
-            <p:commandButton value="#{msg['executeButton']}" actionListener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).executeCode}" update="output"/>
-            <p:commandButton value="#{msg['clearIoButton']}" actionListener="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).clearIO}" update="output, input"/>
+            <p:commandButton value="#{msg['executeButton']}" onclick="executeCode();"/>
+            <p:commandButton value="#{msg['clearIoButton']}" onclick="clearIO();"/>
             <p:commandButton value="#{msg['roomsButton']}" action="admin?faces-redirect=true"/>
-            <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}"/>
-            <pe:codeMirror id="input" mode="xml" readOnly="false" theme="eclipse" lineNumbers="true" lineWrapping="true" matchBrackets="true" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).input}"/>
+            <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
+            <textarea id="inputArea"></textarea>
+            <script type="text/javascript">
+                var editor = CodeMirror.fromTextArea(document.getElementById("inputArea"), {
+                    lineNumbers: true,
+                    mode: "htmlmixed",
+                    matchBrackets: true,
+                    lineWrapping: true
+
+                });
+            </script>
             <br/>
-            <h:outputText id="output" value="#{(systemModel.loadCurrentScreen(userModel.currentRoom)).output}" escape="false"/>
+            <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
 
         </h:form>
 </h:body>

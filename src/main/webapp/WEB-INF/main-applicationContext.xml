@@ -68,13 +68,8 @@
     <bean id="roomModel" class="ru.spb.herzen.jviewer.model.impl.RoomModelImpl" scope="session">
         <property name="managementService" ref="managementService"/>
         <property name="loginService" ref="loginService"/>
-        <property name="systemModel" ref="systemModel"/>
         <aop:scoped-proxy/>
     </bean>
-
-    <bean id="displayModel" class="ru.spb.herzen.jviewer.model.impl.DisplayModelImpl"/>
-
-    <bean id="systemModel" class="ru.spb.herzen.jviewer.model.impl.SystemModelImpl"/>
 
     <!--Options-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />

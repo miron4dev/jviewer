@@ -1,16 +1,11 @@
 package ru.spb.herzen.jviewer.model.impl;
 
-import ru.spb.herzen.jviewer.model.DisplayModel;
 import ru.spb.herzen.jviewer.model.RoomModel;
-import ru.spb.herzen.jviewer.model.SystemModel;
 import ru.spb.herzen.jviewer.service.LoginService;
 import ru.spb.herzen.jviewer.service.ManagementService;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static ru.spb.herzen.jviewer.model.impl.CommonModel.equalsString;
 
@@ -25,7 +20,6 @@ public class RoomModelImpl implements RoomModel {
     private String password;
     private List<String> rooms;
     private String currentRoom;
-    private SystemModel systemModel;
 
     private ManagementService managementService;
     private LoginService loginService;
@@ -55,12 +49,7 @@ public class RoomModelImpl implements RoomModel {
      */
     @Override
     public void refreshRooms(){
-        Map<String, DisplayModel> map = new HashMap<>();
         rooms = loadNames(loginService.getRooms());
-        for(String room: rooms){
-            map.put(room, new DisplayModelImpl());
-        }
-        systemModel.setCurrentState(map);
         if(rooms.size() != 0){
             currentRoom = rooms.get(0);
         }
@@ -155,9 +144,5 @@ public class RoomModelImpl implements RoomModel {
 
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;
-    }
-
-    public void setSystemModel(SystemModel systemModel) {
-        this.systemModel = systemModel;
     }
 }

@@ -44,11 +44,6 @@
         </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
-            <artifactId>primefaces-extensions</artifactId>
-            <version>${primefaces-extensions.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
             <artifactId>resources-codemirror</artifactId>
             <version>${primefaces-codemirror.version}</version>
         </dependency>
@@ -106,7 +101,7 @@
         <dependency>
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-api</artifactId>
-            <version>1.0</version>
+            <version>${websocket.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -168,11 +163,11 @@
         <jsf.version>2.2.6</jsf.version>
         <primefaces.version>5.0</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
-        <primefaces-extensions.version>2.0.0</primefaces-extensions.version>
         <primefaces-codemirror.version>1.2.0</primefaces-codemirror.version>
         <mysql.version>5.1.30</mysql.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <spring-security.version>3.2.4.RELEASE</spring-security.version>
+        <websocket.version>1.0</websocket.version>
         <junit.version>4.11</junit.version>
         <easymock.version>3.2</easymock.version>
         <shale.version>1.0.5</shale.version>
