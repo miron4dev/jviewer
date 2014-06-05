@@ -1,5 +1,7 @@
 package ru.spb.herzen.jviewer.websockets;
 
+import org.apache.log4j.Logger;
+
 import javax.websocket.EncodeException;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -15,6 +17,8 @@ import java.io.IOException;
  */
 @ServerEndpoint(value = "/chat/{room}")
 public class ChatServerEndpoint {
+
+    private final Logger LOG = Logger.getLogger(ChatServerEndpoint.class);
 
     private final String ROOM = "room";
 
@@ -33,7 +37,7 @@ public class ChatServerEndpoint {
                 }
             }
         } catch (IOException | EncodeException e) {
-            // TODO logging
+            LOG.error("CharServerEndpoint: error in attempt of sending message via websocket. More: " + e);
         }
         return msg;
     }

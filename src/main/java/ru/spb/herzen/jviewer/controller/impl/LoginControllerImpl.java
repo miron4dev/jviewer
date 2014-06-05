@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.controller.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,8 @@ import javax.faces.context.FacesContext;
  */
 public class LoginControllerImpl implements LoginController {
 
+    private final Logger LOG = Logger.getLogger(LoginControllerImpl.class);
+
     private UserModel userModel;
     private RoomModel roomModel;
     private AuthenticationManager authenticationManager;
@@ -31,6 +34,7 @@ public class LoginControllerImpl implements LoginController {
             prepareUser();
             return "rooms?faces-redirect=true";
         } catch (BadCredentialsException e){
+            LOG.error("Authentication was failed. More: " + e);
             return null;
         }
     }

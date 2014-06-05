@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.controller.impl;
 
+import org.apache.log4j.Logger;
 import ru.spb.herzen.jviewer.controller.RegistrationController;
 import ru.spb.herzen.jviewer.messages.RegistrationMsg;
 import ru.spb.herzen.jviewer.model.impl.LocaleModel;
@@ -15,6 +16,8 @@ import java.io.Serializable;
  * @author Evgeny Mironenko
  */
 public class RegistrationControllerImpl implements RegistrationController, Serializable {
+
+    private final Logger LOG = Logger.getLogger(RegistrationControllerImpl.class);
 
     private RequestModel requestModel;
     private LocaleModel localeModel;

@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +38,6 @@ public class SecurityService implements AuthenticationProvider {
         if (user == null) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
             throw new BadCredentialsException("Data is invalid.");
-            //TODO: logging
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();

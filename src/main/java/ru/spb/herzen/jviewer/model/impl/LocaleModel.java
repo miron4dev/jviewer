@@ -1,5 +1,7 @@
 package ru.spb.herzen.jviewer.model.impl;
 
+import org.apache.log4j.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import java.io.*;
@@ -13,6 +15,8 @@ import java.util.Properties;
  * @author Evgeny Mironenko
  */
 public class LocaleModel implements Serializable {
+
+    private final Logger LOG = Logger.getLogger(LocaleModel.class);
 
     private Locale currentLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     private List<String> facultyList;
@@ -30,7 +34,7 @@ public class LocaleModel implements Serializable {
             InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             localeFile.load(fis);
         } catch (IOException | NullPointerException e) {
-            //TODO: logging
+            LOG.error("Error in constructing LocaleModel. More: " + e);
             e.printStackTrace();
         }
 

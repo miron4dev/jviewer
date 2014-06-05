@@ -1,5 +1,6 @@
 package ru.spb.herzen.jviewer.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import ru.spb.herzen.jviewer.dao.ManagementDao;
 import ru.spb.herzen.jviewer.service.ManagementService;
@@ -9,6 +10,8 @@ import ru.spb.herzen.jviewer.service.ManagementService;
  * @author Evgeny Mironenko
  */
 public class ManagementServiceImpl implements ManagementService {
+
+    private final Logger LOG = Logger.getLogger(ManagementServiceImpl.class);
 
     private ManagementDao managementDao;
 
@@ -20,7 +23,7 @@ public class ManagementServiceImpl implements ManagementService {
         try{
             return managementDao.createRoom(room, password);
         } catch(DataAccessException e){
-            //TODO logging
+            LOG.error("Failed to create room. More: " + e);
             return false;
         }
     }
@@ -33,7 +36,7 @@ public class ManagementServiceImpl implements ManagementService {
         try{
             return managementDao.removeRoom(room);
         } catch(DataAccessException e){
-            //TODO logging
+            LOG.error("Failed to remove room. More: " + e);
             return false;
         }
     }
