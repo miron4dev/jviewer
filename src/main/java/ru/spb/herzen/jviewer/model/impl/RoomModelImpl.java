@@ -1,6 +1,5 @@
 package ru.spb.herzen.jviewer.model.impl;
 
-import org.apache.log4j.Logger;
 import ru.spb.herzen.jviewer.model.RoomModel;
 import ru.spb.herzen.jviewer.service.LoginService;
 import ru.spb.herzen.jviewer.service.ManagementService;
@@ -15,8 +14,6 @@ import static ru.spb.herzen.jviewer.model.impl.CommonModel.equalsString;
  * @author Evgeny Mironenko
  */
 public class RoomModelImpl implements RoomModel {
-
-    private final Logger LOG = Logger.getLogger(RoomModelImpl.class);
 
     private int id;
     private String name;

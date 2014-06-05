@@ -22,11 +22,22 @@ public class ChatServerEndpoint {
 
     private final String ROOM = "room";
 
+    /**
+     * Prepares websocket connection.
+     * @param session of current user.
+     * @param room of current user.
+     */
     @OnOpen
     public void open(final Session session, @PathParam(ROOM) final String room) {
         session.getUserProperties().put(ROOM, room);
     }
 
+    /**
+     * Sends message by websocket protocol.
+     * @param session of current user.
+     * @param msg - message, which should be delivered.
+     * @return msg. See param.
+     */
     @OnMessage
     public String sendMessage(Session session, String msg) {
         String room = (String) session.getUserProperties().get(ROOM);

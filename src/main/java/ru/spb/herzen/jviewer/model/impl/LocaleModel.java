@@ -34,8 +34,7 @@ public class LocaleModel implements Serializable {
             InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             localeFile.load(fis);
         } catch (IOException | NullPointerException e) {
-            LOG.error("Error in constructing LocaleModel. More: " + e);
-            e.printStackTrace();
+            LOG.error("Error in constructing of LocaleModel. More: " + e);
         }
 
         facultyList.add(localeFile.getProperty("ItFaculty"));

@@ -9,6 +9,7 @@ import ru.spb.herzen.jviewer.service.RegistrationService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -33,8 +34,10 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
         FacesContext currentInstance = FacesContext.getCurrentInstance();
         if (result == RegistrationMsg.SUCCESS) {
             currentInstance.getExternalContext().getFlash().put("success", localeModel.getLocaleFile().getProperty("registrationSuccessfulMessage"));
+            LOG.info("User was registered. From host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost());
             return "index?faces-redirect=true";
         } else {
+            LOG.info("Registration failed. From host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost());
             if (result == RegistrationMsg.EXIST) {
                 currentInstance.addMessage("registrationForm:name", new FacesMessage(localeModel.getLocaleFile().getProperty("userExistMessage")));
             } else if (result == RegistrationMsg.INVITATION_ID) {
