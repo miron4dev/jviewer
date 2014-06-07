@@ -160,7 +160,7 @@
             <plugin>
                 <groupId>org.codehaus.sonar</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.3</version>
+                <version>4.3.1</version>
             </plugin>
         </plugins>
     </build>
@@ -192,5 +192,20 @@
             <layout>default</layout>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jdbc.url>jdbc:mysql://95.85.32.78:3306/sonar</sonar.jdbc.url>
+                <sonar.jdbc.username>root</sonar.jdbc.username>
+                <sonar.jdbc.password>qwerty</sonar.jdbc.password>
+                <sonar.host.url>http://localhost:9000</sonar.host.url>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

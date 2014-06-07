@@ -5,6 +5,9 @@ import org.springframework.dao.DataAccessException;
 import ru.spb.herzen.jviewer.dao.ManagementDao;
 import ru.spb.herzen.jviewer.service.ManagementService;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Management service implementation.
  * @author Evgeny Mironenko
@@ -23,7 +26,8 @@ public class ManagementServiceImpl implements ManagementService {
         try{
             return managementDao.createRoom(room, password);
         } catch(DataAccessException e){
-            LOG.error("Failed to create room. More: " + e);
+            LOG.error("Host: " + ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
+                    + " | Failed to create room. More: " + e);
             return false;
         }
     }
@@ -36,7 +40,8 @@ public class ManagementServiceImpl implements ManagementService {
         try{
             return managementDao.removeRoom(room);
         } catch(DataAccessException e){
-            LOG.error("Failed to remove room. More: " + e);
+            LOG.error("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
+                    + " | Failed to remove room. More: " + e);
             return false;
         }
     }

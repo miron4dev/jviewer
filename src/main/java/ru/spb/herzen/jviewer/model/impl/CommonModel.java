@@ -6,11 +6,10 @@ package ru.spb.herzen.jviewer.model.impl;
  */
 public final class CommonModel {
 
-    private CommonModel(){
-    }
+    private CommonModel() {}
 
     /**
-     * Equals realisation for string objects. Is necessary to prevent NPE.
+     * Equals implementation for string objects. Is necessary to prevent NPE.
      * @param str1 first string.
      * @param str2 second string.
      * @return equality result.

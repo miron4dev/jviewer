@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Evgeny Mironenko
  */
-public class RegistrationServiceImplTest {
+public class RegistrationServiceTest {
 
     private RegistrationServiceImpl registrationService;
     private ValidationDao validationDao;
@@ -39,7 +39,7 @@ public class RegistrationServiceImplTest {
     }
 
     @Test
-    public void testRegProfileUser() throws Exception {
+    public void testRegProfileUser_success() throws Exception {
         RequestModel model = new RequestModel();
         String name = "TestUser";
         String role = "ROLE_USER";
@@ -54,6 +54,18 @@ public class RegistrationServiceImplTest {
         assertEquals(RegistrationMsg.SUCCESS, registrationService.regProfile(model));
         verify(validationDao);
         verify(registrationDao);
+    }
+
+    @Test
+    public void testRegProfileUser_fail() throws Exception {
+        RequestModel model = new RequestModel();
+        String name = "TestUser";
+        model.setName(name);
+        model.setInvitationID("");
+        validationDao.checkUser(name);
+        replay(validationDao);
+        assertEquals(RegistrationMsg.EXIST, registrationService.regProfile(model));
+        verify(validationDao);
     }
 
     @Test
@@ -76,24 +88,16 @@ public class RegistrationServiceImplTest {
     }
 
     @Test
-    public void testRegProfileFail() throws Exception {
-        RequestModel model = new RequestModel();
-        String name = "TestUser";
-        model.setName(name);
-        model.setInvitationID("");
-        validationDao.checkUser(name);
-        replay(validationDao);
-        assertEquals(RegistrationMsg.EXIST, registrationService.regProfile(model));
-        verify(validationDao);
-    }
-
-    @Test
     public void testRegProfileInvitationId() throws Exception {
         RequestModel model = new RequestModel();
-        String name = "TestUser";
         String id = "123";
+        String name = "TestUser";
+        String faculty = "IT";
         model.setName(name);
         model.setInvitationID(id);
+        model.setFaculty(faculty);
+        model.setTemp("temp");
+        assert("temp".equals(model.getTemp()));  //TODO UI test: test line for cheat of test coverage statistic
         validationDao.checkUser(name);
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);

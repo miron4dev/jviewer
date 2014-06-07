@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,9 @@ public class LocaleModel implements Serializable {
         try {
             InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             localeFile.load(fis);
-        } catch (IOException | NullPointerException e) {
-            LOG.error("Error in constructing of LocaleModel. More: " + e);
+        } catch (IOException e) {
+            LOG.error("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
+                    + " | Error in constructing of LocaleModel. More: " + e);
         }
 
         facultyList.add(localeFile.getProperty("ItFaculty"));

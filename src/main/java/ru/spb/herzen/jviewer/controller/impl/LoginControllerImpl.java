@@ -35,7 +35,7 @@ public class LoginControllerImpl implements LoginController {
             prepareUser();
             return "rooms?faces-redirect=true";
         } catch (BadCredentialsException e){
-            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " Authentication by user was failed. More: " + e);
+            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " | Authentication by user was failed. More: " + e);
             return null;
         }
     }
@@ -50,7 +50,7 @@ public class LoginControllerImpl implements LoginController {
             prepareUser();
             return "admin?faces-redirect=true";
         } catch (BadCredentialsException e){
-            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " Authentication by admin was failed. More: " + e);
+            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " | Authentication by admin was failed. More: " + e);
             return null;
         }
     }

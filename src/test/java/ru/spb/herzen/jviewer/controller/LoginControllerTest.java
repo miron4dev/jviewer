@@ -1,6 +1,7 @@
 package ru.spb.herzen.jviewer.controller;
 
 import org.apache.shale.test.mock.MockFacesContext;
+import org.apache.shale.test.mock.MockHttpServletRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import ru.spb.herzen.jviewer.controller.impl.LoginControllerImpl;
 import ru.spb.herzen.jviewer.model.RoomModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.model.impl.UserModelImpl;
+import ru.spb.herzen.jviewer.utils.CommonUtil;
 
 import javax.faces.context.ExternalContext;
 import java.util.List;
@@ -21,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Evgeny Mironenko
  */
-public class LoginControllerImplTest {
+public class LoginControllerTest {
 
     private LoginControllerImpl loginController;
     private UserModel userModel;
@@ -53,31 +55,31 @@ public class LoginControllerImplTest {
     }
 
     @Test
-    public void testLoginUserSuccess() throws Exception {
+    public void testLoginUser_success() throws Exception {
         prepareUserSuccess();
         assertEquals(loginController.loginUser(), "rooms?faces-redirect=true");
         verify(roomModel);
     }
 
     @Test
-    public void testLoginUserFail() throws Exception {
+    public void testLoginUser_fail() throws Exception {
         prepareUserFail();
         assertEquals(loginController.loginUser(), null);
         verify(authenticationManager);
     }
 
     @Test
-    public void testLoginAdminFail() throws Exception {
-        prepareUserFail();
-        assertEquals(loginController.loginAdmin(), null);
-        verify(authenticationManager);
-    }
-
-    @Test
-    public void testLoginAdmin() throws Exception {
+    public void testLoginAdmin_success() throws Exception {
         prepareUserSuccessNonEmptyRoomList();
         assertEquals(loginController.loginAdmin(), "admin?faces-redirect=true");
         verify(roomModel);
+    }
+
+    @Test
+    public void testLoginAdmin_fail() throws Exception {
+        prepareUserFail();
+        assertEquals(loginController.loginAdmin(), null);
+        verify(authenticationManager);
     }
 
     @Test
@@ -91,7 +93,7 @@ public class LoginControllerImplTest {
     }
 
     @Test
-     public void testPageRedirectSuccess() throws Exception {
+     public void testPageRedirect_success() throws Exception {
         String page = "test";
         expect(roomModel.getCurrentRoom()).andReturn(page).times(3);
         replay(roomModel);
@@ -100,7 +102,7 @@ public class LoginControllerImplTest {
     }
 
     @Test
-    public void testPageRedirectFail() throws Exception {
+    public void testPageRedirect_fail() throws Exception {
         String page = "test";
         expect(roomModel.getCurrentRoom()).andReturn(null);
         replay(roomModel);
@@ -138,6 +140,7 @@ public class LoginControllerImplTest {
         expect(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("testLogin", "testPassword")))
             .andThrow(new BadCredentialsException("Failed login"));
         replay(authenticationManager);
+        CommonUtil.replayLogging();
     }
 
 }

@@ -20,13 +20,13 @@ import static org.junit.Assert.assertNotEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:dao-applicationContext.xml")
-public class LoginDaoImplTest {
+public class LoginDaoComplexTest {
 
     @Autowired
     private LoginDao loginDao;
 
     @Test
-    public void testGetDataSuccess() throws Exception {
+    public void testGetData_success() throws Exception {
         UserModel userModel = new UserModelImpl();
         userModel.setId(1);
         userModel.setName("Evgeny Mironenko");
@@ -38,7 +38,7 @@ public class LoginDaoImplTest {
     }
 
     @Test
-    public void testGetDataFail() throws Exception {
+    public void testGetData_fail() throws Exception {
         UserModel userModel = new UserModelImpl();
         userModel.setId(999);
         assertNotEquals(loginDao.getData("Evgeny Mironenko"), userModel);

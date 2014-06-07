@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Evgeny Mironenko
  */
-public class SecurityServiceImplTest {
+public class SecurityServiceTest {
 
     private Authentication authentication;
     private SecurityService securityService;
@@ -57,7 +57,7 @@ public class SecurityServiceImplTest {
     }
 
     @Test
-    public void testAuthenticateSuccess() throws Exception {
+    public void testAuthenticate_success() throws Exception {
         String name = "user";
         String password = "password";
         expect(authentication.getName()).andReturn(name);
@@ -71,7 +71,7 @@ public class SecurityServiceImplTest {
     }
 
     @Test(expected = BadCredentialsException.class)
-    public void testAuthenticateFail() throws Exception {
+    public void testAuthenticate_fail() throws Exception {
         MockFacesContext facesContext = new MockFacesContext();
         ExternalContext externalContext = createMock(ExternalContext.class);
         Flash flash = createMock(Flash.class);

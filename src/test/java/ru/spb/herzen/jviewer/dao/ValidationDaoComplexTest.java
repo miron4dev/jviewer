@@ -14,18 +14,18 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:dao-applicationContext.xml")
-public class ValidationDaoImplTest {
+public class ValidationDaoComplexTest {
 
     @Autowired
     private ValidationDao validationDao;
 
     @Test
-    public void testCheckUserSuccess() throws Exception {
+    public void testCheckUser_success() throws Exception {
         validationDao.checkUser("Evgeny Mironenko");
     }
 
     @Test(expected = EmptyResultDataAccessException.class)
-    public void testCheckUserFail() throws Exception {
+    public void testCheckUser_fail() throws Exception {
         validationDao.checkUser("Test Account");
     }
 

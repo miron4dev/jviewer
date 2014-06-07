@@ -36,7 +36,7 @@ public class PassEqualityValidationTest {
     }
 
     @Test
-    public void testValidateSuccess() throws Exception
+    public void testValidate_success() throws Exception
     {
         Map<String, Object> attributes = createMock(Map.class);
         String password = "123456";
@@ -51,10 +51,18 @@ public class PassEqualityValidationTest {
     }
 
     @Test(expected = ValidatorException.class)
-    public void testValidateFail() throws Exception {
+    public void testValidate_failPasswordEmpty() throws Exception {
+        testValidate_failCommon("");
+    }
+
+    @Test(expected = ValidatorException.class)
+    public void testValidate_failCompare() throws Exception {
+        testValidate_failCommon("654321");
+    }
+
+    private void testValidate_failCommon(String retypePassword) {
         Map<String, Object> attributes = createMock(Map.class);
         String password = "123456";
-        String retypePassword = "654321";
         expect(uiComponent.getAttributes()).andReturn(attributes);
         replay(uiComponent);
         expect(attributes.get("passwordComponent")).andReturn(passwordComponent);

@@ -2,6 +2,8 @@ package ru.spb.herzen.jviewer.websockets;
 
 import org.apache.log4j.Logger;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.EncodeException;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -48,7 +50,8 @@ public class ChatServerEndpoint {
                 }
             }
         } catch (IOException | EncodeException e) {
-            LOG.error("CharServerEndpoint: error in attempt of sending message via websocket. More: " + e);
+            LOG.error("Host: " + ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
+                    + " | Error in attempt of sending message via websocket. More: " + e);
         }
         return msg;
     }

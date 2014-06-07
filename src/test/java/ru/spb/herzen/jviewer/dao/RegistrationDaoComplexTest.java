@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:dao-applicationContext.xml")
-public class RegistrationDaoImplTest {
+public class RegistrationDaoComplexTest {
 
     @Autowired
     private RegistrationDao registrationDao;
@@ -25,12 +25,12 @@ public class RegistrationDaoImplTest {
     private final static String currentInvitationId = "1030011";
 
     @Test
-    public void testRegProfileSuccess() throws Exception {
+    public void testRegProfile_success() throws Exception {
         registrationDao.regProfile(getRandomString(), getRandomString(), getRandomString(), getRandomString());
     }
 
     @Test(expected = DataAccessException.class)
-    public void testRegProfileFail() throws Exception {
+    public void testRegProfile_fail() throws Exception {
         registrationDao.regProfile("Evgeny Mironenko", "blabla", "test_role" ,"IT");
     }
 

@@ -29,10 +29,8 @@ public class LoginServiceImpl implements LoginService {
             if(validationDao.getUserPassword(userModel.getName()).equals(userModel.getPassword())){
                 return loginDao.getData(userModel.getName());
             }
-        } catch(EmptyResultDataAccessException e){
             return null;
-        }
-        return null;
+        } catch(EmptyResultDataAccessException e){ return null; }
     }
 
     /**

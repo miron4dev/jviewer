@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 /**
  * @author Evgeny Mironenko
  */
-public class LoginServiceImplTest {
+public class LoginServiceTest {
 
     private LoginServiceImpl loginService;
     private ValidationDao validationDao;
@@ -44,7 +44,7 @@ public class LoginServiceImplTest {
     }
 
     @Test
-    public void testGetDataSuccess() throws Exception {
+    public void testGetData_success() throws Exception {
         UserModel userModel = new UserModelImpl();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
@@ -61,7 +61,7 @@ public class LoginServiceImplTest {
     }
 
     @Test
-    public void testGetDataFail() throws Exception {
+    public void testGetData_failDao() throws Exception {
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
         String password = "password1234+";
@@ -74,7 +74,21 @@ public class LoginServiceImplTest {
     }
 
     @Test
-    public void testGetRoomsSuccess() throws Exception {
+    public void testGetData_failCompare() throws Exception {
+        UserModel userModel = new UserModelImpl();
+        RequestModel requestModel = new RequestModel();
+        String userName = "Test Test";
+        String password = "password1234+";
+        requestModel.setName(userName);
+        requestModel.setPassword(password);
+        expect(validationDao.getUserPassword(userName)).andReturn("anotherPassword");
+        replay(validationDao);
+        assertNotEquals(userModel, loginService.getData(requestModel));
+        verify(validationDao);
+    }
+
+    @Test
+    public void testGetRooms_success() throws Exception {
         List<RoomModelImpl> roomModelList = new ArrayList<>();
         expect(loginDao.getRooms()).andReturn(roomModelList);
         replay(loginDao);

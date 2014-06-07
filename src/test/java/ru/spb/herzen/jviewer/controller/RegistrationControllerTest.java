@@ -22,24 +22,29 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Evgeny Mironenko
  */
-public class RegistrationControllerImplTest {
+public class RegistrationControllerTest {
 
     private RegistrationControllerImpl registrationController;
     private RequestModel requestModel;
     private RegistrationService registrationService;
     private LocaleModel localeModel;
     private MockFacesContext facesContext;
+    private ExternalContext externalContext;
 
     @Before
     public void init() throws Exception {
+        MockHttpServletRequest request = new MockHttpServletRequest();
         facesContext = new MockFacesContext();
         registrationController = new RegistrationControllerImpl();
         requestModel = new RequestModel();
         localeModel = createMock(LocaleModel.class);
         registrationService = createStrictMock(RegistrationService.class);
+        externalContext = createMock(ExternalContext.class);
+        facesContext.setExternalContext(externalContext);
         registrationController.setRequestModel(requestModel);
         registrationController.setLocaleModel(localeModel);
         registrationController.setRegistrationService(registrationService);
+        expect(externalContext.getRequest()).andReturn(request);
     }
 
     @After
@@ -52,8 +57,7 @@ public class RegistrationControllerImplTest {
     }
 
     @Test
-    public void testRegProfileSuccess() throws Exception {
-        ExternalContext externalContext = createMock(ExternalContext.class);
+    public void testRegProfile_success() throws Exception {
         Flash flash = createMock(Flash.class);
         expect(externalContext.getFlash()).andReturn(flash);
         replay(externalContext);
@@ -61,18 +65,17 @@ public class RegistrationControllerImplTest {
         replay(registrationService);
         expect(localeModel.getLocaleFile()).andReturn(new Properties());
         replay(localeModel);
-        facesContext.setExternalContext(externalContext);
         assertEquals(registrationController.regProfile(), "index?faces-redirect=true");
         verify(registrationService);
     }
 
     @Test
-    public void testRegProfileFailUserExist() throws Exception {
+    public void testRegProfile_failUserExist() throws Exception {
         testRegProfileFail(RegistrationMsg.EXIST);
     }
 
     @Test
-    public void testRegProfileFailWrongId() throws Exception {
+    public void testRegProfile_failWrongId() throws Exception {
         testRegProfileFail(RegistrationMsg.INVITATION_ID);
     }
 
@@ -81,6 +84,7 @@ public class RegistrationControllerImplTest {
         replay(registrationService);
         expect(localeModel.getLocaleFile()).andReturn(new Properties());
         replay(localeModel);
+        replay(externalContext);
         assertEquals(registrationController.regProfile(), null);
         verify(registrationService);
     }
