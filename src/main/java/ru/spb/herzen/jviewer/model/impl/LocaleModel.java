@@ -18,6 +18,8 @@ import java.util.Properties;
 public class LocaleModel implements Serializable {
 
     private final Logger LOG = Logger.getLogger(LocaleModel.class);
+    private static final String ENGLISH_LOCALE_PROPERTIES_PATH = "locale/output/language.properties";
+    private static final String RUSSIAN_LOCALE_PROPERTIES_PATH = "locale/output/language_ru.properties";
 
     private Locale currentLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     private List<String> facultyList;
@@ -27,18 +29,15 @@ public class LocaleModel implements Serializable {
      * Generates faculty list from current *.properties file.
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         facultyList = new ArrayList<>();
         localeFile = new Properties();
-        String fileName = loadFileName();
         try {
-            InputStream fis = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-            localeFile.load(fis);
-        } catch (IOException e) {
+            localeFile.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(loadFileName()));
+        } catch (IOException | NullPointerException e) {
             LOG.error("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
                     + " | Error in constructing of LocaleModel. More: " + e);
         }
-
         facultyList.add(localeFile.getProperty("ItFaculty"));
         facultyList.add(localeFile.getProperty("MathFaculty"));
         facultyList.add(localeFile.getProperty("ChildhoodFaculty"));
@@ -82,12 +81,7 @@ public class LocaleModel implements Serializable {
      * @return path to file
      */
     private String loadFileName(){
-        if(currentLocale.equals(new Locale("en"))){
-            return "locale/output/language.properties";
-        }
-        else {
-            return "locale/output/language_ru.properties";
-        }
+        return currentLocale.equals(new Locale("en")) ? ENGLISH_LOCALE_PROPERTIES_PATH : RUSSIAN_LOCALE_PROPERTIES_PATH;
     }
 
     //

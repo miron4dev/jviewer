@@ -5,17 +5,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.spb.herzen.jviewer.model.impl.LocaleModel;
-import ru.spb.herzen.jviewer.utils.CommonUtil;
 
 import javax.faces.context.ExternalContext;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Properties;
 
 import static org.easymock.EasyMock.*;
 
@@ -48,9 +42,14 @@ public class LocaleModelTest {
     }
 
     @Test
-    public void testInit_fail() throws IOException {
-        CommonUtil.replayLogging();
+    public void testInit_fail() {
+        ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = createMock(ClassLoader.class);
+        Thread.currentThread().setContextClassLoader(classLoader);
+        expect(classLoader.getResourceAsStream("locale/output/language.properties")).andReturn(null);
+        replay(classLoader);
         localeModel.init();
+        Thread.currentThread().setContextClassLoader(originalClassLoader);
     }
 
     @Test
