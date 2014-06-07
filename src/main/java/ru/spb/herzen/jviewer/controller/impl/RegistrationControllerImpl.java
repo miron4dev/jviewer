@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 public class RegistrationControllerImpl implements RegistrationController, Serializable {
 
-    private final Logger LOG = Logger.getLogger(RegistrationControllerImpl.class);
+    private static final Logger LOG = Logger.getLogger(RegistrationControllerImpl.class);
 
     private RequestModel requestModel;
     private LocaleModel localeModel;
@@ -32,17 +32,17 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
     public String regProfile() {
         RegistrationMsg result = registrationService.regProfile(requestModel);
         FacesContext currentInstance = FacesContext.getCurrentInstance();
-        String remoteHost = ((HttpServletRequest)currentInstance.getExternalContext().getRequest()).getRemoteHost();
+        String remoteHost = "Host: " + ((HttpServletRequest)currentInstance.getExternalContext().getRequest()).getRemoteHost();
         if (result == RegistrationMsg.SUCCESS) {
             currentInstance.getExternalContext().getFlash().put("success", localeModel.getLocaleFile().getProperty("registrationSuccessfulMessage"));
-            LOG.info("Host" + remoteHost +  " | User was registered.");
+            LOG.info(remoteHost +  " | User was registered.");
             return "index?faces-redirect=true";
         } else {
             if (result == RegistrationMsg.EXIST) {
-                LOG.warn("Host" + remoteHost + "| Registration failed - user is exist.");
+                LOG.warn(remoteHost + " | Registration failed - user is exist.");
                 currentInstance.addMessage("registrationForm:name", new FacesMessage(localeModel.getLocaleFile().getProperty("userExistMessage")));
             } else if (result == RegistrationMsg.INVITATION_ID) {
-                LOG.warn("Host" + remoteHost + " | Registration failed - invitation id is invalid.");
+                LOG.warn(remoteHost + " | Registration failed - invitation id is invalid.");
                 currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(localeModel.getLocaleFile().getProperty("badInvitationIdMessage")));
             }
             return null;

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LoginControllerImpl implements LoginController {
 
-    private final Logger LOG = Logger.getLogger(LoginControllerImpl.class);
+    private static final Logger LOG = Logger.getLogger(LoginControllerImpl.class);
 
     private UserModel userModel;
     private RoomModel roomModel;
@@ -85,19 +85,17 @@ public class LoginControllerImpl implements LoginController {
     private void prepareUser(){
         authentication();
         roomModel.refreshRooms();
-        if(roomModel.getRooms().size() != 0){
+        if (!roomModel.getRooms().isEmpty()) {
             roomModel.setCurrentRoom(roomModel.getRooms().get(0));
-        }
-        else {
+        } else {
             roomModel.setCurrentRoom("");
         }
     }
 
     /**
      * User authentication.
-     * @throws BadCredentialsException if authentication was failed.
      */
-    private void authentication() throws BadCredentialsException{
+    private void authentication() {
         Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
         Authentication result = authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(result);

@@ -1,7 +1,6 @@
 package ru.spb.herzen.jviewer.controller;
 
 import org.apache.shale.test.mock.MockFacesContext;
-import org.apache.shale.test.mock.MockHttpServletRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import ru.spb.herzen.jviewer.controller.impl.LoginControllerImpl;
 import ru.spb.herzen.jviewer.model.RoomModel;
 import ru.spb.herzen.jviewer.model.UserModel;
 import ru.spb.herzen.jviewer.model.impl.UserModelImpl;
-import ru.spb.herzen.jviewer.utils.CommonUtil;
+import ru.spb.herzen.jviewer.testutils.CommonUtil;
 
 import javax.faces.context.ExternalContext;
 import java.util.List;
@@ -115,7 +114,7 @@ public class LoginControllerTest {
         roomModel.refreshRooms();
         expectLastCall();
         expect(roomModel.getRooms()).andReturn(rooms);
-        expect(rooms.size()).andReturn(0);
+        expect(rooms.isEmpty()).andReturn(true);
         replay(rooms);
         roomModel.setCurrentRoom("");
         expectLastCall();
@@ -128,7 +127,7 @@ public class LoginControllerTest {
         roomModel.refreshRooms();
         expectLastCall();
         expect(roomModel.getRooms()).andReturn(rooms).times(2);
-        expect(rooms.size()).andReturn(1);
+        expect(rooms.isEmpty()).andReturn(false);
         expect(rooms.get(0)).andReturn(roomName);
         replay(rooms);
         roomModel.setCurrentRoom(roomName);

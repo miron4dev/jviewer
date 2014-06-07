@@ -1,13 +1,10 @@
 package ru.spb.herzen.jviewer.websockets;
 
-import org.apache.shale.test.mock.MockFacesContext;
-import org.apache.shale.test.mock.MockHttpServletRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.spb.herzen.jviewer.utils.CommonUtil;
+import ru.spb.herzen.jviewer.testutils.CommonUtil;
 
-import javax.faces.context.ExternalContext;
 import javax.websocket.*;
 
 import java.io.IOException;
@@ -19,8 +16,6 @@ import java.security.Principal;
 import java.util.*;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
 
 /**
  * @author Evgeny Mironenko

@@ -1,16 +1,12 @@
 package ru.spb.herzen.jviewer.service;
 
-import org.apache.shale.test.mock.MockFacesContext;
-import org.apache.shale.test.mock.MockHttpServletRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.QueryTimeoutException;
 import ru.spb.herzen.jviewer.dao.ManagementDao;
 import ru.spb.herzen.jviewer.service.impl.ManagementServiceImpl;
-import ru.spb.herzen.jviewer.utils.CommonUtil;
-
-import javax.faces.context.ExternalContext;
+import ru.spb.herzen.jviewer.testutils.CommonUtil;
 
 import static org.easymock.EasyMock.*;
 import static org.easymock.EasyMock.replay;

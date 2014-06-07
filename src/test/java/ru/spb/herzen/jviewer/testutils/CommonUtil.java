@@ -1,4 +1,4 @@
-package ru.spb.herzen.jviewer.utils;
+package ru.spb.herzen.jviewer.testutils;
 
 import org.apache.shale.test.mock.MockFacesContext;
 import org.apache.shale.test.mock.MockHttpServletRequest;

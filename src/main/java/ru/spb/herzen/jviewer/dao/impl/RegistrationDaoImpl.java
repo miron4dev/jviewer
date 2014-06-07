@@ -1,6 +1,5 @@
 package ru.spb.herzen.jviewer.dao.impl;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import ru.spb.herzen.jviewer.dao.RegistrationDao;
 
@@ -14,7 +13,7 @@ public class RegistrationDaoImpl extends JdbcDaoSupport implements RegistrationD
      * @see ru.spb.herzen.jviewer.dao.RegistrationDao#regProfile(String, String, String, String)
      */
     @Override
-    public void regProfile(String name, String password, String role, String faculty) throws DataAccessException {
+    public void regProfile(String name, String password, String role, String faculty) {
         getJdbcTemplate().update("insert into users (name, password, role, faculty) values (?, ?, ?, ?)", name, password,
                 role, faculty);
     }

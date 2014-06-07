@@ -7,7 +7,8 @@ import ru.spb.herzen.jviewer.service.ManagementService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.spb.herzen.jviewer.model.impl.CommonModel.equalsString;
+import static ru.spb.herzen.jviewer.utils.ObjectUtils.equalsString;
+import static ru.spb.herzen.jviewer.utils.ObjectUtils.hashCodeIncreasing;
 
 /**
  * Room model implementation.
@@ -50,10 +51,9 @@ public class RoomModelImpl implements RoomModel {
     @Override
     public void refreshRooms(){
         rooms = loadNames(loginService.getRooms());
-        if(rooms.size() != 0){
+        if (!rooms.isEmpty()) {
             currentRoom = rooms.get(0);
-        }
-        else {
+        } else {
             currentRoom = "";
         }
     }
@@ -82,6 +82,15 @@ public class RoomModelImpl implements RoomModel {
                     equalsString(currentRoom, room.getCurrentRoom());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash = hashCodeIncreasing(hash, name);
+        hash = hashCodeIncreasing(hash, password);
+        hash = hashCodeIncreasing(hash, currentRoom);
+        return id + hash;
     }
 
     //

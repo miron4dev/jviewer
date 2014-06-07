@@ -1,6 +1,5 @@
 package ru.spb.herzen.jviewer.dao;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import ru.spb.herzen.jviewer.model.impl.RoomModelImpl;
 import ru.spb.herzen.jviewer.model.UserModel;
 
@@ -16,9 +15,8 @@ public interface LoginDao {
      * Gets user data from database.
      * @param name name of user.
      * @return user data object.
-     * @throws EmptyResultDataAccessException if user is not exist.
      */
-    UserModel getData(String name) throws EmptyResultDataAccessException;
+    UserModel getData(String name);
 
     /**
      * Gets list of all available rooms from database.

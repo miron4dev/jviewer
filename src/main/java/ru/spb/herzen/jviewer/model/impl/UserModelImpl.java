@@ -2,9 +2,8 @@ package ru.spb.herzen.jviewer.model.impl;
 
 import ru.spb.herzen.jviewer.model.UserModel;
 
-import static ru.spb.herzen.jviewer.model.impl.CommonModel.*;
-
-import java.io.Serializable;
+import static ru.spb.herzen.jviewer.utils.ObjectUtils.equalsString;
+import static ru.spb.herzen.jviewer.utils.ObjectUtils.hashCodeIncreasing;
 
 /**
  * User model implementation.
@@ -31,6 +30,18 @@ public class UserModelImpl implements UserModel {
                     equalsString(currentRoom, user.getCurrentRoom());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash = hashCodeIncreasing(hash, name);
+        hash = hashCodeIncreasing(hash, password);
+        hash = hashCodeIncreasing(hash, role);
+        hash = hashCodeIncreasing(hash, invitationID);
+        hash = hashCodeIncreasing(hash, faculty);
+        hash = hashCodeIncreasing(hash, currentRoom);
+        return id + hash;
     }
 
     @Override

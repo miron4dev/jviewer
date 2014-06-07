@@ -20,9 +20,8 @@ import java.io.IOException;
 @ServerEndpoint(value = "/chat/{room}")
 public class ChatServerEndpoint {
 
-    private final Logger LOG = Logger.getLogger(ChatServerEndpoint.class);
-
-    private final String ROOM = "room";
+    private static final Logger LOG = Logger.getLogger(ChatServerEndpoint.class);
+    private static final String ROOM = "room";
 
     /**
      * Prepares websocket connection.
@@ -30,7 +29,7 @@ public class ChatServerEndpoint {
      * @param room of current user.
      */
     @OnOpen
-    public void open(final Session session, @PathParam(ROOM) final String room) {
+    public void open(Session session, @PathParam(ROOM) String room) {
         session.getUserProperties().put(ROOM, room);
     }
 

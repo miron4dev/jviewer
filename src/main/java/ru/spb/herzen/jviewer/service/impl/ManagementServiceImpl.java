@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ManagementServiceImpl implements ManagementService {
 
-    private final Logger LOG = Logger.getLogger(ManagementServiceImpl.class);
+    private static final Logger LOG = Logger.getLogger(ManagementServiceImpl.class);
 
     private ManagementDao managementDao;
 

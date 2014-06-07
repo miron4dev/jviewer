@@ -30,7 +30,9 @@ public class LoginServiceImpl implements LoginService {
                 return loginDao.getData(userModel.getName());
             }
             return null;
-        } catch(EmptyResultDataAccessException e){ return null; }
+        } catch(EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     /**

@@ -1,11 +1,9 @@
 package ru.spb.herzen.jviewer.service.impl;
 
-import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.spb.herzen.jviewer.model.impl.RequestModel;
@@ -30,7 +28,7 @@ public class SecurityService implements AuthenticationProvider {
      * @see org.springframework.security.authentication.AuthenticationProvider#authenticate(org.springframework.security.core.Authentication)
      */
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         UserModel user = loginService.getData(requestModel);

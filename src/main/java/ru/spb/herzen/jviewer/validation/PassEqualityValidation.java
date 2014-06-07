@@ -20,10 +20,9 @@ public class PassEqualityValidation implements Validator {
      * @param facesContext current FacesContext
      * @param uiComponent password UI component
      * @param o retryPassword UI object
-     * @throws ValidatorException if something goes wrong
      */
     @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) {
         UIInput passwordComponent = (UIInput) uiComponent.getAttributes().get("passwordComponent");
         String password = (String) passwordComponent.getValue();
         String confirmPassword = (String) o;

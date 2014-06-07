@@ -84,6 +84,11 @@ public class RoomModelTest {
         assertFalse(roomModel.equals(anotherRoom));
     }
 
+    @Test
+    public void testHashCode() {
+        assertEquals(16, roomModel.hashCode());
+    }
+
     private void replayLoginService() {
         expect(loginService.getRooms()).andReturn(new ArrayList<>());
         replay(loginService);

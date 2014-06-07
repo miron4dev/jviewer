@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class LocaleModel implements Serializable {
 
-    private final Logger LOG = Logger.getLogger(LocaleModel.class);
+    private static final Logger LOG = Logger.getLogger(LocaleModel.class);
     private static final String ENGLISH_LOCALE_PROPERTIES_PATH = "locale/output/language.properties";
     private static final String RUSSIAN_LOCALE_PROPERTIES_PATH = "locale/output/language_ru.properties";
 
