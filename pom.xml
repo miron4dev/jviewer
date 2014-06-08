@@ -4,7 +4,7 @@
     <groupId>ru.spb.herzen</groupId>
     <artifactId>jviewer</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>1.46</version>
     <name>jviewer</name>
 
     <description>JViewer Application</description>
@@ -97,6 +97,7 @@
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-api</artifactId>
             <version>${websocket.version}</version>
+ 	    <scope>provided</scope>
         </dependency>
 
         <!-- Logging -->
