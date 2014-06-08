@@ -8,7 +8,6 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['roomManagementTitle']}</title>
-    <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="jviewer.css"/>
 </h:head>
 
@@ -24,7 +23,7 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['roomManagementMessage']}" style="width:450px; height:190px; position:relative; left:500px">
+        <p:panel header="#{msg['roomManagementMessage']}" styleClass="common-panel">
             <p>#{msg['welcomeMessage']}, #{userModel.name}</p>
             <p>#{msg['actionQuestionMessage']}</p>
             <br/>

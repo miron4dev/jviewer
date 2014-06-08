@@ -259,12 +259,57 @@ img.right {
     font-size: 12px !important;
 }
 
-/*pre{*/
-    /*display: block;*/
-    /*border: 1px solid #616161;*/
-    /*padding: 5px;*/
-    /*margin: 0 20px 5px 5px;*/
-    /*min-height: 320px;*/
-    /*min-width: 300px;*/
-    /*overflow-x: auto;*/
-/*}*/
+.alert{
+
+    margin: 20px 0;
+    font-size: 11px;
+    color: red;
+    text-align: center;
+}
+form{
+    display: inline;
+    float: inherit;
+}
+div{
+    clear:both;
+}
+.ui-selectonemenu{
+    width: 43% !important;
+}
+
+#recaptcha_area {
+    padding-left: 45px !important;
+}
+
+.common-panel {
+    width:430px;
+    top: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.registration-input {
+    width: 171px;
+}
+
+.ui-selectonemenu-items-wrapper {
+    width: 300px;
+}
+
+#registrationForm\:facultyList_panel,
+#roomsForm\:roomList_panel {
+    left: 811px !important;
+}
+
+#registrationForm\:facultyList_panel {
+    top: 413px !important;
+}
+
+#roomsForm\:roomList_panel {
+    top: 259px !important;
+}
+
+#registrationForm\:roomList_panel.ui-selectonemenu-items-wrapper {
+    width: 235px;
+}

@@ -8,7 +8,6 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['registrationTitle']}</title>
-    <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="jviewer.css"/>
 </h:head>
 
@@ -24,7 +23,7 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['registrationMessage']}" style="width:450px; height:490px; position:relative; left:500px">
+        <p:panel header="#{msg['registrationMessage']}" styleClass="common-panel">
             <h:form id="registrationForm">
                 <p>
                     <h:message class="alert" for="name"/>
@@ -32,7 +31,8 @@
                     <p:watermark for="name" value="#{msg['name']}"/>
                     <p:inputText id="name" value="#{requestModel.name}" required="true"
                                  requiredMessage="#{msg['requiredMessage']}"
-                                 validatorMessage="#{msg['validatorNameMessage']}">
+                                 validatorMessage="#{msg['validatorNameMessage']}"
+                                 styleClass="registration-input">
                         <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
                     </p:inputText>
                 </p>
@@ -44,7 +44,8 @@
                     <p:password id="password" value="#{requestModel.password}" required="true"
                                 requiredMessage="#{msg['requiredMessage']}"
                                 validatorMessage="#{msg['validatorPasswordMessage']}"
-                                binding="#{passwordComponent}">
+                                binding="#{passwordComponent}"
+                                styleClass="registration-input">
                         <f:validateLength minimum="6"/>
                     </p:password>
                 </p>
@@ -54,7 +55,8 @@
                     <br/>
                     <p:watermark for="rtPassword" value="#{msg['rtPassword']}"/>
                     <p:password id="rtPassword" value="#{requestModel.temp}" required="true"
-                                requiredMessage="#{msg['requiredMessage']}">
+                                requiredMessage="#{msg['requiredMessage']}"
+                                styleClass="registration-input">
                         <f:validator validatorId="rtPassValidation"/>
                         <f:attribute name="passwordComponent" value="#{passwordComponent}"/>
                     </p:password>
@@ -64,11 +66,11 @@
                     <h:message class="alert" for="inviteID"/>
                     <br/>
                     <p:watermark for="inviteID" value="#{msg['inviteID']}"/>
-                    <p:password id="inviteID" value="#{requestModel.invitationID}"/>
+                    <p:password id="inviteID" value="#{requestModel.invitationID}" styleClass="registration-input"/>
                 </p>
                 <br/>
                 <p:watermark for="facultyList" value="#{msg['faculty']}"/>
-                <p:selectOneMenu id="facultyList" value="#{requestModel.faculty}"  >
+                <p:selectOneMenu id="facultyList" value="#{requestModel.faculty}">
                     <f:selectItems value="#{localeModel.facultyList}"/>
                     <p:ajax event="change" update="@this"/>
                 </p:selectOneMenu>

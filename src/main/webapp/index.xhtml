@@ -8,7 +8,6 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['indexTitle']}</title>
-    <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="jviewer.css"/>
 </h:head>
 
@@ -24,7 +23,7 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['indexTitle']}" style="width:450px; height:200px; position:relative; left:500px">
+        <p:panel header="#{msg['indexTitle']}" styleClass="common-panel">
             <h:form id="loginForm" prependId="false">
                 <p>
                     <h:outputText styleClass="alert" value="#{flash['success']}"/>
@@ -49,7 +48,7 @@
                     </p:password>
                 </p>
                 <br/>
-                <p:commandButton icon="ui-icon-person" action="#{loginController.loginAdmin}"/>
+                <p:commandButton icon="ui-icon-person" action="#{loginController.loginAdmin}" update="@form"/>
                 <p:commandButton value="#{msg['loginButton']}" action="#{loginController.loginUser}" update="@form"/>
             </h:form>
             <h:form>
