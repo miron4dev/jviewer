@@ -17,7 +17,7 @@ import java.io.IOException;
  * Based on WebSocket protocol.
  * @author Evgeny Mironenko
  */
-@ServerEndpoint(value = "/chat/{room}")
+@ServerEndpoint(value = "/chat/{room}", encoders = {MessageEncoder.class}, decoders = {MessageDecoder.class})
 public class ChatServerEndpoint {
 
     private static final Logger LOG = Logger.getLogger(ChatServerEndpoint.class);
