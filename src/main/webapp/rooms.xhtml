@@ -27,7 +27,7 @@
             <p>#{msg['welcomeMessage']}, #{userModel.name}</p>
             <p>#{msg['selectRoomMessage']}</p>
             <h:form id="loginForm">
-                <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}">
+                <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}" height="50">
                     <f:selectItems value="#{roomModel.rooms}" />
                     <p:ajax event="change" update="@this"/>
                 </p:selectOneMenu>

@@ -296,20 +296,3 @@ div{
 .ui-selectonemenu-items-wrapper {
     width: 300px;
 }
-
-#registrationForm\:facultyList_panel,
-#roomsForm\:roomList_panel {
-    left: 811px !important;
-}
-
-#registrationForm\:facultyList_panel {
-    top: 413px !important;
-}
-
-#roomsForm\:roomList_panel {
-    top: 259px !important;
-}
-
-#registrationForm\:roomList_panel.ui-selectonemenu-items-wrapper {
-    width: 235px;
-}

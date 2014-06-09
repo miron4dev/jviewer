@@ -70,7 +70,7 @@
                 </p>
                 <br/>
                 <p:watermark for="facultyList" value="#{msg['faculty']}"/>
-                <p:selectOneMenu id="facultyList" value="#{requestModel.faculty}">
+                <p:selectOneMenu id="facultyList" value="#{requestModel.faculty}" height="100" >
                     <f:selectItems value="#{localeModel.facultyList}"/>
                     <p:ajax event="change" update="@this"/>
                 </p:selectOneMenu>
