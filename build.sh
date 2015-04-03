@@ -1,1 +1,1 @@
-mvn clean jacoco:prepare-agent install sonar:sonar
+mvn clean install

@@ -1,61 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-
-<f:view locale="#{localeModel.currentLocale}"/>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:tk="http://jviewer.tk/components" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>#{msg['indexTitle']}</title>
-    <h:outputStylesheet library="styles" name="jviewer.css"/>
+    <title>Java Viewer Application - Главная</title>
+    <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico"/>
 </h:head>
-
 <h:body>
-    <h:form>
-        <h:commandLink action="#{localeModel.switchLocale('en')}">
-            <h:graphicImage library="images" name="us_logo.png"/>
-        </h:commandLink>
-    </h:form>
-    <h:form>
-        <h:commandLink action="#{localeModel.switchLocale('ru')}">
-            <h:graphicImage library="images" name="ru_logo.png"/>
-        </h:commandLink>
-    </h:form>
-    <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['indexTitle']}" styleClass="common-panel">
-            <h:form id="loginForm" prependId="false">
-                <p>
-                    <h:outputText styleClass="alert" value="#{flash['success']}"/>
-                    <h:message class="alert" for="j_username"/>
-                    <br/>
-                    <p:watermark for="j_username" value="#{msg['name']}"/>
-                    <p:inputText id="j_username" value="#{requestModel.name}" required="true"
-                                 requiredMessage="#{msg['requiredMessage']}"
-                                 validatorMessage="#{msg['validatorNameMessage']}">
-                        <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
-                    </p:inputText>
-                </p>
+    <tk:template currentPage="MAIN">
+        <div class="page-header">
+            <h1>Java Viewer Application</h1>
 
-                <p>
-                    <h:message class="alert" for="j_password"/>
-                    <br/>
-                    <p:watermark for="j_password" value="#{msg['password']}"/>
-                    <p:password id="j_password" value="#{requestModel.password}" required="true"
-                                requiredMessage="#{msg['requiredMessage']}"
-                                validatorMessage="#{msg['validatorPasswordMessage']}">
-                        <f:validateLength minimum="6"/>
-                    </p:password>
-                </p>
-                <br/>
-                <p:commandButton icon="ui-icon-person" action="#{loginController.loginAdmin}" update="@form"/>
-                <p:commandButton value="#{msg['loginButton']}" action="#{loginController.loginUser}" update="@form"/>
-            </h:form>
-            <h:form>
-                <p:commandButton value="#{msg['signUpButton']}" action="registration?faces-redirect=true"/>
-            </h:form>
-        </p:panel>
-    </div>
+            <p class="lead">Онлайн-площадка для проведения веб-конференций по HTML, JavaScript, CSS.</p>
+        </div>
+
+        <div class="page-header">
+
+            <h3>Основной функционал:</h3>
+
+            <ul>
+                <li>Регистрация</li>
+                <li>Вход в систему</li>
+                <li>Создание отдельных комнат для обучения</li>
+                <li>Демонстрация кода в реальном времени</li>
+                <li>Интерпретация введенного кода и демонстрация полученного результата</li>
+            </ul>
+
+            <h3>Используемые технологии:</h3>
+
+            <ul>
+                <li>Java 8</li>
+                <li>Spring 4</li>
+                <li>Spring Security 3.2</li>
+                <li>JSF 2</li>
+                <li>Primefaces 5</li>
+                <li>MySQL</li>
+                <li>Maven</li>
+            </ul>
+
+            <h3>Дополнительно:</h3>
+
+            <ul>
+                <li>Tomcat 8</li>
+                <li>Sonar</li>
+            </ul>
+
+            <h3>Ссылки на ресурсы:</h3>
+
+            <ul>
+                <li><p:link outcome="jviewer/index" target="_blank" value="JViewer"/></li>
+            </ul>
+            <ul>
+                <li><p:link href="https://github.com/rustock0/JViewer" target="_blank" value="Github"/></li>
+            </ul>
+            <ul>
+                <li><p:link href="javadoc/index.html" target="_blank" value="Documentation"/></li>
+            </ul>
+            <ul>
+                <li>Превью</li>
+            </ul>
+
+        </div>
+    </tk:template>
+
 </h:body>
 
 </html>
