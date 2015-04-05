@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--Controllers-->
+    <bean id="registrationController" class="tk.jviewer.controller.impl.RegistrationControllerImpl">
+        <property name="registrationService" ref="registrationService"/>
+        <property name="requestModel" ref="requestModel"/>
+        <property name="localeModel" ref="localeModel"/>
+    </bean>
+
+    <bean id="loginController" class="tk.jviewer.controller.impl.LoginControllerImpl">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="userModel" ref="userModel"/>
+        <property name="roomModel" ref="roomModel"/>
+    </bean>
+
+    <!--Services-->
+    <bean id="registrationService" class="tk.jviewer.service.impl.RegistrationServiceImpl">
+        <property name="validationDao" ref="validationDao"/>
+        <property name="registrationDao" ref="registrationDao"/>
+    </bean>
+
+    <bean id="loginService" class="tk.jviewer.service.impl.LoginServiceImpl">
+        <property name="loginDao" ref="loginDao"/>
+        <property name="validationDao" ref="validationDao"/>
+    </bean>
+
+    <bean id="managementService" class="tk.jviewer.service.impl.ManagementServiceImpl">
+        <property name="managementDao" ref="managementDao"/>
+    </bean>
+
+    <!--Dao-->
+    <bean id="registrationDao" class="tk.jviewer.dao.impl.RegistrationDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="loginDao" class="tk.jviewer.dao.impl.LoginDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="validationDao" class="tk.jviewer.dao.impl.ValidationDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="managementDao" class="tk.jviewer.dao.impl.ManagementDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--Models-->
+    <bean id="userModel" class="tk.jviewer.model.impl.UserModelImpl" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="localeModel" class="tk.jviewer.model.impl.LocaleModel" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="requestModel" class="tk.jviewer.model.impl.RequestModel" scope="request">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="roomModel" class="tk.jviewer.model.impl.RoomModelImpl" scope="session">
+        <property name="managementService" ref="managementService"/>
+        <property name="loginService" ref="loginService"/>
+        <aop:scoped-proxy/>
+    </bean>
+
+    <!--Options-->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<composite:interface>
+    <composite:attribute name="currentPage" required="true" type="tk.jviewer.state.CurrentPage"/>
+</composite:interface>
+
+<composite:implementation>
+
+    <h:outputScript library="js" name="bootstrap.min.js"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="custom.css"/>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><p:link styleClass="navbar-brand" outcome="index" value="JViewer"/></li>
+                    <li class="#{cc.attrs.currentPage == 'MAIN' ? 'active': ''}"><p:link outcome="index" value="Главная"/></li>
+                    <li class="#{cc.attrs.currentPage == 'NEWS' ? 'active': ''}"><p:link outcome="news" value="Новости"/></li>
+                    <li class="#{cc.attrs.currentPage == 'STATE' ? 'active': ''}"><p:link outcome="state" value="Статус"/></li>
+                    <li class="#{cc.attrs.currentPage == 'CONTACTS' ? 'active': ''}"><p:link outcome="contacts" value="Разработчик"/></li>
+                    <c:if test="#{cc.attrs.currentPage == 'MAIN'}">
+                        <li style="margin-top: 14px;">
+                            <h:form styleClass="form-inline">
+                                <p:inputText required="true" placeholder="Имя пользователя" style="padding: 6px"/>
+                                <h:outputText value="&#160;" />
+                                <p:password required="true" placeholder="Пароль" style="padding: 6px"/>
+                                <h:outputText value="&#160;" />
+                                <p:button icon="ui-icon-person" value=" Войти" styleClass="btn btn-default" style="padding: 3px; vertical-align: inherit" />
+                            </h:form>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <composite:insertChildren/>
+
+        <div style="text-align: center;">
+            Евгений Мироненко © 2013-<h:outputText value="#{currentYear}"><f:convertDateTime pattern="yyyy" type="date" /></h:outputText>
+        </div>
+
+    </div>
+</composite:implementation>
+
+</html>

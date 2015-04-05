@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/main/viewer.xhtml" access="ROLE_USER"/>
+        <security:intercept-url pattern="/main/rooms.xhtml" access="ROLE_USER"/>
+        <security:intercept-url pattern="/main/editor.xhtml" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/main/admin.xhtml" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/main/newroom.xhtml" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/main/delroom.xhtml" access="ROLE_ADMIN"/>
+        <security:form-login login-page="/main/index.xhtml"/>
+        <security:logout logout-success-url="/main/index.xhtml" />
+    </security:http>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="securityService"/>
+    </security:authentication-manager>
+
+    <bean id="securityService" class="tk.jviewer.service.impl.SecurityService">
+        <property name="loginService" ref="loginService"/>
+        <property name="requestModel" ref="requestModel"/>
+        <property name="userModel" ref="userModel"/>
+    </bean>
+</beans>
