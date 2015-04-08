@@ -1,5 +1,6 @@
 package tk.jviewer.dao;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * @author Evgeny Mironenko
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:dao-applicationContext.xml")
+@Ignore
 public class LoginDaoComplexTest {
 
     @Autowired

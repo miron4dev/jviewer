@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 unzip -u jviewer-build/target/jviewer-build-2.0-build.zip
-/c/tomcat/bin/shutdown.sh
 echo Installing JViewer-Info...
 mv jviewer-info-2.0.war /c/tomcat/webapps/info.war
 echo Installing Jviewer-Main...
