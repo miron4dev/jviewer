@@ -7,6 +7,7 @@ public enum CurrentPage {
 
     MAIN,
     NEWS,
-    STATE,
+    DOWNLOAD,
+    HOWTO,
     CONTACTS
 }

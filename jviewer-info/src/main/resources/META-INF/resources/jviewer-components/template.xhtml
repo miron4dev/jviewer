@@ -24,14 +24,15 @@
                     <li><p:link styleClass="navbar-brand" outcome="index" value="JViewer"/></li>
                     <li class="#{cc.attrs.currentPage == 'MAIN' ? 'active': ''}"><p:link outcome="index" value="Главная"/></li>
                     <li class="#{cc.attrs.currentPage == 'NEWS' ? 'active': ''}"><p:link outcome="news" value="Новости"/></li>
-                    <li class="#{cc.attrs.currentPage == 'STATE' ? 'active': ''}"><p:link outcome="state" value="Статус"/></li>
+                    <li class="#{cc.attrs.currentPage == 'DOWNLOAD' ? 'active': ''}"><p:link outcome="download" value="Скачать"/></li>
+                    <li class="#{cc.attrs.currentPage == 'HOWTO' ? 'active': ''}"><p:link outcome="howto" value="Инструкция"/></li>
                     <li class="#{cc.attrs.currentPage == 'CONTACTS' ? 'active': ''}"><p:link outcome="contacts" value="Разработчик"/></li>
                     <c:if test="#{cc.attrs.currentPage == 'MAIN'}">
                         <li style="margin-top: 14px;">
                             <h:form styleClass="form-inline">
-                                <p:inputText required="true" placeholder="Имя пользователя" style="padding: 6px"/>
+                                <p:inputText required="true" placeholder="Имя пользователя" style="padding: 5px"/>
                                 <h:outputText value="&#160;" />
-                                <p:password required="true" placeholder="Пароль" style="padding: 6px"/>
+                                <p:password required="true" placeholder="Пароль" style="padding: 5px"/>
                                 <h:outputText value="&#160;" />
                                 <p:button icon="ui-icon-person" value=" Войти" styleClass="btn btn-default" style="padding: 3px; vertical-align: inherit" />
                             </h:form>
