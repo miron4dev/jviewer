@@ -30,7 +30,7 @@
                     <c:if test="#{userModel.authenticated}">
                         <li style="margin-left: 45px; margin-top: 23px">
                             <h:form>
-                                <p:commandLink actionListener="#{loginController.logout}" value="Выйти" update=":#{cc.id}:navigation" />
+                                <p:commandLink actionListener="#{loginController.logout}" value="Выйти" oncomplete="setTimeout(location.reload(), 1000)"/>
                             </h:form>
                         </li>
                     </c:if>
@@ -51,7 +51,7 @@
                                     value="#{userModel.password}"/>
                                 <h:outputText value="&#160;" />
                                 <p:commandButton icon="ui-icon-person" value=" Войти" styleClass="btn btn-default"
-                                    style="padding: 3px; vertical-align: inherit" actionListener="#{loginController.login}"
+                                    style="padding: 2px; vertical-align: inherit" actionListener="#{loginController.login}"
                                     update=":#{cc.id}:navigation"/>
                             </h:form>
                         </li>
