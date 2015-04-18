@@ -7,10 +7,19 @@ import java.io.Serializable;
  */
 public class NewsModel implements Serializable {
 
+    private Integer id;
     private String topic;
     private String text;
     private String date;
     private String author;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTopic() {
         return topic;

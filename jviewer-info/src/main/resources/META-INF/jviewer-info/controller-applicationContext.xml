@@ -5,9 +5,11 @@
 
     <bean id="newsController" class="tk.jviewer.info.controller.NewsController">
         <property name="manager" ref="newsManager"/>
+        <property name="newsModel" ref="newsModel"/>
+        <property name="userModel" ref="userModel"/>
     </bean>
 
-    <bean id="redirectionController" class="tk.jviewer.info.controller.RedirectController"/>
+    <bean id="redirectController" class="tk.jviewer.info.controller.RedirectController"/>
 
     <bean id="loginController" class="tk.jviewer.info.controller.LoginController">
         <property name="securityManager" ref="securityManager"/>

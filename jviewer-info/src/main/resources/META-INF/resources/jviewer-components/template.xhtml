@@ -28,7 +28,7 @@
                     <li class="#{cc.attrs.currentPage == 'HOWTO' ? 'active': ''}"><p:link outcome="howto" value="Инструкция"/></li>
                     <li class="#{cc.attrs.currentPage == 'CONTACTS' ? 'active': ''}"><p:link outcome="contacts" value="Разработчик"/></li>
                     <c:if test="#{userModel.authenticated}">
-                        <li style="margin-left: 45px; margin-top: 22px">
+                        <li style="margin-left: 45px; margin-top: 23px">
                             <h:form>
                                 <p:commandLink actionListener="#{loginController.logout}" value="Выйти" update=":#{cc.id}:navigation" />
                             </h:form>

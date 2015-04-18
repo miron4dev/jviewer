@@ -50,6 +50,17 @@
                 <artifactId>bootstrap</artifactId>
                 <version>${primefaces-theme.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>primefaces-extensions</artifactId>
+                <version>${primefaces-extensions.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>resources-ckeditor</artifactId>
+                <version>${primefaces-extensions.version}</version>
+            </dependency>
+
 
             <!-- Database -->
             <dependency>
@@ -166,6 +177,7 @@
         <jsf.version>2.2.6</jsf.version>
         <primefaces.version>5.0</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
+        <primefaces-extensions.version>3.0.0</primefaces-extensions.version>
         <sqlite.version>3.8.7</sqlite.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <spring-security.version>3.2.4.RELEASE</spring-security.version>

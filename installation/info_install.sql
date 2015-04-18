@@ -9,7 +9,7 @@ INSERT INTO users ('id', 'name', 'password', 'admin') VALUES (1, 'admin', 'admin
 
 CREATE TABLE IF NOT EXISTS news (
    id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
-   topic TEXT NOT NULL UNIQUE,
+   topic TEXT NOT NULL,
    text TEXT NOT NULL,
    date DATETIME NOT NULL,
    author TEXT NOT NULL

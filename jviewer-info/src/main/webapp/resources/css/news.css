@@ -1,0 +1,9 @@
+.ui-widget-content {
+    border: none;
+}
+li {
+    list-style-type: none;
+}
+.cke_browser_gecko {
+    width: 955px !important;
+}
