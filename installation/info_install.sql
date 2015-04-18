@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS users
 (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   name TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
-  admin BOOLEAN NOT NULL DEFAULT FALSE
+  password TEXT NOT NULL
 );
 
 INSERT INTO users ('id', 'name', 'password', 'admin') VALUES (1, 'admin', 'admin', 1);

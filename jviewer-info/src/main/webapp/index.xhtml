@@ -3,8 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:tk="http://jviewer.tk/components"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:tk="http://jviewer.tk/components">
 <h:head>
     <title>Java Viewer Application - Главная</title>
     <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico"/>
@@ -53,15 +52,15 @@
             <ul>
                 <li>
                     <h:form>
-                        <p:commandLink actionListener="#{redirectController.redirectToMain}" target="_blank" value="JViewer"/>
+                        <h:commandLink actionListener="#{redirectController.redirectToMain}" target="_blank" value="JViewer"/>
                     </h:form>
                 </li>
             </ul>
             <ul>
-                <li><p:link href="https://github.com/rustock0/JViewer" target="_blank" value="Github"/></li>
+                <li><h:outputLink value="https://github.com/rustock0/JViewer" target="_blank">Github</h:outputLink></li>
             </ul>
             <ul>
-                <li><p:link href="javadoc/index.html" target="_blank" value="Documentation"/></li>
+                <li><h:outputLink value="javadoc/index.html" target="_blank">Documentation</h:outputLink></li>
             </ul>
             <ul>
                 <li>Превью</li>
