@@ -26,6 +26,16 @@ public interface NewsDao {
     void addNews(String topic, String text, String author, String date);
 
     /**
+     * Edits the news in the database.
+     * @param id the news id.
+     * @param topic the news topic.
+     * @param text the news text.
+     * @param author the news author.
+     * @param date the news date.
+     */
+    void editNews(Integer id, String topic, String text, String author, String date);
+
+    /**
      * Delete the news from the database.
      * @param id the news id.
      */

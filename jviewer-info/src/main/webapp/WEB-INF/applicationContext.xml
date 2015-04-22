@@ -5,7 +5,7 @@
 
        <import resource="classpath:META-INF/jviewer-info/jdbc-applicationContext.xml"/>
        <import resource="classpath:META-INF/jviewer-info/dao-applicationContext.xml"/>
-       <import resource="classpath:META-INF/jviewer-info/manager-applicationContext.xml"/>
+       <import resource="classpath:META-INF/jviewer-info/service-applicationContext.xml"/>
        <import resource="classpath:META-INF/jviewer-info/controller-applicationContext.xml"/>
        <import resource="classpath:META-INF/jviewer-info/model-applicationContext.xml"/>
 
