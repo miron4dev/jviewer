@@ -7,11 +7,35 @@
 <h:head>
     <title>Инструкция</title>
     <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico"/>
+    <h:outputStylesheet library="css" name="hotwo.css"/>
 </h:head>
 <h:body>
     <tk:template currentPage="HOWTO">
-        <h1>Инструкция скоро будет здесь...</h1>
-        <h:graphicImage library="images" name="sign_koala.gif"/>
+        <div class="page-header">
+            <h1>Инструкция по установке и обновлению JViewer</h1>
+        </div>
+        <div class="page-header">
+            <div class="bs-callout bs-callout-danger">
+                <h4>Внимание</h4>
+                <p>Работа на 32-битных системах не гарантируется</p>
+            </div>
+
+            <h3>Установка</h3>
+            <ol>
+                <li>Загрузите архив для вашей системы и распакуйте его</li>
+                <li>Перейдите в папку jviewer</li>
+                <li>Выполните файл install_update для загрузки и сборки приложения, и дождитесь окончания его работы</li>
+                <li>Выполните файл deploy для развертывания приложения на сервер</li>
+                <li>Выполните файл start для запуска сервера</li>
+            </ol>
+            <h3>Обновление</h3>
+            <ol>
+                <li>Перейдите в папку jviewer и остановите сервер, запустив файл stop</li>
+                <li>Выполните файл install_update, для обновления и пересборки приложения</li>
+                <li>Выполните файл deploy для развертывания приложения на сервере</li>
+                <li>Вновь запустите сервер, выполнив файл start</li>
+            </ol>
+        </div>
     </tk:template>
 </h:body>
 </html>
