@@ -3,7 +3,7 @@
  */
 
 var socket;
-var serviceLocation = "ws://jviewer.tk:8080/jviewer/chat/";
+var serviceLocation = "ws://jviewer.tk:8080/main/chat/";
 
 $(document).ready(function() {
     socket = new WebSocket(serviceLocation + $('#currentRoom').text());
