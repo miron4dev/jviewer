@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="newsController" class="tk.jviewer.info.controller.NewsController">
-        <property name="manager" ref="newsManager"/>
+        <property name="manager" ref="newsService"/>
         <property name="newsModel" ref="newsModel"/>
         <property name="userModel" ref="userModel"/>
     </bean>
@@ -12,7 +12,7 @@
     <bean id="redirectController" class="tk.jviewer.info.controller.RedirectController"/>
 
     <bean id="loginController" class="tk.jviewer.info.controller.LoginController">
-        <property name="securityManager" ref="securityManager"/>
+        <property name="securityService" ref="securityService"/>
         <property name="userModel" ref="userModel"/>
     </bean>
 

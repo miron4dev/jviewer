@@ -1,4 +1,4 @@
-package tk.jviewer.info.manager;
+package tk.jviewer.info.service;
 
 import tk.jviewer.info.dao.NewsDao;
 import tk.jviewer.info.model.NewsModel;
@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Implementation of {@link NewsManagerImpl}.
+ * Implementation of {@link NewsServiceImpl}.
  */
-public class NewsManagerImpl implements NewsManager {
+public class NewsServiceImpl implements NewsService {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("YYY-MM-DD HH:MM:SS");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 'в' HH:mm:ss");
 
     private NewsDao dao;
 
@@ -24,6 +24,11 @@ public class NewsManagerImpl implements NewsManager {
     @Override
     public void addNews(String topic, String text, String author) {
         dao.addNews(topic, text, author, DATE_FORMAT.format(new Date()));
+    }
+
+    @Override
+    public void editNews(Integer id, String topic, String text, String author) {
+        dao.editNews(id, topic, text, author, DATE_FORMAT.format(new Date()));
     }
 
     @Override

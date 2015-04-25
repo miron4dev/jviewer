@@ -24,6 +24,11 @@ public class NewsDaoImpl extends JdbcDaoSupport implements NewsDao {
     }
 
     @Override
+    public void editNews(Integer id, String topic, String text, String author, String date) {
+        getJdbcTemplate().update("UPDATE news SET topic = ?, text = ?, author = ?, date = ? WHERE id = ?", topic, text, author, date, id);
+    }
+
+    @Override
     public void deleteNews(Integer id) {
         getJdbcTemplate().update("DELETE FROM news WHERE id = ?", id);
     }

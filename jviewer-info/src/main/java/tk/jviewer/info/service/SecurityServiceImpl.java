@@ -1,4 +1,4 @@
-package tk.jviewer.info.manager;
+package tk.jviewer.info.service;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.info.dao.UserDao;
@@ -8,7 +8,7 @@ import java.lang.*;
 /**
  * Security manager.
  */
-public class SecurityManagerImpl implements SecurityManager {
+public class SecurityServiceImpl implements SecurityService {
 
     private UserDao dao;
 

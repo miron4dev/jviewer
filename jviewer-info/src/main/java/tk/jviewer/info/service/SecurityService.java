@@ -1,9 +1,9 @@
-package tk.jviewer.info.manager;
+package tk.jviewer.info.service;
 
 /**
  * Security manager.
  */
-public interface SecurityManager {
+public interface SecurityService {
 
     /**
      * Returns true if user can be authenticated by specified username and password.
