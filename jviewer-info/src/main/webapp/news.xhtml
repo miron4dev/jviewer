@@ -15,7 +15,6 @@
 
     <script type="text/javascript">
         function aliveLinks() {
-            console.log('inside aliveLinks()');
             $('iframe').contents().click(function(e) {
                 if(typeof e.target.href != 'undefined') {
                     window.open(e.target.href, 'new' + e.screenX);
@@ -59,7 +58,7 @@
                 <small style="font-size: 75%"><h:outputText value="#{news.date} by #{news.author}"/></small>
                 <br/>
                 <pe:ckEditor value="#{news.text}" customConfig="resources/plugins/ckeditor/config.js">
-                    <pe:javascript event="initialize" execute="if (#{status.isLast()}) aliveLinks();"/>
+                    <pe:javascript event="initialize" execute="aliveLinks();"/>
                 </pe:ckEditor>
             </div>
         </p:dataList>
