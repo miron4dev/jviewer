@@ -37,6 +37,10 @@ public class ChatServerEndpointTest {
             @Override
             public void addMessageHandler(MessageHandler handler) throws IllegalStateException {}
             @Override
+            public <T> void addMessageHandler(Class<T> aClass, MessageHandler.Whole<T> whole) {}
+            @Override
+            public <T> void addMessageHandler(Class<T> aClass, MessageHandler.Partial<T> partial) {}
+            @Override
             public Set<MessageHandler> getMessageHandlers() {return null;}
             @Override
             public void removeMessageHandler(MessageHandler handler) {}

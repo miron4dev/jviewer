@@ -7,15 +7,17 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <security:http auto-config="true">
-        <security:intercept-url pattern="/main/viewer.xhtml" access="ROLE_USER"/>
-        <security:intercept-url pattern="/main/rooms.xhtml" access="ROLE_USER"/>
-        <security:intercept-url pattern="/main/editor.xhtml" access="ROLE_ADMIN"/>
-        <security:intercept-url pattern="/main/admin.xhtml" access="ROLE_ADMIN"/>
-        <security:intercept-url pattern="/main/newroom.xhtml" access="ROLE_ADMIN"/>
-        <security:intercept-url pattern="/main/delroom.xhtml" access="ROLE_ADMIN"/>
-        <security:form-login login-page="/main/index.xhtml"/>
-        <security:logout logout-success-url="/main/index.xhtml" />
+    <security:http>
+        <security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/rooms.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/editor.xhtml" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/admin.xhtml" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/newroom.xhtml" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/delroom.xhtml" access="hasRole('ROLE_ADMIN')"/>
+        <security:form-login login-page="/index.xhtml"/>
+        <security:logout logout-success-url="/index.xhtml" />
+        <!-- TODO: turn on CSRF protection https://github.com/rustock0/JViewer/issues/29 -->
+        <security:csrf disabled="true"/>
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">
