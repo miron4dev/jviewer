@@ -12,6 +12,17 @@
     <title>Новости</title>
     <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="resources/css/news.css"/>
+
+    <script type="text/javascript">
+        function aliveLinks() {
+            console.log('inside aliveLinks()');
+            $('iframe').contents().click(function(e) {
+                if(typeof e.target.href != 'undefined') {
+                    window.open(e.target.href, 'new' + e.screenX);
+                }
+            });
+        }
+    </script>
 </h:head>
 <h:body>
     <tk:template id="template" currentPage="NEWS">
@@ -47,7 +58,9 @@
                 </h2>
                 <small style="font-size: 75%"><h:outputText value="#{news.date} by #{news.author}"/></small>
                 <br/>
-                <pe:ckEditor id="newsText#{news.id}" value="#{news.text}" customConfig="resources/plugins/ckeditor/config.js" />
+                <pe:ckEditor value="#{news.text}" customConfig="resources/plugins/ckeditor/config.js">
+                    <pe:javascript event="initialize" execute="if (#{status.isLast()}) aliveLinks();"/>
+                </pe:ckEditor>
             </div>
         </p:dataList>
         <h:panelGroup layout="block" rendered="#{userModel.authenticated}">
