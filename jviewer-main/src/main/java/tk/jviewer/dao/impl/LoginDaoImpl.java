@@ -3,8 +3,7 @@ package tk.jviewer.dao.impl;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import tk.jviewer.dao.LoginDao;
-import tk.jviewer.model.impl.RoomModelImpl;
-import tk.jviewer.model.impl.UserModelImpl;
+import tk.jviewer.model.RoomModel;
 import tk.jviewer.model.UserModel;
 
 import java.util.List;
@@ -21,14 +20,14 @@ public class LoginDaoImpl extends JdbcDaoSupport implements LoginDao {
     @Override
     public UserModel getData(String name) {
         return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{name},
-                new BeanPropertyRowMapper<>(UserModelImpl.class));
+                new BeanPropertyRowMapper<>(UserModel.class));
     }
 
     /**
      * @see tk.jviewer.dao.LoginDao#getRooms()
      */
     @Override
-    public List<RoomModelImpl> getRooms() {
-        return getJdbcTemplate().query("select * from rooms", new BeanPropertyRowMapper<>(RoomModelImpl.class));
+    public List<RoomModel> getRooms() {
+        return getJdbcTemplate().query("select * from rooms", new BeanPropertyRowMapper<>(RoomModel.class));
     }
 }

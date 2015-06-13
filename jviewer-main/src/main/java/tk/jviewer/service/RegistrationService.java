@@ -1,7 +1,7 @@
 package tk.jviewer.service;
 
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.model.RequestModel;
 
 /**
  * Registration service interface.

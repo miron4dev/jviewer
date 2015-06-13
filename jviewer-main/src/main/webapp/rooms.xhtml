@@ -7,7 +7,7 @@
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['roomManagementTitle']}</title>
+    <title>#{msg['J45']}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 </h:head>
 
@@ -23,9 +23,9 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['roomManagementMessage']}" styleClass="common-panel">
-            <p>#{msg['welcomeMessage']}, #{userModel.name}</p>
-            <p>#{msg['selectRoomMessage']}</p>
+        <p:panel header="#{msg['J45']}" styleClass="common-panel">
+            <p>#{msg['J47']}, #{userModel.name}</p>
+            <p>#{msg['J48']}</p>
             <h:form id="loginForm">
                 <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}" height="50">
                     <f:selectItems value="#{roomModel.rooms}" />
@@ -33,9 +33,9 @@
                 </p:selectOneMenu>
                 <br/>
                 <br/>
-                <p:commandButton action="#{loginController.pageRedirect('viewer')}" value="#{msg['loginButton']}" />
+                <p:commandButton action="#{loginController.pageRedirect('viewer')}" value="#{msg['J51']}" />
             </h:form>
-            <h:form id="logout"><p:commandButton action="#{loginController.logout}" value="#{msg['logoutButton']}" /></h:form>
+            <h:form id="logout"><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

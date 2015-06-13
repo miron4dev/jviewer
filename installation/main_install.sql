@@ -45,9 +45,9 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J9', 'Имя
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J10', 'Пароль', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Повторите пароль', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Пригласительный ID', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Факультет информационных технологий', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Факультет математики', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J15', 'Институт детства', 'ru', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Факультет информационных технологий', 'ru', 'faculty');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Факультет математики', 'ru', 'faculty');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J15', 'Институт детства', 'ru', 'faculty');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J16', 'Создать новый профиль', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J17', 'Назад', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Поле не может быть пустым', 'ru', 'registration');
@@ -79,7 +79,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J43', 'Фа�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J44', 'Филологический факультет', 'ru', 'faculties');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Управление комнатами', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Управление комнатами', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'С возвращением,', 'ru', 'rooms');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'С возвращением', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J48', 'Выберите действие', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J49', 'Создать новую комнату', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J50', 'Удалить', 'ru', 'rooms');
@@ -100,6 +100,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J64', 'Вы�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Очистить', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Список комнат', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Выйти', 'ru', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Комната:', 'ru', 'viewer');
 
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Welcome to JViewer', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Create new account', 'en', 'index');
@@ -115,7 +116,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Retyp
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Invitation ID', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Faculty of Information Technology', 'en', 'faculty');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Faculty of Mathematics', 'en', 'faculty');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J15', 'Institute of childhood', 'en', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J15', 'Institute of childhood', 'en', 'faculty');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J16', 'Create account', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J17', 'Go back', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Field cannot be empty.', 'en', 'registration');
@@ -147,7 +148,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J43', 'Facul
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J44', 'Faculty of Philology', 'en', 'faculties');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Rooms management page', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Rooms management page', 'en', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'Welcome back,', 'en', 'rooms');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'Welcome back', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J48', 'What do you want to do?', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J49', 'Create new room', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J50', 'Delete', 'en', 'rooms');
@@ -168,3 +169,4 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J64', 'Execu
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Clear', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Rooms', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Logout', 'en', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Room:', 'en', 'viewer');

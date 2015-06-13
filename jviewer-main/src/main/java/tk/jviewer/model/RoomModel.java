@@ -1,88 +1,141 @@
 package tk.jviewer.model;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import tk.jviewer.service.LoginService;
+import tk.jviewer.service.ManagementService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Room model interface.
+ * Room model implementation.
+ *
  * @author Evgeny Mironenko
  */
-public interface RoomModel extends Serializable {
+public class RoomModel {
+
+    private int id;
+    private String name;
+    private String password;
+    private List<String> rooms;
+    private String currentRoom;
+
+    private ManagementService managementService;
+    private LoginService loginService;
+
+    public String createRoom() {
+        managementService.createRoom(name, password);
+        refreshRooms();
+        return "admin?faces-redirect=true";
+    }
+
+    public String removeRoom() {
+        managementService.removeRoom(currentRoom);
+        refreshRooms();
+        return "admin?faces-redirect=true";
+    }
+
+    public void refreshRooms() {
+        rooms = loadNames(loginService.getRooms());
+        if (!rooms.isEmpty()) {
+            currentRoom = rooms.get(0);
+        } else {
+            currentRoom = "";
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof RoomModel) {
+            RoomModel room = (RoomModel) obj;
+            return id == room.getId() && StringUtils.equals(name, room.getName()) && StringUtils.equals(password, room.getPassword()) &&
+                    StringUtils.equals(currentRoom, room.getCurrentRoom());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(name).append(password).append(currentRoom).build();
+    }
 
     /**
-     * Creates new room.
-     * @return URL to admin page menu.
+     * Loads the list of room names.
+     *
+     * @param roomModelList list of room objects.
+     * @return list of room names.
      */
-    String createRoom();
+    private List<String> loadNames(List<RoomModel> roomModelList) {
+        List<String> names = new ArrayList<>();
+        for (RoomModel aRoomModelList : roomModelList) {
+            names.add(aRoomModelList.getName());
+        }
 
-    /**
-     * Removes chosen room.
-     * @return URL to admin page menu.
-     */
-    String removeRoom();
+        return names;
+    }
 
-    /**
-     * Refreshes list of rooms.
-     */
-    void refreshRooms();
+    //
+    // Getters and setters.
+    //
 
-    /**
-     * Gets current room id in database.
-     * @return id
-     */
-    int getId();
+    public int getId() {
+        return id;
+    }
 
-    /**
-     * Sets room id in database.
-     * @param id of room
-     */
-    void setId(int id);
 
-    /**
-     * Gets current name of room.
-     * @return name
-     */
-    String getName();
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    /**
-     * Sets current name of room.
-     * @param name of room
-     */
-    void setName(String name);
 
-    /**
-     * Gets current password from room.
-     * @return password
-     */
-    String getPassword();
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * Sets password for room.
-     * @param password for room
-     */
-    void setPassword(String password);
 
-    /**
-     * Gets all rooms at the server.
-     * @return list of rooms
-     */
-    List<String> getRooms();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /**
-     * Sets list of all rooms to the server.
-     * @param rooms list of rooms
-     */
-    void setRooms(List<String> rooms);
 
-    /**
-     * Gets current chosen room.
-     * @return current room.
-     */
-    String getCurrentRoom();
+    public String getPassword() {
+        return password;
+    }
 
-    /**
-     * Sets current room.
-     * @param currentRoom name of chosen room
-     */
-    void setCurrentRoom(String currentRoom);
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public List<String> getRooms() {
+        return rooms;
+    }
+
+
+    public void setRooms(List<String> rooms) {
+        this.rooms = rooms;
+    }
+
+
+    public String getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(String currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    //
+    // Dependency Injection
+    //
+
+    public void setManagementService(ManagementService managementService) {
+        this.managementService = managementService;
+    }
+
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
 }

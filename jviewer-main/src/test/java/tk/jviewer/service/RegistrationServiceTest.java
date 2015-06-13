@@ -7,7 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.RegistrationDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.RegistrationServiceImpl;
 
 import static org.easymock.EasyMock.*;

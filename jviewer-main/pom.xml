@@ -89,6 +89,16 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

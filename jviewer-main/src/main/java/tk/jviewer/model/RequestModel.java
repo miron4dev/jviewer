@@ -1,4 +1,4 @@
-package tk.jviewer.model.impl;
+package tk.jviewer.model;
 
 /**
  * Request model implementation. Used on the JSF pages for sending requests.

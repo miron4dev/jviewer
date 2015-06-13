@@ -6,14 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 import tk.jviewer.controller.impl.RegistrationControllerImpl;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.impl.LocaleModel;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.mock.AbstractMockCtrlTestSupport;
+import tk.jviewer.model.LocaleModel;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.RegistrationService;
+import tk.jviewer.service.ResourceService;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.Flash;
 
-import java.util.Properties;
+import java.util.Locale;
 
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
@@ -21,11 +23,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Evgeny Mironenko
  */
-public class RegistrationControllerTest {
+public class RegistrationControllerTest extends AbstractMockCtrlTestSupport {
 
     private RegistrationControllerImpl registrationController;
     private RequestModel requestModel;
     private RegistrationService registrationService;
+    private ResourceService resourceService;
     private LocaleModel localeModel;
     private MockFacesContext facesContext;
     private ExternalContext externalContext;
@@ -36,13 +39,16 @@ public class RegistrationControllerTest {
         facesContext = new MockFacesContext();
         registrationController = new RegistrationControllerImpl();
         requestModel = new RequestModel();
-        localeModel = createMock(LocaleModel.class);
-        registrationService = createStrictMock(RegistrationService.class);
-        externalContext = createMock(ExternalContext.class);
+        localeModel = mockCtrl.createMock(LocaleModel.class);
+        registrationService = mockCtrl.createMock(RegistrationService.class);
+        resourceService = mockCtrl.createMock(ResourceService.class);
+        externalContext = mockCtrl.createMock(ExternalContext.class);
+
         facesContext.setExternalContext(externalContext);
         registrationController.setRequestModel(requestModel);
         registrationController.setLocaleModel(localeModel);
         registrationController.setRegistrationService(registrationService);
+        registrationController.setResourceService(resourceService);
         expect(externalContext.getRequest()).andReturn(request);
     }
 
@@ -57,35 +63,39 @@ public class RegistrationControllerTest {
 
     @Test
     public void testRegProfile_success() throws Exception {
-        Flash flash = createMock(Flash.class);
+        Locale locale = Locale.ENGLISH;
+        String value = "testValue";
+        Flash flash = mockCtrl.createMock(Flash.class);
         expect(externalContext.getFlash()).andReturn(flash);
-        replay(externalContext);
         expect(registrationService.regProfile(requestModel)).andReturn(RegistrationMsg.SUCCESS);
-        replay(registrationService);
-        expect(localeModel.getLocaleFile()).andReturn(new Properties());
-        replay(localeModel);
+        expect(localeModel.getCurrentLocale()).andReturn(locale);
+        expect(resourceService.getValue(locale, "J6")).andReturn(value);
+        expect(flash.put("success", value)).andReturn(null);
+
+        mockCtrl.replay();
         assertEquals(registrationController.regProfile(), "index?faces-redirect=true");
-        verify(registrationService);
     }
 
     @Test
     public void testRegProfile_failUserExist() throws Exception {
-        testRegProfileFail(RegistrationMsg.EXIST);
+        Locale locale = Locale.ENGLISH;
+        expect(registrationService.regProfile(requestModel)).andReturn(RegistrationMsg.EXIST);
+        expect(localeModel.getCurrentLocale()).andReturn(locale);
+        expect(resourceService.getValue(locale, "J22")).andReturn("testValue");
+
+        mockCtrl.replay();
+        assertEquals(registrationController.regProfile(), null);
     }
 
     @Test
     public void testRegProfile_failWrongId() throws Exception {
-        testRegProfileFail(RegistrationMsg.INVITATION_ID);
-    }
+        Locale locale = Locale.ENGLISH;
+        expect(registrationService.regProfile(requestModel)).andReturn(RegistrationMsg.INVITATION_ID);
+        expect(localeModel.getCurrentLocale()).andReturn(locale);
+        expect(resourceService.getValue(locale, "J23")).andReturn("testValue");
 
-    private void testRegProfileFail(RegistrationMsg result) {
-        expect(registrationService.regProfile(requestModel)).andReturn(result);
-        replay(registrationService);
-        expect(localeModel.getLocaleFile()).andReturn(new Properties());
-        replay(localeModel);
-        replay(externalContext);
+        mockCtrl.replay();
         assertEquals(registrationController.regProfile(), null);
-        verify(registrationService);
     }
 
 }

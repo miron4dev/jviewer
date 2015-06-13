@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userModel" class="tk.jviewer.model.UserModel" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="localeModel" class="tk.jviewer.model.LocaleModel" scope="session">
+        <property name="resourceService" ref="resourceService"/>
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="requestModel" class="tk.jviewer.model.RequestModel" scope="request">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="roomModel" class="tk.jviewer.model.RoomModel" scope="session">
+        <property name="managementService" ref="managementService"/>
+        <property name="loginService" ref="loginService"/>
+        <aop:scoped-proxy/>
+    </bean>
+
+</beans>

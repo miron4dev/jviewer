@@ -10,8 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import tk.jviewer.model.UserModel;
-import tk.jviewer.model.impl.RequestModel;
-import tk.jviewer.model.impl.UserModelImpl;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.SecurityService;
 
 import javax.faces.context.ExternalContext;
@@ -39,7 +38,7 @@ public class SecurityServiceTest {
     public void init() throws Exception {
         securityService = new SecurityService();
         requestModel = new RequestModel();
-        userModel = new UserModelImpl();
+        userModel = new UserModel();
         userModel.setRole(role);
         loginService = createStrictMock(LoginService.class);
         authentication = createStrictMock(Authentication.class);

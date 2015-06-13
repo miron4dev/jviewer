@@ -4,7 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.RegistrationDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.RegistrationService;
 
 import java.io.Serializable;
@@ -19,7 +19,7 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     private RegistrationDao registrationDao;
 
     /**
-     * @see tk.jviewer.service.RegistrationService#regProfile(tk.jviewer.model.impl.RequestModel)
+     * @see tk.jviewer.service.RegistrationService#regProfile(RequestModel)
      */
     @Override
     public RegistrationMsg regProfile(RequestModel requestModel) {

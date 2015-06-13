@@ -7,7 +7,7 @@
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['deleteRoomTitle']}</title>
+    <title>#{msg['J58']}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 </h:head>
 
@@ -23,11 +23,11 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['roomManagementMessage']}" styleClass="common-panel">
-            <p>#{msg['deleteQuestionMessage']} #{roomModel.currentRoom}?</p>
+        <p:panel header="#{msg['J59']}" styleClass="common-panel">
+            <p>#{msg['J60']} #{roomModel.currentRoom}?</p>
             <br/>
-            <h:form id="deleteForm"><p:commandButton action="#{roomModel.removeRoom}" value="#{msg['yesButton']}" /></h:form>
-            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="#{msg['noButton']}" /></h:form>
+            <h:form id="deleteForm"><p:commandButton action="#{roomModel.removeRoom}" value="#{msg['J61']}" /></h:form>
+            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="#{msg['J62']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

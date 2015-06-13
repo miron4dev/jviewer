@@ -3,7 +3,6 @@ package tk.jviewer.model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tk.jviewer.model.impl.RoomModelImpl;
 import tk.jviewer.service.LoginService;
 import tk.jviewer.service.ManagementService;
 
@@ -20,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class RoomModelTest {
 
-    private RoomModelImpl roomModel;
+    private RoomModel roomModel;
     private ManagementService managementService;
     private LoginService loginService;
 
@@ -28,7 +27,7 @@ public class RoomModelTest {
     public void init() {
         managementService = createMock(ManagementService.class);
         loginService = createMock(LoginService.class);
-        roomModel = new RoomModelImpl();
+        roomModel = new RoomModel();
         roomModel.setName("testRoom");
         roomModel.setCurrentRoom("testRoom");
         roomModel.setRooms(new ArrayList<>());
@@ -62,31 +61,11 @@ public class RoomModelTest {
 
     @Test
     public void testRefreshRooms() {
-        List<RoomModelImpl> rooms = new ArrayList<>();
+        List<RoomModel> rooms = new ArrayList<>();
         rooms.add(roomModel);
         expect(loginService.getRooms()).andReturn(rooms);
         replay(loginService);
         roomModel.refreshRooms();
-    }
-
-    @Test
-    public void testEquals_true() {
-        RoomModel anotherRoom = new RoomModelImpl();
-        anotherRoom.setName("testRoom");
-        anotherRoom.setCurrentRoom("testRoom");
-        anotherRoom.setRooms(new ArrayList<>());
-        assertTrue(roomModel.equals(anotherRoom));
-    }
-
-    @Test
-    public void testEquals_false() {
-        Object anotherRoom = new Object();
-        assertFalse(roomModel.equals(anotherRoom));
-    }
-
-    @Test
-    public void testHashCode() {
-        assertEquals(16, roomModel.hashCode());
     }
 
     private void replayLoginService() {

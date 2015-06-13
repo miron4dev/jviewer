@@ -8,9 +8,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.model.UserModel;
-import tk.jviewer.model.impl.RequestModel;
-import tk.jviewer.model.impl.RoomModelImpl;
-import tk.jviewer.model.impl.UserModelImpl;
+import tk.jviewer.model.RequestModel;
+import tk.jviewer.model.RoomModel;
 import tk.jviewer.service.impl.LoginServiceImpl;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class LoginServiceTest {
 
     @Test
     public void testGetData_success() throws Exception {
-        UserModel userModel = new UserModelImpl();
+        UserModel userModel = new UserModel();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
         String password = "password1234+";
@@ -76,7 +75,7 @@ public class LoginServiceTest {
 
     @Test
     public void testGetData_failCompare() throws Exception {
-        UserModel userModel = new UserModelImpl();
+        UserModel userModel = new UserModel();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
         String password = "password1234+";
@@ -90,7 +89,7 @@ public class LoginServiceTest {
 
     @Test
     public void testGetRooms_success() throws Exception {
-        List<RoomModelImpl> roomModelList = new ArrayList<>();
+        List<RoomModel> roomModelList = new ArrayList<>();
         expect(loginDao.getRooms()).andReturn(roomModelList);
         replay(loginDao);
         assertEquals(roomModelList, loginService.getRooms());

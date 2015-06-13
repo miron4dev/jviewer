@@ -1,106 +1,103 @@
 package tk.jviewer.model;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * User model interface.
+ * User model implementation.
  * @author Evgeny Mironenko
  */
-public interface UserModel extends Serializable {
+public class UserModel {
 
-    /**
-     * Gets user id in database.
-     * @return user id.
-     */
-    int getId();
+    private int id;
+    private String name;
+    private String password;
+    private String role;
+    private String invitationID;
+    private String faculty;
+    private boolean enabled;
+    private String currentRoom;
 
-    /**
-     * Sets user id in database.
-     * @param id id of user.
-     */
-    void setId(int id);
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof UserModel) {
+            UserModel user = (UserModel)obj;
+            return id == user.id && enabled == user.isEnabled() && StringUtils.equals(name, user.getName()) &&
+                    StringUtils.equals(password, user.getPassword()) && StringUtils.equals(role, user.getRole()) &&
+                    StringUtils.equals(invitationID, user.getInvitationID()) && StringUtils.equals(faculty, user.getFaculty()) &&
+                    StringUtils.equals(currentRoom, user.getCurrentRoom());
+        }
+        return false;
+    }
 
-    /**
-     * Gets user name.
-     * @return name
-     */
-    String getName();
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(name).append(password).append(role).append(invitationID).append(faculty)
+                .append(currentRoom).build();
+    }
 
-    /**
-     * Sets user name.
-     * @param name of user.
-     */
-    void setName(String name);
+    public int getId() {
+        return id;
+    }
 
-    /**
-     * Gets user password.
-     * @return password
-     */
-    String getPassword();
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    /**
-     * Sets user password.
-     * @param password user password
-     */
-    void setPassword(String password);
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * Gets user role in system.
-     * @return role
-     */
-    String getRole();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /**
-     * Sets user role in system.
-     * @param role of user
-     */
-    void setRole(String role);
+    public String getPassword() {
+        return password;
+    }
 
-    /**
-     * Gets user invitation Id.
-     * @return invitation Id
-     */
-    String getInvitationID();
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    /**
-     * Sets user invitation Id.
-     * @param invitationID id
-     */
-    void setInvitationID(String invitationID);
+    public String getRole() {
+        return role;
+    }
 
-    /**
-     * Gets user faculty.
-     * @return faculty
-     */
-    String getFaculty();
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-    /**
-     * Sets faculty of user.
-     * @param faculty of user
-     */
-    void setFaculty(String faculty);
+    public String getInvitationID() {
+        return invitationID;
+    }
 
-    /**
-     * Gets availability of user.
-     * @return user availability.
-     */
-    boolean isEnabled();
+    public void setInvitationID(String invitationID) {
+        this.invitationID = invitationID;
+    }
 
-    /**
-     * Sets availability of user.
-     * @param enabled availability value
-     */
-    void setEnabled(boolean enabled);
+    public String getFaculty() {
+        return faculty;
+    }
 
-    /**
-     * Gets current chosen room.
-     * @return chosen room.
-     */
-    String getCurrentRoom();
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
 
-    /**
-     * Sets current room.
-     * @param currentRoom name of chosen room
-     */
-    void setCurrentRoom(String currentRoom);
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(String currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
 }

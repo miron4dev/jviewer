@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import tk.jviewer.controller.impl.LoginControllerImpl;
 import tk.jviewer.model.RoomModel;
 import tk.jviewer.model.UserModel;
-import tk.jviewer.model.impl.UserModelImpl;
 import tk.jviewer.testutils.CommonUtil;
 
 import javax.faces.context.ExternalContext;
@@ -34,7 +33,7 @@ public class LoginControllerTest {
     public void init() throws Exception {
         facesContext = new MockFacesContext();
         loginController = new LoginControllerImpl();
-        userModel = new UserModelImpl();
+        userModel = new UserModel();
         userModel.setName("testLogin");
         userModel.setPassword("testPassword");
         roomModel = createStrictMock(RoomModel.class);

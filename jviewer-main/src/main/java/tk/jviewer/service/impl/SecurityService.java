@@ -6,7 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.model.UserModel;
 import tk.jviewer.service.LoginService;
 

@@ -4,10 +4,10 @@ import org.apache.shale.test.mock.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tk.jviewer.model.impl.LocaleModel;
 
 import javax.faces.context.ExternalContext;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -42,27 +42,7 @@ public class LocaleModelTest {
     }
 
     @Test
-    public void testInit_fail() {
-        ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
-        ClassLoader classLoader = createMock(ClassLoader.class);
-        Thread.currentThread().setContextClassLoader(classLoader);
-        expect(classLoader.getResourceAsStream("locale/output/language.properties")).andReturn(null);
-        replay(classLoader);
-        localeModel.init();
-        Thread.currentThread().setContextClassLoader(originalClassLoader);
-    }
-
-    @Test
-    public void testSwitchLocale() {
+    public void testSwitchLocale() throws IOException {
         localeModel.switchLocale("ru");
-    }
-
-    //TODO UI test: test method for cheat of test coverage statistic
-    @Test
-    public void testFieldsCheat() {
-        localeModel.getCurrentLocale();
-        localeModel.getFacultyList();
-        localeModel.getLocaleFile();
-        localeModel.setFacultyList(new ArrayList<>());
     }
 }

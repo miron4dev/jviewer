@@ -2,13 +2,9 @@ package tk.jviewer.dao;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tk.jviewer.model.UserModel;
-import tk.jviewer.model.impl.RoomModelImpl;
-import tk.jviewer.model.impl.UserModelImpl;
+import tk.jviewer.model.RoomModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +23,7 @@ public class LoginDaoComplexTest {
 
     @Test
     public void testGetData_success() throws Exception {
-        UserModel userModel = new UserModelImpl();
+        UserModel userModel = new UserModel();
         userModel.setId(1);
         userModel.setName("Evgeny Mironenko");
         userModel.setPassword("qwerty");
@@ -39,15 +35,15 @@ public class LoginDaoComplexTest {
 
     @Test
     public void testGetData_fail() throws Exception {
-        UserModel userModel = new UserModelImpl();
+        UserModel userModel = new UserModel();
         userModel.setId(999);
         assertNotEquals(loginDao.getData("Evgeny Mironenko"), userModel);
     }
 
     @Test
     public void testGetRooms() throws Exception {
-        List<RoomModelImpl> rooms = new ArrayList<>();
-        RoomModelImpl roomModel = new RoomModelImpl();
+        List<RoomModel> rooms = new ArrayList<>();
+        RoomModel roomModel = new RoomModel();
         roomModel.setId(1);
         roomModel.setName("Main");
         roomModel.setPassword(null);

@@ -7,7 +7,7 @@
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['mainTitle']}</title>
+    <title>#{msg['J68']} #{userModel.currentRoom}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
     <h:outputStylesheet library="css" name="codemirror.css"/>
 
@@ -31,10 +31,10 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['currentRoomMessage']}: <h:outputText id="currentRoom" value="#{userModel.currentRoom}"/>
+    #{msg['J63']}: <h:outputText id="currentRoom" value="#{userModel.currentRoom}"/>
     <h:form id="displayForm">
-            <p:commandButton value="#{msg['roomsButton']}" action="rooms?faces-redirect=true"/>
-            <p:commandButton value="#{msg['logoutButton']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
+            <p:commandButton value="#{msg['J66']}" action="rooms?faces-redirect=true"/>
+            <p:commandButton value="#{msg['J67']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
             <textarea id="inputArea"></textarea>
             <script type="text/javascript">
                 var editor = CodeMirror.fromTextArea(document.getElementById("inputArea"), {

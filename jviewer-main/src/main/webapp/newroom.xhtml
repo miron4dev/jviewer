@@ -7,7 +7,7 @@
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['createRoomTitle']}</title>
+    <title>#{msg['J49']}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 </h:head>
 
@@ -23,22 +23,18 @@
         </h:commandLink>
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['roomManagementMessage']}" styleClass="common-panel">
+        <p:panel header="#{msg['J54']}" styleClass="common-panel">
             <br/>
             <h:form id="createForm">
                 <h:message class="alert" for="name"/>
                 <br/>
-                <p:inputText id="name" value="#{roomModel.name}" required="true" requiredMessage="#{msg['requiredMessage']}"/>
-                <p:watermark value="#{msg['name']}" for="name"/>
-                <!--<br/>-->
-                <!--<br/>-->
-                <!--<p:password id="password" value="#{roomModel.password}"/>-->
-                <!--<p:watermark value="#{msg['password']}" for="password"/>-->
+                <p:inputText id="name" value="#{roomModel.name}" required="true" requiredMessage="#{msg['J18']}"/>
+                <p:watermark value="#{msg['J55']}" for="name"/>
                 <br/>
                 <br/>
-                <p:commandButton action="#{roomModel.createRoom}" value="#{msg['createButton']}" update="@form" />
+                <p:commandButton action="#{roomModel.createRoom}" value="#{msg['J56']}" update="@form" />
             </h:form>
-            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="#{msg['backButton']}" /></h:form>
+            <h:form id="cancelForm"><p:commandButton action="admin?faces-redirect=true" value="#{msg['J57']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

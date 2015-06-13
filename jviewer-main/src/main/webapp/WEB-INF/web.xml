@@ -60,11 +60,7 @@
     <!--Params-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            WEB-INF/jdbc-applicationContext.xml,
-            WEB-INF/security-applicationContext.xml,
-            WEB-INF/main-applicationContext.xml
-        </param-value>
+        <param-value>WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
     <context-param>

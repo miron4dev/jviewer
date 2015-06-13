@@ -3,9 +3,10 @@ package tk.jviewer.controller.impl;
 import org.apache.log4j.Logger;
 import tk.jviewer.controller.RegistrationController;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.impl.LocaleModel;
-import tk.jviewer.model.impl.RequestModel;
+import tk.jviewer.model.LocaleModel;
+import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.RegistrationService;
+import tk.jviewer.service.ResourceService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
     private RequestModel requestModel;
     private LocaleModel localeModel;
     private RegistrationService registrationService;
+    private ResourceService resourceService;
 
     /**
      * Creates new profile.
@@ -34,16 +36,19 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
         FacesContext currentInstance = FacesContext.getCurrentInstance();
         String remoteHost = "Host: " + ((HttpServletRequest)currentInstance.getExternalContext().getRequest()).getRemoteHost();
         if (result == RegistrationMsg.SUCCESS) {
-            currentInstance.getExternalContext().getFlash().put("success", localeModel.getLocaleFile().getProperty("registrationSuccessfulMessage"));
+            currentInstance.getExternalContext().getFlash().put("success", resourceService.getValue(localeModel.getCurrentLocale(),
+                    "J6"));
             LOG.info(remoteHost +  " | User was registered.");
             return "index?faces-redirect=true";
         } else {
             if (result == RegistrationMsg.EXIST) {
                 LOG.warn(remoteHost + " | Registration failed - user is exist.");
-                currentInstance.addMessage("registrationForm:name", new FacesMessage(localeModel.getLocaleFile().getProperty("userExistMessage")));
+                currentInstance.addMessage("registrationForm:name", new FacesMessage(resourceService.getValue(localeModel.getCurrentLocale(),
+                        "J22")));
             } else if (result == RegistrationMsg.INVITATION_ID) {
                 LOG.warn(remoteHost + " | Registration failed - invitation id is invalid.");
-                currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(localeModel.getLocaleFile().getProperty("badInvitationIdMessage")));
+                currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(resourceService.getValue(localeModel.getCurrentLocale(),
+                        "J23")));
             }
             return null;
         }
@@ -57,11 +62,16 @@ public class RegistrationControllerImpl implements RegistrationController, Seria
         this.requestModel = requestModel;
     }
 
+    public void setLocaleModel(LocaleModel localeModel) {
+        this.localeModel = localeModel;
+    }
+
     public void setRegistrationService(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 
-    public void setLocaleModel(LocaleModel localeModel) {
-        this.localeModel = localeModel;
+    public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
     }
+
 }

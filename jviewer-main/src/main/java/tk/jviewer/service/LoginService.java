@@ -1,7 +1,7 @@
 package tk.jviewer.service;
 
-import tk.jviewer.model.impl.RequestModel;
-import tk.jviewer.model.impl.RoomModelImpl;
+import tk.jviewer.model.RequestModel;
+import tk.jviewer.model.RoomModel;
 import tk.jviewer.model.UserModel;
 
 import java.util.List;
@@ -23,5 +23,5 @@ public interface LoginService {
      * Gets list of all available rooms.
      * @return list of rooms.
      */
-    List<RoomModelImpl> getRooms();
+    List<RoomModel> getRooms();
 }

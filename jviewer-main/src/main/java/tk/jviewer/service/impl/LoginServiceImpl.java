@@ -3,8 +3,8 @@ package tk.jviewer.service.impl;
 import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
-import tk.jviewer.model.impl.RequestModel;
-import tk.jviewer.model.impl.RoomModelImpl;
+import tk.jviewer.model.RequestModel;
+import tk.jviewer.model.RoomModel;
 import tk.jviewer.model.UserModel;
 import tk.jviewer.service.LoginService;
 
@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
     private LoginDao loginDao;
 
     /**
-     * @see tk.jviewer.service.LoginService#getData(tk.jviewer.model.impl.RequestModel)
+     * @see tk.jviewer.service.LoginService#getData(RequestModel)
      * If validation will be failed, return null.
      */
     @Override
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
      * If list of rooms will be empty, return null.
      */
     @Override
-    public List<RoomModelImpl> getRooms() {
+    public List<RoomModel> getRooms() {
         return loginDao.getRooms();
     }
 
