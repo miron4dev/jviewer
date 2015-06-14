@@ -13,6 +13,13 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <!-- JViewer -->
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-refresh-lib</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- UI -->
         <dependency>
             <groupId>com.sun.faces</groupId>

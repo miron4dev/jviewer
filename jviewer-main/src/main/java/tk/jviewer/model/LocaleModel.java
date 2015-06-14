@@ -17,6 +17,8 @@ import java.util.Locale;
  */
 public class LocaleModel implements Serializable {
 
+    private static final long serialVersionUID = 3172284145552982157L;
+
     private Locale currentLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     private List<String> facultyList;
 

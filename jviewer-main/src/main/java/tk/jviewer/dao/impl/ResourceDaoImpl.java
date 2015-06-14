@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Evgeny Mironenko on 13.06.2015.
+ * Implementation of {@link ResourceDao}.
+ * @author Evgeny Mironenko
  */
 public class ResourceDaoImpl extends JdbcDaoSupport implements ResourceDao {
 

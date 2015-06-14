@@ -8,7 +8,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Created by Evgeny Mironenko on 12.06.2015.
+ * Extension of {@link ResourceBundle}, which gets resources from the database.
+ * @author Evgeny Mironenko
  */
 public class DatabaseResourceBundle extends ResourceBundle {
 

@@ -3,7 +3,8 @@ package tk.jviewer.bundle;
 import java.util.Locale;
 
 /**
- * Created by Evgeny Mironenko on 12.06.2015.
+ * Extension of {@link DatabaseResourceBundle} for English language support.
+ * @author Evgeny Mironenko
  */
 public class DatabaseResourceBundle_en extends DatabaseResourceBundle {
 
