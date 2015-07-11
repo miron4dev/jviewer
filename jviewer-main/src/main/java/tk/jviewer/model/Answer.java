@@ -1,4 +1,4 @@
-package tk.jviewer.testing.model;
+package tk.jviewer.model;
 
 import java.io.Serializable;
 
@@ -11,10 +11,8 @@ public class Answer implements Serializable {
     private static final long serialVersionUID = -1283565263146494192L;
 
     private String text;
-    private boolean correct;
+    private String correct;
     private AnswerType type;
-    // It should be filled only in case of AnswerType#TEXT_FIELD
-    private String correctAnswer;
 
     public String getText() {
         return text;
@@ -24,11 +22,11 @@ public class Answer implements Serializable {
         this.text = text;
     }
 
-    public boolean isCorrect() {
+    public String getCorrect() {
         return correct;
     }
 
-    public void setCorrect(boolean correct) {
+    public void setCorrect(String correct) {
         this.correct = correct;
     }
 
@@ -38,13 +36,5 @@ public class Answer implements Serializable {
 
     public void setType(AnswerType type) {
         this.type = type;
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
     }
 }

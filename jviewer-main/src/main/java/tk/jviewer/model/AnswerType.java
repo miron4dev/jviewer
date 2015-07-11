@@ -1,4 +1,4 @@
-package tk.jviewer.testing.model;
+package tk.jviewer.model;
 
 /**
  * Answer type enumeration.

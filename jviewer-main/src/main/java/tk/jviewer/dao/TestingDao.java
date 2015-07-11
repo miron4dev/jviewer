@@ -1,7 +1,7 @@
-package tk.jviewer.testing.dao;
+package tk.jviewer.dao;
 
-import tk.jviewer.testing.model.Question;
-import tk.jviewer.testing.model.Result;
+import tk.jviewer.model.Question;
+import tk.jviewer.model.Result;
 
 import java.util.List;
 

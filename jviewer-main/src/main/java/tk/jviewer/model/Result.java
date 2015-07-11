@@ -1,4 +1,4 @@
-package tk.jviewer.testing.model;
+package tk.jviewer.model;
 
 import java.io.Serializable;
 import java.util.Map;

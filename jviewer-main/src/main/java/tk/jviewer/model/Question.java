@@ -1,8 +1,7 @@
-package tk.jviewer.testing.model;
+package tk.jviewer.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Question representation.
@@ -14,7 +13,7 @@ public class Question implements Serializable {
 
     private int id;
     private String topic;
-    private String question;
+    private String text;
     private List<Answer> answers;
 
     public int getId() {
@@ -33,12 +32,12 @@ public class Question implements Serializable {
         this.topic = topic;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getText() {
+        return text;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public List<Answer> getAnswers() {

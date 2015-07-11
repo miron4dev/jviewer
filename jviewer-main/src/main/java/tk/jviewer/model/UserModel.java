@@ -17,6 +17,7 @@ public class UserModel {
     private String faculty;
     private boolean enabled;
     private String currentRoom;
+    private Test chosenTest;
 
     @Override
     public boolean equals(Object obj) {
@@ -100,4 +101,11 @@ public class UserModel {
         this.currentRoom = currentRoom;
     }
 
+    public Test getChosenTest() {
+        return chosenTest;
+    }
+
+    public void setChosenTest(Test chosenTest) {
+        this.chosenTest = chosenTest;
+    }
 }

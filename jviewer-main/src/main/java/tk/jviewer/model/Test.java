@@ -1,9 +1,10 @@
-package tk.jviewer.testing.model;
+package tk.jviewer.model;
 
 import java.util.List;
 
 /**
- * Created by Evgeny Mironenko on 10.07.2015.
+ * Test representation.
+ * @author Evgeny Mironenko
  */
 public class Test {
 

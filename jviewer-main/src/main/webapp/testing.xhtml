@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -7,7 +8,7 @@
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['J45']}</title>
+    <title>Choose your test</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 </h:head>
 
@@ -22,23 +23,20 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
+
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="#{msg['J45']}" styleClass="common-panel">
-            <p>#{msg['J47']}, #{userModel.name}</p>
-            <p>#{msg['J48']}</p>
-            <h:form id="loginForm">
-                <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}" height="50">
-                    <f:selectItems value="#{roomModel.rooms}" />
+        <p:panel header="Choose your test" styleClass="common-panel">
+            <h:form>
+                <p:selectOneMenu id="testList" styleClass="select-menu" value="#{userModel.chosenTest}" height="50">
+                    <f:selectItems value="#{}"/>
                     <p:ajax event="change" update="@this"/>
                 </p:selectOneMenu>
                 <br/>
                 <br/>
-                <p:commandButton action="#{loginController.pageRedirect('viewer')}" value="#{msg['J51']}" />
+                <p:commandButton action="#{}" value="Choose"/>
             </h:form>
-            <h:form><p:commandButton value="Take test" action="testing?faces-redirect=true"/></h:form>
-            <h:form id="logout"><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
+            <h:form><p:commandButton value="Back" action="rooms?faces-redirect=true"/></h:form>
         </p:panel>
     </div>
 </h:body>
-
 </html>

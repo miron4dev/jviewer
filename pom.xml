@@ -26,7 +26,6 @@
         <module>jviewer-build</module>
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
-        <module>jviewer-testing</module>
     </modules>
 
     <dependencyManagement>
