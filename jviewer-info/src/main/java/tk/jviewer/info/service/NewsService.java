@@ -1,6 +1,6 @@
 package tk.jviewer.info.service;
 
-import tk.jviewer.info.model.NewsModel;
+import tk.jviewer.info.model.News;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface NewsService {
      * Returns the list of news.
      * @return see description.
      */
-    List<NewsModel> getNews();
+    List<News> getNews();
 
     /**
      * Adds the news.

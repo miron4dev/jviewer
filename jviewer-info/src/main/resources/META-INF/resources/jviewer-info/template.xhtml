@@ -27,14 +27,14 @@
                     <li class="#{cc.attrs.currentPage == 'DOWNLOAD' ? 'active': ''}"><p:link outcome="download" value="Скачать"/></li>
                     <li class="#{cc.attrs.currentPage == 'HOWTO' ? 'active': ''}"><p:link outcome="howto" value="Инструкция"/></li>
                     <li class="#{cc.attrs.currentPage == 'CONTACTS' ? 'active': ''}"><p:link outcome="contacts" value="Разработчик"/></li>
-                    <c:if test="#{userModel.authenticated}">
+                    <c:if test="#{userProfile.authenticated}">
                         <li style="margin-left: 45px; margin-top: 23px">
                             <h:form>
                                 <p:commandLink actionListener="#{loginController.logout}" value="Выйти" oncomplete="setTimeout(location.reload(), 1000)"/>
                             </h:form>
                         </li>
                     </c:if>
-                    <c:if test="#{cc.attrs.currentPage == 'MAIN' and not userModel.authenticated}">
+                    <c:if test="#{cc.attrs.currentPage == 'MAIN' and not userProfile.authenticated}">
                         <li>
                             <h:panelGroup layout="block" styleClass="alert alert-danger fade in" rendered="#{not empty flash.failed}"
                                  style="z-index: 1000; position: absolute; width: 500px; height: 50px; text-align: center;">
@@ -45,10 +45,10 @@
                         <li style="margin-top: 14px;">
                             <h:form styleClass="form-inline">
                                 <p:inputText required="true" placeholder="Имя пользователя" style="padding: 5px"
-                                    value="#{userModel.name}"/>
+                                    value="#{userProfile.name}"/>
                                 <h:outputText value="&#160;" />
                                 <p:password required="true" placeholder="Пароль" style="padding: 5px"
-                                    value="#{userModel.password}"/>
+                                    value="#{userProfile.password}"/>
                                 <h:outputText value="&#160;" />
                                 <p:commandButton icon="ui-icon-person" value=" Войти" styleClass="btn btn-default"
                                     style="padding: 2px; vertical-align: inherit" actionListener="#{loginController.login}"

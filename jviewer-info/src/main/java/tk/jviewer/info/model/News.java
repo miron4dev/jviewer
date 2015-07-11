@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Model of news
  */
-public class NewsModel implements Serializable {
+public class News implements Serializable {
 
     private Integer id;
     private String topic;
@@ -55,7 +55,7 @@ public class NewsModel implements Serializable {
 
     @Override
     public String toString() {
-        return "NewsModel{" +
+        return "News{" +
                 "topic='" + topic + '\'' +
                 ", text='" + text + '\'' +
                 ", date='" + date + '\'' +

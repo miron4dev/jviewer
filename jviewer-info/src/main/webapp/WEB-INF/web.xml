@@ -18,6 +18,14 @@
     </servlet-mapping>
 
     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/controller-applicationContext.xml
+            /WEB-INF/spring/model-applicationContext.xml
+        </param-value>
+    </context-param>
+
+    <context-param>
         <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
         <param-value>/WEB-INF/taglib.xml</param-value>
     </context-param>

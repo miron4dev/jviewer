@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Model of user.
  */
-public class UserModel implements Serializable {
+public class UserProfile implements Serializable {
 
     private String name;
     private String password;

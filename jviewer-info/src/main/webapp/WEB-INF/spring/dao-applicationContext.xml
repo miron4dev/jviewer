@@ -3,12 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="newsService" class="tk.jviewer.info.service.NewsServiceImpl">
-        <property name="dao" ref="newsDao"/>
+    <import resource="jdbc-applicationContext.xml"/>
+
+    <bean id="newsDao" class="tk.jviewer.info.dao.NewsDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="securityService" class="tk.jviewer.info.service.SecurityServiceImpl">
-        <property name="dao" ref="userDao"/>
+    <bean id="userDao" class="tk.jviewer.info.dao.UserDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
 </beans>

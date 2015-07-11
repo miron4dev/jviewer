@@ -5,11 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="userModel" class="tk.jviewer.info.model.UserModel" scope="session">
+    <bean id="userProfile" class="tk.jviewer.info.model.UserProfile" scope="session">
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="newsModel" class="tk.jviewer.info.model.NewsModel" scope="request">
+    <bean id="news" class="tk.jviewer.info.model.News" scope="request">
         <aop:scoped-proxy/>
     </bean>
 </beans>

@@ -1,7 +1,7 @@
 package tk.jviewer.info.service;
 
 import tk.jviewer.info.dao.NewsDao;
-import tk.jviewer.info.model.NewsModel;
+import tk.jviewer.info.model.News;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +17,7 @@ public class NewsServiceImpl implements NewsService {
     private NewsDao dao;
 
     @Override
-    public List<NewsModel> getNews() {
+    public List<News> getNews() {
         return dao.getNews();
     }
 

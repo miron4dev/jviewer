@@ -3,7 +3,7 @@ package tk.jviewer.info.dao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import tk.jviewer.info.model.UserModel;
+import tk.jviewer.info.model.UserProfile;
 
 /**
  * Implementation of {@link UserDao}.
@@ -11,8 +11,8 @@ import tk.jviewer.info.model.UserModel;
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
     @Override
-    public UserModel getUserByName(String name) throws EmptyResultDataAccessException {
+    public UserProfile getUserByName(String name) throws EmptyResultDataAccessException {
         return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{name},
-                new BeanPropertyRowMapper<>(UserModel.class));
+                new BeanPropertyRowMapper<>(UserProfile.class));
     }
 }

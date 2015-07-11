@@ -2,9 +2,8 @@ package tk.jviewer.info.dao;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import tk.jviewer.info.model.NewsModel;
+import tk.jviewer.info.model.News;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,8 +12,8 @@ import java.util.List;
 public class NewsDaoImpl extends JdbcDaoSupport implements NewsDao {
 
     @Override
-    public List<NewsModel> getNews() {
-        return getJdbcTemplate().query("SELECT * FROM news", new BeanPropertyRowMapper<>(NewsModel.class));
+    public List<News> getNews() {
+        return getJdbcTemplate().query("SELECT * FROM news", new BeanPropertyRowMapper<>(News.class));
     }
 
     @Override

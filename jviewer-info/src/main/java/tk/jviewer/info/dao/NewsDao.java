@@ -1,8 +1,7 @@
 package tk.jviewer.info.dao;
 
-import tk.jviewer.info.model.NewsModel;
+import tk.jviewer.info.model.News;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ public interface NewsDao {
      * Returns the all news from the database.
      * @return see description.
      */
-    List<NewsModel> getNews();
+    List<News> getNews();
 
     /**
      * Adds the news to the database.

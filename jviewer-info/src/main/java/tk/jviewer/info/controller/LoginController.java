@@ -1,7 +1,7 @@
 package tk.jviewer.info.controller;
 
+import tk.jviewer.info.model.UserProfile;
 import tk.jviewer.info.service.SecurityService;
-import tk.jviewer.info.model.UserModel;
 
 import javax.faces.context.FacesContext;
 
@@ -11,18 +11,18 @@ import javax.faces.context.FacesContext;
 public class LoginController {
 
     private SecurityService securityService;
-    private UserModel userModel;
+    private UserProfile userProfile;
 
     public void login() {
-        if (securityService.authenticate(userModel.getName(), userModel.getPassword())) {
-            userModel.setAuthenticated(true);
+        if (securityService.authenticate(userProfile.getName(), userProfile.getPassword())) {
+            userProfile.setAuthenticated(true);
         } else {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("failed", "Ошибка входа. Данные неверны.");
         }
     }
 
     public void logout() {
-        userModel.setAuthenticated(false);
+        userProfile.setAuthenticated(false);
     }
 
     //
@@ -33,8 +33,8 @@ public class LoginController {
         this.securityService = securityService;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
 }

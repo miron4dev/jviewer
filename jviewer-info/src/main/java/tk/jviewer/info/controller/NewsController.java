@@ -1,8 +1,8 @@
 package tk.jviewer.info.controller;
 
 import tk.jviewer.info.service.NewsService;
-import tk.jviewer.info.model.NewsModel;
-import tk.jviewer.info.model.UserModel;
+import tk.jviewer.info.model.News;
+import tk.jviewer.info.model.UserProfile;
 
 import javax.faces.context.FacesContext;
 import java.io.IOException;
@@ -17,14 +17,14 @@ public class NewsController {
     private static final String NEWS_PAGE = "news.xhtml";
 
     private NewsService manager;
-    private NewsModel newsModel;
-    private UserModel userModel;
+    private News news;
+    private UserProfile userProfile;
 
     /**
      * @see NewsService#getNews()
      */
-    public List<NewsModel> getNews() {
-        List<NewsModel> news = manager.getNews();
+    public List<News> getNews() {
+        List<News> news = manager.getNews();
         Collections.reverse(news);
         return news;
     }
@@ -33,9 +33,9 @@ public class NewsController {
      * @see NewsService#addNews(String, String, String)
      */
     public void addNews() throws IOException {
-        manager.addNews(newsModel.getTopic(), newsModel.getText(), userModel.getName());
-        newsModel.setTopic("");
-        newsModel.setText("");
+        manager.addNews(news.getTopic(), news.getText(), userProfile.getName());
+        news.setTopic("");
+        news.setText("");
         FacesContext.getCurrentInstance().getExternalContext().redirect(NEWS_PAGE);
     }
 
@@ -43,7 +43,7 @@ public class NewsController {
      * @see NewsService#editNews(Integer, String, String, String)
      */
     public void editNews() throws IOException {
-        manager.editNews(newsModel.getId(), newsModel.getTopic(), newsModel.getText(), userModel.getName());
+        manager.editNews(news.getId(), news.getTopic(), news.getText(), userProfile.getName());
         FacesContext.getCurrentInstance().getExternalContext().redirect(NEWS_PAGE);
     }
 
@@ -63,11 +63,11 @@ public class NewsController {
         this.manager = manager;
     }
 
-    public void setNewsModel(NewsModel newsModel) {
-        this.newsModel = newsModel;
+    public void setNews(News news) {
+        this.news = news;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }
