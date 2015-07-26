@@ -5,6 +5,7 @@ import org.apache.commons.collections4.map.MultiKeyMap;
 import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.ResourceDao;
 import tk.jviewer.refresh.Refresh;
+import tk.jviewer.refresh.Refreshable;
 import tk.jviewer.service.ResourceService;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import java.util.*;
  * Implementation of {@link ResourceService}. It's refreshable service.
  * @author Evgeny Mironenko
  */
-@Refresh
+@Refreshable
 public class ResourceServiceImpl implements ResourceService, Serializable {
 
     private static final long serialVersionUID = 4046286891272354949L;

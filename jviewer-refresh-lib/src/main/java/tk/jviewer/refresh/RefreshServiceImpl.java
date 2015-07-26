@@ -19,7 +19,7 @@ public class RefreshServiceImpl implements RefreshService {
     @Override
     @ManagedOperation(description = "Executes all methods, which annotated by Refresh annotation.")
     public void refresh() {
-        for (Object bean : context.getBeansWithAnnotation(Refresh.class).values()) {
+        for (Object bean : context.getBeansWithAnnotation(Refreshable.class).values()) {
             for (Method method : bean.getClass().getMethods()) {
                 if (method.isAnnotationPresent(Refresh.class)) {
                     try {
