@@ -12,6 +12,13 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     private RefreshService refreshService;
 
+    /**
+     * Initiates refresh service mechanism after initialization.
+     */
+    public void init() {
+        refreshService.refresh();
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         refreshService.setApplicationContext(applicationContext);
