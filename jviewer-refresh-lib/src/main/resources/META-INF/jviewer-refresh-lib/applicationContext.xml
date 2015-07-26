@@ -13,7 +13,7 @@
 
     <bean id="refreshService" class="tk.jviewer.refresh.RefreshServiceImpl"/>
 
-    <bean class="tk.jviewer.refresh.ApplicationContextProvider">
+    <bean class="tk.jviewer.refresh.ApplicationContextProvider" init-method="init">
         <property name="refreshService" ref="refreshService"/>
     </bean>
 
