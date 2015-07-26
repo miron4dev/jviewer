@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import tk.jviewer.service.LoginService;
 import tk.jviewer.service.ManagementService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import java.util.List;
  *
  * @author Evgeny Mironenko
  */
-public class RoomModel {
+public class RoomModel implements Serializable {
+
+    private static final long serialVersionUID = -8138653647619806300L;
 
     private int id;
     private String name;

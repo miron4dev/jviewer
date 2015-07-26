@@ -3,11 +3,18 @@ package tk.jviewer.model;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
+import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 /**
  * User model implementation.
  * @author Evgeny Mironenko
  */
-public class UserModel {
+public class UserModel implements Serializable {
+
+    private static final long serialVersionUID = -3774835245941358853L;
 
     private int id;
     private String name;
@@ -18,6 +25,7 @@ public class UserModel {
     private boolean enabled;
     private String currentRoom;
     private Test chosenTest;
+    private List<Test> availableTests;
 
     @Override
     public boolean equals(Object obj) {
@@ -107,5 +115,25 @@ public class UserModel {
 
     public void setChosenTest(Test chosenTest) {
         this.chosenTest = chosenTest;
+    }
+
+    public List<Test> getAvailableTests() {
+        return availableTests;
+    }
+
+    public void setAvailableTests(List<Test> availableTests) {
+        this.availableTests = availableTests;
+    }
+
+    public Test lookupTestByName(String name) {
+        if (isEmpty(name)) {
+            return null;
+        }
+        for (Test test: availableTests) {
+            if (name.equals(test.getName())) {
+                return test;
+            }
+        }
+        return null;
     }
 }

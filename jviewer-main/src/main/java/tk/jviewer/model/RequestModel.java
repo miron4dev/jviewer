@@ -1,10 +1,14 @@
 package tk.jviewer.model;
 
+import java.io.Serializable;
+
 /**
  * Request model implementation. Used on the JSF pages for sending requests.
  * @author Evgeny Mironenko
  */
-public class RequestModel {
+public class RequestModel implements Serializable {
+
+    private static final long serialVersionUID = 5648043578683281691L;
 
     private String name;
     private String password;

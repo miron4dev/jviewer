@@ -14,6 +14,15 @@ public class Answer implements Serializable {
     private String correct;
     private AnswerType type;
 
+    public Answer() {
+    }
+
+    public Answer(String text, String correct, AnswerType type) {
+        this.text = text;
+        this.correct = correct;
+        this.type = type;
+    }
+
     public String getText() {
         return text;
     }

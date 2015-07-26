@@ -7,6 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
 <f:view locale="#{localeModel.currentLocale}"/>
+
 <h:head>
     <title>Choose your test</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
@@ -27,13 +28,12 @@
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="Choose your test" styleClass="common-panel">
             <h:form>
-                <p:selectOneMenu id="testList" styleClass="select-menu" value="#{userModel.chosenTest}" height="50">
-                    <f:selectItems value="#{}"/>
-                    <p:ajax event="change" update="@this"/>
+                <p:selectOneMenu id="testList" styleClass="select-menu" value="#{takeTestDialog.chosenTest}" converter="#{testConverter}">
+                    <f:selectItems value="#{takeTestDialog.availableTests}" var="test" itemLabel="#{test.name}"/>
                 </p:selectOneMenu>
                 <br/>
                 <br/>
-                <p:commandButton action="#{}" value="Choose"/>
+                <p:commandButton action="currentQuestion?faces-redirect=true" value="Take test"/>
             </h:form>
             <h:form><p:commandButton value="Back" action="rooms?faces-redirect=true"/></h:form>
         </p:panel>
