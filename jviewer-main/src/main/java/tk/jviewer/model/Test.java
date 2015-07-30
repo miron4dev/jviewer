@@ -13,12 +13,11 @@ public class Test implements Serializable {
 
     private String name;
     private List<Question> questions;
-    private Question currentQuestion;
+    private int currentQuestionIndex;
 
     public Test(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
-        this.currentQuestion = questions.get(0);
     }
 
     public String getName() {
@@ -30,11 +29,11 @@ public class Test implements Serializable {
     }
 
     public Question getCurrentQuestion() {
-        return currentQuestion;
+        return questions.get(currentQuestionIndex);
     }
 
-    public void setCurrentQuestion(Question currentQuestion) {
-        this.currentQuestion = currentQuestion;
+    public void nextQuestion() {
+        currentQuestionIndex++;
     }
 
     public Integer getProgress() {

@@ -96,6 +96,13 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- JSTL tags -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
         <!-- Apache Commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>

@@ -1,5 +1,6 @@
 package tk.jviewer.dialog;
 
+import org.apache.log4j.Logger;
 import tk.jviewer.converter.TestConverter;
 import tk.jviewer.model.*;
 
@@ -14,6 +15,8 @@ import java.util.List;
  */
 public class TakeTestDialog {
 
+    private static final Logger logger = Logger.getLogger(TakeTestDialog.class);
+
     private UserModel userModel;
 
     /**
@@ -21,7 +24,9 @@ public class TakeTestDialog {
      */
     @PostConstruct
     public void lookupAvailableTests() {
-        userModel.setAvailableTests(Collections.singletonList(fillDummyTest()));
+        List<Test> availableTests = Collections.singletonList(fillDummyTest());
+        userModel.setAvailableTests(availableTests);
+        logger.info("Found " + availableTests.size() + " available tests for user " + userModel.getName());
     }
 
     /**
@@ -29,16 +34,28 @@ public class TakeTestDialog {
      * @return see description.
      */
     private Test fillDummyTest() {
-        Question question = new Question();
-        question.setId(1);
-        question.setTopic("Test topic question");
-        question.setText("Test text question");
-        Answer answer1 = new Answer("The first answer", Boolean.FALSE.toString(), AnswerType.RADIO_BUTTON);
-        Answer answer2 = new Answer("The second answer", Boolean.TRUE.toString(), AnswerType.RADIO_BUTTON);
-        Answer answer3 = new Answer("The third answer", "correct", AnswerType.RADIO_BUTTON);
-        question.setAnswers(Arrays.asList(answer1, answer2, answer3));
+        Question question1 = new Question();
+        question1.setId(1);
+        question1.setTopic("To be or not to be?");
+        question1.setText("That is the question");
+        Answer answer1 = new Answer("To be", Boolean.FALSE.toString(), AnswerType.RADIO_BUTTON);
+        Answer answer2 = new Answer("Not to be", "correct", AnswerType.RADIO_BUTTON);
+        question1.setAnswers(Arrays.asList(answer1, answer2));
+
+        Question question2 = new Question();
+        question2.setId(2);
+        question2.setTopic("Random test");
+        question2.setText("Who lives in a pineapple under the sea?");
+        Answer answer21 = new Answer("Barmaley", Boolean.FALSE.toString(), AnswerType.CHECK_BOX);
+        Answer answer22 = new Answer("Sponge Bob Square Pants", Boolean.TRUE.toString(), AnswerType.CHECK_BOX);
+        Answer answer23 = new Answer("Earthworm Jim", "correct", AnswerType.CHECK_BOX);
+        Answer answer24 = new Answer("Princess Nesmeyana", "correct", AnswerType.CHECK_BOX);
+        question2.setAnswers(Arrays.asList(answer21, answer22, answer23, answer24));
+
         List<Question> questions = new ArrayList<>();
-        questions.add(question);
+        questions.add(question1);
+        questions.add(question2);
+
         return new Test("Test", questions);
     }
 
@@ -48,6 +65,19 @@ public class TakeTestDialog {
 
     public Test getChosenTest() {
         return userModel.getChosenTest();
+    }
+
+    public Question getCurrentQuestion() {
+        Test chosenTest = getChosenTest();
+        return chosenTest.getCurrentQuestion();
+    }
+
+    public void nextQuestion() {
+        getChosenTest().nextQuestion();
+    }
+
+    public String cancelTest() {
+        return "testing?faces-redirect=true";
     }
 
     public void setChosenTest(Test chosenTest) {
@@ -61,4 +91,5 @@ public class TakeTestDialog {
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
     }
+
 }
