@@ -24,4 +24,6 @@
         <aop:scoped-proxy/>
     </bean>
 
+    <bean id="takeTestManagedBean" class="tk.jviewer.model.TakeTestManagedBean" scope="session"/>
+
 </beans>

@@ -1,7 +1,7 @@
 package tk.jviewer.converter;
 
+import tk.jviewer.model.TakeTestManagedBean;
 import tk.jviewer.model.Test;
-import tk.jviewer.model.UserModel;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -14,14 +14,14 @@ import javax.faces.convert.ConverterException;
  */
 public class TestConverter implements Converter {
 
-    private UserModel userModel;
+    private TakeTestManagedBean managedBean;
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
         if (s == null || s.isEmpty()) {
             return null;
         }
-        return userModel.lookupTestByName(s);
+        return managedBean.lookupTestByName(s);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TestConverter implements Converter {
     // Dependency Injection
     //
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setManagedBean(TakeTestManagedBean managedBean) {
+        this.managedBean = managedBean;
     }
 }

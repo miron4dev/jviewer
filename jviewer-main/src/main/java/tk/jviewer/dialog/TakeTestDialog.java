@@ -15,8 +15,9 @@ import java.util.List;
  */
 public class TakeTestDialog {
 
-    private static final Logger logger = Logger.getLogger(TakeTestDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(TakeTestDialog.class);
 
+    private TakeTestManagedBean managedBean;
     private UserModel userModel;
 
     /**
@@ -25,8 +26,8 @@ public class TakeTestDialog {
     @PostConstruct
     public void lookupAvailableTests() {
         List<Test> availableTests = Collections.singletonList(fillDummyTest());
-        userModel.setAvailableTests(availableTests);
-        logger.info("Found " + availableTests.size() + " available tests for user " + userModel.getName());
+        managedBean.setAvailableTests(availableTests);
+        LOGGER.info("Found " + availableTests.size() + " available tests for user " + userModel.getName());
     }
 
     /**
@@ -60,11 +61,11 @@ public class TakeTestDialog {
     }
 
     public List<Test> getAvailableTests() {
-        return userModel.getAvailableTests();
+        return managedBean.getAvailableTests();
     }
 
     public Test getChosenTest() {
-        return userModel.getChosenTest();
+        return managedBean.getChosenTest();
     }
 
     public Question getCurrentQuestion() {
@@ -76,20 +77,27 @@ public class TakeTestDialog {
         getChosenTest().nextQuestion();
     }
 
+    public void previousQuestion() {
+        getChosenTest().previousQuestion();
+    }
+
     public String cancelTest() {
         return "testing?faces-redirect=true";
     }
 
     public void setChosenTest(Test chosenTest) {
-        userModel.setChosenTest(chosenTest);
+        managedBean.setChosenTest(chosenTest);
     }
 
     //
     // Dependency Injection
     //
 
+    public void setManagedBean(TakeTestManagedBean managedBean) {
+        this.managedBean = managedBean;
+    }
+
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
     }
-
 }

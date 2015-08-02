@@ -26,6 +26,10 @@
             <property-name>userModel</property-name>
             <value>#{userModel}</value>
         </managed-property>
+        <managed-property>
+            <property-name>managedBean</property-name>
+            <value>#{takeTestManagedBean}</value>
+        </managed-property>
     </managed-bean>
 
     <managed-bean>
@@ -33,8 +37,8 @@
         <managed-bean-class>tk.jviewer.converter.TestConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
-            <property-name>userModel</property-name>
-            <value>#{userModel}</value>
+            <property-name>managedBean</property-name>
+            <value>#{takeTestManagedBean}</value>
         </managed-property>
     </managed-bean>
 
