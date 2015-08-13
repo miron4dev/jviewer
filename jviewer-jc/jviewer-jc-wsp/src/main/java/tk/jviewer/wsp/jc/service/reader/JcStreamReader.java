@@ -2,6 +2,8 @@ package tk.jviewer.wsp.jc.service.reader;
 
 import java.io.*;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 /**
  * Reads the specified instance of {@link InputStream} and transforms the result into the string.
  */
@@ -34,6 +36,7 @@ public class JcStreamReader {
         } catch (IOException ioe) {
             throw new IllegalStateException(ioe);
         }
-        return result;
+        // We should remove the last line breaking
+        return !result.isEmpty() ? result.substring(0, result.length() -1) : EMPTY;
     }
 }

@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.apache.commons.lang3.RandomStringUtils.random;
+
 /**
  * Implementation of {@link JcService}.
  */
@@ -16,6 +18,7 @@ import java.util.regex.Pattern;
 public class JcServiceImpl implements JcService {
 
     private static final Pattern LOOKUP_CLASS_PATTERN = Pattern.compile("public class ([\\w]++) ");
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int RESULT_SUCCESS = 0;
     private static final File TEMP_DIR = new File("tmp");
 
@@ -37,8 +40,9 @@ public class JcServiceImpl implements JcService {
         String className = null;
         File sourceFile = null;
         try {
-            sourceCode = "package tmp;\n" + sourceCode;
-            className = lookupClassName(sourceCode);
+            validateSources();
+            className = random(15, ALPHABET);
+            sourceCode = adjustSourceCode(className, sourceCode);
             sourceFile = writeToFile(className, sourceCode);
             Process compile = Runtime.getRuntime().exec("javac " + sourceFile.getPath());
             if (compile.waitFor() != RESULT_SUCCESS) {
@@ -60,26 +64,26 @@ public class JcServiceImpl implements JcService {
         }
     }
 
-    private String lookupClassName(String sourceCode) {
+    private void validateSources() {
+        //TODO validation
+    }
+
+    private String adjustSourceCode(String className, String sourceCode) {
         Matcher matcher = LOOKUP_CLASS_PATTERN.matcher(sourceCode);
         if (matcher.find()) {
-            return matcher.group(1);
+            sourceCode = "package tmp;\n" + sourceCode;
+            return sourceCode.replaceFirst(matcher.group(1), className);
         } else {
             throw new IllegalArgumentException("Could not lookup class name. Source code is invalid!");
         }
     }
 
     private File writeToFile(String className, String sourceCode) {
-        try {
-            File file = new File(TEMP_DIR + File.separator + className + ".java");
-            if (file.createNewFile()) {
-                PrintWriter printWriter = new PrintWriter(file);
-                printWriter.print(sourceCode);
-                printWriter.flush();
-                return file;
-            } else {
-                throw new IllegalStateException("Could not create the file " + className);
-            }
+        File file = new File(TEMP_DIR + File.separator + className + ".java");
+        try (PrintWriter printWriter = new PrintWriter(file)) {
+            printWriter.print(sourceCode);
+            printWriter.flush();
+            return file;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
