@@ -1,5 +1,7 @@
 package tk.jviewer.wsp.jc.service;
 
+import tk.jviewer.wsp.jc.service.model.JcFault;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -19,5 +21,5 @@ public interface JcService {
      */
     @WebMethod(operationName = "compileAndExecute")
     @WebResult(name = "result")
-    String compileAndExecute(@WebParam(name = "sourceCode") @XmlElement(required = true) String sourceCode);
+    String compileAndExecute(@WebParam(name = "sourceCode") @XmlElement(required = true) String sourceCode) throws JcFault;
 }
