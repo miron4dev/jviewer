@@ -1,4 +1,4 @@
-package tk.jviewer.model.question;
+package tk.jviewer.model;
 
 import org.apache.commons.lang3.StringUtils;
 import tk.jviewer.model.Answer;

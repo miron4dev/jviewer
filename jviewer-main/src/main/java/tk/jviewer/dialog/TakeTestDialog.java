@@ -3,7 +3,7 @@ package tk.jviewer.dialog;
 import org.apache.log4j.Logger;
 import tk.jviewer.converter.TestConverter;
 import tk.jviewer.model.Answer;
-import tk.jviewer.model.question.Question;
+import tk.jviewer.model.Question;
 import tk.jviewer.model.TakeTestManagedBean;
 import tk.jviewer.model.Test;
 import tk.jviewer.model.UserModel;
