@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
@@ -29,34 +30,23 @@
                                     </div>
                                 </div>
                                 <div class="answers-pnl">
-                                    <c:forEach var="answer" items="#{takeTestDialog.currentQuestion.answers}">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <c:if test="#{answer.type == 'RADIO_BUTTON'}">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optradio" value="#{answer.id}"/>
-                                                            <h:outputText value="#{answer.text}"/>
-                                                        </label>
-                                                    </div>
-                                                </c:if>
-                                                <c:if test="#{answer.type == 'CHECK_BOX'}">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="#{answer.id}"/>
-                                                            <h:outputText value="#{answer.text}"/>
-                                                        </label>
-                                                    </div>
-                                                </c:if>
-                                                <c:if test="#{answer.type == 'TEXT_FIELD'}">
-                                                    <label>
-                                                        <h:outputText value="Please write your answer"/>
-                                                        <input type="text"/>
-                                                    </label>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
+                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'RADIO_BUTTON'}">
+                                        <h:selectOneRadio value="#{takeTestDialog.currentQuestion.userAnswer}" layout="pageDirection">
+                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}"
+                                                    var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                        </h:selectOneRadio>
+                                    </c:if>
+                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'CHECK_BOX'}">
+                                        <h:selectManyCheckbox value="#{takeTestDialog.currentQuestion.userAnswers}" layout="pageDirection">
+                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}" var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                        </h:selectManyCheckbox>
+                                    </c:if>
+                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'TEXT_FIELD'}">
+                                        <label>
+                                            <h:outputText value="Please write your answer"/>
+                                            <input type="text"/>
+                                        </label>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +63,7 @@
                                     <p:commandButton action="#{takeTestDialog.cancelTest}" value="Cancel test"/>
                                 </h:panelGroup>
                             </div>
-                            <p:progressBar value="50" labelTemplate="{value}%" displayOnly="true"/>
+                            <p:progressBar value="#{takeTestDialog.chosenTest.progress}" labelTemplate="{value}%" displayOnly="true"/>
                         </div>
                     </div>
                 </h:panelGroup>
@@ -81,7 +71,7 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
-        <p:remoteCommand name="sendAnswersCommand" actionListener="#{takeTestDialog.saveAnswer}" />
+        <p:remoteCommand name="sendAnswersCommand" actionListener="#{takeTestDialog.saveAnswer}"/>
     </h:form>
     <script type="text/javascript">
         var collectAnswers = function () {

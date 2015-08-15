@@ -52,7 +52,31 @@ public class Test implements Serializable {
         }
     }
 
-    public Integer getProgress() {
-        return 0;
+    public int getCorrectlyAnsweredQuestionsNumber() {
+        int number = 0;
+        for (final Question question : questions.keySet()) {
+            if (question.isCorrectlyAnswered()) {
+                number++;
+            }
+        }
+
+        return number;
     }
+
+    public int getTotalQuestionsNumber() {
+        return questions.size();
+    }
+
+    public Integer getProgress() {
+        return (int) (getPassedQuestionsPortion() * 100);
+    }
+
+    //
+    // Helper Methods
+    //
+
+    private double getPassedQuestionsPortion() {
+        return (double) currentQuestionIndex / getTotalQuestionsNumber();
+    }
+
 }

@@ -3,8 +3,14 @@ package tk.jviewer.model;
 import java.io.Serializable;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
+import static tk.jviewer.model.AnswerType.CHECK_BOX;
+import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
+import static tk.jviewer.model.AnswerType.TEXT_FIELD;
+
 /**
  * Question representation.
+ *
  * @author Evgeny Mironenko
  */
 public class Question implements Serializable {
@@ -15,8 +21,10 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers;
-    private List<Integer> correctAnswers;
-    private List<Integer> userAnswers;
+    private List<String> correctAnswers;
+    private String userAnswer;
+    private List<String> userAnswers;
+    private AnswerType typeOfAnswers;
 
     public int getId() {
         return id;
@@ -24,6 +32,14 @@ public class Question implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public AnswerType getTypeOfAnswers() {
+        return typeOfAnswers;
+    }
+
+    public void setTypeOfAnswers(AnswerType typeOfAnswers) {
+        this.typeOfAnswers = typeOfAnswers;
     }
 
     public String getTopic() {
@@ -50,20 +66,40 @@ public class Question implements Serializable {
         this.answers = answers;
     }
 
-    public List<Integer> getCorrectAnswers() {
+    public List<String> getCorrectAnswers() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(List<Integer> correctAnswers) {
+    public void setCorrectAnswers(List<String> correctAnswers) {
         this.correctAnswers = correctAnswers;
     }
 
-    public List<Integer> getUserAnswers() {
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    public List<String> getUserAnswers() {
         return userAnswers;
     }
 
-    public void setUserAnswers(List<Integer> userAnswers) {
+    public void setUserAnswers(List<String> userAnswers) {
         this.userAnswers = userAnswers;
+    }
+
+    public boolean isCorrectlyAnswered() {
+        if (typeOfAnswers == RADIO_BUTTON) {
+            return correctAnswers.contains(userAnswer);
+        } else if (typeOfAnswers == CHECK_BOX) {
+            return isEqualCollection(correctAnswers, userAnswers);
+        } else if (typeOfAnswers == TEXT_FIELD) {
+            return true; // TODO: need to be specified
+        }
+
+        throw new RuntimeException("Unsupported answers type " + typeOfAnswers);
     }
 
 }
