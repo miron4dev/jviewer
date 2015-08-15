@@ -1,5 +1,7 @@
 package tk.jviewer.model;
 
+import tk.jviewer.model.question.Question;
+
 import java.io.Serializable;
 import java.util.Map;
 

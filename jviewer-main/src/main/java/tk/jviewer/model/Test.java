@@ -1,11 +1,9 @@
 package tk.jviewer.model;
 
-import com.google.common.collect.Iterables;
+import tk.jviewer.model.question.Question;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Test representation.
@@ -16,16 +14,14 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 3480658726164313166L;
 
-    private String name;
-    private Map<Question, Boolean> questions;
+    private final String name;
+    private final List<Question> questions;
+
     private int currentQuestionIndex;
 
     public Test(String name, List<Question> questions) {
         this.name = name;
-        this.questions = new HashMap<>();
-        for (Question question : questions) {
-            this.questions.put(question, false);
-        }
+        this.questions = questions;
     }
 
     public String getName() {
@@ -33,11 +29,15 @@ public class Test implements Serializable {
     }
 
     public Question getCurrentQuestion() {
-        return Iterables.get(questions.keySet(), currentQuestionIndex);
+        return questions.get(currentQuestionIndex);
     }
 
     public boolean isCurrentQuestionTheLast() {
         return currentQuestionIndex == questions.size() - 1;
+    }
+
+    public boolean isCurrentQuestionTheFirst() {
+        return currentQuestionIndex == 0;
     }
 
     public void nextQuestion() {
@@ -54,7 +54,7 @@ public class Test implements Serializable {
 
     public int getCorrectlyAnsweredQuestionsNumber() {
         int number = 0;
-        for (final Question question : questions.keySet()) {
+        for (final Question question : questions) {
             if (question.isCorrectlyAnswered()) {
                 number++;
             }

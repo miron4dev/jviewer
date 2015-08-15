@@ -1,9 +1,14 @@
-package tk.jviewer.model;
+package tk.jviewer.model.question;
+
+import org.apache.commons.lang3.StringUtils;
+import tk.jviewer.model.Answer;
+import tk.jviewer.model.AnswerType;
 
 import java.io.Serializable;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
+import static org.apache.commons.lang3.StringUtils.trim;
 import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 import static tk.jviewer.model.AnswerType.TEXT_FIELD;
@@ -23,6 +28,8 @@ public class Question implements Serializable {
     private List<Answer> answers;
     private List<String> correctAnswers;
     private String userAnswer;
+    private String correctTextualAnswer;
+    private String userTextualAnswer;
     private List<String> userAnswers;
     private AnswerType typeOfAnswers;
 
@@ -66,12 +73,16 @@ public class Question implements Serializable {
         this.answers = answers;
     }
 
-    public List<String> getCorrectAnswers() {
-        return correctAnswers;
-    }
-
     public void setCorrectAnswers(List<String> correctAnswers) {
         this.correctAnswers = correctAnswers;
+    }
+
+    public void setCorrectTextualAnswer(String correctTextualAnswer) {
+        this.correctTextualAnswer = correctTextualAnswer;
+    }
+
+    public void setUserTextualAnswer(String userTextualAnswer) {
+        this.userTextualAnswer = userTextualAnswer;
     }
 
     public String getUserAnswer() {
@@ -96,7 +107,7 @@ public class Question implements Serializable {
         } else if (typeOfAnswers == CHECK_BOX) {
             return isEqualCollection(correctAnswers, userAnswers);
         } else if (typeOfAnswers == TEXT_FIELD) {
-            return true; // TODO: need to be specified
+            return correctTextualAnswer.equals(trim(userTextualAnswer));
         }
 
         throw new RuntimeException("Unsupported answers type " + typeOfAnswers);

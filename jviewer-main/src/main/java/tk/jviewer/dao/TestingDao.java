@@ -1,6 +1,6 @@
 package tk.jviewer.dao;
 
-import tk.jviewer.model.Question;
+import tk.jviewer.model.question.Question;
 import tk.jviewer.model.Result;
 
 import java.util.List;
