@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Test representation.
+ *
  * @author Evgeny Mironenko
  */
 public class Test implements Serializable {
@@ -22,7 +23,7 @@ public class Test implements Serializable {
     public Test(String name, List<Question> questions) {
         this.name = name;
         this.questions = new HashMap<>();
-        for (Question question: questions) {
+        for (Question question : questions) {
             this.questions.put(question, false);
         }
     }
@@ -35,8 +36,12 @@ public class Test implements Serializable {
         return Iterables.get(questions.keySet(), currentQuestionIndex);
     }
 
+    public boolean isCurrentQuestionTheLast() {
+        return currentQuestionIndex == questions.size() - 1;
+    }
+
     public void nextQuestion() {
-        if (currentQuestionIndex < questions.size() - 1) {
+        if (!isCurrentQuestionTheLast()) {
             currentQuestionIndex++;
         }
     }

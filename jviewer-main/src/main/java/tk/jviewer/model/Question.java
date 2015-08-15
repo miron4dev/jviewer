@@ -15,6 +15,8 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers;
+    private List<Integer> correctAnswers;
+    private List<Integer> userAnswers;
 
     public int getId() {
         return id;
@@ -47,4 +49,21 @@ public class Question implements Serializable {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+
+    public List<Integer> getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(List<Integer> correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
+
+    public List<Integer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(List<Integer> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
+
 }

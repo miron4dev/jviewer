@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jstl/core">
+
+<h:head>
+    <h:outputStylesheet name="css/bootstrap.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="h2">
+                                        <h:outputText value="Your results"/>
+                                    </div>
+                                    <div class="h4">
+                                        <h:outputText value="Congratulations! Now you're a PhD."/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h:panelGroup id="controls" styleClass="pull-right">
+                                <p:commandButton action="#{takeTestDialog.cancelTest}" value="Cancel test"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

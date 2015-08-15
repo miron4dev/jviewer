@@ -10,6 +10,7 @@ public class Answer implements Serializable {
 
     private static final long serialVersionUID = -1283565263146494192L;
 
+    private int id;
     private String text;
     private String correct;
     private AnswerType type;
@@ -17,10 +18,15 @@ public class Answer implements Serializable {
     public Answer() {
     }
 
-    public Answer(String text, String correct, AnswerType type) {
+    public Answer(int id, String text, String correct, AnswerType type) {
+        this.id = id;
         this.text = text;
         this.correct = correct;
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getText() {
