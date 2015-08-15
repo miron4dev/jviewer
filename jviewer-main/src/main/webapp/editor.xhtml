@@ -3,24 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
     <title>#{msg['J68']} #{userModel.currentRoom}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
-    <h:outputStylesheet library="css" name="codemirror.css"/>
-
-    <h:outputScript library="js" name="codemirror/codemirror.js"/>
-    <h:outputScript library="js" name="codemirror/javascript.js"/>
-    <h:outputScript library="js" name="codemirror/css.js"/>
-    <h:outputScript library="js" name="codemirror/xml.js"/>
-    <h:outputScript library="js" name="codemirror/htmlmixed.js"/>
 
     <h:outputScript library="js" name="chat_admin.js"/>
 </h:head>
 
-<h:body>
+<h:body onload="initViewer()">
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('en')}">
             <h:graphicImage library="images" name="us_logo.png"/>
@@ -31,22 +25,16 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['J63']}: <h:outputText id="currentRoom" value="#{userModel.currentRoom}"/>
+    #{msg['J63']}: <h:outputText id="currentRoom" value="#{not empty userModel.currentRoom ? userModel.currentRoom : 'TEST_ROOM'}"/>
         <h:form id="displayForm">
             <p:commandButton value="#{msg['J64']}" onclick="executeCode();"/>
             <p:commandButton value="#{msg['J65']}" onclick="clearIO();"/>
             <p:commandButton value="#{msg['J66']}" action="admin?faces-redirect=true"/>
             <p:commandButton value="#{msg['J67']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
-            <textarea id="inputArea"></textarea>
-            <script type="text/javascript">
-                var editor = CodeMirror.fromTextArea(document.getElementById("inputArea"), {
-                    lineNumbers: true,
-                    mode: "htmlmixed",
-                    matchBrackets: true,
-                    lineWrapping: true
-
-                });
-            </script>
+            <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true"
+                theme="eclipse" escape="false" widgetVar="codeMirror">
+                <pe:javascript event="change" execute="sendCode()"/>
+            </pe:codeMirror>
             <br/>
             <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
 

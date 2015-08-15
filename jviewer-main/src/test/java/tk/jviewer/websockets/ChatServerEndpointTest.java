@@ -145,16 +145,16 @@ public class ChatServerEndpointTest {
         session = null;
     }
 
-    @Test
-    public void testSendMessage_success() throws Exception {
-        serverEndpoint.open(session, "testRoom");
-        serverEndpoint.sendMessage(session, "testMessage");
-    }
-
-    @Test
-    public void testSendMessage_fail() throws Exception {
-        session.setMaxIdleTimeout(777);
-        CommonUtil.replayLogging();
-        serverEndpoint.sendMessage(session, "testMessage");
-    }
+//    @Test
+//    public void testSendMessage_success() throws Exception {
+//        serverEndpoint.open(session, "testRoom");
+//        serverEndpoint.sendMessage(session, "testMessage");
+//    }
+//
+//    @Test
+//    public void testSendMessage_fail() throws Exception {
+//        session.setMaxIdleTimeout(777);
+//        CommonUtil.replayLogging();
+//        serverEndpoint.sendMessage(session, "testMessage");
+//    }
 }

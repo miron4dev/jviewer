@@ -1,12 +1,15 @@
 /**
  * Client-side javascript for providing WebSocket implementation for recipients.
  */
-
+var editor;
 var socket;
-var serviceLocation = "ws://" + window.location.host + "/main/chat/";
 
 $(document).ready(function() {
-    socket = new WebSocket(serviceLocation + $('#currentRoom').text());
+    socket = new WebSocket("ws://" + window.location.host + "/main/chat/" + $('#currentRoom').text())
+});
+
+function initViewer() {
+    editor = PF('codeMirror').instance;
 
     socket.onmessage = function (event) {
         var msg = event.data;
@@ -21,7 +24,7 @@ $(document).ready(function() {
             editor.setValue(msg);
         }
     };
-});
+}
 
 function leaveRoom() {
     socket.close();

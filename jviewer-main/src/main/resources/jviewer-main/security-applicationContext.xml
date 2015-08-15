@@ -8,9 +8,9 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http>
-        <security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
+        <!--<security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>-->
         <security:intercept-url pattern="/rooms.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
-        <security:intercept-url pattern="/editor.xhtml" access="hasRole('ROLE_ADMIN')"/>
+        <!--<security:intercept-url pattern="/editor.xhtml" access="hasRole('ROLE_ADMIN')"/>-->
         <security:intercept-url pattern="/admin.xhtml" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/newroom.xhtml" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/delroom.xhtml" access="hasRole('ROLE_ADMIN')"/>

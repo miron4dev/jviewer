@@ -10,7 +10,6 @@
     </bean>
 
     <bean id="localeModel" class="tk.jviewer.model.LocaleModel" scope="session">
-        <property name="resourceService" ref="resourceService"/>
         <aop:scoped-proxy/>
     </bean>
 

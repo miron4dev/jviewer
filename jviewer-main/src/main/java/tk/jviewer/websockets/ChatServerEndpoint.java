@@ -2,56 +2,53 @@ package tk.jviewer.websockets;
 
 import org.apache.log4j.Logger;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.websocket.EncodeException;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Server-side implementation of chat.
  * Based on WebSocket protocol.
  * @author Evgeny Mironenko
  */
-@ServerEndpoint(value = "/chat/{room}", encoders = {MessageEncoder.class}, decoders = {MessageDecoder.class})
+@ServerEndpoint(value = "/chat/{room}")
 public class ChatServerEndpoint {
 
     private static final Logger LOG = Logger.getLogger(ChatServerEndpoint.class);
     private static final String ROOM = "room";
+    private static final Set<Session> SESSIONS = new HashSet<>();
 
-    /**
-     * Prepares websocket connection.
-     * @param session of current user.
-     * @param room of current user.
-     */
     @OnOpen
-    public void open(Session session, @PathParam(ROOM) String room) {
+    public void onOpen(Session session, @PathParam(ROOM) String room) {
         session.getUserProperties().put(ROOM, room);
+        SESSIONS.add(session);
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        SESSIONS.remove(session);
     }
 
     /**
-     * Sends message by websocket protocol.
-     * @param session of current user.
-     * @param msg - message, which should be delivered.
-     * @return msg. See param.
+     * Sends the message trough websocket protocol.
+     * @param msg message, which should be delivered.
      */
     @OnMessage
-    public String sendMessage(Session session, String msg) {
-        String room = (String) session.getUserProperties().get(ROOM);
-        try {
-            for (Session s : session.getOpenSessions()) {
+    public void sendMessage(Session session, String msg) {
+        synchronized (SESSIONS) {
+            String room = (String) session.getUserProperties().get(ROOM);
+            for (Session s : SESSIONS) {
                 if (s.isOpen() && room.equals(s.getUserProperties().get(ROOM))) {
-                    s.getBasicRemote().sendObject(msg);
+                    s.getAsyncRemote().sendText(msg);
                 }
             }
-        } catch (IOException | EncodeException e) {
-            LOG.error("Host: " + ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost()
-                    + " | Error in attempt of sending message via websocket. More: " + e);
         }
-        return msg;
+    }
+
+    @OnError
+    public void logError(Throwable throwable) {
+        LOG.error("Exception occurred during data transmission through Web Socket", throwable);
     }
 }

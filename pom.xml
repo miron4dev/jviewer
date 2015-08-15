@@ -64,6 +64,12 @@
                 <version>${primefaces-extensions.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>resources-codemirror</artifactId>
+                <version>${primefaces-extensions.version}</version>
+            </dependency>
+
             <!-- Database -->
             <dependency>
                 <groupId>org.xerial</groupId>
@@ -220,7 +226,7 @@
         <jsf.version>2.2.10</jsf.version>
         <primefaces.version>5.2</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
-        <primefaces-extensions.version>3.1.0</primefaces-extensions.version>
+        <primefaces-extensions.version>3.2.0</primefaces-extensions.version>
         <sqlite.version>3.8.7</sqlite.version>
         <spring.version>4.1.6.RELEASE</spring.version>
         <spring-security.version>4.0.1.RELEASE</spring-security.version>

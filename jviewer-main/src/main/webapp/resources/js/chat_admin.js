@@ -3,15 +3,19 @@
  */
 
 var socket;
-var serviceLocation = "ws://" + window.location.host + "/main/chat/";
+var editor;
 
 $(document).ready(function() {
-    socket = new WebSocket(serviceLocation + $('#currentRoom').text());
-
-    editor.on('keyup', function() {
-        socket.send(editor.getValue());
-    });
+    socket = new WebSocket("ws://" + window.location.host + "/main/chat/" + $('#currentRoom').text())
 });
+
+function initViewer() {
+    editor = PF('codeMirror').instance;
+}
+
+function sendCode() {
+    socket.send(editor.getValue());
+}
 
 function executeCode() {
     socket.send('/execute');
