@@ -39,13 +39,14 @@
                                     </c:if>
                                     <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'CHECK_BOX'}">
                                         <h:selectManyCheckbox value="#{takeTestDialog.currentQuestion.userAnswers}" layout="pageDirection">
-                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}" var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}"
+                                                    var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectManyCheckbox>
                                     </c:if>
                                     <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'TEXT_FIELD'}">
                                         <label>
                                             <h:outputText value="Please write your answer"/>
-                                            <input class="textual-answer-input" type="text"/>
+                                            <h:inputText value="#{takeTestDialog.currentQuestion.userTextualAnswer}"/>
                                         </label>
                                     </c:if>
                                 </div>
@@ -89,7 +90,7 @@
     </h:form>
     <script type="text/javascript">
         var getTextualAnswer = function () {
-            return $('.textual-answer-input').val();
+            return $('.answers-pnl input[type=text]').val();
         };
 
         var collectIdsOfAnswers = function () {

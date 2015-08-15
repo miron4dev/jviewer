@@ -1,9 +1,5 @@
 package tk.jviewer.model;
 
-import org.apache.commons.lang3.StringUtils;
-import tk.jviewer.model.Answer;
-import tk.jviewer.model.AnswerType;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -79,6 +75,10 @@ public class Question implements Serializable {
 
     public void setCorrectTextualAnswer(String correctTextualAnswer) {
         this.correctTextualAnswer = correctTextualAnswer;
+    }
+
+    public String getUserTextualAnswer() {
+        return userTextualAnswer;
     }
 
     public void setUserTextualAnswer(String userTextualAnswer) {
