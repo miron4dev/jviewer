@@ -107,7 +107,7 @@ public class Question implements Serializable {
         } else if (typeOfAnswers == CHECK_BOX) {
             return isEqualCollection(correctAnswers, userAnswers);
         } else if (typeOfAnswers == TEXT_FIELD) {
-            return correctTextualAnswer.equals(trim(userTextualAnswer));
+            return correctTextualAnswer.equalsIgnoreCase(trim(userTextualAnswer));
         }
 
         throw new RuntimeException("Unsupported answers type " + typeOfAnswers);
