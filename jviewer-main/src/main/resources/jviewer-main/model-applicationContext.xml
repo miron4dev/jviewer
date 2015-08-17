@@ -17,12 +17,6 @@
         <aop:scoped-proxy/>
     </bean>
 
-    <bean id="roomModel" class="tk.jviewer.model.RoomModel" scope="session">
-        <property name="managementService" ref="managementService"/>
-        <property name="loginService" ref="loginService"/>
-        <aop:scoped-proxy/>
-    </bean>
-
     <bean id="takeTestManagedBean" class="tk.jviewer.model.TakeTestManagedBean" scope="session"/>
 
 </beans>

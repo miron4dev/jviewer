@@ -1,5 +1,10 @@
 package tk.jviewer.dao;
 
+import org.springframework.dao.DataAccessException;
+import tk.jviewer.model.Room;
+
+import java.util.List;
+
 /**
  * Management Data Access Object interface.
  * @author Evgeny Mironenko
@@ -7,17 +12,24 @@ package tk.jviewer.dao;
 public interface ManagementDao {
 
     /**
-     * Adds new room to database.
-     * @param name name of room.
-     * @param password password for room. Default is null.
-     * @return success of creation.
+     * Returns the list of all available rooms in the database.
+     * @return list of rooms.
+     * @throws DataAccessException if sql query has been failed.
      */
-    boolean createRoom(String name, String password);
+    List<Room> getRooms() throws DataAccessException;
 
     /**
-     * Removes chosen room from database.
+     * Adds a new room to the database.
      * @param name name of room.
-     * @return success of removing.
+     * @param password password of room.
+     * @throws DataAccessException if sql query has been failed.
      */
-    boolean removeRoom(String name);
+    void createRoom(String name, String password) throws DataAccessException;
+
+    /**
+     * Removes a chosen room from the database.
+     * @param name name of the room.
+     * @throws DataAccessException if sql query has been failed.
+     */
+    void deleteRoom(String name) throws DataAccessException;
 }

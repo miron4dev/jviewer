@@ -13,7 +13,6 @@
     <bean id="loginController" class="tk.jviewer.controller.impl.LoginControllerImpl">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="userModel" ref="userModel"/>
-        <property name="roomModel" ref="roomModel"/>
     </bean>
 
 </beans>

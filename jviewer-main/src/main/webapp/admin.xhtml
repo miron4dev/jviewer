@@ -27,18 +27,43 @@
             <p>#{msg['J47']}, #{userModel.name}</p>
             <p>#{msg['J48']}</p>
             <br/>
-            <h:form id="roomsForm">
-                <p:selectOneMenu id="roomList" styleClass="select-menu" value="#{roomModel.currentRoom}" height="50">
-                    <f:selectItems value="#{roomModel.rooms}" />
-                    <p:ajax event="change" update="@this"/>
-                </p:selectOneMenu>
+            <h:form id="roomList-form">
+                <p:remoteCommand name="redirect" action="#{loginController.pageRedirect('editor')}"/>
+                <p:growl id="notification" showDetail="true" />
+
+                <p:dataTable id="rooms-tbl" value="#{mainPageDialog.availableRooms}" var="room" widgetVar="rooms-tbl">
+                    <p:column headerText="Room" filterBy="#{room.name}" filterMatchMode="contains">
+                        <h:outputText value="#{room.name}"/>
+                    </p:column>
+                    <p:column headerText="Type"  filterBy="#{room.type}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('rooms-tbl').filter()" >
+                                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{mainPageDialog.possibleRoomTypes}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{room.type}"/>
+                    </p:column>
+                    <p:column style="text-align:center">
+                        <p:commandLink value="Login" actionListener="#{mainPageDialog.chooseRoom(room)}" process="@this"
+                                       oncomplete="redirect()"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteRoom(room)}" update="@form">
+                            <p:confirm header="Confirmation" message="Are you sure that you want to delete this room?"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
             <br/>
             <br/>
-            <h:form id="createForm"><p:commandButton action="newroom?faces-redirect=true" value="#{msg['J49']}" /></h:form>
-            <h:form id="deleteForm"><p:commandButton action="delroom?faces-redirect=true" value="#{msg['J50']}" /></h:form>
-            <h:form id="loginForm"><p:commandButton action="#{loginController.pageRedirect('editor')}" value="#{msg['J51']}" /></h:form>
-            <h:form id="logoutForm"><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
+            <h:form><p:commandButton value="#{msg['J49']}"/></h:form>
+            <h:form><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

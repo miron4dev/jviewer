@@ -4,10 +4,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.jviewer.model.UserModel;
-import tk.jviewer.model.RoomModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -38,16 +34,5 @@ public class LoginDaoComplexTest {
         UserModel userModel = new UserModel();
         userModel.setId(999);
         assertNotEquals(loginDao.getData("Evgeny Mironenko"), userModel);
-    }
-
-    @Test
-    public void testGetRooms() throws Exception {
-        List<RoomModel> rooms = new ArrayList<>();
-        RoomModel roomModel = new RoomModel();
-        roomModel.setId(1);
-        roomModel.setName("Main");
-        roomModel.setPassword(null);
-        rooms.add(roomModel);
-        assertEquals(loginDao.getRooms(), rooms);
     }
 }

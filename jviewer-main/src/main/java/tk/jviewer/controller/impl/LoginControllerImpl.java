@@ -7,7 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import tk.jviewer.controller.LoginController;
-import tk.jviewer.model.RoomModel;
 import tk.jviewer.model.UserModel;
 
 import javax.faces.context.FacesContext;
@@ -22,7 +21,6 @@ public class LoginControllerImpl implements LoginController {
     private static final Logger LOG = Logger.getLogger(LoginControllerImpl.class);
 
     private UserModel userModel;
-    private RoomModel roomModel;
     private AuthenticationManager authenticationManager;
 
     /**
@@ -72,10 +70,6 @@ public class LoginControllerImpl implements LoginController {
      */
     @Override
     public String pageRedirect(String page){
-        if(roomModel.getCurrentRoom() == null || roomModel.getCurrentRoom().isEmpty()){
-            return null;
-        }
-        userModel.setCurrentRoom(roomModel.getCurrentRoom());
         return page + "?faces-redirect=true";
     }
 
@@ -84,12 +78,6 @@ public class LoginControllerImpl implements LoginController {
      */
     private void prepareUser(){
         authentication();
-        roomModel.refreshRooms();
-        if (!roomModel.getRooms().isEmpty()) {
-            roomModel.setCurrentRoom(roomModel.getRooms().get(0));
-        } else {
-            roomModel.setCurrentRoom("");
-        }
     }
 
     /**
@@ -111,9 +99,5 @@ public class LoginControllerImpl implements LoginController {
 
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-    }
-
-    public void setRoomModel(RoomModel roomModel) {
-        this.roomModel = roomModel;
     }
 }

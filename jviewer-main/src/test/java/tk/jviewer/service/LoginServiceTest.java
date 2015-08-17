@@ -9,14 +9,9 @@ import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.model.UserModel;
 import tk.jviewer.model.RequestModel;
-import tk.jviewer.model.RoomModel;
 import tk.jviewer.service.impl.LoginServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
 
 /**
  * @author Evgeny Mironenko
@@ -85,15 +80,6 @@ public class LoginServiceTest {
         replay(validationDao);
         Assert.assertNotEquals(userModel, loginService.getData(requestModel));
         verify(validationDao);
-    }
-
-    @Test
-    public void testGetRooms_success() throws Exception {
-        List<RoomModel> roomModelList = new ArrayList<>();
-        expect(loginDao.getRooms()).andReturn(roomModelList);
-        replay(loginDao);
-        assertEquals(roomModelList, loginService.getRooms());
-        verify(loginDao);
     }
 
 }

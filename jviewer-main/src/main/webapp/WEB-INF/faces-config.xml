@@ -33,6 +33,20 @@
     </managed-bean>
 
     <managed-bean>
+        <managed-bean-name>mainPageDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.MainPageDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>userModel</property-name>
+            <value>#{userModel}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>controller</property-name>
+            <value>#{managementController}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>testConverter</managed-bean-name>
         <managed-bean-class>tk.jviewer.converter.TestConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
