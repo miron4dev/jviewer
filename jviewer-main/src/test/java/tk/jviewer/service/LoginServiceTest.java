@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.LoginServiceImpl;
 
@@ -40,7 +40,7 @@ public class LoginServiceTest {
 
     @Test
     public void testGetData_success() throws Exception {
-        UserModel userModel = new UserModel();
+        UserProfile userProfile = new UserProfile();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
         String password = "password1234+";
@@ -48,9 +48,9 @@ public class LoginServiceTest {
         requestModel.setPassword(password);
         expect(validationDao.getUserPassword(userName)).andReturn(password);
         replay(validationDao);
-        expect(loginDao.getData(userName)).andReturn(userModel);
+        expect(loginDao.getData(userName)).andReturn(userProfile);
         replay(loginDao);
-        Assert.assertEquals(userModel, loginService.getData(requestModel));
+        Assert.assertEquals(userProfile, loginService.getData(requestModel));
         verify(validationDao);
         verify(loginDao);
     }
@@ -70,7 +70,7 @@ public class LoginServiceTest {
 
     @Test
     public void testGetData_failCompare() throws Exception {
-        UserModel userModel = new UserModel();
+        UserProfile userProfile = new UserProfile();
         RequestModel requestModel = new RequestModel();
         String userName = "Test Test";
         String password = "password1234+";
@@ -78,7 +78,7 @@ public class LoginServiceTest {
         requestModel.setPassword(password);
         expect(validationDao.getUserPassword(userName)).andReturn("anotherPassword");
         replay(validationDao);
-        Assert.assertNotEquals(userModel, loginService.getData(requestModel));
+        Assert.assertNotEquals(userProfile, loginService.getData(requestModel));
         verify(validationDao);
     }
 

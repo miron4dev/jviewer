@@ -7,12 +7,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import tk.jviewer.model.RequestModel;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.LoginService;
 
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static tk.jviewer.profile.Permission.*;
 
 /**
  * Implementation of Spring Security service.
@@ -22,16 +25,13 @@ public class SecurityService implements AuthenticationProvider {
 
     private LoginService loginService;
     private RequestModel requestModel;
-    private UserModel userModel;
+    private UserProfile userProfile;
 
-    /**
-     * @see org.springframework.security.authentication.AuthenticationProvider#authenticate(org.springframework.security.core.Authentication)
-     */
     @Override
     public Authentication authenticate(Authentication authentication) {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        UserModel user = loginService.getData(requestModel);
+        UserProfile user = loginService.getData(requestModel);
 
         if (user == null) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
@@ -40,19 +40,19 @@ public class SecurityService implements AuthenticationProvider {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        userModel.setEnabled(user.isEnabled());
-        userModel.setRole(user.getRole());
-        userModel.setFaculty(user.getFaculty());
-        userModel.setId(user.getId());
-        userModel.setInvitationID(user.getInvitationID());
-        userModel.setName(user.getName());
-        userModel.setPassword(user.getPassword());
+        userProfile.setEnabled(user.isEnabled());
+        userProfile.setRole(user.getRole());
+        userProfile.setFaculty(user.getFaculty());
+        userProfile.setId(user.getId());
+        userProfile.setInvitationID(user.getInvitationID());
+        userProfile.setName(user.getName());
+        userProfile.setPassword(user.getPassword());
+        if ("ROLE_ADMIN".equals(user.getRole())) {
+            userProfile.setPermissions(Arrays.asList(CREATE_ROOM, DELETE_ROOM, EDIT_VIEWER));
+        }
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
 
-    /**
-     * @see org.springframework.security.authentication.AuthenticationProvider#supports(Class)
-     */
     @Override
     public boolean supports(Class<?> aClass) {
         return true;
@@ -70,7 +70,7 @@ public class SecurityService implements AuthenticationProvider {
         this.requestModel = requestModel;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

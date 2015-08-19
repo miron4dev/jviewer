@@ -4,7 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.model.RequestModel;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.LoginService;
 
 /**
@@ -21,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
      * If validation will be failed, return null.
      */
     @Override
-    public UserModel getData(RequestModel userModel) {
+    public UserProfile getData(RequestModel userModel) {
         try{
             if(validationDao.getUserPassword(userModel.getName()).equals(userModel.getPassword())){
                 return loginDao.getData(userModel.getName());

@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.SecurityService;
 
@@ -31,19 +31,19 @@ public class SecurityServiceTest {
     private SecurityService securityService;
     private LoginService loginService;
     private RequestModel requestModel;
-    private UserModel userModel;
+    private UserProfile userProfile;
     private String role = "ROLE_USER";
 
     @Before
     public void init() throws Exception {
         securityService = new SecurityService();
         requestModel = new RequestModel();
-        userModel = new UserModel();
-        userModel.setRole(role);
+        userProfile = new UserProfile();
+        userProfile.setRole(role);
         loginService = createStrictMock(LoginService.class);
         authentication = createStrictMock(Authentication.class);
         securityService.setRequestModel(requestModel);
-        securityService.setUserModel(userModel);
+        securityService.setUserProfile(userProfile);
         securityService.setLoginService(loginService);
     }
 
@@ -51,7 +51,7 @@ public class SecurityServiceTest {
     public void destroy() throws Exception {
         securityService = null;
         requestModel = null;
-        userModel = null;
+        userProfile = null;
         loginService = null;
     }
 
@@ -62,7 +62,7 @@ public class SecurityServiceTest {
         expect(authentication.getName()).andReturn(name);
         expect(authentication.getCredentials()).andReturn(password);
         replay(authentication);
-        expect(loginService.getData(requestModel)).andReturn(userModel);
+        expect(loginService.getData(requestModel)).andReturn(userProfile);
         replay(loginService);
         assertEquals(securityService.authenticate(authentication), getAuthentication(name, password));
         verify(authentication);

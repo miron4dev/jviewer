@@ -4,10 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.impl.ManagementController;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,9 @@ import java.util.stream.Stream;
 /**
  * Main page dialog.
  */
-public class MainPageDialog {
+public class MainPageDialog implements Serializable {
 
+    private static final long serialVersionUID = -8729752510193178635L;
     private static final Logger LOG = Logger.getLogger(MainPageDialog.class);
     private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(Room.Type.values()).map(Enum::name).collect(Collectors.toList());
 
@@ -25,7 +27,7 @@ public class MainPageDialog {
     private String roomPassword;
     private Room.Type roomType;
 
-    private UserModel userModel;
+    private UserProfile userProfile;
     private ManagementController controller;
 
     public void createRoom() {
@@ -49,7 +51,7 @@ public class MainPageDialog {
     }
 
     public void chooseRoom(Room room) {
-        userModel.setCurrentRoom(room.getName());
+        userProfile.setCurrentRoom(room.getName());
     }
 
     public List<Room> getAvailableRooms() {
@@ -103,8 +105,8 @@ public class MainPageDialog {
     // Dependency Injection
     //
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     public void setController(ManagementController controller) {

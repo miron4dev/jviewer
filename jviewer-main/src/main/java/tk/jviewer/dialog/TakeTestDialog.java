@@ -2,11 +2,8 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import tk.jviewer.converter.TestConverter;
-import tk.jviewer.model.Answer;
-import tk.jviewer.model.Question;
-import tk.jviewer.model.TakeTestManagedBean;
-import tk.jviewer.model.Test;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.model.*;
+import tk.jviewer.profile.UserProfile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -39,7 +36,7 @@ public class TakeTestDialog implements Serializable {
     private static final String IDS_OF_ANSWERS_SEPARATOR = ",";
 
     private TakeTestManagedBean managedBean;
-    private UserModel userModel;
+    private UserProfile userProfile;
 
     /**
      * Look ups available tests for the current user.
@@ -48,7 +45,7 @@ public class TakeTestDialog implements Serializable {
     public void lookupAvailableTests() {
         List<Test> availableTests = singletonList(fillDummyTest());
         managedBean.setAvailableTests(availableTests);
-        logger.info("Found " + availableTests.size() + " available tests for user " + userModel.getName());
+        logger.info("Found " + availableTests.size() + " available tests for user " + userProfile.getName());
     }
 
     /**
@@ -163,8 +160,8 @@ public class TakeTestDialog implements Serializable {
         this.managedBean = managedBean;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
 }

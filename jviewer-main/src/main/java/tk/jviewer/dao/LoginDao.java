@@ -1,6 +1,6 @@
 package tk.jviewer.dao;
 
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 
 /**
  * Login Data Access Object interface.
@@ -13,5 +13,5 @@ public interface LoginDao {
      * @param name name of user.
      * @return user data object.
      */
-    UserModel getData(String name);
+    UserProfile getData(String name);
 }

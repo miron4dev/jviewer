@@ -7,7 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import tk.jviewer.controller.LoginController;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class LoginControllerImpl implements LoginController {
 
     private static final Logger LOG = Logger.getLogger(LoginControllerImpl.class);
 
-    private UserModel userModel;
+    private UserProfile userProfile;
     private AuthenticationManager authenticationManager;
 
     /**
@@ -84,7 +84,7 @@ public class LoginControllerImpl implements LoginController {
      * User authentication.
      */
     private void authentication() {
-        Authentication request = new UsernamePasswordAuthenticationToken(userModel.getName(), userModel.getPassword());
+        Authentication request = new UsernamePasswordAuthenticationToken(userProfile.getName(), userProfile.getPassword());
         Authentication result = authenticationManager.authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(result);
     }
@@ -93,8 +93,8 @@ public class LoginControllerImpl implements LoginController {
     // Setters for Dependency Injection.
     //
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {

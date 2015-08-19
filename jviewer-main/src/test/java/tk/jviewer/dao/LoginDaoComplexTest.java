@@ -3,7 +3,7 @@ package tk.jviewer.dao;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -19,20 +19,20 @@ public class LoginDaoComplexTest {
 
     @Test
     public void testGetData_success() throws Exception {
-        UserModel userModel = new UserModel();
-        userModel.setId(1);
-        userModel.setName("Evgeny Mironenko");
-        userModel.setPassword("qwerty");
-        userModel.setRole("ROLE_USER");
-        userModel.setFaculty("Faculty of Information Technology");
-        userModel.setEnabled(true);
-        assertEquals(loginDao.getData("Evgeny Mironenko"), userModel);
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(1);
+        userProfile.setName("Evgeny Mironenko");
+        userProfile.setPassword("qwerty");
+        userProfile.setRole("ROLE_USER");
+        userProfile.setFaculty("Faculty of Information Technology");
+        userProfile.setEnabled(true);
+        assertEquals(loginDao.getData("Evgeny Mironenko"), userProfile);
     }
 
     @Test
     public void testGetData_fail() throws Exception {
-        UserModel userModel = new UserModel();
-        userModel.setId(999);
-        assertNotEquals(loginDao.getData("Evgeny Mironenko"), userModel);
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(999);
+        assertNotEquals(loginDao.getData("Evgeny Mironenko"), userProfile);
     }
 }

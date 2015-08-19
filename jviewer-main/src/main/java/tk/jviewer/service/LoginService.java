@@ -1,7 +1,7 @@
 package tk.jviewer.service;
 
 import tk.jviewer.model.RequestModel;
-import tk.jviewer.model.UserModel;
+import tk.jviewer.profile.UserProfile;
 
 /**
  * Login service interface.
@@ -14,5 +14,5 @@ public interface LoginService {
      * @param requestModel current request model
      * @return user data object.
      */
-    UserModel getData(RequestModel requestModel);
+    UserProfile getData(RequestModel requestModel);
 }

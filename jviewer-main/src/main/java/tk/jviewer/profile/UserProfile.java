@@ -1,13 +1,19 @@
-package tk.jviewer.model;
+package tk.jviewer.profile;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * User model implementation.
+ * User profile implementation.
  * @author Evgeny Mironenko
  */
-public class UserModel {
+public class UserProfile implements Serializable {
+
+    private static final long serialVersionUID = 1760830794494874370L;
 
     private int id;
     private String name;
@@ -17,11 +23,12 @@ public class UserModel {
     private String faculty;
     private boolean enabled;
     private String currentRoom;
+    private List<Permission> permissions = new ArrayList<>();
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof UserModel) {
-            UserModel user = (UserModel)obj;
+        if(obj instanceof UserProfile) {
+            UserProfile user = (UserProfile)obj;
             return id == user.id && enabled == user.isEnabled() && StringUtils.equals(name, user.getName()) &&
                     StringUtils.equals(password, user.getPassword()) && StringUtils.equals(role, user.getRole()) &&
                     StringUtils.equals(invitationID, user.getInvitationID()) && StringUtils.equals(faculty, user.getFaculty()) &&
@@ -98,5 +105,13 @@ public class UserModel {
 
     public void setCurrentRoom(String currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    public boolean hasPermission(Permission permission) {
+        return permissions.contains(permission);
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 }

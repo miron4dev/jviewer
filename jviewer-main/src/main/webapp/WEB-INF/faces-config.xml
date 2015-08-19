@@ -23,8 +23,8 @@
         <managed-bean-class>tk.jviewer.dialog.TakeTestDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
-            <property-name>userModel</property-name>
-            <value>#{userModel}</value>
+            <property-name>userProfile</property-name>
+            <value>#{userProfile}</value>
         </managed-property>
         <managed-property>
             <property-name>managedBean</property-name>
@@ -37,8 +37,8 @@
         <managed-bean-class>tk.jviewer.dialog.MainPageDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
-            <property-name>userModel</property-name>
-            <value>#{userModel}</value>
+            <property-name>userProfile</property-name>
+            <value>#{userProfile}</value>
         </managed-property>
         <managed-property>
             <property-name>controller</property-name>

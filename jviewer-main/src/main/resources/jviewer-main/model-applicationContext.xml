@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="userModel" class="tk.jviewer.model.UserModel" scope="session">
+    <bean id="userProfile" class="tk.jviewer.profile.UserProfile" scope="session">
         <aop:scoped-proxy/>
     </bean>
 
