@@ -3,15 +3,11 @@ package tk.jviewer.model;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.io.Serializable;
-
 /**
  * User model implementation.
  * @author Evgeny Mironenko
  */
-public class UserModel implements Serializable {
-
-    private static final long serialVersionUID = -3774835245941358853L;
+public class UserModel {
 
     private int id;
     private String name;

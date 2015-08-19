@@ -1,6 +1,5 @@
 package tk.jviewer.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -8,9 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 /**
  * Contains Take Test dialog state.
  */
-public class TakeTestManagedBean implements Serializable {
-
-    private static final long serialVersionUID = -413311231242850151L;
+public class TakeTestManagedBean {
 
     private Test chosenTest;
     private List<Test> availableTests;

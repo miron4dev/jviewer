@@ -60,9 +60,30 @@
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
             </h:form>
+            <h:form>
+                <p:dialog header="Create new room" widgetVar="createRoomDialog" resizable="false" showEffect="clip" hideEffect="clip">
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <p:watermark for="roomName" value="Name"/>
+                        <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
+
+                        <p:watermark for="roomPassword" value="Password"/>
+                        <p:password id="roomPassword" value="#{mainPageDialog.roomPassword}"/>
+
+                        <p:watermark for="roomType" value="Type"/>
+                        <p:selectOneMenu id="roomType" required="true" value="#{mainPageDialog.roomType}">
+                            <f:selectItems value="#{mainPageDialog.possibleRoomTypes}"/>
+                        </p:selectOneMenu>
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Create" update="roomList-form" actionListener="#{mainPageDialog.createRoom}"
+                                    oncomplete="PF('createRoomDialog').hide()"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
             <br/>
             <br/>
-            <h:form><p:commandButton value="#{msg['J49']}"/></h:form>
+            <h:form><p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();"/></h:form>
             <h:form><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>
     </div>

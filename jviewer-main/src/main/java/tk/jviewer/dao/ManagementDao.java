@@ -22,9 +22,10 @@ public interface ManagementDao {
      * Adds a new room to the database.
      * @param name name of room.
      * @param password password of room.
+     * @param type type of room.
      * @throws DataAccessException if sql query has been failed.
      */
-    void createRoom(String name, String password) throws DataAccessException;
+    void createRoom(String name, String password, String type) throws DataAccessException;
 
     /**
      * Removes a chosen room from the database.

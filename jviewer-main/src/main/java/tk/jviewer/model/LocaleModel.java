@@ -13,9 +13,7 @@ import java.util.Locale;
  * Locale model implementation.
  * @author Evgeny Mironenko
  */
-public class LocaleModel implements Serializable {
-
-    private static final long serialVersionUID = 3172284145552982157L;
+public class LocaleModel {
 
     private Locale currentLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     private List<String> facultyList;

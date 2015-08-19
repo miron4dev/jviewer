@@ -13,14 +13,6 @@ public class Room implements Serializable {
 
     private static final long serialVersionUID = -8138653647619806300L;
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     public enum Type {
         HTML,
         JAVA
@@ -49,24 +41,28 @@ public class Room implements Serializable {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
     }
 
-
     public String getPassword() {
         return password;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     @Override

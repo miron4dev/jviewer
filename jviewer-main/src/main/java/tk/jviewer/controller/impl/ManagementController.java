@@ -27,7 +27,7 @@ public class ManagementController {
      * @param room the instance of {@link Room}.
      */
     public void createRoom(Room room) throws DataAccessException {
-        managementDao.createRoom(room.getName(), room.getPassword());
+        managementDao.createRoom(room.getName(), room.getPassword(), room.getType().name());
     }
 
     /**
