@@ -48,8 +48,7 @@
                     </p:password>
                 </p>
                 <br/>
-                <p:commandButton icon="ui-icon-person" action="#{loginController.loginAdmin}" update="@form"/>
-                <p:commandButton value="#{msg['J3']}" action="#{loginController.loginUser}" update="@form"/>
+                <p:commandButton value="#{msg['J3']}" action="#{loginController.login}" update="@form"/>
             </h:form>
             <h:form>
                 <p:commandButton value="#{msg['J2']}" action="registration?faces-redirect=true"/>

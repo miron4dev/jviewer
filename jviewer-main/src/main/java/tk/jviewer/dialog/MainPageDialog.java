@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.impl.ManagementController;
+import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
 
 import javax.faces.application.FacesMessage;
@@ -62,6 +63,14 @@ public class MainPageDialog implements Serializable {
             addMessage(FacesMessage.SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
             return new ArrayList<>();
         }
+    }
+
+    public boolean isRoomCreationAllowed() {
+        return userProfile.hasPermission(Permission.CREATE_ROOM);
+    }
+
+    public boolean isRoomDeletionAllowed() {
+        return userProfile.hasPermission(Permission.DELETE_ROOM);
     }
 
     public List<String> getPossibleRoomTypes() {

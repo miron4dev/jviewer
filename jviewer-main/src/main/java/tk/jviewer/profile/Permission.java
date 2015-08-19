@@ -1,7 +1,7 @@
 package tk.jviewer.profile;
 
 /**
- * Possible set of user permissions
+ * Possible set of user permissions.
  */
 public enum Permission {
 

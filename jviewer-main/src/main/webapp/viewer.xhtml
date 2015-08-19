@@ -11,7 +11,8 @@
     <title>#{msg['J68']} #{userProfile.currentRoom}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 
-    <h:outputScript library="js" name="chat_user.js"/>
+    <h:outputScript library="js" name="chat_admin.js" rendered="#{userProfile.hasPermission('EDIT_VIEWER')}"/>
+    <h:outputScript library="js" name="chat_user.js" rendered="#{!userProfile.hasPermission('EDIT_VIEWER')}"/>
 </h:head>
 
 <h:body onload="initViewer()">
@@ -25,15 +26,20 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['J63']}:<h:outputText id="currentRoom" value="#{not empty userProfile.currentRoom ? userProfile.currentRoom : 'TEST_ROOM'}"/>
-    <h:form id="displayForm">
-        <p:commandButton value="#{msg['J66']}" action="rooms?faces-redirect=true"/>
-        <p:commandButton value="#{msg['J67']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
-        <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true" theme="eclipse"
-            escape="false" readonly="nocursor" widgetVar="codeMirror"/>
-        <br/>
-        <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
-    </h:form>
+    #{msg['J63']}: <h:outputText id="currentRoom" value="#{userProfile.currentRoom}"/>
+        <h:form id="displayForm">
+            <p:commandButton value="#{msg['J64']}" onclick="executeCode();"/>
+            <p:commandButton value="#{msg['J65']}" onclick="clearIO();"/>
+            <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true"/>
+            <p:commandButton value="#{msg['J67']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
+            <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true"
+                theme="eclipse" escape="false" widgetVar="codeMirror">
+                <pe:javascript event="change" execute="sendCode()"/>
+            </pe:codeMirror>
+            <br/>
+            <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
+
+        </h:form>
 </h:body>
 
 </html>

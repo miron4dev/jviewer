@@ -7,16 +7,10 @@ package tk.jviewer.controller;
 public interface LoginController {
 
     /**
-     * Login user.
-     * @return user URL.
+     * Does login.
+     * @return URL for navigation.
      */
-    String loginUser();
-
-    /**
-     * Login admin.
-     * @return admin URL.
-     */
-    String loginAdmin();
+    String login();
 
     /**
      * Logout any profile.

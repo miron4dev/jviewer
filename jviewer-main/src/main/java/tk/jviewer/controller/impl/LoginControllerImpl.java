@@ -28,27 +28,12 @@ public class LoginControllerImpl implements LoginController {
      * @return URL for redirect. In BadCredentialsException cases return null and show error message.
      */
     @Override
-    public String loginUser() {
+    public String login() {
         try{
-            prepareUser();
-            return "rooms?faces-redirect=true";
+            authentication();
+            return "main?faces-redirect=true";
         } catch (BadCredentialsException e){
-            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " | Authentication by user was failed. More: " + e);
-            return null;
-        }
-    }
-
-    /**
-     * Prepares admin for login to system.
-     * @return URL for redirect. In BadCredentialsException cases return null and show error message.
-     */
-    @Override
-    public String loginAdmin() {
-        try{
-            prepareUser();
-            return "admin?faces-redirect=true";
-        } catch (BadCredentialsException e){
-            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " | Authentication by admin was failed. More: " + e);
+            LOG.warn("Host: " + ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteHost() + " | Authentication was failed. More: " + e);
             return null;
         }
     }
@@ -71,13 +56,6 @@ public class LoginControllerImpl implements LoginController {
     @Override
     public String pageRedirect(String page){
         return page + "?faces-redirect=true";
-    }
-
-    /**
-     * Prepares any type of user for login to system.
-     */
-    private void prepareUser(){
-        authentication();
     }
 
     /**
