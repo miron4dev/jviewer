@@ -10,10 +10,10 @@ $(document).ready(function() {
 });
 
 function initViewer() {
-    editor = PF('codeMirror').instance;
+    editor = PF('viewerContent').instance;
 }
 
-function sendCode() {
+function sendContent() {
     socket.send(editor.getValue());
 }
 

@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function initViewer() {
-    editor = PF('codeMirror').instance;
+    editor = PF('viewerContent').instance;
 
     socket.onmessage = function (event) {
         var msg = event.data;
@@ -24,6 +24,10 @@ function initViewer() {
             editor.setValue(msg);
         }
     };
+}
+
+function sendContent() {
+    //do nothing
 }
 
 function leaveRoom() {

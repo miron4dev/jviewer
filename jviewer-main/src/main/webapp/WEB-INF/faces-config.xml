@@ -47,6 +47,20 @@
     </managed-bean>
 
     <managed-bean>
+        <managed-bean-name>viewerDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.ViewerDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>userProfile</property-name>
+            <value>#{userProfile}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginController</property-name>
+            <value>#{loginController}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>testConverter</managed-bean-name>
         <managed-bean-class>tk.jviewer.converter.TestConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>

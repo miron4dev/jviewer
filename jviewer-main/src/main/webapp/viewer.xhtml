@@ -11,8 +11,8 @@
     <title>#{msg['J68']} #{userProfile.currentRoom}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 
-    <h:outputScript library="js" name="chat_admin.js" rendered="#{userProfile.hasPermission('EDIT_VIEWER')}"/>
-    <h:outputScript library="js" name="chat_user.js" rendered="#{!userProfile.hasPermission('EDIT_VIEWER')}"/>
+    <h:outputScript library="js" name="chat_admin.js" rendered="#{viewerDialog.hasEditPermissions()}"/>
+    <h:outputScript library="js" name="chat_user.js" rendered="#{!viewerDialog.hasEditPermissions()}"/>
 </h:head>
 
 <h:body onload="initViewer()">
@@ -26,15 +26,15 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['J63']}: <h:outputText id="currentRoom" value="#{userProfile.currentRoom}"/>
+    #{msg['J63']}: <h:outputText id="currentRoom" value="#{viewerDialog.currentRoom}"/>
         <h:form id="displayForm">
-            <p:commandButton value="#{msg['J64']}" onclick="executeCode();"/>
-            <p:commandButton value="#{msg['J65']}" onclick="clearIO();"/>
+            <p:commandButton value="#{msg['J64']}" onclick="executeCode();" rendered="#{viewerDialog.hasEditPermissions()}"/>
+            <p:commandButton value="#{msg['J65']}" onclick="clearIO();" rendered="#{viewerDialog.hasEditPermissions()}"/>
             <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true"/>
-            <p:commandButton value="#{msg['J67']}" action="#{loginController.logout}" onclick="leaveRoom();"/>
+            <p:commandButton value="#{msg['J67']}" action="#{viewerDialog.logout}" onclick="leaveRoom();"/>
             <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true"
-                theme="eclipse" escape="false" widgetVar="codeMirror">
-                <pe:javascript event="change" execute="sendCode()"/>
+                theme="eclipse" escape="false" widgetVar="viewerContent" readonly="#{!viewerDialog.hasEditPermissions()}">
+                <pe:javascript event="change" execute="sendContent()"/>
             </pe:codeMirror>
             <br/>
             <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
