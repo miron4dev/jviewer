@@ -6,7 +6,11 @@ var socket;
 var editor;
 
 $(document).ready(function() {
-    socket = new WebSocket("ws://" + window.location.host + "/main/chat/" + $('#currentRoom').text())
+    if (window.location.protocol == 'http:') {
+        socket = new WebSocket("ws://" + window.location.host + "/main/chat/" + $('#currentRoom').text());
+    } else {
+        socket = new WebSocket("wss://" + window.location.host + "/main/chat/" + $('#currentRoom').text());
+    }
 });
 
 function initViewer() {
