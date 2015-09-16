@@ -22,7 +22,6 @@ public class UserProfile implements Serializable {
     private String invitationID;
     private String faculty;
     private boolean enabled;
-    private String currentRoom;
     private List<Permission> permissions = new ArrayList<>();
 
     @Override
@@ -31,16 +30,14 @@ public class UserProfile implements Serializable {
             UserProfile user = (UserProfile)obj;
             return id == user.id && enabled == user.isEnabled() && StringUtils.equals(name, user.getName()) &&
                     StringUtils.equals(password, user.getPassword()) && StringUtils.equals(role, user.getRole()) &&
-                    StringUtils.equals(invitationID, user.getInvitationID()) && StringUtils.equals(faculty, user.getFaculty()) &&
-                    StringUtils.equals(currentRoom, user.getCurrentRoom());
+                    StringUtils.equals(invitationID, user.getInvitationID()) && StringUtils.equals(faculty, user.getFaculty());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(password).append(role).append(invitationID).append(faculty)
-                .append(currentRoom).build();
+        return new HashCodeBuilder().append(id).append(name).append(password).append(role).append(invitationID).append(faculty).build();
     }
 
     public int getId() {
@@ -97,14 +94,6 @@ public class UserProfile implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(String currentRoom) {
-        this.currentRoom = currentRoom;
     }
 
     public boolean hasPermission(Permission permission) {

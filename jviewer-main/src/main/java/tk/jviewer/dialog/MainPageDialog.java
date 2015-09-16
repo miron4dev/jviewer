@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.impl.ManagementController;
+import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
 
@@ -30,6 +31,7 @@ public class MainPageDialog implements Serializable {
 
     private UserProfile userProfile;
     private ManagementController controller;
+    private ViewerManagedBean viewerManagedBean;
 
     public void createRoom() {
         try {
@@ -52,7 +54,7 @@ public class MainPageDialog implements Serializable {
     }
 
     public void chooseRoom(Room room) {
-        userProfile.setCurrentRoom(room.getName());
+        viewerManagedBean.setCurrentRoom(room);
     }
 
     public List<Room> getAvailableRooms() {
@@ -120,5 +122,9 @@ public class MainPageDialog implements Serializable {
 
     public void setController(ManagementController controller) {
         this.controller = controller;
+    }
+
+    public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
+        this.viewerManagedBean = viewerManagedBean;
     }
 }

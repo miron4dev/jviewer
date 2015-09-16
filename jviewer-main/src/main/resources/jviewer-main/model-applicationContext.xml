@@ -19,4 +19,6 @@
 
     <bean id="takeTestManagedBean" class="tk.jviewer.model.TakeTestManagedBean" scope="session"/>
 
+    <bean id="viewerManagedBean" class="tk.jviewer.model.ViewerManagedBean" scope="session"/>
+
 </beans>

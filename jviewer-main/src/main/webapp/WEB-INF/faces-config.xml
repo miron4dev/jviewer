@@ -44,6 +44,10 @@
             <property-name>controller</property-name>
             <value>#{managementController}</value>
         </managed-property>
+        <managed-property>
+            <property-name>viewerManagedBean</property-name>
+            <value>#{viewerManagedBean}</value>
+        </managed-property>
     </managed-bean>
 
     <managed-bean>
@@ -57,6 +61,14 @@
         <managed-property>
             <property-name>loginController</property-name>
             <value>#{loginController}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>jcWsClient</property-name>
+            <value>#{jcWsClient}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>viewerManagedBean</property-name>
+            <value>#{viewerManagedBean}</value>
         </managed-property>
     </managed-bean>
 

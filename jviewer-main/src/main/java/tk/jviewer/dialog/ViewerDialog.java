@@ -1,8 +1,11 @@
 package tk.jviewer.dialog;
 
 import tk.jviewer.controller.LoginController;
+import tk.jviewer.model.Room;
+import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
+import tk.jviewer.wsc.jc.JcWsClient;
 
 import java.io.Serializable;
 
@@ -13,15 +16,24 @@ public class ViewerDialog implements Serializable {
 
     private static final long serialVersionUID = 5961684911167350079L;
 
+    private String content;
+    private String result;
+
     private UserProfile userProfile;
     private LoginController loginController;
+    private JcWsClient jcWsClient;
+    private ViewerManagedBean viewerManagedBean;
 
     /**
      * Returns the current room.
      * @return see description.
      */
     public String getCurrentRoom() {
-        return userProfile.getCurrentRoom();
+        return viewerManagedBean.getCurrentRoom().getName();
+    }
+
+    public boolean isJavaRoom() {
+        return viewerManagedBean.getCurrentRoom().getType() == Room.Type.JAVA;
     }
 
     /**
@@ -40,8 +52,19 @@ public class ViewerDialog implements Serializable {
         return loginController.logout();
     }
 
-    public void sendContent(String content) {
-        //TODO
+    /**
+     * Sends entered content to JC Web Service and saves a result.
+     */
+    public void sendContent() {
+        result = jcWsClient.compileAndExecute(content);
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getResult() {
+        return result;
     }
 
     //
@@ -54,5 +77,13 @@ public class ViewerDialog implements Serializable {
 
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
+    }
+
+    public void setJcWsClient(JcWsClient jcWsClient) {
+        this.jcWsClient = jcWsClient;
+    }
+
+    public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
+        this.viewerManagedBean = viewerManagedBean;
     }
 }

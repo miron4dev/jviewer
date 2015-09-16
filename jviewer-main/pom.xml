@@ -19,6 +19,11 @@
             <artifactId>jviewer-refresh-lib</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-jc-wsc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- UI -->
         <dependency>

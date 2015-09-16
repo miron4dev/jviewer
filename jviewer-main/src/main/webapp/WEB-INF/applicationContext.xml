@@ -10,6 +10,7 @@
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
     <import resource="classpath:META-INF/jviewer-refresh-lib/applicationContext.xml"/>
+    <import resource="classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml"/>
 
     <import resource="classpath:jviewer-main/controller-applicationContext.xml"/>
     <import resource="classpath:jviewer-main/dao-applicationContext.xml"/>
