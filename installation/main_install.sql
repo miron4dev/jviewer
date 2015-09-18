@@ -14,15 +14,17 @@ INSERT INTO rooms ('id', 'name', 'password') VALUES (1, 'Main', NULL);
 
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
-  name TEXT NOT NULL UNIQUE,
+  username TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL,
-  role TEXT NOT NULL DEFAULT 'user',
+  role TEXT NOT NULL DEFAULT 'ROLE_USER',
   faculty TEXT NOT NULL,
-  enabled BOOLEAN NOT NULL DEFAULT 1
+  enabled BOOLEAN NOT NULL DEFAULT 1,
+  first_name TEXT NOT NULL,
+  last_name	TEXT NOT NULL
 );
 
-INSERT INTO users ('id', 'name', 'password', 'role', 'faculty', 'enabled') VALUES
-  (2, 'Admin Admin', 'admin1234+', 'ROLE_ADMIN', 'Faculty of Information Technology', '1');
+INSERT INTO users ('id', 'username', 'password', 'role', 'faculty', 'enabled', 'first_name', 'last_name') VALUES
+  (2, 'admin', 'admin1234+', 'ROLE_ADMIN', 'Faculty of Information Technology', '1', 'Admin', 'Admin');
 
 
 CREATE TABLE IF NOT EXISTS localization (
