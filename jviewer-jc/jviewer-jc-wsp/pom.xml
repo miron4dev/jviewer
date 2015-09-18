@@ -13,6 +13,13 @@
     <artifactId>jviewer-jc-wsp</artifactId>
 
     <dependencies>
+        <!-- JViewer -->
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-jc-wsdl2java</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -61,38 +68,6 @@
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-java2ws-plugin</artifactId>
-                <version>${cxf.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.cxf</groupId>
-                        <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                        <version>${cxf.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.cxf</groupId>
-                        <artifactId>cxf-rt-frontend-simple</artifactId>
-                        <version>${cxf.version}</version>
-                    </dependency>
-                </dependencies>
-
-                <executions>
-                    <execution>
-                        <id>process-classes</id>
-                        <phase>process-classes</phase>
-                        <configuration>
-                            <className>tk.jviewer.wsp.jc.service.JcService</className>
-                            <genWsdl>true</genWsdl>
-                            <verbose>true</verbose>
-                        </configuration>
-                        <goals>
-                            <goal>java2ws</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

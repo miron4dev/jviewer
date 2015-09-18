@@ -5,6 +5,7 @@ import tk.jviewer.model.Room;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
+import tk.jviewer.services.jc_v1_00.JcResult;
 import tk.jviewer.wsc.jc.JcWsClient;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class ViewerDialog implements Serializable {
 
     private String content;
     private String result;
+    private boolean errorOccurred;
 
     private UserProfile userProfile;
     private LoginController loginController;
@@ -56,7 +58,17 @@ public class ViewerDialog implements Serializable {
      * Sends entered content to JC Web Service and saves a result.
      */
     public void sendContent() {
-        result = jcWsClient.compileAndExecute(content);
+        JcResult jcResult = jcWsClient.compileAndExecute(content);
+        result = jcResult.getOutput();
+        errorOccurred = jcResult.isErrorOccurred();
+    }
+
+    /**
+     * Clears the current state of dialog.
+     */
+    public void clear() {
+        result = null;
+        errorOccurred = false;
     }
 
     public void setContent(String content) {
@@ -65,6 +77,10 @@ public class ViewerDialog implements Serializable {
 
     public String getResult() {
         return result;
+    }
+
+    public boolean isErrorOccurred() {
+        return errorOccurred;
     }
 
     //

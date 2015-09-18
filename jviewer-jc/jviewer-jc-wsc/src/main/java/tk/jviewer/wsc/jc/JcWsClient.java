@@ -1,5 +1,7 @@
 package tk.jviewer.wsc.jc;
 
+import tk.jviewer.services.jc_v1_00.JcResult;
+
 /**
  * JViewer Java Compiler Web Service Client.
  */
@@ -10,5 +12,5 @@ public interface JcWsClient {
      * @param sourceCode a some java code.
      * @return see description.
      */
-    String compileAndExecute(String sourceCode);
+    JcResult compileAndExecute(String sourceCode);
 }

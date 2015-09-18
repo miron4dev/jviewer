@@ -1,10 +1,11 @@
 package tk.jviewer.wsp.jc.service;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import tk.jviewer.wsp.jc.service.model.JcFault;
+import tk.jviewer.services.jc_v1_00.JcFault_Exception;
+import tk.jviewer.services.jc_v1_00.JcResult;
+import tk.jviewer.services.jc_v1_00.JcServicePortType;
 import tk.jviewer.wsp.jc.service.reader.JcStreamReader;
 
-import javax.jws.WebService;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -16,10 +17,9 @@ import static java.io.File.separator;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 
 /**
- * Implementation of {@link JcService}.
+ * Implementation of {@link JcServicePortType}.
  */
-@WebService(endpointInterface = "tk.jviewer.wsp.jc.service.JcService")
-public class JcServiceImpl implements JcService {
+public class JcServiceImpl implements JcServicePortType {
 
     private static final List<String> UNALLOWED_SOURCE_SNIPPETS = Arrays.asList("import javax.swing", "import javafx");
     private static final Pattern LOOKUP_CLASS_PATTERN = Pattern.compile("public class ([\\w]++) ");
@@ -39,31 +39,35 @@ public class JcServiceImpl implements JcService {
     }
 
     @Override
-    public String compileAndExecute(String sourceCode) throws JcFault {
+    public JcResult compileAndExecute(String sourceCode) throws JcFault_Exception {
         File workingDirectory = null;
         try {
             validateSources(sourceCode);
             workingDirectory = new File(TEMP_DIR + separator + random(15, ALPHABET));
             if (!workingDirectory.mkdir()) {
-                throw new RuntimeException("Could not create the unique directory" + workingDirectory.getName());
+                throw new RuntimeException("Could not create the unique directory " + workingDirectory.getName());
             }
             String className = lookupClassName(sourceCode);
             File sourceFile = writeToFile(workingDirectory, className, sourceCode);
 
             Process compile = Runtime.getRuntime().exec("javac " + sourceFile.getPath());
+            JcResult result = new JcResult();
             if (compile.waitFor() != RESULT_SUCCESS) {
-                return new JcStreamReader(compile.getErrorStream()).read();
+                result.setOutput(new JcStreamReader(compile.getErrorStream()).read());
+                result.setErrorOccurred(true);
+                return result;
             } else {
                 Process execute = Runtime.getRuntime().exec("java -classpath " + workingDirectory + " " + className);
                 if (execute.waitFor() != RESULT_SUCCESS) {
-                    return new JcStreamReader(execute.getErrorStream()).read();
+                    result.setOutput(new JcStreamReader(execute.getErrorStream()).read());
+                    result.setErrorOccurred(true);
                 }
-                return new JcStreamReader(execute.getInputStream()).read();
+                result.setOutput(new JcStreamReader(execute.getInputStream()).read());
+                result.setErrorOccurred(false);
+                return result;
             }
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            throw new JcFault(e);
         } catch (Exception e) {
-            throw new JcFault(ExceptionUtils.getStackTrace(e));
+            throw new JcFault_Exception(ExceptionUtils.getStackTrace(e));
         } finally {
             deleteDirectory(workingDirectory);
         }

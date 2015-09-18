@@ -34,10 +34,13 @@
             <pe:remoteCommand name="executeJavaCode" actionListener="#{viewerDialog.sendContent}" process="@this" rendered="#{editPermission}">
                 <pe:assignableParam name="content" assignTo="#{viewerDialog.content}"/>
             </pe:remoteCommand>
+            <p:remoteCommand name="clearJavaResult" actionListener="#{viewerDialog.clear}" update="javaResult" process="@this"
+                             rendered="#{isJavaRoom}"/>
+
             <p:commandButton value="#{msg['J64']}"
                 onclick="if (#{isJavaRoom}) { executeJavaCode(editor.getValue()); } else { executeCode(); }"
                 update="#{isJavaRoom ? 'javaResult' : ''}" rendered="#{editPermission}"/>
-            <p:commandButton value="#{msg['J65']}" onclick="clearIO();" rendered="#{editPermission}"/>
+            <p:commandButton value="#{msg['J65']}" onclick="clearIO(); if(#{isJavaRoom}) { clearJavaResult() }" rendered="#{editPermission}"/>
             <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true"/>
             <p:commandButton value="#{msg['J67']}" action="#{viewerDialog.logout}" onclick="leaveRoom();"/>
             <pe:codeMirror mode="#{isJavaRoom ? 'text/x-java' : 'htmlmixed'}" lineNumbers="true" lineWrapping="true"
@@ -47,7 +50,8 @@
             <br/>
             <c:choose>
                 <c:when test="#{isJavaRoom}">
-                    <pre><h:outputText id="javaResult" value="#{viewerDialog.result}" escape="false"/></pre>
+                    <pre><h:outputText id="javaResult" value="#{viewerDialog.result}" escape="false"
+                                       style="#{viewerDialog.errorOccurred ? 'color:red' : ''}"/></pre>
                 </c:when>
                 <c:otherwise>
                     <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>

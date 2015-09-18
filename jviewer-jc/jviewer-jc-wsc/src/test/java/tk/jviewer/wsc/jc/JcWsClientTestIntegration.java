@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import tk.jviewer.services.jc_v1_00.JcResult;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @ContextConfiguration(locations = "classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml")
 public class JcWsClientTestIntegration extends AbstractJUnit4SpringContextTests {
@@ -23,7 +23,9 @@ public class JcWsClientTestIntegration extends AbstractJUnit4SpringContextTests 
                 "        System.out.println(\"TEST FOO\");\n" +
                 "    }");
         sourceCode.append("}");
-        assertEquals("TEST FOO", wsClient.compileAndExecute(sourceCode.toString()));
+        JcResult result = wsClient.compileAndExecute(sourceCode.toString());
+        assertFalse(result.isErrorOccurred());
+        assertEquals("TEST FOO", result.getOutput());
     }
 
     @Test
@@ -34,6 +36,8 @@ public class JcWsClientTestIntegration extends AbstractJUnit4SpringContextTests 
                 "        System.out.println(\"TEST FOO\")\n" +
                 "    }");
         sourceCode.append("}");
-        assertThat(wsClient.compileAndExecute(sourceCode.toString()), CoreMatchers.containsString("error: ';' expected"));
+        JcResult result = wsClient.compileAndExecute(sourceCode.toString());
+        assertTrue(result.isErrorOccurred());
+        assertThat(result.getOutput(), CoreMatchers.containsString("error: ';' expected"));
     }
 }
