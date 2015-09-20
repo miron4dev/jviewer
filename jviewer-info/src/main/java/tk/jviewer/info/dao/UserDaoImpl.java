@@ -11,8 +11,8 @@ import tk.jviewer.info.model.UserProfile;
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
     @Override
-    public UserProfile getUserByName(String name) throws EmptyResultDataAccessException {
-        return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{name},
+    public UserProfile getUserByName(String username) throws EmptyResultDataAccessException {
+        return getJdbcTemplate().queryForObject("select * from users where username = ?", new Object[]{username},
                 new BeanPropertyRowMapper<>(UserProfile.class));
     }
 }

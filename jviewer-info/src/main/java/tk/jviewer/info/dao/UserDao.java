@@ -10,9 +10,9 @@ public interface UserDao {
 
     /**
      * Returns the user model by name.
-     * @param name name of the users.
+     * @param username name of the users.
      * @return see description.
      * @throws EmptyResultDataAccessException if user with this name does not exists.
      */
-    UserProfile getUserByName(String name) throws EmptyResultDataAccessException;
+    UserProfile getUserByName(String username) throws EmptyResultDataAccessException;
 }

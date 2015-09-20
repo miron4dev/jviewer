@@ -12,8 +12,8 @@ import tk.jviewer.profile.UserProfile;
 public class LoginDaoImpl extends JdbcDaoSupport implements LoginDao {
 
     @Override
-    public UserProfile getData(String name) {
-        return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{name},
+    public UserProfile getData(String username) {
+        return getJdbcTemplate().queryForObject("select * from users where username = ?", new Object[]{username},
                 new BeanPropertyRowMapper<>(UserProfile.class));
     }
 }

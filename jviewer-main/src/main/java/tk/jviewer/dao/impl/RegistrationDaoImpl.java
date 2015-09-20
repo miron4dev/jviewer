@@ -13,9 +13,9 @@ public class RegistrationDaoImpl extends JdbcDaoSupport implements RegistrationD
      * @see tk.jviewer.dao.RegistrationDao#regProfile(String, String, String, String)
      */
     @Override
-    public void regProfile(String name, String password, String role, String faculty) {
-        getJdbcTemplate().update("insert into users (name, password, role, faculty) values (?, ?, ?, ?)", name, password,
-                role, faculty);
+    public void regProfile(String username, String password, String role, String faculty) {
+        getJdbcTemplate().update("insert into users (username, password, role, faculty, first_name, last_name) values (?, ?, ?, ?, ?, ?)", username, password,
+                role, faculty, "TODO", "TODO"); // TODO for EM
     }
 
     /**
