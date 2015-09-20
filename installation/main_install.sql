@@ -7,10 +7,11 @@ INSERT INTO properties ('invitationID') VALUES ('1030011');
 CREATE TABLE IF NOT EXISTS 'rooms' (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   name TEXT NOT NULL UNIQUE,
-  password TEXT DEFAULT NULL
+  password TEXT DEFAULT NULL,
+  type TEXT NOT NULL
 );
 
-INSERT INTO rooms ('id', 'name', 'password') VALUES (1, 'Main', NULL);
+INSERT INTO rooms ('id', 'name', 'password', 'type') VALUES (1, 'Main', NULL, 'HTML');
 
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
