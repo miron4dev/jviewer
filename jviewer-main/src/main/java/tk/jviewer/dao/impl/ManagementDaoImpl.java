@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Management Data Access Object implementation.
+ *
  * @author Evgeny Mironenko
  */
 public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
@@ -19,9 +20,9 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
     public List<Room> getRooms() throws DataAccessException {
         List<Map<String, Object>> rows = getJdbcTemplate().queryForList("select * from rooms");
         List<Room> rooms = new ArrayList<>();
-        for (Map<String, Object> row: rows) {
-            Room room = new Room((String)row.get("name"), (String)row.get("password"), Room.Type.valueOf((String)row.get("type")));
-            room.setId((Integer)row.get("id"));
+        for (Map<String, Object> row : rows) {
+            final Room room = new Room(get(row, "name"), get(row, "password"), Room.Type.valueOf(get(row, "type")));
+            room.setId((Integer) row.get("id"));
             rooms.add(room);
         }
         return rooms;
@@ -36,4 +37,13 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
     public void deleteRoom(String name) throws DataAccessException {
         getJdbcTemplate().update("delete from rooms where name = ?", name);
     }
+
+    //
+    // Helper Methods
+    //
+
+    private static String get(final Map<String, Object> row, final String column) {
+        return (String) row.get(column);
+    }
+
 }

@@ -54,17 +54,16 @@ public class TakeTestDialog implements Serializable {
      * @return see description.
      */
     private Test fillDummyTest() {
-        Question question1 = new Question();
+        Question question1 = new Question(RADIO_BUTTON);
         question1.setId(1);
         question1.setTopic("To be or not to be?");
         question1.setText("That is the question");
         Answer answer1 = new Answer("0", "To be", Boolean.FALSE.toString(), RADIO_BUTTON);
         Answer answer2 = new Answer("1", "Not to be", "correct", RADIO_BUTTON);
-        question1.setTypeOfAnswers(RADIO_BUTTON);
         question1.setAnswers(asList(answer1, answer2));
         question1.setCorrectAnswers(singletonList("0"));
 
-        Question question2 = new Question();
+        Question question2 = new Question(CHECK_BOX);
         question2.setId(2);
         question2.setTopic("Random test");
         question2.setText("Who lives in a pineapple under the sea?");
@@ -72,15 +71,13 @@ public class TakeTestDialog implements Serializable {
         Answer answer22 = new Answer("1", "Sponge Bob Square Pants", Boolean.TRUE.toString(), CHECK_BOX);
         Answer answer23 = new Answer("2", "Earthworm Jim", "correct", CHECK_BOX);
         Answer answer24 = new Answer("3", "Princess Nesmeyana", "correct", CHECK_BOX);
-        question2.setTypeOfAnswers(CHECK_BOX);
         question2.setAnswers(asList(answer21, answer22, answer23, answer24));
         question2.setCorrectAnswers(asList("1", "2"));
 
-        Question question3 = new Question();
+        Question question3 = new Question(TEXT_FIELD);
         question3.setId(3);
         question3.setTopic("Arithmetical question");
         question3.setText("2 + 2 = ?");
-        question3.setTypeOfAnswers(TEXT_FIELD);
         question3.setCorrectTextualAnswer("4");
 
         List<Question> questions = new ArrayList<>();
@@ -88,7 +85,7 @@ public class TakeTestDialog implements Serializable {
         questions.add(question2);
         questions.add(question3);
 
-        return new Test("Test", questions);
+        return new Test("Test", questions, 2);
     }
 
     public List<Test> getAvailableTests() {

@@ -37,6 +37,10 @@ public class Question implements Serializable {
         this.id = id;
     }
 
+    public Question(final AnswerType typeOfAnswers) {
+        this.typeOfAnswers = typeOfAnswers;
+    }
+
     public AnswerType getTypeOfAnswers() {
         return typeOfAnswers;
     }

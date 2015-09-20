@@ -3,6 +3,8 @@ package tk.jviewer.model;
 import java.io.Serializable;
 import java.util.List;
 
+import static java.util.Collections.unmodifiableList;
+
 /**
  * Test representation.
  *
@@ -14,12 +16,14 @@ public class Test implements Serializable {
 
     private final String name;
     private final List<Question> questions;
+    private final int questionsToAnswerToPassTheTest;
 
     private int currentQuestionIndex;
 
-    public Test(String name, List<Question> questions) {
+    public Test(final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
         this.name = name;
-        this.questions = questions;
+        this.questions = unmodifiableList(questions);
+        this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
     }
 
     public String getName() {
@@ -67,6 +71,10 @@ public class Test implements Serializable {
 
     public Integer getProgress() {
         return (int) (getPassedQuestionsPortion() * 100);
+    }
+
+    public boolean isPassed() {
+        return getCorrectlyAnsweredQuestionsNumber() >= questionsToAnswerToPassTheTest;
     }
 
     //

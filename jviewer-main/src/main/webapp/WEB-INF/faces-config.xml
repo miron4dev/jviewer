@@ -19,6 +19,12 @@
     </application>
 
     <managed-bean>
+        <managed-bean-name>createTestDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.CreateTestDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>takeTestDialog</managed-bean-name>
         <managed-bean-class>tk.jviewer.dialog.TakeTestDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
