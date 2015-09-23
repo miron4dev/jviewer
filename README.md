@@ -1,7 +1,7 @@
 JViewer
 =======
 
-Webinar platform for conferences about HTML, JavaScript, CSS and JAVA, which allows to:
+Webinar platform for conferences about HTML, JavaScript, CSS and Java, which allows to:
 - create separate rooms (Web and Java)
 - demonstrate entered code and result of this code in real time
 - get tested on specific questions of topic
