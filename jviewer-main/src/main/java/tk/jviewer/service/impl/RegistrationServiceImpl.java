@@ -4,49 +4,42 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.RegistrationDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.RegistrationService;
 
-import java.io.Serializable;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static tk.jviewer.messages.RegistrationMsg.*;
 
 /**
  * Registration service implementation.
  * @author Evgeny Mironenko
  */
-public class RegistrationServiceImpl implements RegistrationService, Serializable {
+public class RegistrationServiceImpl implements RegistrationService {
+
+    private static final String USER_PERMISSIONS = "ROLE_USER";
+    private static final String ADMIN_PERMISSIONS = "ROLE_ADMIN";
 
     private ValidationDao validationDao;
     private RegistrationDao registrationDao;
 
-    /**
-     * @see tk.jviewer.service.RegistrationService#regProfile(RequestModel)
-     */
     @Override
-    public RegistrationMsg regProfile(RequestModel requestModel) {
+    public RegistrationMsg createProfile(String name, String password, String invitationId, String department) {
         try{
-            validationDao.checkUser(requestModel.getName());
-            return RegistrationMsg.EXIST;
+            validationDao.checkUser(name);
+            return EXIST;
         } catch (EmptyResultDataAccessException e){
-            return checkUserData(requestModel);
-        }
-    }
-
-    /**
-     * Checks user data and creates new profile, or returns error message.
-     * @param requestModel request model of current user
-     * @return message about success of registration
-     */
-    private RegistrationMsg checkUserData(RequestModel requestModel) {
-        if(requestModel.getInvitationID().isEmpty() || registrationDao.getInvitationID().equals(requestModel.getInvitationID())){
-            if(requestModel.getInvitationID().isEmpty()){
-                requestModel.setRole("ROLE_USER");
-            } else{
-                requestModel.setRole("ROLE_ADMIN");
+            // Profile with such name does not exist in the database.
+            if(isEmpty(invitationId) || registrationDao.getInvitationID().equals(invitationId)) {
+                String role;
+                if(isEmpty(invitationId)){
+                    role = USER_PERMISSIONS;
+                } else{
+                    role = ADMIN_PERMISSIONS;
+                }
+                registrationDao.regProfile(name, password, role, department);
+                return SUCCESS;
             }
-            registrationDao.regProfile(requestModel.getName(), requestModel.getPassword(), requestModel.getRole(), requestModel.getFaculty());
-            return RegistrationMsg.SUCCESS;
+            return INVITATION_ID;
         }
-        return RegistrationMsg.INVITATION_ID;
     }
 
     //

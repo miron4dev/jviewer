@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.RegistrationDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.RegistrationServiceImpl;
 
 import static org.easymock.EasyMock.*;
@@ -40,70 +39,65 @@ public class RegistrationServiceTest {
 
     @Test
     public void testRegProfileUser_success() throws Exception {
-        RequestModel model = new RequestModel();
         String name = "TestUser";
+        String password = "TestPassword";
+        String invitationId = "";
+        String department = "TestDepartment";
         String role = "ROLE_USER";
-        model.setName(name);
-        model.setInvitationID("");
         validationDao.checkUser(name);
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);
-        registrationDao.regProfile(name, null, role, null);
+        registrationDao.regProfile(name, password, role, department);
         expectLastCall();
         replay(registrationDao);
-        assertEquals(RegistrationMsg.SUCCESS, registrationService.regProfile(model));
+        assertEquals(RegistrationMsg.SUCCESS, registrationService.createProfile(name, password, invitationId, department));
         verify(validationDao);
         verify(registrationDao);
     }
 
     @Test
     public void testRegProfileUser_fail() throws Exception {
-        RequestModel model = new RequestModel();
         String name = "TestUser";
-        model.setName(name);
-        model.setInvitationID("");
+        String password = "TestPassword";
+        String invitationId = "";
+        String department = "TestDepartment";
         validationDao.checkUser(name);
         replay(validationDao);
-        assertEquals(RegistrationMsg.EXIST, registrationService.regProfile(model));
+        assertEquals(RegistrationMsg.EXIST, registrationService.createProfile(name, password, invitationId, department));
         verify(validationDao);
     }
 
     @Test
     public void testRegProfileAdmin() throws Exception {
-        RequestModel model = new RequestModel();
         String name = "TestAdmin";
+        String password = "TestPassword";
+        String invitationId = "12345";
+        String department = "TestDepartment";
         String role = "ROLE_ADMIN";
-        model.setName(name);
-        model.setInvitationID("12345");
         validationDao.checkUser(name);
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);
-        expect(registrationDao.getInvitationID()).andReturn(model.getInvitationID());
-        registrationDao.regProfile(name, null, role, null);
+        expect(registrationDao.getInvitationID()).andReturn(invitationId);
+        registrationDao.regProfile(name, password, role, department);
         expectLastCall();
         replay(registrationDao);
-        assertEquals(RegistrationMsg.SUCCESS, registrationService.regProfile(model));
+        assertEquals(RegistrationMsg.SUCCESS, registrationService.createProfile(name, password, invitationId, department));
         verify(validationDao);
         verify(registrationDao);
     }
 
     @Test
     public void testRegProfileInvitationId() throws Exception {
-        RequestModel model = new RequestModel();
-        String id = "123";
-        String name = "TestUser";
-        String faculty = "IT";
-        model.setName(name);
-        model.setInvitationID(id);
-        model.setFaculty(faculty);
-        model.setTemp("temp");
-        assert("temp".equals(model.getTemp()));  //TODO UI test: test line for cheat of test coverage statistic
+        String name = "TestAdmin";
+        String password = "TestPassword";
+        String invitationId = "12345";
+        String department = "TestDepartment";
         validationDao.checkUser(name);
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);
         expect(registrationDao.getInvitationID()).andReturn("321");
         replay(registrationDao);
-        assertEquals(RegistrationMsg.INVITATION_ID, registrationService.regProfile(model));
+        assertEquals(RegistrationMsg.INVITATION_ID, registrationService.createProfile(name, password, invitationId, department));
         verify(validationDao);
         verify(registrationDao);
     }

@@ -22,7 +22,6 @@
 
     <bean id="securityService" class="tk.jviewer.service.impl.SecurityService">
         <property name="loginService" ref="loginService"/>
-        <property name="requestModel" ref="requestModel"/>
         <property name="userProfile" ref="userProfile"/>
     </bean>
 </beans>

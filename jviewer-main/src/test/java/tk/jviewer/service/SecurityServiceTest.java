@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import tk.jviewer.profile.UserProfile;
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.service.impl.SecurityService;
 
 import javax.faces.context.ExternalContext;
@@ -30,19 +29,16 @@ public class SecurityServiceTest {
     private Authentication authentication;
     private SecurityService securityService;
     private LoginService loginService;
-    private RequestModel requestModel;
     private UserProfile userProfile;
     private String role = "ROLE_USER";
 
     @Before
     public void init() throws Exception {
         securityService = new SecurityService();
-        requestModel = new RequestModel();
         userProfile = new UserProfile();
         userProfile.setRole(role);
         loginService = createStrictMock(LoginService.class);
         authentication = createStrictMock(Authentication.class);
-        securityService.setRequestModel(requestModel);
         securityService.setUserProfile(userProfile);
         securityService.setLoginService(loginService);
     }
@@ -50,7 +46,6 @@ public class SecurityServiceTest {
     @After
     public void destroy() throws Exception {
         securityService = null;
-        requestModel = null;
         userProfile = null;
         loginService = null;
     }
@@ -62,7 +57,7 @@ public class SecurityServiceTest {
         expect(authentication.getName()).andReturn(name);
         expect(authentication.getCredentials()).andReturn(password);
         replay(authentication);
-        expect(loginService.getData(requestModel)).andReturn(userProfile);
+        expect(loginService.getData(name, password)).andReturn(userProfile);
         replay(loginService);
         assertEquals(securityService.authenticate(authentication), getAuthentication(name, password));
         verify(authentication);
@@ -82,7 +77,7 @@ public class SecurityServiceTest {
         expect(authentication.getName()).andReturn(name);
         expect(authentication.getCredentials()).andReturn(password);
         replay(authentication);
-        expect(loginService.getData(requestModel)).andReturn(null);
+        expect(loginService.getData(name, password)).andReturn(null);
         replay(loginService);
         securityService.authenticate(authentication);
         verify(authentication);

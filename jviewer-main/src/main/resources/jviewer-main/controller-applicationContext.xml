@@ -3,16 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="registrationController" class="tk.jviewer.controller.impl.RegistrationControllerImpl">
-        <property name="requestModel" ref="requestModel"/>
-        <property name="localeModel" ref="localeModel"/>
-        <property name="registrationService" ref="registrationService"/>
-        <property name="resourceService" ref="resourceService"/>
-    </bean>
-
-    <bean id="loginController" class="tk.jviewer.controller.impl.LoginControllerImpl">
-        <property name="authenticationManager" ref="authenticationManager"/>
-        <property name="userProfile" ref="userProfile"/>
-    </bean>
+    <bean id="logoutController" class="tk.jviewer.controller.LogoutController"/>
 
 </beans>

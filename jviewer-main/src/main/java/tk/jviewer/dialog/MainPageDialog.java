@@ -3,7 +3,7 @@ package tk.jviewer.dialog;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Room;
-import tk.jviewer.controller.impl.ManagementController;
+import tk.jviewer.controller.ManagementController;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;

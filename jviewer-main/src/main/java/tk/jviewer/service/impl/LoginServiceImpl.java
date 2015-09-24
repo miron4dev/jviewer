@@ -3,7 +3,6 @@ package tk.jviewer.service.impl;
 import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.LoginService;
 
@@ -17,14 +16,14 @@ public class LoginServiceImpl implements LoginService {
     private LoginDao loginDao;
 
     /**
-     * @see tk.jviewer.service.LoginService#getData(RequestModel)
-     * If validation will be failed, return null.
+     * {@inheritDoc}
+     * If authentication was failed, returns null.
      */
     @Override
-    public UserProfile getData(RequestModel userModel) {
+    public UserProfile getData(String username, String password) {
         try{
-            if(validationDao.getUserPassword(userModel.getName()).equals(userModel.getPassword())){
-                return loginDao.getData(userModel.getName());
+            if(validationDao.getUserPassword(username).equals(password)){
+                return loginDao.getData(username);
             }
             return null;
         } catch(EmptyResultDataAccessException e){

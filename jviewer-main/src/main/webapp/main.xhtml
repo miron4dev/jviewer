@@ -28,7 +28,7 @@
             <p>#{msg['J48']}</p>
             <br/>
             <h:form id="roomList-form">
-                <p:remoteCommand name="redirect" action="#{loginController.pageRedirect('viewer')}"/>
+                <p:remoteCommand name="redirect" action="viewer?faces-redirect=true"/>
                 <p:growl id="notification" showDetail="true" />
 
                 <p:dataTable id="rooms-tbl" value="#{mainPageDialog.availableRooms}" var="room" widgetVar="rooms-tbl">
@@ -86,7 +86,7 @@
             </h:panelGroup>
             <h:form><p:commandButton value="Take test" action="testing?faces-redirect=true"/></h:form>
             <h:form><p:commandButton value="Create test" action="createtest?faces-redirect=true"/></h:form>
-            <h:form><p:commandButton action="#{loginController.logout}" value="#{msg['J52']}" /></h:form>
+            <h:form><p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>
     </div>
 </h:body>

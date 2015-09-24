@@ -30,25 +30,22 @@
                     <h:message class="alert" for="j_username"/>
                     <br/>
                     <p:watermark for="j_username" value="#{msg['J4']}"/>
-                    <p:inputText id="j_username" value="#{requestModel.name}" required="true"
-                                 requiredMessage="#{msg['J18']}"
-                                 validatorMessage="#{msg['J19']}">
-                        <f:validateRegex pattern="([A-Z]{1}[a-z]+ {1}[A-Z]{1}[a-z]+)"/>
-                    </p:inputText>
+                    <p:inputText id="j_username" value="#{loginDialog.username}" required="true"
+                                 requiredMessage="#{msg['J18']}" validatorMessage="#{msg['J19']}"/>
+                    <f:validateLength minimum="6"/>
                 </p>
 
                 <p>
                     <h:message class="alert" for="j_password"/>
                     <br/>
                     <p:watermark for="j_password" value="#{msg['J5']}"/>
-                    <p:password id="j_password" value="#{requestModel.password}" required="true"
-                                requiredMessage="#{msg['J18']}"
-                                validatorMessage="#{msg['J20']}">
+                    <p:password id="j_password" value="#{loginDialog.password}" required="true"
+                                requiredMessage="#{msg['J18']}" validatorMessage="#{msg['J20']}">
                         <f:validateLength minimum="6"/>
                     </p:password>
                 </p>
                 <br/>
-                <p:commandButton value="#{msg['J3']}" action="#{loginController.login}" update="@form"/>
+                <p:commandButton value="#{msg['J3']}" action="#{loginDialog.login}" update="@form"/>
             </h:form>
             <h:form>
                 <p:commandButton value="#{msg['J2']}" action="registration?faces-redirect=true"/>

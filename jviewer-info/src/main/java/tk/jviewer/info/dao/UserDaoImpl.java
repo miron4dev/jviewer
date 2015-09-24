@@ -12,7 +12,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
     @Override
     public UserProfile getUserByName(String username) throws EmptyResultDataAccessException {
-        return getJdbcTemplate().queryForObject("select * from users where username = ?", new Object[]{username},
+        return getJdbcTemplate().queryForObject("select * from users where name = ?", new Object[]{username},
                 new BeanPropertyRowMapper<>(UserProfile.class));
     }
 }

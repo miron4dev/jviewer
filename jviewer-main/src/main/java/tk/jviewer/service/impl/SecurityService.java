@@ -6,7 +6,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.LoginService;
 
@@ -24,14 +23,13 @@ import static tk.jviewer.profile.Permission.*;
 public class SecurityService implements AuthenticationProvider {
 
     private LoginService loginService;
-    private RequestModel requestModel;
     private UserProfile userProfile;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        UserProfile user = loginService.getData(requestModel);
+        UserProfile user = loginService.getData(username, password);
 
         if (user == null) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
@@ -64,10 +62,6 @@ public class SecurityService implements AuthenticationProvider {
 
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;
-    }
-
-    public void setRequestModel(RequestModel requestModel) {
-        this.requestModel = requestModel;
     }
 
     public void setUserProfile(UserProfile userProfile) {

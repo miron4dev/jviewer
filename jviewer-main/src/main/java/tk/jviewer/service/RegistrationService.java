@@ -1,7 +1,6 @@
 package tk.jviewer.service;
 
 import tk.jviewer.messages.RegistrationMsg;
-import tk.jviewer.model.RequestModel;
 
 /**
  * Registration service interface.
@@ -10,9 +9,12 @@ import tk.jviewer.model.RequestModel;
 public interface RegistrationService {
 
     /**
-     * Creates new profile from request model.
-     * @param userModel current request model
-     * @return message about result of registration
+     * Creates new profile in JViewer.
+     * @param name username.
+     * @param password password.
+     * @param invitationId invitation id. It's not mandatory.
+     * @param department department.
+     * @return state about registration action.
      */
-    RegistrationMsg regProfile(RequestModel userModel);
+    RegistrationMsg createProfile(String name, String password, String invitationId, String department);
 }

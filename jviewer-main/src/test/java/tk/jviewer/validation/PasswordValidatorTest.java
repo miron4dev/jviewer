@@ -15,22 +15,22 @@ import static org.easymock.EasyMock.*;
 /**
  * @author Evgeny Mironenko
  */
-public class PassEqualityValidationTest {
+public class PasswordValidatorTest {
 
-    private PassEqualityValidation passEqualityValidation;
+    private PasswordValidator passwordValidator;
     private UIComponent uiComponent;
     private UIInput passwordComponent;
 
     @Before
     public void init() {
-        passEqualityValidation = new PassEqualityValidation();
+        passwordValidator = new PasswordValidator();
         uiComponent = createMock(UIComponent.class);
         passwordComponent = createMock(UIInput.class);
     }
 
     @After
     public void destroy() {
-        passEqualityValidation = null;
+        passwordValidator = null;
         uiComponent = null;
         passwordComponent = null;
     }
@@ -47,7 +47,7 @@ public class PassEqualityValidationTest {
         replay(attributes);
         expect(passwordComponent.getValue()).andReturn(password);
         replay(passwordComponent);
-        passEqualityValidation.validate(null, uiComponent, retypePassword);
+        passwordValidator.validate(null, uiComponent, retypePassword);
     }
 
     @Test(expected = ValidatorException.class)
@@ -69,6 +69,6 @@ public class PassEqualityValidationTest {
         replay(attributes);
         expect(passwordComponent.getValue()).andReturn(password);
         replay(passwordComponent);
-        passEqualityValidation.validate(null, uiComponent, retypePassword);
+        passwordValidator.validate(null, uiComponent, retypePassword);
     }
 }

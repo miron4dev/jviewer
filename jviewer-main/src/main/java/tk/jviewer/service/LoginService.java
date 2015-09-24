@@ -1,6 +1,5 @@
 package tk.jviewer.service;
 
-import tk.jviewer.model.RequestModel;
 import tk.jviewer.profile.UserProfile;
 
 /**
@@ -10,9 +9,10 @@ import tk.jviewer.profile.UserProfile;
 public interface LoginService {
 
     /**
-     * Gets user data from request model.
-     * @param requestModel current request model
-     * @return user data object.
+     * Returns the user profile by specified username and password.
+     * @param username name of user.
+     * @param password password of user.
+     * @return see description.
      */
-    UserProfile getData(RequestModel requestModel);
+    UserProfile getData(String username, String password);
 }

@@ -1,6 +1,6 @@
 package tk.jviewer.dialog;
 
-import tk.jviewer.controller.LoginController;
+import tk.jviewer.controller.LogoutController;
 import tk.jviewer.model.Room;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
@@ -22,7 +22,7 @@ public class ViewerDialog implements Serializable {
     private boolean errorOccurred;
 
     private UserProfile userProfile;
-    private LoginController loginController;
+    private LogoutController logoutController;
     private JcWsClient jcWsClient;
     private ViewerManagedBean viewerManagedBean;
 
@@ -51,7 +51,7 @@ public class ViewerDialog implements Serializable {
      * @return navigation rule.
      */
     public String logout() {
-        return loginController.logout();
+        return logoutController.logout();
     }
 
     /**
@@ -91,8 +91,8 @@ public class ViewerDialog implements Serializable {
         this.userProfile = userProfile;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
+    public void setLogoutController(LogoutController logoutController) {
+        this.logoutController = logoutController;
     }
 
     public void setJcWsClient(JcWsClient jcWsClient) {

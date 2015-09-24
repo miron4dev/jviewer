@@ -1,4 +1,4 @@
-package tk.jviewer.controller.impl;
+package tk.jviewer.controller;
 
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.dao.ManagementDao;

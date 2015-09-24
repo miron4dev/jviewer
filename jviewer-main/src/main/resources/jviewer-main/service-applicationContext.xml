@@ -13,7 +13,7 @@
         <property name="validationDao" ref="validationDao"/>
     </bean>
 
-    <bean id="managementController" class="tk.jviewer.controller.impl.ManagementController">
+    <bean id="managementController" class="tk.jviewer.controller.ManagementController">
         <property name="managementDao" ref="managementDao"/>
     </bean>
 

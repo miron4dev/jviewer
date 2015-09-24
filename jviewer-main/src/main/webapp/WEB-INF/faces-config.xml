@@ -65,8 +65,8 @@
             <value>#{userProfile}</value>
         </managed-property>
         <managed-property>
-            <property-name>loginController</property-name>
-            <value>#{loginController}</value>
+            <property-name>logoutController</property-name>
+            <value>#{logoutController}</value>
         </managed-property>
         <managed-property>
             <property-name>jcWsClient</property-name>
@@ -75,6 +75,34 @@
         <managed-property>
             <property-name>viewerManagedBean</property-name>
             <value>#{viewerManagedBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>registrationDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.RegistrationDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>localeModel</property-name>
+            <value>#{localeModel}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>registrationService</property-name>
+            <value>#{registrationService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>resourceService</property-name>
+            <value>#{resourceService}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>loginDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.LoginDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>authenticationManager</property-name>
+            <value>#{authenticationManager}</value>
         </managed-property>
     </managed-bean>
 
