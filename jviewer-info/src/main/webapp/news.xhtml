@@ -27,6 +27,10 @@
     <tk:template id="template" currentPage="NEWS">
         <h:form>
             <p:remoteCommand name="refreshCreateNews" update=":template:writeNews"/>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
         </h:form>
 
         <p:dataList id="news" value="#{newsController.news}" var="var" varStatus="status" paginator="true" rows="5" paginatorPosition="bottom">
@@ -40,19 +44,10 @@
                             <f:setPropertyActionListener target="#{news.text}" value="#{var.text}"/>
                             <f:setPropertyActionListener target="#{news.author}" value="#{var.author}"/>
                         </p:commandLink>
-                        <p:commandLink onclick="PF('deleteDialog_#{var.id}').show()" title="Удалить">
+                        <p:commandLink actionListener="#{newsController.deleteNews(var.id)}" title="Удалить">
                             <h:graphicImage library="images" name="button_delete.png" />
+                            <p:confirm header="Подтверждение" message="Вы действительно хотите удалить данную новость?"/>
                         </p:commandLink>
-
-                        <p:confirmDialog widgetVar="deleteDialog_#{var.id}" showEffect="fade" header="Подтверждение"
-                                         message="Вы действительно хотите удалить данную новость?">
-                            <h:form style="text-align: center">
-                                <p:commandButton value="Да" actionListener="#{newsController.deleteNews(var.id)}"
-                                                 styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="Нет" onclick="PF('deleteDialog_#{var.id}').hide();" type="button"
-                                                 styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                            </h:form>
-                        </p:confirmDialog>
                     </h:panelGroup>
                 </h2>
                 <small style="font-size: 75%"><h:outputText value="#{var.date} by #{var.author}"/></small>
@@ -62,6 +57,7 @@
                 </pe:ckEditor>
             </div>
         </p:dataList>
+
         <h:panelGroup layout="block" rendered="#{userProfile.authenticated}">
             <p:dialog widgetVar="editDialog" modal="true" resizable="false" showEffect="fade" header="Редактирование новости"
                       onShow="refreshCreateNews();" onHide="refreshCreateNews();">

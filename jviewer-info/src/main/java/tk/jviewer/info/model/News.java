@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class News implements Serializable {
 
+    private static final long serialVersionUID = 2491387418422869005L;
+
     private Integer id;
     private String topic;
     private String text;
