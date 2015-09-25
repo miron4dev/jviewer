@@ -2,16 +2,12 @@ CREATE TABLE IF NOT EXISTS 'properties' (
   'invitationID' INTEGER DEFAULT NULL
 );
 
-INSERT INTO properties ('invitationID') VALUES ('1030011');
-
 CREATE TABLE IF NOT EXISTS 'rooms' (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   name TEXT NOT NULL UNIQUE,
   password TEXT DEFAULT NULL,
   type TEXT NOT NULL
 );
-
-INSERT INTO rooms ('id', 'name', 'password', 'type') VALUES (1, 'Main', NULL, 'HTML');
 
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
@@ -24,11 +20,9 @@ CREATE TABLE IF NOT EXISTS users (
   last_name	TEXT NOT NULL
 );
 
-INSERT INTO users ('id', 'username', 'password', 'role', 'faculty', 'enabled', 'first_name', 'last_name') VALUES
-  (2, 'admin', 'admin1234+', 'ROLE_ADMIN', 'Faculty of Information Technology', '1', 'Admin', 'Admin');
+DROP TABLE localization;
 
-
-CREATE TABLE IF NOT EXISTS localization (
+CREATE TABLE localization (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   key TEXT NOT NULL,
   value TEXT NOT NULL,
@@ -36,6 +30,7 @@ CREATE TABLE IF NOT EXISTS localization (
   dialog_name TEXT NOT NULL
 );
 
+-- Russian --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Добро пожаловать на JViewer', 'ru', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Создать новый профиль', 'ru', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J3', 'Войти', 'ru', 'index');
@@ -83,6 +78,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Сп�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Выйти', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Комната:', 'ru', 'viewer');
 
+-- English --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Welcome to JViewer', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Create new account', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J3', 'Login', 'en', 'index');
