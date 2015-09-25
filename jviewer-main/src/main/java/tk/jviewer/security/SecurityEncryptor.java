@@ -20,15 +20,17 @@ public class SecurityEncryptor {
             (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
     };
 
+    private static final String ALGORITHM = "PBEWithMD5AndDES";
+
     public static String encrypt(String property) {
         try {
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
-            Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+            Cipher pbeCipher = Cipher.getInstance(ALGORITHM);
             pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
             return new BASE64Encoder().encode(pbeCipher.doFinal(property.getBytes("UTF-8")));
         } catch (Exception e) {
-            throw new RuntimeException("Exception occurred during password encoding. Please refer to support.", e);
+            throw new RuntimeException("Exception occurred during data encoding. Please refer to JViewer support.", e);
         }
     }
 }
