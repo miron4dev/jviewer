@@ -30,7 +30,7 @@ public class SecurityEncryptor {
             pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
             return new BASE64Encoder().encode(pbeCipher.doFinal(property.getBytes("UTF-8")));
         } catch (Exception e) {
-            throw new RuntimeException("Exception occurred during data encoding. Please refer to JViewer support.", e);
+            throw new RuntimeException("Exception occurred during data encrypting. Please refer to JViewer support.", e);
         }
     }
 }
