@@ -4,6 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.RegistrationDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.messages.RegistrationMsg;
+import tk.jviewer.security.SecurityEncryptor;
 import tk.jviewer.service.RegistrationService;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -35,7 +36,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 } else{
                     role = ADMIN_PERMISSIONS;
                 }
-                registrationDao.regProfile(name, password, role, department);
+                registrationDao.regProfile(name, SecurityEncryptor.encrypt(password), role, department);
                 return SUCCESS;
             }
             return INVITATION_ID;

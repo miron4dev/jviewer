@@ -31,8 +31,9 @@
                     <br/>
                     <p:watermark for="j_username" value="#{msg['J4']}"/>
                     <p:inputText id="j_username" value="#{loginDialog.username}" required="true"
-                                 requiredMessage="#{msg['J18']}" validatorMessage="#{msg['J19']}"/>
-                    <f:validateLength minimum="6"/>
+                                 requiredMessage="#{msg['J18']}" validatorMessage="#{msg['J19']}">
+                        <f:validateLength minimum="5"/>
+                    </p:inputText>
                 </p>
 
                 <p>

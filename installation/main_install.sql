@@ -44,11 +44,11 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J10', 'Па�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Повторите пароль', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Пригласительный ID', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Факультет', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Минимальная длина имени составляет 6 символов', 'ru', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Минимальная длина имени составляет 5 символов', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J16', 'Создать новый профиль', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J17', 'Назад', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Поле не может быть пустым', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Минимальная длина имени составляет 6 символов', 'ru', 'index');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Минимальная длина имени составляет 5 символов', 'ru', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J20', 'Пароль должен быть не менее 6 символов.', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J21', 'Код с картинки неверен.', 'ru', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J22', 'Пользователь с таким именем уже существует.', 'ru', 'registration');
@@ -92,11 +92,11 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J10', 'Passw
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Confirm password', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Invitation ID', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Department', 'en', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Name must be less than 6 characters', 'ru', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Name must be less than 5 characters', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J16', 'Create account', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J17', 'Go back', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Field cannot be empty.', 'en', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Name must be less than 6 characters', 'ru', 'index');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Name must be less than 5 characters', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J20', 'Password must be less than 6 characters.', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J21', 'Captcha is wrong.', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J22', 'User with that name is already exist.', 'en', 'registration');

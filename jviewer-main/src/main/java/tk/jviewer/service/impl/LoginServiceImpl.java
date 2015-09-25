@@ -4,6 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.profile.UserProfile;
+import tk.jviewer.security.SecurityEncryptor;
 import tk.jviewer.service.LoginService;
 
 /**
@@ -22,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserProfile getData(String username, String password) {
         try{
-            if(validationDao.getUserPassword(username).equals(password)){
+            if(validationDao.getUserPassword(username).equals(SecurityEncryptor.encrypt(password))){
                 return loginDao.getData(username);
             }
             return null;
