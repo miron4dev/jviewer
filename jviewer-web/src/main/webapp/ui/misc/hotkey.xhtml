@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+        
+        <h3 style="margin-top:0">ImageSwitch Integration (Left-Right)</h3>
+        <p:imageSwitch effect="fade" widgetVar="switcher" slideshowAuto="false">
+            <p:graphicImage name="demo/images/nature/nature1.jpg" />
+            <p:graphicImage name="demo/images/nature/nature2.jpg" />
+            <p:graphicImage name="demo/images/nature/nature3.jpg" />
+            <p:graphicImage name="demo/images/nature/nature4.jpg" />
+        </p:imageSwitch>
+
+        <p:hotkey bind="left" handler="PF('switcher').previous();" />
+        <p:hotkey bind="right" handler="PF('switcher').next();" />
+
+        <h3>Ajax Hotkey (ctrl + shift + s)</h3>
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
+            
+            <p:hotkey bind="ctrl+shift+s" update="msgs" actionListener="#{hotkeyView.save}"/>
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="text" value="Text" />
+                <p:inputText id="text" value="#{hotkeyView.text}" />
+            </h:panelGrid>
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>

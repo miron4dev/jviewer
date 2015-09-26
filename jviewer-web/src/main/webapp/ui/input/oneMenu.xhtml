@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+	</ui:define>
+    
+
+    <ui:define name="content">
+        
+        <h:form>
+            <p:messages autoUpdate="true" />
+
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="console" value="Basic:" />
+                <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                    <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                </p:selectOneMenu>
+
+                <p:outputLabel for="car" value="Grouping: " />
+                <p:selectOneMenu id="car" value="#{selectOneMenuView.car}">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{selectOneMenuView.cars}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel for="city" value="Editable: " />
+                <p:selectOneMenu id="city" value="#{selectOneMenuView.city}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{selectOneMenuView.cities}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel for="advanced" value="Advanced:" />
+                <p:selectOneMenu id="advanced" value="#{selectOneMenuView.theme}" converter="theme" panelStyle="width:400px"
+                                 effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
+                    <f:selectItems value="#{selectOneMenuView.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+
+                    <p:column style="width:10%">
+                        <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <h:outputText value="#{t.displayName}" />
+                    </p:column>
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-check" />
+
+            <p:dialog header="Values" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
+                <p:panelGrid columns="2" id="display" columnClasses="label,value">
+                    <h:outputText value="Basic:" />
+                    <h:outputText value="#{selectOneMenuView.console}" />
+
+                    <h:outputText value="Grouping:" />
+                    <h:outputText value="#{selectOneMenuView.car}" />
+
+                    <h:outputText value="Editable" />
+                    <h:outputText value="#{selectOneMenuView.city}" />
+
+                    <h:outputText value="Advanced:" />
+                    <h:outputText value="#{selectOneMenuView.theme.displayName}" />
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+   
+</ui:composition>

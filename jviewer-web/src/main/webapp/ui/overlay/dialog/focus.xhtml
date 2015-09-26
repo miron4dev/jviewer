@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>         
+            <p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();" type="button" icon="ui-icon-extlink" />
+            
+            <p:dialog header="Dynamic Focus" widgetVar="dlg" focus="age">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="name" value="Name:" />
+                    <p:inputText id="name" label="name" />
+                    
+                    <h:outputLabel for="surname" value="Surname:" />
+                    <p:inputText id="surname" label="surname" />
+                    
+                    <h:outputLabel for="age" value="Age:" />
+                    <p:inputText id="age" label="age" />
+                </h:panelGrid>
+            </p:dialog>       
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>

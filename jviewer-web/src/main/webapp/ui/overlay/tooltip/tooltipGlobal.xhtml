@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <p:tooltip />
+        
+        <h:form>  
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Input: " />
+                <p:inputText pt:data-tooltip="Tooltip for an input" />
+
+                <h:outputText value="Link: " />
+                <h:outputLink value="#" pt:data-tooltip="Tooltip for a link">
+                    <h:outputText value="Fade Effect" />
+                </h:outputLink>
+
+                <h:outputText value="Button: " />
+                <p:commandButton value="Update" pt:data-tooltip="Update components" update="@parent" />
+            </h:panelGrid>      
+        </h:form>
+        
+    </ui:define>
+
+  
+</ui:composition>

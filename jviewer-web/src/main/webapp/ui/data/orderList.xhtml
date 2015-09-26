@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
+            
+            <h3 style="margin-top: 0">Basic OrderList</h3>
+            <p:orderList value="#{orderListView.cities}" var="city" controlsLocation="none" itemLabel="#{city}" itemValue="#{city}" />
+            <p:commandButton value="Submit" update="displayCities" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
+            
+            <h3>Pojo Support with Clip Effect, Captions, Custom Content, Reorder Controls and Events (since v5.1.5)</h3>
+            <p:orderList value="#{orderListView.themes}" var="theme" itemValue="#{theme}" converter="theme" controlsLocation="left">
+                <p:ajax event="select" listener="#{orderListView.onSelect}" update="msgs"/>
+                <p:ajax event="unselect" listener="#{orderListView.onUnselect}" update="msgs"/>
+                <p:ajax event="reorder" listener="#{orderListView.onReorder}" update="msgs"/>
+                
+                <f:facet name="caption">Available</f:facet>
+
+                <p:column style="width:25%">
+                    <h:outputText styleClass="ui-theme ui-theme-#{theme.name}" />
+                </p:column>
+
+                 <p:column style="width:75%;">
+                    <h:outputText value="#{theme.displayName}" />
+                </p:column>
+            </p:orderList>
+            <p:commandButton value="Submit" update="displayThemes" oncomplete="PF('themesDialog').show()" style="margin-top:5px" />
+
+            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog" header="Cities" width="200">
+                <p:dataList id="displayCities" value="#{orderListView.cities}" var="city">
+                    <h:outputText value="#{city}" />
+                </p:dataList>
+            </p:dialog>
+
+            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="themesDialog" header="Themes" width="200" id="dlgThemes">
+                <h:panelGrid id="displayThemes" columns="2">
+                    <ui:repeat value="#{orderListView.themes}" var="theme">
+                        <h:outputText value="#{theme.displayName}" style="margin-right:5px" />
+                        <br />
+                    </ui:repeat>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

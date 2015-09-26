@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:panel id="panel" header="Form" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="text1" value="Text 1:" />
+                    <p:inputText id="text1" value="#{resetInputView.text1}" required="true" label="Firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="text1" />
+
+                    <p:outputLabel for="text2" value="Text 2:" />
+                    <p:inputText id="text2" value="#{resetInputView.text2}" required="true" label="Surname"/>
+                    <p:message for="text2" />
+                </h:panelGrid>
+            </p:panel>
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Submit" update="panel" actionListener="#{resetInputView.save}" style="margin-right:20px;" />
+                </f:facet>
+                
+                <f:facet name="right">
+                    <p:commandButton value="Reset Fail" update="panel" process="@this" actionListener="#{resetInputView.resetFail}" style="margin-right:20px;" />
+
+                    <p:commandButton value="Reset Tag" update="panel" process="@this" style="margin-right:20px;" >
+                        <p:resetInput target="panel" />
+                    </p:commandButton>
+
+                    <p:commandButton value="Reset Code" update="panel" process="@this" actionListener="#{resetInputView.reset}"  style="margin-right:20px;" />
+
+                    <p:commandButton value="Reset Non-Ajax" actionListener="#{resetInputView.reset}" immediate="true" ajax="false" style="margin-right:20px;">
+                        <p:resetInput target="panel" />
+                    </p:commandButton>
+
+                    <h:commandButton value="Reset p:ajax" style="margin-right:20px;" >
+                        <p:ajax update="panel" resetValues="true" />
+                    </h:commandButton>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

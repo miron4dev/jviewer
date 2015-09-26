@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" />
+            
+            <p:dataTable id="cars1" var="car" value="#{dtResizableColumnsView.cars1}" resizableColumns="true" style="margin-bottom:20px">
+                <f:facet name="header">
+                    Basic Resize
+                </f:facet>
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:column headerText="Brand">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+                <p:column headerText="Color">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+            </p:dataTable>
+            
+            <p:dataTable id="cars2" var="car" value="#{dtResizableColumnsView.cars2}" resizableColumns="true" liveResize="true">
+                <p:ajax event="colResize" update=":form:msgs" listener="#{dtResizableColumnsView.onResize}" />
+                <f:facet name="header">
+                    Live Resize with Callback
+                </f:facet>
+                <p:column headerText="Id" id="id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year" id="year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:column headerText="Brand" id="brand">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+                <p:column headerText="Color" id="color">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+            </p:dataTable>
+            
+            <p:dataTable var="sale" value="#{dtGroupView.sales}" resizableColumns="true" resizeMode="expand">
+                <f:facet name="header">
+
+                </f:facet>
+
+                <p:columnGroup type="header">
+                    <p:row>
+                        <p:column rowspan="3" headerText="Manufacturer" />
+                        <p:column colspan="4" headerText="Sale Rate" />
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2" headerText="Sales" />
+                        <p:column colspan="2" headerText="Profit" />
+                    </p:row>
+                    <p:row>
+                        <p:column headerText="Last Year" />
+                        <p:column headerText="This Year" />
+                        <p:column headerText="Last Year" />
+                        <p:column headerText="This Year" />
+                    </p:row>
+                </p:columnGroup>
+
+                <p:column>
+                    <h:outputText value="#{sale.manufacturer}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.lastYearProfit}%" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.thisYearProfit}%" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.lastYearSale}">
+                        <f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.thisYearSale}">
+                        <f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>
+                </p:column>
+
+                <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column colspan="3" style="text-align:right" footerText="Totals:" />
+                        <p:column footerText="$#{dtGroupView.lastYearTotal}" />
+
+                        <p:column footerText="$#{dtGroupView.thisYearTotal}" />
+                    </p:row>
+                </p:columnGroup>
+            </p:dataTable>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

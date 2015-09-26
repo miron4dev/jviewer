@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:contextMenu for="cars">
+                <p:menuitem value="View" update="carDetail" icon="ui-icon-search fa fa-search" oncomplete="PF('carDialog').show()"/>
+                <p:menuitem value="Delete" update="cars" icon="ui-icon-close fa fa-close" actionListener="#{dtContextMenuView.deleteCar}"/>
+            </p:contextMenu>
+
+            <p:dataTable id="cars" var="car" value="#{dtContextMenuView.cars}" rowKey="#{car.id}"
+                         selection="#{dtContextMenuView.selectedCar}" selectionMode="single">
+                <f:facet name="header">
+                    RightClick to View Options
+                </f:facet>
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:column headerText="Brand">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+                <p:column headerText="Color">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+            </p:dataTable> 
+
+            <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="carDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty dtContextMenuView.selectedCar}" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage name="demo/images/car/#{dtContextMenuView.selectedCar.brand}-big.gif"/> 
+                        </f:facet>
+                        
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{dtContextMenuView.selectedCar.id}" />
+
+                        <h:outputText value="Year" />
+                        <h:outputText value="#{dtContextMenuView.selectedCar.year}" />
+
+                        <h:outputText value="Color:" />
+                        <h:outputText value="#{dtContextMenuView.selectedCar.color}" style="color:#{dtContextMenuView.selectedCar.color}"/>
+                    
+                        <h:outputText value="Price" />
+                        <h:outputText value="\$#{dtContextMenuView.selectedCar.price}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

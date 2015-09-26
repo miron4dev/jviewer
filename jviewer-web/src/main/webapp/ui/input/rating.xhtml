@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Basic:" />
+                <p:rating value="#{ratingView.rating1}" />
+
+                <h:outputText value="Callback:" />
+                <p:rating value="#{ratingView.rating2}" stars="10" cancel="false" onRate="alert('You rated ' + value)" />
+
+                <h:outputText value="Ajax Rate:" />
+                <p:rating value="#{ratingView.rating3}">
+                    <p:ajax event="rate" listener="#{ratingView.onrate}" update="messages" />
+                    <p:ajax event="cancel" listener="#{ratingView.oncancel}" update="messages" />
+                </p:rating>
+
+                <h:outputText value="Readonly:" />
+                <p:rating value="#{ratingView.rating4}" readonly="true" />
+
+                <h:outputText value="Disabled"/>
+                <p:rating value="#{ratingView.rating4}" disabled="true" />
+            </h:panelGrid>
+
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" style="margin:5px" />
+
+            <p:dialog header="Values" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                <h:panelGrid id="display" columns="2" cellpadding="5">
+                    <h:outputText value="Rating 1:" />
+                    <h:outputText value="#{ratingView.rating1}" />
+
+                    <h:outputText value="Rating 2:" />
+                    <h:outputText value="#{ratingView.rating2}" />
+
+                    <h:outputText value="Rating 3:" />
+                    <h:outputText value="#{ratingView.rating3}" />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+   
+</ui:composition>

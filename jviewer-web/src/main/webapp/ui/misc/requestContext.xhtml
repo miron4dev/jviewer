@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="head">
+        
+        <style type="text/css">
+            .ui-log {
+                left: 600px;
+                top: 100px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function handleComplete(xhr, status, args) {
+                if(args.validationFailed) {
+                    PrimeFaces.debug("Validation Failed");
+                } 
+                else {
+                    PrimeFaces.debug("Save:" + args.saved);
+                    PrimeFaces.debug("FirstName: " + args.user.firstname + ", Lastname: " + args.user.lastname);
+                }
+            }
+        </script>
+    </ui:define>
+
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:panel id="panel" header="New User" style="margin-bottom:10px;">
+                <p:messages />
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="firstname" value="Firstname:" />
+                    <p:inputText id="firstname" value="#{requestContextView.user.firstname}" required="true"/>
+
+                    <p:outputLabel for="surname" value="Lastname:" />
+                    <p:inputText id="surname" value="#{requestContextView.user.lastname}" required="true"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:commandButton value="Save" actionListener="#{requestContextView.save}" oncomplete="handleComplete(xhr, status, args)" />
+
+            <p:log />
+        </h:form>
+        
+    </ui:define>
+
+
+</ui:composition>

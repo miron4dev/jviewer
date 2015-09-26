@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="head">
+        <script type="text/javascript">
+            //<![CDATA[
+function exportChart() {
+    //export image
+    $('#output').empty().append(PF('chart').exportAsImage());
+
+    //show the dialog
+    PF('dlg').show();
+}
+            //]]>
+        </script>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:chart type="line" model="#{chartView.lineModel1}" style="width:500px;height:300px" widgetVar="chart"/>
+
+        <br />
+
+        <p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>
+
+        <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
+            <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

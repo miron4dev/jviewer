@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+        <p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star" style="margin-right:20px;">
+            <f:param name="productId" value="10" />
+        </p:button>
+        
+        <p:button outcome="productDetail" value="With Icon" icon="ui-icon-star" style="margin-right:20px;">
+            <f:param name="productId" value="20" />
+        </p:button>
+        
+        <p:button outcome="productDetail" icon="ui-icon-star" style="margin-right:20px;" title="Icon Only">
+            <f:param name="productId" value="30" />
+        </p:button>
+        
+        <p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star" disabled="true" style="margin-right:20px;">
+            <f:param name="productId" value="40" />
+        </p:button>
+    
+    </ui:define>
+
+</ui:composition>

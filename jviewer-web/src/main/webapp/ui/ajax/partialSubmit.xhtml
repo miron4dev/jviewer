@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-log {
+                left:auto;
+                right:20px;
+                top:300px;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:log />
+
+            <h:panelGrid columns="5" cellpadding="5">
+                <h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+                <p:inputText id="name" />
+                <p:commandButton value="False" partialSubmit="false" process="name" />
+                <p:commandButton value="True" partialSubmit="true" process="name" />
+            </h:panelGrid>
+
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputText />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <p:inputTextarea />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+            <h:selectOneMenu />
+            <br />
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

@@ -27,6 +27,7 @@
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
+        <module>jviewer-web</module>
     </modules>
 
     <dependencyManagement>
@@ -42,6 +43,12 @@
                 <artifactId>jsf-impl</artifactId>
                 <version>${jsf.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${el.api.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.primefaces</groupId>
@@ -63,7 +70,6 @@
                 <artifactId>resources-ckeditor</artifactId>
                 <version>${primefaces-extensions.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.primefaces.extensions</groupId>
                 <artifactId>resources-codemirror</artifactId>
@@ -205,12 +211,6 @@
                 <groupId>org.apache.shale</groupId>
                 <artifactId>shale-test</artifactId>
                 <version>${shale.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>${el.api.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

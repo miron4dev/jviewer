@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form>
+            <p:panel id="panel" header="New User">
+
+                <p:messages id="msgs" />
+
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="firstname" value="Firstname:" />
+                    <p:inputText id="firstname" value="#{userView.firstname}" required="true" label="Firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="firstname" display="icon" />
+
+                    <p:outputLabel for="lastname" value="Lastname:" />
+                    <p:inputText id="lastname" value="#{userView.lastname}" label="Lastname" required="true">
+                        <f:validateLength minimum="2" />
+                        <p:ajax update="msgLastname" event="keyup" />
+                    </p:inputText>
+                    <p:message for="lastname" id="msgLastname" display="icon" />
+
+                </h:panelGrid>
+
+                <p:commandButton value="Save" update="panel" actionListener="#{userView.save}" icon="ui-icon-check" />
+            </p:panel>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

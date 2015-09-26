@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>       
+            <p:growl id="growl" sticky="true" showDetail="true" />
+            
+            <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlg').show();">Show the Picture of the Day</h:outputLink>
+            
+            <p:dialog id="picture" widgetVar="dlg" header="Picture of the Day" resizable="false" showEffect="clip" hideEffect="clip">
+                <p:ajax event="close" update="growl" listener="#{dialogView.handleClose}" />
+                <p:ajax event="move" update="growl" listener="#{dialogView.handleMove}" />
+                
+                <p:graphicImage name="/demo/images/nature/nature4.jpg" />
+            </p:dialog>      
+        </h:form>
+ 
+    </ui:define>
+
+  
+</ui:composition>

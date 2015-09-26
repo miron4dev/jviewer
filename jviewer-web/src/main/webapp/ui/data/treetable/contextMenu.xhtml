@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-treetable table {
+                table-layout: fixed
+            }
+            
+            .value {
+                font-weight: bold
+            }
+        </style>
+    </ui:define>
+    
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:contextMenu for="docs">
+                <p:menuitem value="View" update="documentPanel" icon="ui-icon-search" oncomplete="PF('documentDialog').show()"/>
+                <p:menuitem value="Delete" actionListener="#{ttContextMenuView.deleteNode}" update="docs" icon="ui-icon-close"/>
+            </p:contextMenu>
+            
+            <p:treeTable id="docs" value="#{ttContextMenuView.root}" var="document" selectionMode="single" selection="#{ttContextMenuView.selectedNode}">
+                <f:facet name="header">
+                    Document Viewer
+                </f:facet>
+                <p:column headerText="Name">
+                    <h:outputText value="#{document.name}" />
+                </p:column>
+                <p:column headerText="Size">
+                    <h:outputText value="#{document.size}" />
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{document.type}" />
+                </p:column>
+            </p:treeTable>
+            
+            <p:dialog id="dialog" header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true" resizable="false">
+                <p:outputPanel id="documentPanel">
+                    <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty ttContextMenuView.selectedNode}">
+                        <h:outputLabel for="name" value="Name: " />
+                        <h:outputText id="name" value="#{ttContextMenuView.selectedNode.data.name}" style="font-weight:bold" />
+
+                        <h:outputLabel for="size" value="Size: " />
+                        <h:outputText id="size" value="#{ttContextMenuView.selectedNode.data.size}" style="font-weight:bold" />
+
+                        <h:outputLabel for="type" value="Type " />
+                        <h:outputText id="type" value="#{ttContextMenuView.selectedNode.data.type}" style="font-weight:bold" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

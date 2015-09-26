@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:multiSelectListbox value="#{multiSelectView.selection}" effect="slide" header="Categories" showHeaders="true">
+                <f:selectItems value="#{multiSelectView.categories}" />
+            </p:multiSelectListbox>
+
+            <p:commandButton value="Save" icon="ui-icon-check" update="out" style="display:block;margin:10px 0" />
+
+            <h:outputText id="out" value="Value: #{multiSelectView.selection}" style="display:block" />
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>

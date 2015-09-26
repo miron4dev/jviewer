@@ -1,0 +1,70 @@
+<ui:composition 
+
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    
+    <!-- TOPBAR START -->
+    <div id="layout-topbar">
+        <a id="menu-button" class="Animated1">
+            <span id="menuline1" class="Animated05"></span>
+            <span id="menuline2" class="Animated05"></span>
+            <span id="menuline3" class="Animated05"></span>
+        </a>
+        <a href="/adamantium/dashboard.xhtml"><h:graphicImage name="images/logo.svg" id="logo" library="adamantium-layout" /></a>
+        
+        <a id="topmenu-button" class="Animated1">
+            <i class="icon-list2"></i>
+        </a>
+        
+        <ul id="top-menu">
+            <li>
+                <a class="menulink Animated05"><i class="icon-search"></i> <span>Search</span></a>
+                <ul style="margin-left:-150px;">
+                    <li><span class="PadWithBorder10 DispBlock"><p:inputText placeholder="Search here" styleClass="Wid60"/> <p:button icon="fa fa-search" styleClass="Fright"/></span></li>
+                </ul>
+            </li>
+            <li>
+                <a class="menulink Animated05"><i class="icon-chat"></i> <span>Messages</span></a>
+                <ul style="margin-left:-130px;">
+                    <li><a href="#"><i class="icon-comment-alt2-stroke Fs18 Blue Fright"></i> <span class="FontAdamantiumBold">Clark Davenport</span><br/><span class="Fs12">Hi, How is going ?</span></a></li>
+                    <li><a href="#"><i class="icon-comment-alt2-stroke Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Jack Sparrow</span><br/><span class="Fs12">Test Results</span></a></li>
+                    <li><a href="#"><i class="icon-comment-alt2-stroke Fs18 Fright"></i> <span class="FontAdamantiumBold">Jack Sparrow</span><br/><span class="Fs12">Test Results</span></a></li>
+                    <li><a href="#"><i class="icon-comment-alt2-stroke Purple Fs18 Fright"></i> <span class="FontAdamantiumBold">George Flinn</span><br/><span class="Fs12">MapX Test Cases</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="menulink Animated05"><i class="icon-calendar"></i> <span>Calendar</span></a>
+                <ul style="margin-left:-135px;">
+                    <li><a href="#"><i class="icon-alarmclock Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Meeting With John</span><br/><span class="Fs12">13:30 - 18.08.2015</span></a></li>
+                    <li><a href="#"><i class="icon-alarmclock Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Dinner With Boss</span><br/><span class="Fs12">14:45 - 18.08.2015</span></a></li>
+                    <li><a href="#"><i class="icon-document-stroke Fs18 Fright"></i> <span class="FontAdamantiumBold">Send Reports</span><br/><span class="Fs12">15:30 - 18.08.2015</span></a></li>
+                    <li><a href="#"><i class="icon-folder-stroke Fs18 Blue Fright"></i> <span class="FontAdamantiumBold">Arrange Reports</span><br/><span class="Fs12">18:30 - 18.08.2015</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="menulink Animated05"><i class="icon-alarm animated swing infinite"></i> <span>Alerts</span></a>
+                <ul style="margin-left:-155px;">
+                    <li><a href="#"><i class="icon-cd Fs20 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Reports Exported</span><br/><span class="Fs12">Recorded To File System</span></a></li>
+                    <li><a href="#"><i class="icon-cd Fs20 Red Fright"></i> <span class="FontAdamantiumBold Red">Bug Alert</span><br/><span class="Fs12">SportX Tools</span></a></li>
+                    <li><a href="#"><i class="icon-cd Fs20 Red Fright"></i> <span class="FontAdamantiumBold Red">Bug Alert</span><br/><span class="Fs12">MapX Tools</span></a></li>
+                    <li><a href="#"><i class="icon-cd Fs20 Orange Fright"></i> <span class="FontAdamantiumBold Orange">Download Completed</span><br/><span class="Fs12">SportX Tools</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="menulink Animated05"><i class="icon-settings"></i> <span>Settings</span></a>
+                <ul style="margin-left:-145px;">
+                    <li><a href="#"><i class="icon-brightness Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Brightness</span></a></li>
+                    <li><a href="#"><i class="icon-users Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Accounts</span></a></li>
+                    <li><a href="#"><i class="icon-attachment Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Attachments</span></a></li>
+                    <li><a href="#"><i class="icon-lock-stroke Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Log Out System</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- TOPBAR END -->
+    
+</ui:composition>

@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+            
+            <p:tree id="docs" value="#{treeContextMenuView.root}" var="doc" selectionMode="single" selection="#{treeContextMenuView.selectedNode}" dynamic="true">                    
+                <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                    <h:outputText value="#{doc.name}"/>
+                </p:treeNode>
+                <p:treeNode type="document" icon="ui-icon-document">
+                    <h:outputText value="#{doc.name}" />
+                </p:treeNode>
+                <p:treeNode type="picture" icon="ui-icon-image">
+                    <h:outputText value="#{doc.name}" />
+                </p:treeNode>
+                <p:treeNode type="mp3" icon="ui-icon-video">
+                    <h:outputText value="#{doc.name}" />
+                </p:treeNode>
+            </p:tree>
+            
+            <p:contextMenu for="docs">
+                <p:menuitem value="View" update="messages" actionListener="#{treeContextMenuView.displaySelectedSingle}" icon="ui-icon-search" />
+                <p:menuitem value="Delete" update="docs" actionListener="#{treeContextMenuView.deleteNode}" icon="ui-icon-close"/>
+            </p:contextMenu>
+        </h:form>
+        
+    </ui:define>
+
+  
+</ui:composition>

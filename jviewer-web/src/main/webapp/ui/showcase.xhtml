@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:p="http://primefaces.org/ui">
+        <h:head>
+            <style type="text/css">
+
+            </style>
+        </h:head>
+        <h:body>
+            <h3> SHOWCASE </h3>
+            <p:menubar>
+                <p:submenu label="Ajax Core">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/basic.xhtml" value="Basic"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/event.xhtml" value="Event"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/listener.xhtml" value="Listener"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/counter.xhtml" value="Counter"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/process.xhtml" value="Process"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/validation.xhtml" value="Validation"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/dropdown.xhtml" value="Dropdown"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/partialSubmit.xhtml" value="PartialSubmit"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/selector.xhtml" value="Selector"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/search.xhtml" value="Search"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/poll.xhtml" value="Poll"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/fragment.xhtml" value="Fragment"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/status.xhtml" value="Status"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/ajax/remoteCommand.xhtml" value="RemoteCommand"></p:menuitem>                
+                </p:submenu>
+
+                <p:submenu label="Input">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/autoComplete.xhtml" value="AutoComplete"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/inputTextarea.xhtml" value="InputTextarea"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/booleanButton.xhtml" value="BooleanButton"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/booleanCheckbox.xhtml" value="BooleanCheckbox"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/calendar.xhtml" value="Calendar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/checkboxMenu.xhtml" value="CheckboxMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/oneMenu.xhtml" value="OneMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/editor.xhtml" value="Editor"></p:menuitem> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/inputText.xhtml" value="InputText"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/inputMask.xhtml" value="InputMask"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/listbox.xhtml" value="Listbox"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/manyButton.xhtml" value="ManyButton"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/manyMenu.xhtml" value="ManyMenu"></p:menuitem> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/manyCheckbox.xhtml" value="ManyCheckbox"></p:menuitem> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/multiSelectListbox.xhtml" value="MultiSelectListbox"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/oneButton.xhtml" value="OneButton"></p:menuitem> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/oneRadio.xhtml" value="OneRadio"></p:menuitem> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/spinner.xhtml" value="Spinner"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/slider.xhtml" value="Slider"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/inputSwitch.xhtml" value="Switch"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/password.xhtml" value="Password"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/keyboard.xhtml" value="Keyboard"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/rating.xhtml" value="Rating"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/colorPicker.xhtml" value="ColorPicker"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/input/inplace.xhtml" value="Inplace"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Button">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/button/button.xhtml" value="Button"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/button/commandButton.xhtml" value="CommandButton"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/button/commandLink.xhtml" value="CommandLink"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/button/link.xhtml" value="Link"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/button/splitButton.xhtml" value="SplitButton"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Data">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/carousel.xhtml" value="Carousel"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/dataGrid.xhtml" value="DataGrid"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/dataList.xhtml" value="DataList"></p:menuitem>
+                    <p:submenu label="DataScroller">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datascroller/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datascroller/inline.xhtml" value="Inline"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datascroller/loader.xhtml" value="Loader"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="DataTable">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/facets.xhtml" value="Facets"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/paginator.xhtml" value="Paginator"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/sort.xhtml" value="Sort"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/filter.xhtml" value="Filter"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/selection.xhtml" value="Selection"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/group.xhtml" value="Group"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/subTable.xhtml" value="SubTable"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/summaryRow.xhtml" value="SummaryRow"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/expansion.xhtml" value="Expansion"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/columns.xhtml" value="Columns"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/edit.xhtml" value="Edit"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/scroll.xhtml" value="Scroll"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/rowColor.xhtml" value="RowColor"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/lazy.xhtml" value="Lazy"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/columnResize.xhtml" value="Resize"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/reorder.xhtml" value="Reorder"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/columnToggler.xhtml" value="ColToggler"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/contextMenu.xhtml" value="ContextMenu"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/sticky.xhtml" value="Sticky"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/responsive.xhtml" value="Responsive"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/rtl.xhtml" value="RTL"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Diagram">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/diagram/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/diagram/hierarchical.xhtml" value="Hierarchical"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/diagram/flowchart.xhtml" value="FlowChart"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/diagram/statemachine.xhtml" value="StateMachine"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/diagram/editable.xhtml" value="Editable"></p:menuitem>
+                    </p:submenu>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/pickList.xhtml" value="PickList"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/orderList.xhtml" value="OrderList"></p:menuitem>
+                    <p:submenu label="GMap">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/event.xhtml" value="Event"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/markers.xhtml" value="Markers"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/markerSelection.xhtml" value="Selection"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/addMarkers.xhtml" value="Add Markers"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/draggableMarkers.xhtml" value="Draggable"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/infoWindow.xhtml" value="InfoWindow"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/polylines.xhtml" value="Polylines"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/polygons.xhtml" value="Polygons"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/circles.xhtml" value="Circles"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/rectangles.xhtml" value="Rectangles"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/street.xhtml" value="StreetView"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/controls.xhtml" value="Controls"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/geocode.xhtml" value="Geocode"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/gmap/mapDialog.xhtml" value="Dialog"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="DataExporter">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/dataexporter/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/dataexporter/excludeColumns.xhtml" value="Exclude"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/dataexporter/customizedDocuments.xhtml" value="Customized"></p:menuitem>
+                    </p:submenu>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/mindmap.xhtml" value="Mindmap"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/ring.xhtml" value="Ring"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/schedule.xhtml" value="Schedule"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/data/tagCloud.xhtml" value="TagCloud"></p:menuitem>
+                    <p:submenu label="Tree">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/icon.xhtml" value="Icon"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/selection.xhtml" value="Selection"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/events.xhtml" value="Events"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/dragdrop.xhtml" value="DragDrop"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/contextMenu.xhtml" value="ContextMenu"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/animate.xhtml" value="Animate"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/rtl.xhtml" value="RTL"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="TreeTable">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/selection.xhtml" value="Selection"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/events.xhtml" value="Events"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/contextMenu.xhtml" value="ContextMenu"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/scroll.xhtml" value="Scroll"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/resize.xhtml" value="Resize"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/sort.xhtml" value="Sort"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/columns.xhtml" value="Columns"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="HorizontalTree">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/htree/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/htree/icon.xhtml" value="Icon"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/htree/selection.xhtml" value="Selection"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/htree/events.xhtml" value="Events"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/htree/contextMenu.xhtml" value="ContextMenu"></p:menuitem>
+                    </p:submenu>
+                </p:submenu>
+
+                <p:submenu label="Panel">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/accordionPanel.xhtml" value="Accordion"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/dashboard.xhtml" value="Dashboard"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/fieldset.xhtml" value="Fieldset"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/grid.xhtml" value="Grid CSS"></p:menuitem>
+                    <p:submenu label="Layout">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/full.xhtml" target="_blank" value="Full"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/element.xhtml" value="Element"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/nested.xhtml" target="_blank" value="Nested"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/events.xhtml" target="_blank" value="Events"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/complex.xhtml" target="_blank" value="Complex"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/panel/layout/mailbox.xhtml" target="_blank" value="Mailbox"></p:menuitem>
+                    </p:submenu>  
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/notificationBar.xhtml" value="NotificationBar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/outputPanel.xhtml" value="OutputPanel"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/panel.xhtml" value="Panel"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/panelGrid.xhtml" value="PanelGrid"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/ribbon.xhtml" value="Ribbon"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/scrollPanel.xhtml" value="ScrollPanel"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/tabView.xhtml" value="TabView"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/toolbar.xhtml" value="Toolbar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/panel/wizard.xhtml" value="Wizard"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Overlay">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/confirmDialog.xhtml" value="ConfirmDialog"></p:menuitem>
+                    <p:submenu label="Dialog">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/dynamic.xhtml" value="Dynamic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/focus.xhtml" value="Focus"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/events.xhtml" value="Events"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/minMax.xhtml" value="Min/Max"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/loginDemo.xhtml" value="Login"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/dialog/rtl.xhtml" value="RTL"></p:menuitem>
+                    </p:submenu>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/lightBox.xhtml" value="LightBox"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/overlayPanel.xhtml" value="OverlayPanel"></p:menuitem>
+                    <p:submenu label="Tooltip">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/tooltip/tooltipOptions.xhtml" value="Tooltip Options"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/overlay/tooltip/tooltipGlobal.xhtml" value="Global Tooltip"></p:menuitem>
+                    </p:submenu>
+                </p:submenu>
+
+                <p:submenu label="Menu">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/breadcrumb.xhtml" value="Breadcrumb"></p:menuitem>
+                    <p:submenu label="ContextMenu">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/menu/contextmenu/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/menu/contextmenu/tiered.xhtml" value="Tiered"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/menu/contextmenu/target.xhtml" value="Target"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/datatable/contextMenu.xhtml" value="DataTable"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/tree/contextMenu.xhtml" value="Tree"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/data/treetable/contextMenu.xhtml" value="TreeTable"></p:menuitem>
+                    </p:submenu>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/dock.xhtml" value="Dock"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/megaMenu.xhtml" value="MegaMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/menu.xhtml" value="Menu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/menubar.xhtml" value="Menubar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/menuButton.xhtml" value="MenuButton"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/panelMenu.xhtml" value="PanelMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/slideMenu.xhtml" value="SlideMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/stack.xhtml" value="Stack"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/steps.xhtml" value="Steps"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/tabMenu.xhtml" value="TabMenu"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/menu/tieredMenu.xhtml" value="TieredMenu"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Charts">         
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/area.xhtml" value="Area"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/bar.xhtml" value="Bar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/bubble.xhtml" value="Bubble"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/donut.xhtml" value="Donut"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/line.xhtml" value="Line"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/pie.xhtml" value="Pie"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/metergauge.xhtml" value="MeterGauge"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/ohlc.xhtml" value="OHLC"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/animate.xhtml" value="Animate"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/export.xhtml" value="Export"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/interactive.xhtml" value="Interactive"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/live.xhtml" value="Live"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/graphicImage.xhtml" value="Static"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/zoom.xhtml" value="Zoom"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/combined.xhtml" value="Combined"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/multiaxis.xhtml" value="MultiAxis"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/date.xhtml" value="Date"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/chart/responsive.xhtml" value="Responsive"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Messages"> 
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/message/growl.xhtml" value="Growl"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/message/messages.xhtml" value="Messages"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Multimedia">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/barcode.xhtml" value="Barcode"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/compare.xhtml" value="Compare"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/contentFlow.xhtml" value="ContentFlow"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/cropper.xhtml" value="Cropper"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/galleria.xhtml" value="Galleria"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/graphicImage.xhtml" value="GraphicImage"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/media.xhtml" value="Media"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/photoCam.xhtml" value="PhotoCam"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/multimedia/switch.xhtml" value="Switch"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="File">
+                    <p:submenu label="Upload">
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/file/upload/basic.xhtml" value="Basic"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/file/upload/single.xhtml" value="Single"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/file/upload/multiple.xhtml" value="Multiple"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/file/upload/auto.xhtml" value="Auto"></p:menuitem>
+                        <p:menuitem url="http://localhost:8086/adamantium/ui/file/upload/dnd.xhtml" value="DragDrop"></p:menuitem>
+                    </p:submenu>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/file/download.xhtml" value="Download"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="DragDrop">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/dnd/draggable.xhtml" value="Draggable"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/dnd/dataGrid.xhtml" value="DataGrid"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/dnd/dataTable.xhtml" value="DataTable"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/dnd/custom.xhtml" value="Custom"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Misc">
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/blockUI.xhtml" value="BlockUI"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/cache.xhtml" value="Cache"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/captcha.xhtml" value="Captcha"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/clock.xhtml" value="Clock"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/collector.xhtml" value="Collector"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/defaultCommand.xhtml" value="DefaultCommand"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/effect.xhtml" value="Effect"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/exceptionHandler.xhtml" value="ExceptionHandler"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/fa.xhtml" value="FontAwesome"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/feedReader.xhtml" value="FeedReader"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/focus.xhtml" value="Focus"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/hotkey.xhtml" value="Hotkey"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/idleMonitor.xhtml" value="IdleMonitor"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/log.xhtml" value="Log"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/outputLabel.xhtml" value="OutputLabel"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/printer.xhtml" value="Printer"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/progressBar.xhtml" value="ProgressBar"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/requestContext.xhtml" value="RequestContext"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/resetInput.xhtml" value="ResetInput"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/resizable.xhtml" value="Resizable"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/separator.xhtml" value="Separator"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/spacer.xhtml" value="Spacer"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/spotlight.xhtml" value="Spotlight"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/sticky.xhtml" value="Sticky"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/terminal.xhtml" value="Terminal"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/themeSwitcher.xhtml" value="ThemeSwitcher"></p:menuitem>
+                    <p:menuitem url="http://localhost:8086/adamantium/ui/misc/watermark.xhtml" value="Watermark"></p:menuitem>
+                </p:submenu>
+            </p:menubar>
+        </h:body>
+    </html>

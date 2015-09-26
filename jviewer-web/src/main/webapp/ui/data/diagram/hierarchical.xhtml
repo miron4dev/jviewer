@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-diagram-element {	
+                width:5em; 
+                height:5em;
+                line-height:5em;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                border-radius: 5em;
+                border: 1px solid #404a4e;
+                background-color: #404a4e;
+                color: #cccccc;
+            }
+            
+            .ui-diagram-element:hover {
+                background-color: #20282b;
+            }
+        </style>
+	</ui:define>
+ 
+    <ui:define name="content">
+
+        <p:diagram value="#{diagramHierarchicalView.model}" style="height:600px" styleClass="ui-widget-content" />
+        
+    </ui:define>
+
+</ui:composition>

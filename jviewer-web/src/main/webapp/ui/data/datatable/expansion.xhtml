@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+	</ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:dataTable var="car" value="#{dtBasicView.cars}">
+                <f:facet name="header">
+                    Expand rows to see detailed information
+                </f:facet>
+                <p:column style="width:24px">
+                    <p:rowToggler />
+                </p:column>
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+
+                <p:rowExpansion>
+                    <p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
+                        <f:facet name="header">
+                            <p:graphicImage name="demo/images/car/#{car.brand}-big.gif"/> 
+                        </f:facet>
+
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{car.id}" />
+
+                        <h:outputText value="Year" />
+                        <h:outputText value="#{car.year}" />
+
+                        <h:outputText value="Color:" />
+                        <h:outputText value="#{car.color}" style="color:#{car.color}"/>
+
+                        <h:outputText value="Price" />
+                        <h:outputText value="\$#{car.price}" />
+                    </p:panelGrid>
+                </p:rowExpansion>
+            </p:dataTable>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

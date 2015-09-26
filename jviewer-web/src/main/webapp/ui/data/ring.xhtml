@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .image-ring .ui-ring-item {
+                border:0 none;
+            }
+
+            .image-ring .ui-ring-item img {
+				width: 100%;
+			}
+            
+            .ui-ring button {
+                font-size: 1em !important;
+            }
+            
+            .value {
+                font-weight: bold;
+            }
+        </style>
+    </ui:define>
+    
+    <ui:define name="content">
+
+        <h:form id="form">
+            <h3 style="margin-top: 0">Basic Ring</h3>
+            <p:ring id="basic" value="#{ringView.cars}" var="car">
+                <p:outputPanel style="text-align: center;" layout="block">
+                    #{car.brand}
+                    <br />
+                    <p:commandButton update=":form:carDetail" icon="ui-icon-search" title="View" oncomplete="PF('carDialog').show();">
+                        <f:setPropertyActionListener value="#{car}" target="#{ringView.selectedCar}" />
+                    </p:commandButton>
+                </p:outputPanel>
+            </p:ring>
+
+            <h3>Images with Custom Easing</h3>
+            <p:ring id="custom" value="#{ringView.cars}" var="car" styleClass="image-ring" easing="easeInOutBack">
+                <p:graphicImage id="img" name="/demo/images/car/#{car.brand}-big.gif" />
+            </p:ring>
+
+            <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="170">
+                <p:outputPanel id="carDetail" style="text-align:center;" layout="block">
+                    <p:panelGrid  columns="2" rendered="#{not empty ringView.selectedCar}" columnClasses="value">
+                        <f:facet name="header">
+                            <p:graphicImage name="demo/images/car/#{ringView.selectedCar.brand}-big.gif" /> 
+                        </f:facet>
+                        
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{ringView.selectedCar.id}" />
+
+                        <h:outputText value="Year" />
+                        <h:outputText value="#{ringView.selectedCar.year}" />
+                        
+                        <h:outputText value="Brand: " />
+                        <h:outputText value="#{ringView.selectedCar.brand}" />
+
+                        <h:outputText value="Color:" />
+                        <h:outputText value="#{ringView.selectedCar.color}" style="color:#{ringView.selectedCar.color}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

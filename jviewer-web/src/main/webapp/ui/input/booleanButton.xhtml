@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="msgs" />
+
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <h:outputText value="I accept terms and conditions: " />
+                <p:selectBooleanButton id="value1" value="#{selectBooleanView.value1}" onLabel="Yes" offLabel="No" style="width:60px" />
+
+                <h:outputText value="Subscribe me to newsletter: " />
+                <p:selectBooleanButton id="value2" value="#{selectBooleanView.value2}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px">
+                    <p:ajax update="msgs" listener="#{selectBooleanView.addMessage}" />
+                </p:selectBooleanButton>
+            </h:panelGrid>
+
+            <p:commandButton id="submit" value="Submit" update="display" icon="ui-icon-check" oncomplete="PF('dlg').show()" />
+
+            <p:dialog id="dialog" header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                <h:panelGrid columns="1" id="display">
+                    <h:outputText value="Value 1: #{selectBooleanView.value1}" />
+                    <h:outputText value="Value 2: #{selectBooleanView.value2}" />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>

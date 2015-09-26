@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">            
+            .value {
+                font-weight: bold;
+            }
+        </style>
+	</ui:define>
+    
+
+
+    <ui:define name="content">
+        
+        <h:form>
+            <h3 style="margin-top:0">Basic</h3>
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="console" value="Console:" />
+                <p:selectOneRadio id="console" value="#{radioView.console}">
+                    <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="PS4" itemValue="PS+" />
+                    <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                </p:selectOneRadio>
+            </h:panelGrid>
+
+            <h3>Grid</h3>
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="city" value="City:" />
+                <p:selectOneRadio id="city" value="#{radioView.city}"  layout="grid" columns="3">
+                    <f:selectItems value="#{radioView.cities}" var="c" itemLabel="#{city}" itemValue="#{city}"/>
+                </p:selectOneRadio>
+            </h:panelGrid>
+
+            <h3>Custom Layout</h3>
+            <p:outputPanel id="customPanel" style="margin-bottom:10px">
+                <p:selectOneRadio id="customRadio" value="#{radioView.color}" layout="custom">
+                    <f:selectItem itemLabel="Red" itemValue="Red" />
+                    <f:selectItem itemLabel="Green" itemValue="Green" />
+                    <f:selectItem itemLabel="Blue" itemValue="Blue" />
+                </p:selectOneRadio>
+
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+                    <h:outputLabel for="opt1" value="Red" />
+                    <p:spinner />
+
+                    <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+                    <h:outputLabel for="opt2" value="Green" />
+                    <p:inputText />
+
+                    <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+                    <h:outputLabel for="opt3" value="Blue" />
+                    <p:calendar />
+                </h:panelGrid>
+            </p:outputPanel>
+
+            <p:commandButton value="Submit" update="display" icon="ui-icon-check" oncomplete="PF('dlg').show()"/>
+
+            <p:dialog modal="true" resizable="false" widgetVar="dlg" header="Values" showEffect="clip">
+                <p:panelGrid columns="2" id="display" columnClasses="label,value">
+                    <h:outputText value="Console:" />
+                    <h:outputText value="#{radioView.console}" />
+                    
+                    <h:outputText value="City:" />
+                    <h:outputText value="#{radioView.city}" />
+                    
+                    <h:outputText value="Color:" />
+                    <h:outputText value="#{radioView.color}" />
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+
+  
+</ui:composition>

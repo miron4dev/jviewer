@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            <h:panelGrid columns="4" cellpadding="5">
+                <h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+                <p:inputText id="name" value="#{basicView.text}" />
+                <p:commandButton value="Submit" update="display" icon="ui-icon-check" />
+                <h:outputText id="display" value="#{basicView.text}" />
+            </h:panelGrid>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

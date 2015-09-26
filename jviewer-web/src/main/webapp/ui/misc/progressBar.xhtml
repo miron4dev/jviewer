@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="head"> 
+        <style tyle="text/css">
+            .animated .ui-progressbar-value { 
+                background-image: url("#{resource['demo/images/pbar-ani.gif']}"); 
+            }
+        </style>
+        
+        <script type="text/javascript">
+            //<![CDATA[
+function start() {
+    PF('startButton1').disable();
+    
+    window['progress'] = setInterval(function() {
+        var pbClient = PF('pbClient'),
+        oldValue = pbClient.getValue(),
+        newValue = oldValue + 10;
+                
+        pbClient.setValue(pbClient.getValue() + 10);
+    
+        if(newValue === 100) {
+            clearInterval(window['progress']);
+        }
+        
+        
+    }, 1000);
+}
+
+function cancel() {
+    clearInterval(window['progress']);
+    PF('pbClient').setValue(0);
+    PF('startButton1').enable();
+}
+            //]]>
+        </script>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form>   
+            <p:growl id="growl" />
+
+            <h3 style="margin-top:0">Client ProgressBar</h3>
+            <p:commandButton value="Start" id="start" type="button" onclick="start()" widgetVar="startButton1"/>
+            <p:commandButton value="Cancel" id="cancel" type="button" onclick="cancel()" />
+            <br /><br />
+            <p:progressBar id="progressBarClient" widgetVar="pbClient" style="width:300px"/>
+
+            <h3>Ajax ProgressBar</h3>
+            <p:commandButton value="Start" type="button" onclick="PF('pbAjax').start();PF('startButton2').disable();" widgetVar="startButton2" />
+            <p:commandButton value="Cancel" actionListener="#{progressBarView.cancel}" oncomplete="PF('pbAjax').cancel();PF('startButton2').enable();" />
+            <br /><br />
+            <p:progressBar widgetVar="pbAjax" ajax="true" value="#{progressBarView.progress}" labelTemplate="{value}%" styleClass="animated" global="false">
+                <p:ajax event="complete" listener="#{progressBarView.onComplete}" update="growl" oncomplete="PF('startButton2').enable()"/>
+            </p:progressBar>
+
+            <h3>Static Display</h3>
+            <p:progressBar value="50" labelTemplate="{value}%" displayOnly="true"/>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

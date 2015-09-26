@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+        
+        Right click to view the menu options.
+        
+        <h:form>
+				
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:contextMenu style="width:180px">
+                <p:submenu label="Ajax Menuitems" icon="ui-icon-refresh">
+                    <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
+                    <p:menuitem value="Update" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                </p:submenu>
+                <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
+                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
+                </p:submenu>
+                <p:separator />
+                <p:submenu label="Navigations" icon="ui-icon-extlink">
+                    <p:submenu label="Prime Links">
+                        <p:menuitem value="PrimeTek" url="http://www.primetek.com.tr" />
+                        <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+                    </p:submenu>
+                    <p:menuitem value="Mobile" outcome="/mobile/index" icon="ui-icon-signal" />
+                </p:submenu>
+            </p:contextMenu>
+
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

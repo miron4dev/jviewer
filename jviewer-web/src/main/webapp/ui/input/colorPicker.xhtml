@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+
+        <h:form>    
+            <h:panelGrid columns="2" cellpadding="5" style="margin-left: 20px">
+                <h:outputText value="Inline: " />
+                <p:colorPicker value="#{colorView.colorInline}" mode="inline" />
+
+                <h:outputText value="Popup: " />
+                <p:colorPicker value="#{colorView.colorPopup}" />                   
+            </h:panelGrid>
+
+            <p:separator />
+
+            <p:commandButton value="Submit" oncomplete="PF('dlg').show();" update="grid" style="margin-left: 20px" />
+            
+            <p:dialog modal="true" widgetVar="dlg" showEffect="fade" hideEffect="fade" header="Selected Colors" resizable="false">
+                <h:panelGrid id="grid" columns="2" cellpadding="5">
+                    <h:outputText value="Inline color: " />
+                    <h:outputText value="#{colorView.colorInline}" style="background-color: \##{colorView.colorInline}" />
+                    
+                    <h:outputText value="Popup color: " />
+                    <h:outputText value="#{colorView.colorPopup}" style="background-color: \##{colorView.colorPopup}" />
+                </h:panelGrid>
+            </p:dialog>     
+        </h:form>
+ 
+    </ui:define>
+
+   
+</ui:composition>

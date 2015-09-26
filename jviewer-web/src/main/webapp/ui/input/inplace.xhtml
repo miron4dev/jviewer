@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+		<style type="text/css">
+			.column {
+				font-weight: bold;
+			}
+		</style>
+	</ui:define>
+    
+  
+
+    <ui:define name="content">
+
+        <h:form>
+            <h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+                <h:outputLabel for="basic" value="Basic:" />
+                <p:inplace id="basic">
+                    <p:inputText value="Edit Me" />
+                </p:inplace>
+
+                <h:outputLabel for="ajax" value="Ajax:" />
+                <p:inplace id="ajax" editor="true">
+                    <p:inputText value="#{inplaceView.text}" required="true" label="text" />
+                </p:inplace>
+
+                <h:outputLabel for="event" value="Dblclick"/>
+                <p:inplace id="event" label="Cities" effectSpeed="fast" event="dblclick">
+                    <h:selectOneMenu>
+                        <f:selectItem itemLabel="New York" itemValue="0" />
+                        <f:selectItem itemLabel="London" itemValue="1" />
+                        <f:selectItem itemLabel="Paris" itemValue="2" />
+                        <f:selectItem itemLabel="Berlin" itemValue="3" />
+                    </h:selectOneMenu>
+                </p:inplace>
+
+                <h:outputLabel for="facet" value="Facet:" />
+                <p:inplace id="facet" effect="none">
+                    <f:facet name="output">
+                        Yes or No
+                    </f:facet>
+                    <f:facet name="input">
+                        <h:selectBooleanCheckbox />
+                    </f:facet>
+                </p:inplace>
+
+                <h:outputLabel for="image" value="Image:" />
+                <p:inplace id="image" label="Show" effect="slide">
+                    <p:graphicImage name="/demo/images/nature/nature3.jpg" />
+                </p:inplace>
+            </h:panelGrid>
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>

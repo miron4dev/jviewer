@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+        
+        <h:form id="form"> 
+            <p:growl autoUpdate="true"/>
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="btnSelect" value="Default Button:" />
+                <p:selectOneMenu id="btnSelect" value="#{defaultCommandView.btn}" onchange="$('#form').submit()">
+                    <f:selectItems value="#{defaultCommandView.buttons}" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <p:separator />
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>
+                <p:inputText id="name" value="#{defaultCommandView.text}" />
+                <h:outputText value="#{defaultCommandView.text}" id="display" />
+            </h:panelGrid>
+
+            <p:commandButton value="Button1" id="btn1" actionListener="#{defaultCommandView.btn1Submit}" ajax="false"/>
+            <p:commandButton value="Button2" id="btn2" actionListener="#{defaultCommandView.btn2Submit}" />
+            <h:commandButton value="Button3" id="btn3" actionListener="#{defaultCommandView.btn3Submit}" />
+
+            <p:defaultCommand target="#{defaultCommandView.btn}" />
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

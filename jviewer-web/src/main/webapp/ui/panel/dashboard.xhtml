@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="head">
+		<style type="text/css">
+			.ui-panel, div.ui-state-hover {
+				margin: 10px;
+				width:200px;
+			}
+			
+			.ui-dashboard-column {
+				width:220px;
+			}
+		</style>
+
+	</ui:define>
+
+
+    <ui:define name="content">
+        
+        <div style="height:500px">
+            <h:form>
+                <p:growl id="msgs" showDetail="true" />
+
+                <p:dashboard id="board" model="#{dashboardView.model}">
+                    <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+
+                    <p:panel id="sports" header="Sports">
+                        <h:outputText value="Sports Content" />
+                    </p:panel>
+
+                    <p:panel id="finance" header="Finance">
+                        <h:outputText value="Finance Content" />
+                    </p:panel>
+
+                    <p:panel id="lifestyle" header="Lifestyle">
+                        <h:outputText value="Lifestyle Content"  />
+                    </p:panel>
+
+                    <p:panel id="weather" header="Weather">
+                        <h:outputText value="Weather Content" />
+                    </p:panel>
+
+                    <p:panel id="politics" header="Politics">
+                        <h:outputText value="Politics Content" />
+                    </p:panel>
+                </p:dashboard>
+
+                <div style="clear:both" />
+            </h:form>
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

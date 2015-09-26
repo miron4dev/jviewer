@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+       <h:form id="form">      
+            <p:commandButton id="imageBtn" value="Basic" type="button" />
+            <p:overlayPanel id="imagePanel" for="imageBtn" hideEffect="fade">
+                <p:graphicImage name="/demo/images/nature/nature1.jpg" width="300" />
+            </p:overlayPanel>
+
+            <br /><br />
+
+            <p:commandButton id="movieBtn" value="Dynamic" type="button" />
+            <p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade" dynamic="true" style="width:600px">
+                <p:dataTable var="movies" value="#{movieView.movieList}" rows="5" paginator="true">
+                    <p:column headerText="Movie">
+                        <h:outputText value="#{movies.movie}" />
+                    </p:column>
+
+                    <p:column headerText="Directed By">
+                        <h:outputText value="#{movies.directedBy}" />
+                    </p:column>
+
+                    <p:column headerText="Genres">
+                        <h:outputText value="#{movies.genres}" />
+                    </p:column>
+
+                    <p:column headerText="Run Time(min.)">
+                        <h:outputText value="#{movies.runTime}" />
+                    </p:column>
+                </p:dataTable>
+            </p:overlayPanel>
+
+            <br /><br />
+
+            <p:graphicImage id="img" name="/demo/images/images.png" style="cursor:pointer" title="Custom Options" />
+            <p:overlayPanel id="imgPanel" for="img" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
+                            dismissable="false" showCloseIcon="true">
+                <p:imageSwitch effect="fade" style="width:300px;height:188px;">
+                    <ui:repeat value="#{imageSwitchView.images}" var="image">
+                        <p:graphicImage name="/demo/images/nature/#{image}" width="300" />
+                    </ui:repeat>
+                </p:imageSwitch>
+            </p:overlayPanel>    
+            
+             <br /><br />
+            
+            <p:dataTable id="basicDT" var="car" value="#{dtSelectionView.cars1}">
+                <f:facet name="header">
+                    DataTable Integration
+                </f:facet>
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:column headerText="Brand">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+                <p:column headerText="Color">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                     <p:commandButton update=":form:carDetail" oncomplete="PF('carOP').show('#{component.clientId}')" icon="ui-icon-search" title="View">
+                        <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+            <p:overlayPanel widgetVar="carOP" showEffect="fade" hideEffect="fade" dismissable="false" showCloseIcon="true">
+                <p:outputPanel id="carDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
+                        </f:facet>
+                        
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{dtSelectionView.selectedCar.id}" />
+
+                        <h:outputText value="Year" />
+                        <h:outputText value="#{dtSelectionView.selectedCar.year}" />
+
+                        <h:outputText value="Color:" />
+                        <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+                    
+                        <h:outputText value="Price" />
+                        <h:outputText value="\$#{dtSelectionView.selectedCar.price}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:overlayPanel>
+             
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

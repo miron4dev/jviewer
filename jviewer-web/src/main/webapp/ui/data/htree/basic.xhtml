@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form>
+            <h3 style="margin-top:0">Client</h3>
+            <p:tree value="#{treeBasicView.root}" var="node" orientation="horizontal">
+                <p:treeNode>
+                    <h:outputText value="#{node}" />
+                </p:treeNode>
+            </p:tree>
+            
+            <h3>Ajax</h3>
+            <p:tree value="#{treeBasicView.root}" var="node" dynamic="true" orientation="horizontal">
+                <p:treeNode>
+                    <h:outputText value="#{node}" />
+                </p:treeNode>
+            </p:tree>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

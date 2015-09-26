@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+      <ui:define name="head">
+        <style type="text/css">
+            .Implementation .ui-panel {
+                margin-bottom: 20px;
+            }
+        </style>
+	</ui:define>
+
+
+    <ui:define name="content">
+        <p:panel id="basic" header="Basic Resizable">
+            Resize Me!
+        </p:panel>
+        <p:resizable for="basic" />
+
+        <p:panel id="aspectRatio" header="Aspect Ratio">
+            Keep the aspect ratio.
+        </p:panel>
+        <p:resizable for="aspectRatio" aspectRatio="true"/>
+
+        <p:panel id="ghost" header="Ghost">
+            A ghost is displayed, don't be scared.
+        </p:panel>
+        <p:resizable for="ghost" ghost="true"/>
+
+        <p:panel id="animation" header="Animated">
+            Resize can be animated as well.
+        </p:panel>
+        <p:resizable for="animation" animate="true" effect="swing" effectDuration="normal"/>
+
+        <p:panel id="boundaries" header="Boundaries" style="width:300px;height:150px;">
+            I have min/max boundaries.
+        </p:panel>
+        <p:resizable for="boundaries" minWidth="200" maxWidth="400" minHeight="100" maxHeight="200" />
+
+        <p:panel id="grid" header="Grid">
+            Resize offset is 20 pixels.
+        </p:panel>
+        <p:resizable for="grid" grid="20"/>
+
+        <p:panel id="handles" header="Handles">
+            I can be resized to any direction.
+        </p:panel>
+        <p:resizable for="handles" handles="e,w,n,se,sw,ne,nw"/>
+
+        <p:outputPanel id="containmentPanel" layout="block" style="width:400px;height:200px;border:2px solid black;">
+            <p:panel id="containment" header="Containment" style="margin:0">
+                I'm restricted to my parent's boundaries.
+            </p:panel>
+            <p:resizable for="containment" containment="true"/>
+        </p:outputPanel>
+        
+        <h3>Ajax Callback</h3>
+        <h:form>
+            <p:growl id="growl" showDetail="true" />
+
+            <p:graphicImage id="nature" name="demo/images/nature/nature5.jpg" />
+
+            <p:resizable for="nature" animate="true" ghost="true">
+                <p:ajax listener="#{resizableView.onResize}" update="growl" />
+            </p:resizable>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>

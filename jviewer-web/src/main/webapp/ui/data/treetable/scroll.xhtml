@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-treetable {
+                margin-top: 40px
+            }
+            .ui-treetable table {
+                table-layout: fixed
+            }
+        </style>
+    </ui:define>
+   
+    <ui:define name="content">
+        
+        <h:form>
+            <p:treeTable value="#{ttScrollableView.root1}" var="document" style="margin-top:0" scrollable="true" scrollHeight="150">
+                <f:facet name="header">
+                    Vertical
+                </f:facet>
+                <p:column headerText="Name">
+                    <h:outputText value="#{document.name}" />
+                </p:column>
+                <p:column headerText="Size">
+                    <h:outputText value="#{document.size}" />
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{document.type}" />
+                </p:column>
+            </p:treeTable>
+            
+            <p:treeTable value="#{ttScrollableView.root2}" var="document" scrollable="true" scrollWidth="400">
+                <f:facet name="header">
+                    Horizontal
+                </f:facet>
+                <p:column headerText="Name">
+                    <h:outputText value="#{document.name}" />
+                </p:column>
+                <p:column headerText="Size">
+                    <h:outputText value="#{document.size}" />
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{document.type}" />
+                </p:column>
+            </p:treeTable>
+            
+            <p:treeTable value="#{ttScrollableView.root3}" var="document" scrollable="true" scrollHeight="150" scrollWidth="400">
+                <f:facet name="header">
+                    Vertical and Horizontal
+                </f:facet>
+                <p:column headerText="Name">
+                    <h:outputText value="#{document.name}" />
+                </p:column>
+                <p:column headerText="Size">
+                    <h:outputText value="#{document.size}" />
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{document.type}" />
+                </p:column>
+            </p:treeTable>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

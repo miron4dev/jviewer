@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form>
+            <p:panel id="panel" header="Register">
+
+                <p:focus context="panel"/>
+
+                <p:messages />
+
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="username" value="Username" />
+                    <p:inputText id="username" value="#{focusView.username}" required="true" label="Firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="username" />
+
+                    <p:outputLabel for="email" value="Email" />
+                    <p:inputText id="email" value="#{focusView.email}" required="true" label="Surname"/>
+                    <p:message for="email" />
+                </h:panelGrid>
+
+                <p:commandButton id="submitButton" value="Save" update="@parent" actionListener="#{focusView.save}" />
+            </p:panel>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

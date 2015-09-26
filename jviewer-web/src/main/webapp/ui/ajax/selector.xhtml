@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form>
+            <p:panel id="panel" header="PFS Form" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel for="txt1" value="Text 1: *" />
+                    <p:inputText id="txt1" value="#{selectorView.text1}" required="true" label="Text 1">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="txt1" />
+                    <h:outputText value="#{selectorView.text1}" />
+
+                    <h:outputLabel for="txt2" value="Text 2: *" />
+                    <p:inputText id="txt2" value="#{selectorView.text2}" required="true" label="Text 2" />
+                    <p:message for="txt2" />
+                    <h:outputText value="#{selectorView.text2}" />
+
+                    <h:outputLabel for="txt3" value="Text 3: *" />
+                    <h:selectOneMenu id="txt3" value="#{selectorView.text3}" required="true" label="Text 3">
+                        <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Option 1" itemValue="1" />
+                        <f:selectItem itemLabel="Option 2" itemValue="2" />
+                        <f:selectItem itemLabel="Option 3" itemValue="3" />
+                    </h:selectOneMenu>
+                    <p:message for="txt3" />
+                    <h:outputText value="#{selectorView.text3}" />
+                </h:panelGrid>
+            </p:panel>
+
+            <h:panelGrid columns="5">
+                <p:commandButton update="@(form)" value="All Forms" />
+                <p:commandButton update="@(form:last)" value="Last Form" />
+                <p:commandButton update="@(.ui-panel)" value="All Panels" />
+                <p:commandButton process="@(.ui-panel :input)" update="@(.ui-panel)" value="Inputs of Panel" />
+                <p:commandButton process="@(.ui-panel :input:not(select))" update="@(.ui-panel)" value="Inputs Except Select" />
+            </h:panelGrid>
+        </h:form>
+    
+    </ui:define>
+
+</ui:composition>

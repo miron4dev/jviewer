@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+
+        <h:form>    
+            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="600" />
+            
+            <h:panelGrid columns="2" style="margin-top: 10px">
+                <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
+                
+                <p:commandButton value="Clear" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+            </h:panelGrid>
+            
+            <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                <h:outputText id="display" value="#{editorView.text}" escape="false" />
+            </p:dialog>     
+        </h:form>
+        
+    </ui:define>
+
+ 
+
+</ui:composition>

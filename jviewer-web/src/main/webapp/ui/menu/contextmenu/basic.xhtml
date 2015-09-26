@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template.xhtml">
+
+
+    <ui:define name="content">
+        
+        Right click to view the menu options.
+    
+        <h:form>				
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:contextMenu>
+                <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk"/>
+                <p:menuitem value="Update" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+                <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close"/>
+                <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink"/>
+            </p:contextMenu>
+        </h:form>
+        
+    </ui:define>
+
+ 
+</ui:composition>
