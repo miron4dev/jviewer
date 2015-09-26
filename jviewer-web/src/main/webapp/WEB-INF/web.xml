@@ -44,13 +44,28 @@
         <param-value>/WEB-INF/primefaces-adamantium.taglib.xml</param-value>
     </context-param>
 
+    <!-- Support parameters -->
     <welcome-file-list>
-        <welcome-file>dashboard.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
+
+    <!-- Error pages -->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/pages/403.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/pages/404.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/pages/error.xhtml</location>
+    </error-page>
 
     <!-- Mime Mapping -->
     <mime-mapping>
