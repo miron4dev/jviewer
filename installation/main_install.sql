@@ -1,14 +1,20 @@
-CREATE TABLE IF NOT EXISTS 'properties' (
-  'invitationID' INTEGER DEFAULT NULL
-);
+-- Properties --
+DROP TABLE properties;
+CREATE TABLE properties (
+	'name'	TEXT NOT NULL,
+	'value'	TEXT DEFAULT NULL
+)
+INSERT INTO properties (name, value) VALUES ('invitationID', 'QwpmBQ+f9pmugF+Cd2ScAw==');
 
-CREATE TABLE IF NOT EXISTS 'rooms' (
+-- Rooms --
+CREATE TABLE IF NOT EXISTS rooms (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   name TEXT NOT NULL UNIQUE,
   password TEXT DEFAULT NULL,
   type TEXT NOT NULL
 );
 
+-- Users --
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   username TEXT NOT NULL UNIQUE,
@@ -20,6 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name	TEXT NOT NULL
 );
 
+-- Localization --
 DROP TABLE localization;
 
 CREATE TABLE localization (

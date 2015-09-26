@@ -29,14 +29,14 @@ public class RegistrationServiceImpl implements RegistrationService {
             return EXIST;
         } catch (EmptyResultDataAccessException e){
             // Profile with such name does not exist in the database.
-            if(isEmpty(invitationId) || registrationDao.getInvitationID().equals(invitationId)) {
+            if(isEmpty(invitationId) || registrationDao.getInvitationID().equals(SecurityEncryptor.encrypt(invitationId))) {
                 String role;
                 if(isEmpty(invitationId)){
                     role = USER_PERMISSIONS;
                 } else{
                     role = ADMIN_PERMISSIONS;
                 }
-                registrationDao.regProfile(name, SecurityEncryptor.encrypt(password), role, department);
+                registrationDao.createProfile(name, SecurityEncryptor.encrypt(password), role, department);
                 return SUCCESS;
             }
             return INVITATION_ID;

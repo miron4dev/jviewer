@@ -47,7 +47,7 @@ public class RegistrationServiceTest {
         validationDao.checkUser(name);
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);
-        registrationDao.regProfile(name, password, role, department);
+        registrationDao.createProfile(name, password, role, department);
         expectLastCall();
         replay(registrationDao);
         assertEquals(RegistrationMsg.SUCCESS, registrationService.createProfile(name, password, invitationId, department));
@@ -78,7 +78,7 @@ public class RegistrationServiceTest {
         expectLastCall().andThrow(new EmptyResultDataAccessException(0));
         replay(validationDao);
         expect(registrationDao.getInvitationID()).andReturn(invitationId);
-        registrationDao.regProfile(name, password, role, department);
+        registrationDao.createProfile(name, password, role, department);
         expectLastCall();
         replay(registrationDao);
         assertEquals(RegistrationMsg.SUCCESS, registrationService.createProfile(name, password, invitationId, department));

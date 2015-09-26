@@ -9,26 +9,29 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 /**
- * Provides encrypt mechanism.
+ * Serves for data encryption.
  */
-public class SecurityEncryptor {
+public final class SecurityEncryptor {
 
-    //TODO: take out to the security file
-    private static final char[] PASSWORD = "enfldsgbnlsngdlksdsgm".toCharArray();
-    private static final byte[] SALT = {
-            (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
-            (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
-    };
+    private static final String ALGORITHM = SecurityConfigProvider.getInstance().getSecurityProperty("algorithm");
+    private static final char[] PASSWORD = SecurityConfigProvider.getInstance().getSecurityProperty("passphrase").toCharArray();
+    private static final byte[] SALT = SecurityConfigProvider.getInstance().getSalt();
 
-    private static final String ALGORITHM = "PBEWithMD5AndDES";
+    private SecurityEncryptor() {
+    }
 
-    public static String encrypt(String property) {
+    /**
+     * Returns an encrypted string.
+     * @param string unencrypted string.
+     * @return see description.
+     */
+    public static String encrypt(String string) {
         try {
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
             Cipher pbeCipher = Cipher.getInstance(ALGORITHM);
             pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
-            return new BASE64Encoder().encode(pbeCipher.doFinal(property.getBytes("UTF-8")));
+            return new BASE64Encoder().encode(pbeCipher.doFinal(string.getBytes("UTF-8")));
         } catch (Exception e) {
             throw new RuntimeException("Exception occurred during data encrypting. Please refer to JViewer support.", e);
         }

@@ -9,20 +9,16 @@ import tk.jviewer.dao.RegistrationDao;
  */
 public class RegistrationDaoImpl extends JdbcDaoSupport implements RegistrationDao {
 
-    /**
-     * @see tk.jviewer.dao.RegistrationDao#regProfile(String, String, String, String)
-     */
+    private static final String INVITATION_ID = "invitationID";
+
     @Override
-    public void regProfile(String username, String password, String role, String faculty) {
+    public void createProfile(String username, String password, String role, String faculty) {
         getJdbcTemplate().update("insert into users (username, password, role, faculty, first_name, last_name) values (?, ?, ?, ?, ?, ?)", username, password,
                 role, faculty, "TODO", "TODO"); // TODO for EM
     }
 
-    /**
-     * @see tk.jviewer.dao.RegistrationDao#getInvitationID()
-     */
     @Override
     public String getInvitationID() {
-        return getJdbcTemplate().queryForObject("select invitationID from properties", String.class);
+        return getJdbcTemplate().queryForObject("select value from properties where name = ?", new Object[]{INVITATION_ID}, String.class);
     }
 }

@@ -13,7 +13,7 @@ public interface RegistrationDao {
      * @param role role of profile. Default is USER_ROLE.
      * @param faculty faculty of profile.
      */
-    void regProfile(String name, String password, String role, String faculty);
+    void createProfile(String name, String password, String role, String faculty);
 
     /**
      * Gets invitation ID for professor registration from database.
