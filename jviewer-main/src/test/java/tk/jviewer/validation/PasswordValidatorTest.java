@@ -43,9 +43,9 @@ public class PasswordValidatorTest {
         String retypePassword = "123456";
         expect(uiComponent.getAttributes()).andReturn(attributes);
         replay(uiComponent);
-        expect(attributes.get("passwordComponent")).andReturn(passwordComponent);
+        expect(attributes.get("confirmPassword")).andReturn(passwordComponent);
         replay(attributes);
-        expect(passwordComponent.getValue()).andReturn(password);
+        expect(passwordComponent.getSubmittedValue()).andReturn(password);
         replay(passwordComponent);
         passwordValidator.validate(null, uiComponent, retypePassword);
     }
@@ -65,9 +65,9 @@ public class PasswordValidatorTest {
         String password = "123456";
         expect(uiComponent.getAttributes()).andReturn(attributes);
         replay(uiComponent);
-        expect(attributes.get("passwordComponent")).andReturn(passwordComponent);
+        expect(attributes.get("confirmPassword")).andReturn(passwordComponent);
         replay(attributes);
-        expect(passwordComponent.getValue()).andReturn(password);
+        expect(passwordComponent.getSubmittedValue()).andReturn(password);
         replay(passwordComponent);
         passwordValidator.validate(null, uiComponent, retypePassword);
     }

@@ -6,10 +6,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.io.Serializable;
+
 /**
  * Serves for "login" use case.
  */
-public class LoginDialog {
+public class LoginDialog implements Serializable {
+
+    private static final long serialVersionUID = -7942708194299358529L;
 
     private String username;
     private String password;
