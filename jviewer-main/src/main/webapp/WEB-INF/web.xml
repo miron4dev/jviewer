@@ -70,12 +70,12 @@
 
     <context-param>
         <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
-        <param-value>6LdeF-sSAAAAACZZSefcTfYJe0LTTvC0ixgqCueK</param-value>
+        <param-value>6Ldokg0TAAAAADkItdGhGyZw5z8pda6EZmOy8Xp3</param-value>
     </context-param>
 
     <context-param>
         <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
-        <param-value>6LdeF-sSAAAAAM-zNY_jXg6T66VxX4Oza41W-khq</param-value>
+        <param-value>6Ldokg0TAAAAAOyrV4g9q91odn9ZXa_ZFjBLHp1Q</param-value>
     </context-param>
 
     <welcome-file-list>
