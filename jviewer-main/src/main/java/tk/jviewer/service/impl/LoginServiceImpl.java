@@ -1,10 +1,10 @@
 package tk.jviewer.service.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import tk.jviewer.dao.LoginDao;
 import tk.jviewer.dao.ValidationDao;
 import tk.jviewer.profile.UserProfile;
-import tk.jviewer.security.SecurityEncryptor;
 import tk.jviewer.service.LoginService;
 
 /**
@@ -15,6 +15,7 @@ public class LoginServiceImpl implements LoginService {
 
     private ValidationDao validationDao;
     private LoginDao loginDao;
+    private BCryptPasswordEncoder encoder;
 
     /**
      * {@inheritDoc}
@@ -23,7 +24,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserProfile getData(String username, String password) {
         try{
-            if(validationDao.getUserPassword(username).equals(SecurityEncryptor.encrypt(password))){
+            if(encoder.matches(password, validationDao.getUserPassword(username))){
                 return loginDao.getData(username);
             }
             return null;
@@ -42,5 +43,9 @@ public class LoginServiceImpl implements LoginService {
 
     public void setLoginDao(LoginDao loginDao) {
         this.loginDao = loginDao;
+    }
+
+    public void setEncoder(BCryptPasswordEncoder encoder) {
+        this.encoder = encoder;
     }
 }

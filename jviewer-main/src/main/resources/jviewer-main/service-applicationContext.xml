@@ -6,11 +6,13 @@
     <bean id="registrationService" class="tk.jviewer.service.impl.RegistrationServiceImpl">
         <property name="validationDao" ref="validationDao"/>
         <property name="registrationDao" ref="registrationDao"/>
+        <property name="encoder" ref="encoder"/>
     </bean>
 
     <bean id="loginService" class="tk.jviewer.service.impl.LoginServiceImpl">
         <property name="loginDao" ref="loginDao"/>
         <property name="validationDao" ref="validationDao"/>
+        <property name="encoder" ref="encoder"/>
     </bean>
 
     <bean id="managementController" class="tk.jviewer.controller.ManagementController">

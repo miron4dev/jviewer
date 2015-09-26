@@ -24,4 +24,8 @@
         <property name="loginService" ref="loginService"/>
         <property name="userProfile" ref="userProfile"/>
     </bean>
+
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11" />
+    </bean>
 </beans>

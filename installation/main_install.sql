@@ -3,8 +3,8 @@ DROP TABLE properties;
 CREATE TABLE properties (
 	'name'	TEXT NOT NULL,
 	'value'	TEXT DEFAULT NULL
-)
-INSERT INTO properties (name, value) VALUES ('invitationID', 'QwpmBQ+f9pmugF+Cd2ScAw==');
+);
+INSERT INTO properties (name, value) VALUES ('invitationID', '$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2');
 
 -- Rooms --
 CREATE TABLE IF NOT EXISTS rooms (
