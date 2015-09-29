@@ -33,7 +33,7 @@ public class CreateQuizDialog implements Serializable {
 
     @PostConstruct
     public void init() {
-        quiz = quizService.getQuiz();
+        quiz = quizService.createQuiz();
         editingQuestion = quiz.getCurrentQuestion();
     }
 

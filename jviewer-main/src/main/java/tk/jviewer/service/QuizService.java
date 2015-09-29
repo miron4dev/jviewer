@@ -8,7 +8,7 @@ import tk.jviewer.model.Test;
  */
 public interface QuizService {
 
-    Test getQuiz();
+    Test createQuiz();
 
     @Deprecated
     Question getQuestion(long id);

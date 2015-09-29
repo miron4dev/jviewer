@@ -30,7 +30,7 @@ public class DummyQuizService implements QuizService {
     }
 
     @Override
-    public Test getQuiz() {
+    public Test createQuiz() {
         return quiz;
     }
 
@@ -73,8 +73,8 @@ public class DummyQuizService implements QuizService {
     private Test fillDummyTest() {
         Question question1 = new Question(RADIO_BUTTON);
         question1.setId(1);
-        question1.setTopic("To be or not to be?");
-        question1.setText("That is the question");
+        question1.setTopic("That is the question");
+        question1.setText("To be or not to be?");
         Answer answer1 = new Answer("0", "To be", RADIO_BUTTON);
         Answer answer2 = new Answer("1", "Not to be", RADIO_BUTTON);
         question1.setAnswers(new ArrayList<>(asList(answer1, answer2)));
