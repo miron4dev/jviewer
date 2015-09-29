@@ -10,7 +10,7 @@ Technologies and frameworks, which are used:
 - Java
 - Spring & Spring Security
 - JSF
-- Primefaces
+- PrimeFaces
 - WebSocket
 - SQLite
 - Maven
@@ -22,5 +22,17 @@ Technologies and frameworks, which are used:
 - MAC OS
 
 ## Download
-
 Links to download JViewer are available <a href="http://jviewer.tk:8080/download.xhtml" target="_blank">here</a>
+
+## Configure Tomcat locally
+1. Add the next connector into the ${catalina.home}/conf/server.xml:
+```
+<Connector port="8443" SSLEnabled="true" protocol="org.apache.coyote.http11.Http11NioProtocol"
+        maxThreads="150" scheme="https" secure="true"
+        clientAuth="false" sslProtocol="TLS"
+        keystoreFile="${catalina.home}/keystore/jviewer.tk.jks" keystorePass="secret" keystoreType="JKS"
+        keyAlias="tomcat"/>
+```
+2. Replace "secret" with a real value for the keystorePass
+3. Create the "keystore" directory inside the ${catalina.home} one
+4. Put the jviewer.tk.jks key file into the "keystore" directory
