@@ -51,6 +51,11 @@ public class DummyQuizService implements QuizService {
         quiz.addQuestion(question);
     }
 
+    @Override
+    public void saveQuiz(final Test quiz) {
+
+    }
+
     private long getUnusedId() {
         long id = 0;
         for (final Question question : quiz.getQuestions()) {
@@ -73,7 +78,7 @@ public class DummyQuizService implements QuizService {
         Answer answer1 = new Answer("0", "To be", RADIO_BUTTON);
         Answer answer2 = new Answer("1", "Not to be", RADIO_BUTTON);
         question1.setAnswers(new ArrayList<>(asList(answer1, answer2)));
-        question1.setCorrectAnswers(new ArrayList<>(singletonList("0")));
+        question1.setCorrectSingleChoiceAnswer("0");
 
         Question question2 = new Question(CHECK_BOX);
         question2.setId(2);
@@ -84,7 +89,7 @@ public class DummyQuizService implements QuizService {
         Answer answer23 = new Answer("2", "Earthworm Jim", CHECK_BOX);
         Answer answer24 = new Answer("3", "Princess Nesmeyana", CHECK_BOX);
         question2.setAnswers(new ArrayList<>(asList(answer21, answer22, answer23, answer24)));
-        question2.setCorrectAnswers(new ArrayList<>(asList("1", "2")));
+        question2.setCorrectMultipleChoiceAnswers(new ArrayList<>(asList("1", "2")));
 
         Question question3 = new Question(TEXT_FIELD);
         question3.setId(3);

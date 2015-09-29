@@ -1,7 +1,6 @@
 package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
-import tk.jviewer.converter.TestConverter;
 import tk.jviewer.model.*;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.QuizService;
@@ -14,12 +13,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static tk.jviewer.model.AnswerType.CHECK_BOX;
-import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
-import static tk.jviewer.model.AnswerType.TEXT_FIELD;
 
 /**
  * Take Test dialog implementation.
@@ -107,7 +102,7 @@ public class TakeTestDialog implements Serializable {
             final String[] ids = idsOfAnswers.split(IDS_OF_ANSWERS_SEPARATOR);
             final List<String> userAnswers = new ArrayList<>(ids.length);
             Collections.addAll(userAnswers, ids);
-            currentQuestion.setUserAnswers(userAnswers); // stupid JSF does not support result of Arrays.asList() during rendering
+            currentQuestion.setUserMultipleChoiceAnswers(userAnswers); // stupid JSF does not support result of Arrays.asList() during rendering
         } else if (isNotBlank(textualAnswer)) {
             currentQuestion.setUserTextualAnswer(textualAnswer);
         }

@@ -12,6 +12,8 @@
     <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 <h:body>
+    <c:set var="currentQuestion" value="#{takeTestDialog.currentQuestion}"/>
+    <c:set var="typeOfAnswers" value="#{currentQuestion.typeOfAnswers}"/>
     <h:form>
         <div class="container">
             <div class="row">
@@ -23,30 +25,32 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="h2">
-                                            <h:outputText value="#{takeTestDialog.currentQuestion.topic}"/>
+                                            <h:outputText value="#{currentQuestion.topic}"/>
                                         </div>
                                         <div class="h4">
-                                            <h:outputText value="#{takeTestDialog.currentQuestion.text}"/>
+                                            <h:outputText value="#{currentQuestion.text}"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="answers-pnl">
-                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'RADIO_BUTTON'}">
-                                        <h:selectOneRadio value="#{takeTestDialog.currentQuestion.userAnswer}" layout="pageDirection">
-                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}"
+                                <div class="multipleChoiceAnswers-pnl">
+                                    <c:if test="#{typeOfAnswers == 'RADIO_BUTTON'}">
+                                        <h:selectOneRadio value="#{currentQuestion.userSingleChoiceAnswer}"
+                                                layout="pageDirection">
+                                            <f:selectItems value="#{currentQuestion.answers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectOneRadio>
                                     </c:if>
-                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'CHECK_BOX'}">
-                                        <h:selectManyCheckbox value="#{takeTestDialog.currentQuestion.userAnswers}" layout="pageDirection">
-                                            <f:selectItems value="#{takeTestDialog.currentQuestion.answers}"
+                                    <c:if test="#{typeOfAnswers == 'CHECK_BOX'}">
+                                        <h:selectManyCheckbox value="#{currentQuestion.userMultipleChoiceAnswers}"
+                                                layout="pageDirection">
+                                            <f:selectItems value="#{currentQuestion.answers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectManyCheckbox>
                                     </c:if>
-                                    <c:if test="#{takeTestDialog.currentQuestion.typeOfAnswers == 'TEXT_FIELD'}">
+                                    <c:if test="#{typeOfAnswers == 'TEXT_FIELD'}">
                                         <label>
                                             <h:outputText value="Please write your answer"/>
-                                            <h:inputText value="#{takeTestDialog.currentQuestion.userTextualAnswer}"/>
+                                            <h:inputText value="#{currentQuestion.userTextualAnswer}"/>
                                         </label>
                                     </c:if>
                                 </div>
@@ -77,7 +81,8 @@
                         <hr/>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p:progressBar value="#{takeTestDialog.chosenTest.progress}" labelTemplate="{value}%" displayOnly="true"/>
+                                <p:progressBar value="#{takeTestDialog.chosenTest.progress}"
+                                        labelTemplate="{value}%" displayOnly="true"/>
                             </div>
                         </div>
                     </div>
@@ -90,12 +95,12 @@
     </h:form>
     <script type="text/javascript">
         var getTextualAnswer = function () {
-            return $('.answers-pnl input[type=text]').val();
+            return $('.multipleChoiceAnswers-pnl input[type=text]').val();
         };
 
         var collectIdsOfAnswers = function () {
             var result = [];
-            $('.answers-pnl input').each(function () {
+            $('.multipleChoiceAnswers-pnl input').each(function () {
                 if ($(this).prop('checked')) {
                     result.push(this.value);
                 }

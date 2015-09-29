@@ -53,6 +53,7 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public String cancelQuizCreation() {
+        quizService.saveQuiz(quiz);
         return "main?faces-redirect=true";
     }
 

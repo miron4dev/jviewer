@@ -23,11 +23,12 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
-    private List<String> correctAnswers;
-    private String userAnswer;
+    private String correctSingleChoiceAnswer;
+    private List<String> correctMultipleChoiceAnswers = new ArrayList<>();
+    private String userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
-    private List<String> userAnswers;
+    private List<String> userMultipleChoiceAnswers;
     private AnswerType typeOfAnswers;
 
     public long getId() {
@@ -70,16 +71,24 @@ public class Question implements Serializable {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setAnswers(List<Answer> multipleChoiceAnswers) {
+        this.answers = multipleChoiceAnswers;
     }
 
     public void addAnswer(Answer answer) {
         answers.add(answer);
     }
 
-    public void setCorrectAnswers(List<String> correctAnswers) {
-        this.correctAnswers = correctAnswers;
+    public List<String> getCorrectMultipleChoiceAnswers() {
+        return correctMultipleChoiceAnswers;
+    }
+
+    public void setCorrectMultipleChoiceAnswers(List<String> correctMultipleChoiceAnswers) {
+        this.correctMultipleChoiceAnswers = correctMultipleChoiceAnswers;
+    }
+
+    public String getCorrectTextualAnswer() {
+        return correctTextualAnswer;
     }
 
     public void setCorrectTextualAnswer(String correctTextualAnswer) {
@@ -94,32 +103,39 @@ public class Question implements Serializable {
         this.userTextualAnswer = userTextualAnswer;
     }
 
-    public String getUserAnswer() {
-        return userAnswer;
+    public String getUserSingleChoiceAnswer() {
+        return userSingleChoiceAnswer;
     }
 
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
+    public void setUserSingleChoiceAnswer(String userSingleChoiceAnswer) {
+        this.userSingleChoiceAnswer = userSingleChoiceAnswer;
     }
 
-    public List<String> getUserAnswers() {
-        return userAnswers;
+    public List<String> getUserMultipleChoiceAnswers() {
+        return userMultipleChoiceAnswers;
     }
 
-    public void setUserAnswers(List<String> userAnswers) {
-        this.userAnswers = userAnswers;
+    public void setUserMultipleChoiceAnswers(List<String> userMultipleChoiceAnswers) {
+        this.userMultipleChoiceAnswers = userMultipleChoiceAnswers;
     }
 
     public boolean isCorrectlyAnswered() {
         if (typeOfAnswers == RADIO_BUTTON) {
-            return correctAnswers.contains(userAnswer);
+            return correctSingleChoiceAnswer.equals(userSingleChoiceAnswer);
         } else if (typeOfAnswers == CHECK_BOX) {
-            return isEqualCollection(correctAnswers, userAnswers);
+            return isEqualCollection(correctMultipleChoiceAnswers, userMultipleChoiceAnswers);
         } else if (typeOfAnswers == TEXT_FIELD) {
             return correctTextualAnswer.equalsIgnoreCase(trim(userTextualAnswer));
         }
 
-        throw new RuntimeException("Unsupported answers type " + typeOfAnswers);
+        throw new RuntimeException("Unsupported multipleChoiceAnswers type " + typeOfAnswers);
     }
 
+    public String getCorrectSingleChoiceAnswer() {
+        return correctSingleChoiceAnswer;
+    }
+
+    public void setCorrectSingleChoiceAnswer(String correctSingleChoiceAnswer) {
+        this.correctSingleChoiceAnswer = correctSingleChoiceAnswer;
+    }
 }

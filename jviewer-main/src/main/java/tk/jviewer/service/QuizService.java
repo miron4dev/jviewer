@@ -10,8 +10,12 @@ public interface QuizService {
 
     Test getQuiz();
 
+    @Deprecated
     Question getQuestion(long id);
 
+    @Deprecated
     void addQuestion(Test quiz, Question question);
+
+    void saveQuiz(Test quiz);
 
 }
