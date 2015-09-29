@@ -34,7 +34,6 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
             keystoreFile="${catalina.home}/keystore/jviewer.tk.jks" keystorePass="secret" keystoreType="JKS"
             keyAlias="tomcat"/>
     ```
-
 2. Replace "secret" with a real value for the keystorePass
 3. Create the "keystore" directory inside the ${catalina.home} one
 4. Put the jviewer.tk.jks key file into the "keystore" directory
