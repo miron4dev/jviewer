@@ -54,6 +54,10 @@ public class Test implements Serializable {
         }
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
     public int getCorrectlyAnsweredQuestionsNumber() {
         int number = 0;
         for (final Question question : questions) {

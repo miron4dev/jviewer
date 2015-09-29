@@ -1,0 +1,87 @@
+package tk.jviewer.service.impl;
+
+import tk.jviewer.converter.TestConverter;
+import tk.jviewer.model.Answer;
+import tk.jviewer.model.Question;
+import tk.jviewer.model.Test;
+import tk.jviewer.service.QuizService;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+import static tk.jviewer.model.AnswerType.CHECK_BOX;
+import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
+import static tk.jviewer.model.AnswerType.TEXT_FIELD;
+
+/**
+ * For development purposes. Will be removed in the near future.
+ */
+public class DummyQuizService implements QuizService {
+
+    private Test quiz;
+
+    @PostConstruct
+    public void init() {
+        quiz = fillDummyTest();
+    }
+
+    @Override
+    public Test getQuiz() {
+        return quiz;
+    }
+
+    @Override
+    public Question getQuestion(final long id) {
+        for (Question question : quiz.getQuestions()) {
+            if (question.getId() == id) {
+                return question;
+            }
+        }
+
+        throw new RuntimeException("Question with id " + id + " was not found");
+    }
+
+    /**
+     * Returns dummy test. It should be removed after real implementation. Also please take care about {@link TestConverter}.
+     *
+     * @return see description.
+     */
+    private Test fillDummyTest() {
+        Question question1 = new Question(RADIO_BUTTON);
+        question1.setId(1);
+        question1.setTopic("To be or not to be?");
+        question1.setText("That is the question");
+        Answer answer1 = new Answer("0", "To be", Boolean.FALSE.toString(), RADIO_BUTTON);
+        Answer answer2 = new Answer("1", "Not to be", "correct", RADIO_BUTTON);
+        question1.setAnswers(asList(answer1, answer2));
+        question1.setCorrectAnswers(singletonList("0"));
+
+        Question question2 = new Question(CHECK_BOX);
+        question2.setId(2);
+        question2.setTopic("Random test");
+        question2.setText("Who lives in a pineapple under the sea?");
+        Answer answer21 = new Answer("0", "Barmaley", Boolean.FALSE.toString(), CHECK_BOX);
+        Answer answer22 = new Answer("1", "Sponge Bob Square Pants", Boolean.TRUE.toString(), CHECK_BOX);
+        Answer answer23 = new Answer("2", "Earthworm Jim", "correct", CHECK_BOX);
+        Answer answer24 = new Answer("3", "Princess Nesmeyana", "correct", CHECK_BOX);
+        question2.setAnswers(asList(answer21, answer22, answer23, answer24));
+        question2.setCorrectAnswers(asList("1", "2"));
+
+        Question question3 = new Question(TEXT_FIELD);
+        question3.setId(3);
+        question3.setTopic("Arithmetical question");
+        question3.setText("2 + 2 = ?");
+        question3.setCorrectTextualAnswer("4");
+
+        List<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
+
+        return new Test("Test", questions, 2);
+    }
+
+}

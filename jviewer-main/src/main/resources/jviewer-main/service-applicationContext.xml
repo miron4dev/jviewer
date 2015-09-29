@@ -22,4 +22,6 @@
     <bean id="resourceService" class="tk.jviewer.service.impl.ResourceServiceImpl">
         <property name="dao" ref="resourceDao"/>
     </bean>
+
+    <bean id="quizService" class="tk.jviewer.service.impl.DummyQuizService"/>
 </beans>

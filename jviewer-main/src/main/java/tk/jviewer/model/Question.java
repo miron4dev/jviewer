@@ -18,7 +18,7 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = -1512807566188743676L;
 
-    private int id;
+    private long id;
     private String topic;
     private String text;
     private List<Answer> answers;
@@ -29,7 +29,7 @@ public class Question implements Serializable {
     private List<String> userAnswers;
     private AnswerType typeOfAnswers;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

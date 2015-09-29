@@ -18,7 +18,7 @@ Technologies and frameworks, which are used:
 
 ## Available platforms
 - Windows
-- Linux 
+- Linux
 - MAC OS
 
 ## Download
