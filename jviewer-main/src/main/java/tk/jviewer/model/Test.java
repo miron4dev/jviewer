@@ -22,7 +22,7 @@ public class Test implements Serializable {
 
     public Test(final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
         this.name = name;
-        this.questions = unmodifiableList(questions);
+        this.questions = questions;
         this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
     }
 
@@ -55,7 +55,11 @@ public class Test implements Serializable {
     }
 
     public List<Question> getQuestions() {
-        return questions;
+        return unmodifiableList(questions);
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
     }
 
     public int getCorrectlyAnsweredQuestionsNumber() {

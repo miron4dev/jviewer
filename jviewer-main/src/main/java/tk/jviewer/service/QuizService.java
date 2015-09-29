@@ -11,4 +11,7 @@ public interface QuizService {
     Test getQuiz();
 
     Question getQuestion(long id);
+
+    void addQuestion(Test quiz, Question question);
+
 }

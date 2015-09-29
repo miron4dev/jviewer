@@ -17,15 +17,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <p:dataList value="#{createQuizDialog.quiz.questions}" var="question">
-                        <f:facet name="header">
-                            Quiestions
-                        </f:facet>
-                        <h:commandLink value="#{question.topic}, #{question.text}">
-                            <f:ajax listener="#{createQuizDialog.onEditingQuestionChanged()}" render="quizForm:question"/>
-                            <f:param name="id" value="#{question.id}"/>
-                        </h:commandLink>
-                    </p:dataList>
+                    <h:panelGroup layout="block" id="questions">
+                        <p:dataList value="#{createQuizDialog.quiz.questions}" var="question">
+                            <f:facet name="header">
+                                Quiestions
+                            </f:facet>
+                            <h:commandLink value="#{question.topic}, #{question.text}">
+                                <f:ajax listener="#{createQuizDialog.onEditingQuestionChanged()}" render="quizForm:question"/>
+                                <f:param name="id" value="#{question.id}"/>
+                            </h:commandLink>
+                        </p:dataList>
+                    </h:panelGroup>
+                    <h:inputText id="newQuestionText" value="#{createQuizDialog.newQuestionText}"/>
+                    <h:commandLink value="Add question">
+                        <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}" execute="quizForm:newQuestionText" render="quizForm:questions"/>
+                    </h:commandLink>
                 </div>
                 <div class="col-sm-6">
                     <div class="row">
@@ -61,22 +67,33 @@
                                             <h:outputText value="Answers"/>
                                         </h3>
                                         <h:panelGroup layout="block" id="answers">
-                                            <!-- TODO: reuse in taketest.xhtml -->
                                             <c:if test="#{createQuizDialog.editingQuestion.typeOfAnswers == 'RADIO_BUTTON'}">
-                                                <h:selectOneRadio value="#{createQuizDialog.editingQuestion.userAnswer}" layout="pageDirection">
-                                                    <f:selectItems value="#{createQuizDialog.editingQuestion.answers}"
-                                                            var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                </h:selectOneRadio>
+                                                <h:panelGroup layout="block" id="radioAnswers">
+                                                    <h:selectOneRadio value="#{createQuizDialog.editingQuestion.userAnswer}" layout="pageDirection">
+                                                        <f:selectItems value="#{createQuizDialog.editingQuestion.answers}"
+                                                                var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                                    </h:selectOneRadio>
+                                                    <h:inputText id="newRadioAnswerText" value="#{createQuizDialog.newAnswerText}"/>
+                                                    <h:commandLink value="Add answer">
+                                                        <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}" execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
                                             </c:if>
                                             <c:if test="#{createQuizDialog.editingQuestion.typeOfAnswers == 'CHECK_BOX'}">
-                                                <h:selectManyCheckbox value="#{createQuizDialog.editingQuestion.userAnswers}" layout="pageDirection">
-                                                    <f:selectItems value="#{createQuizDialog.editingQuestion.answers}"
-                                                            var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                </h:selectManyCheckbox>
+                                                <h:panelGroup layout="block" id="checkAnswers">
+                                                    <h:selectManyCheckbox value="#{createQuizDialog.editingQuestion.userAnswers}" layout="pageDirection">
+                                                        <f:selectItems value="#{createQuizDialog.editingQuestion.answers}"
+                                                                var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                                    </h:selectManyCheckbox>
+                                                    <h:inputText id="newCheckAnswerText" value="#{createQuizDialog.newAnswerText}"/>
+                                                    <h:commandLink value="Add answer">
+                                                        <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}" execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
                                             </c:if>
                                             <c:if test="#{createQuizDialog.editingQuestion.typeOfAnswers == 'TEXT_FIELD'}">
                                                 <div class="form-group">
-                                                    <h:outputLabel for="textualAnswer" value="Please write your answer"/>
+                                                    <h:outputLabel for="textualAnswer" value="Please write correct answer"/>
                                                     <h:inputText id="textualAnswer" value="#{createQuizDialog.editingQuestion.userTextualAnswer}" styleClass="form-control"/>
                                                 </div>
                                             </c:if>

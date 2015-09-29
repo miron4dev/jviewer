@@ -1,6 +1,7 @@
 package tk.jviewer.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
@@ -21,7 +22,7 @@ public class Question implements Serializable {
     private long id;
     private String topic;
     private String text;
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
     private List<String> correctAnswers;
     private String userAnswer;
     private String correctTextualAnswer;
@@ -33,7 +34,7 @@ public class Question implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -71,6 +72,10 @@ public class Question implements Serializable {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
     }
 
     public void setCorrectAnswers(List<String> correctAnswers) {

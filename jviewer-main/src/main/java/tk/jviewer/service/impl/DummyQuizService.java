@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.max;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static tk.jviewer.model.AnswerType.CHECK_BOX;
@@ -44,6 +45,21 @@ public class DummyQuizService implements QuizService {
         throw new RuntimeException("Question with id " + id + " was not found");
     }
 
+    @Override
+    public void addQuestion(final Test quiz, final Question question) {
+        question.setId(getUnusedId());
+        quiz.addQuestion(question);
+    }
+
+    private long getUnusedId() {
+        long id = 0;
+        for (final Question question : quiz.getQuestions()) {
+            id = max(id, question.getId());
+        }
+
+        return id + 1;
+    }
+
     /**
      * Returns dummy test. It should be removed after real implementation. Also please take care about {@link TestConverter}.
      *
@@ -54,21 +70,21 @@ public class DummyQuizService implements QuizService {
         question1.setId(1);
         question1.setTopic("To be or not to be?");
         question1.setText("That is the question");
-        Answer answer1 = new Answer("0", "To be", Boolean.FALSE.toString(), RADIO_BUTTON);
-        Answer answer2 = new Answer("1", "Not to be", "correct", RADIO_BUTTON);
-        question1.setAnswers(asList(answer1, answer2));
-        question1.setCorrectAnswers(singletonList("0"));
+        Answer answer1 = new Answer("0", "To be", RADIO_BUTTON);
+        Answer answer2 = new Answer("1", "Not to be", RADIO_BUTTON);
+        question1.setAnswers(new ArrayList<>(asList(answer1, answer2)));
+        question1.setCorrectAnswers(new ArrayList<>(singletonList("0")));
 
         Question question2 = new Question(CHECK_BOX);
         question2.setId(2);
         question2.setTopic("Random test");
         question2.setText("Who lives in a pineapple under the sea?");
-        Answer answer21 = new Answer("0", "Barmaley", Boolean.FALSE.toString(), CHECK_BOX);
-        Answer answer22 = new Answer("1", "Sponge Bob Square Pants", Boolean.TRUE.toString(), CHECK_BOX);
-        Answer answer23 = new Answer("2", "Earthworm Jim", "correct", CHECK_BOX);
-        Answer answer24 = new Answer("3", "Princess Nesmeyana", "correct", CHECK_BOX);
-        question2.setAnswers(asList(answer21, answer22, answer23, answer24));
-        question2.setCorrectAnswers(asList("1", "2"));
+        Answer answer21 = new Answer("0", "Barmaley", CHECK_BOX);
+        Answer answer22 = new Answer("1", "Sponge Bob Square Pants", CHECK_BOX);
+        Answer answer23 = new Answer("2", "Earthworm Jim", CHECK_BOX);
+        Answer answer24 = new Answer("3", "Princess Nesmeyana", CHECK_BOX);
+        question2.setAnswers(new ArrayList<>(asList(answer21, answer22, answer23, answer24)));
+        question2.setCorrectAnswers(new ArrayList<>(asList("1", "2")));
 
         Question question3 = new Question(TEXT_FIELD);
         question3.setId(3);

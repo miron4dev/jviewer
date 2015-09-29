@@ -1,5 +1,6 @@
 package tk.jviewer.dialog;
 
+import tk.jviewer.model.Answer;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Test;
 import tk.jviewer.service.QuizService;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import static java.lang.Long.parseLong;
+import static tk.jviewer.model.AnswerType.CHECK_BOX;
 
 /**
  * Serves "create quiz" use case.
@@ -24,6 +26,9 @@ public class CreateQuizDialog implements Serializable {
     private Test quiz;
 
     private Question editingQuestion;
+
+    private String newQuestionText;
+    private String newAnswerText;
 
     @PostConstruct
     public void init() {
@@ -39,6 +44,14 @@ public class CreateQuizDialog implements Serializable {
         return editingQuestion;
     }
 
+    public String getNewQuestionText() {
+        return newQuestionText;
+    }
+
+    public void setNewQuestionText(String newQuestionText) {
+        this.newQuestionText = newQuestionText;
+    }
+
     public String cancelQuizCreation() {
         return "main?faces-redirect=true";
     }
@@ -51,12 +64,30 @@ public class CreateQuizDialog implements Serializable {
         editingQuestion = quizService.getQuestion(parseLong(id));
     }
 
+    public void onAddNewQuestionPressed() {
+        final Question question = new Question(CHECK_BOX);
+        question.setText(newQuestionText);
+        quizService.addQuestion(quiz, question);
+    }
+
+    public void onAddNewAnswerPressed() {
+        editingQuestion.addAnswer(new Answer(newAnswerText, editingQuestion.getTypeOfAnswers()));
+    }
+
     //
     // Dependency Injection
     //
 
     public void setQuizService(QuizService quizService) {
         this.quizService = quizService;
+    }
+
+    public void setNewAnswerText(String newAnswerText) {
+        this.newAnswerText = newAnswerText;
+    }
+
+    public String getNewAnswerText() {
+        return newAnswerText;
     }
 
 }

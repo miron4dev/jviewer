@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Answer representation.
+ *
  * @author Evgeny Mironenko
  */
 public class Answer implements Serializable {
@@ -12,16 +13,18 @@ public class Answer implements Serializable {
 
     private String id;
     private String text;
-    private String correct;
     private AnswerType type;
 
     public Answer() {
     }
 
-    public Answer(String id, String text, String correct, AnswerType type) {
+    public Answer(final String text, final AnswerType type) {
+        this(null, text, type);
+    }
+
+    public Answer(String id, String text, AnswerType type) {
         this.id = id;
         this.text = text;
-        this.correct = correct;
         this.type = type;
     }
 
@@ -35,14 +38,6 @@ public class Answer implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public String getCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(String correct) {
-        this.correct = correct;
     }
 
     public AnswerType getType() {
