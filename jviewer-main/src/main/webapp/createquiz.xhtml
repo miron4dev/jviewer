@@ -10,6 +10,7 @@
 <h:head>
     <title>Create new quiz</title>
     <h:outputStylesheet name="css/bootstrap.css"/>
+    <h:outputScript name="js/quiz.js"/>
 </h:head>
 
 <h:body>
@@ -33,10 +34,11 @@
                         </p:dataList>
                     </h:panelGroup>
                     <h:inputText id="newQuestionText" value="#{createQuizDialog.newQuestionText}"/>
-                    <h:commandLink value="Add question">
+                    <h:commandButton id="addQuestionBtn" value="Add question"
+                            onclick="return jviewer.quiz.hasText('quizForm:newQuestionText')">
                         <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}"
                                 execute="quizForm:newQuestionText" render="quizForm:questions"/>
-                    </h:commandLink>
+                    </h:commandButton>
                 </div>
                 <div class="col-sm-6">
                     <div class="row">
@@ -83,10 +85,11 @@
                                                         <f:ajax/>
                                                     </h:selectOneRadio>
                                                     <h:inputText id="newRadioAnswerText" value="#{createQuizDialog.newAnswerText}"/>
-                                                    <h:commandLink value="Add answer">
+                                                    <h:commandButton value="Add answer"
+                                                            onclick="return jviewer.quiz.hasText('quizForm:newRadioAnswerText')">
                                                         <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
                                                                 execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers"/>
-                                                    </h:commandLink>
+                                                    </h:commandButton>
                                                 </h:panelGroup>
                                             </c:if>
                                             <c:if test="#{typeOfAnswers == 'CHECK_BOX'}">
@@ -97,17 +100,20 @@
                                                         <f:ajax/>
                                                     </h:selectManyCheckbox>
                                                     <h:inputText id="newCheckAnswerText" value="#{createQuizDialog.newAnswerText}"/>
-                                                    <h:commandLink value="Add answer">
+                                                    <h:commandButton value="Add answer"
+                                                            onclick="return jviewer.quiz.hasText('quizForm:newCheckAnswerText')">
                                                         <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
                                                                 execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers"/>
-                                                    </h:commandLink>
+                                                    </h:commandButton>
                                                 </h:panelGroup>
                                             </c:if>
                                             <c:if test="#{typeOfAnswers == 'TEXT_FIELD'}">
                                                 <div class="form-group">
                                                     <h:outputLabel for="textualAnswer" value="Please write the correct answer"/>
                                                     <h:inputText id="textualAnswer" value="#{editingQuestion.correctTextualAnswer}"
-                                                            styleClass="form-control"/>
+                                                            styleClass="form-control">
+                                                        <f:ajax event="blur"/>
+                                                    </h:inputText>
                                                 </div>
                                             </c:if>
                                         </h:panelGroup>

@@ -12,7 +12,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import static java.lang.Long.parseLong;
-import static tk.jviewer.model.AnswerType.CHECK_BOX;
+import static org.springframework.util.Assert.hasText;
+import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
 /**
  * Serves "create quiz" use case.
@@ -52,6 +53,14 @@ public class CreateQuizDialog implements Serializable {
         this.newQuestionText = newQuestionText;
     }
 
+    public String getNewAnswerText() {
+        return newAnswerText;
+    }
+
+    public void setNewAnswerText(String newAnswerText) {
+        this.newAnswerText = newAnswerText;
+    }
+
     public String cancelQuizCreation() {
         quizService.saveQuiz(quiz);
         return "main?faces-redirect=true";
@@ -66,12 +75,14 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public void onAddNewQuestionPressed() {
-        final Question question = new Question(CHECK_BOX);
+        hasText(newQuestionText);
+        final Question question = new Question(RADIO_BUTTON);
         question.setText(newQuestionText);
         quizService.addQuestion(quiz, question);
     }
 
     public void onAddNewAnswerPressed() {
+        hasText(newAnswerText);
         editingQuestion.addAnswer(new Answer(newAnswerText, editingQuestion.getTypeOfAnswers()));
     }
 
@@ -81,14 +92,6 @@ public class CreateQuizDialog implements Serializable {
 
     public void setQuizService(QuizService quizService) {
         this.quizService = quizService;
-    }
-
-    public void setNewAnswerText(String newAnswerText) {
-        this.newAnswerText = newAnswerText;
-    }
-
-    public String getNewAnswerText() {
-        return newAnswerText;
     }
 
 }
