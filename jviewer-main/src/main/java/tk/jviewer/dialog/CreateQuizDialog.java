@@ -43,7 +43,7 @@ public class CreateQuizDialog implements Serializable {
         return "main?faces-redirect=true";
     }
 
-    public void onQuestionSelected() {
+    public void onEditingQuestionChanged() {
         final FacesContext facesContext = FacesContext.getCurrentInstance();
         final ExternalContext externalContext = facesContext.getExternalContext();
         final Map<String, String> params = externalContext.getRequestParameterMap();
