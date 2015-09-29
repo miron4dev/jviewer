@@ -18,7 +18,15 @@ jviewer.quiz = function (){
                 return false;
             }
             return true;
+        },
+
+        press: function(event, buttonId) {
+            if (event.keyCode === 13) {
+                $(_$(buttonId)).click();
+                return false;
+            }
         }
+
     }
 
 }();
