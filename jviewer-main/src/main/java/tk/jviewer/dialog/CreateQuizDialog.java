@@ -1,6 +1,8 @@
 package tk.jviewer.dialog;
 
+import org.springframework.util.Assert;
 import tk.jviewer.model.Answer;
+import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Test;
 import tk.jviewer.service.QuizService;
@@ -10,9 +12,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.UUID;
 
 import static java.lang.Long.parseLong;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.springframework.util.Assert.hasText;
+import static org.springframework.util.Assert.notNull;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
 /**
@@ -67,11 +72,8 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public void onEditingQuestionChanged() {
-        final FacesContext facesContext = FacesContext.getCurrentInstance();
-        final ExternalContext externalContext = facesContext.getExternalContext();
-        final Map<String, String> params = externalContext.getRequestParameterMap();
-        final String id = params.get("id");
-        editingQuestion = quizService.getQuestion(parseLong(id));
+        final long id = parseLong(getIdFromRequest());
+        editingQuestion = quizService.getQuestion(id);
     }
 
     public void onAddNewQuestionPressed() {
@@ -81,9 +83,34 @@ public class CreateQuizDialog implements Serializable {
         quizService.addQuestion(quiz, question);
     }
 
+    public void onDeleteQuestionPressed() {
+        final long id = parseLong(getIdFromRequest());
+        final Question question = quizService.getQuestion(id);
+        quiz.removeQuestion(question);
+    }
+
     public void onAddNewAnswerPressed() {
         hasText(newAnswerText);
-        editingQuestion.addAnswer(new Answer(newAnswerText, editingQuestion.getTypeOfAnswers()));
+        final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
+        final Answer answer = new Answer(UUID.randomUUID().toString(), newAnswerText, typeOfAnswers);
+        editingQuestion.addAnswer(answer);
+        if (typeOfAnswers == RADIO_BUTTON && isBlank(editingQuestion.getCorrectSingleChoiceAnswer())) {
+            editingQuestion.setCorrectSingleChoiceAnswer(answer.getId());
+        }
+    }
+
+    public void onDeleteAnswerPressed() {
+        final String answerId = getIdFromRequest();
+        Answer answerToDelete = null;
+        for (final Answer answer : editingQuestion.getAnswers()) {
+            if (answer.getId().equals(answerId)) {
+                answerToDelete = answer;
+                break;
+            }
+        }
+
+        notNull(answerToDelete);
+        editingQuestion.removeAnswer(answerToDelete);
     }
 
     //
@@ -92,6 +119,18 @@ public class CreateQuizDialog implements Serializable {
 
     public void setQuizService(QuizService quizService) {
         this.quizService = quizService;
+    }
+
+    //
+    // Helper Methods
+    //
+
+    private String getIdFromRequest() {
+        final FacesContext facesContext = FacesContext.getCurrentInstance();
+        final ExternalContext externalContext = facesContext.getExternalContext();
+        final Map<String, String> params = externalContext.getRequestParameterMap();
+
+        return params.get("id");
     }
 
 }

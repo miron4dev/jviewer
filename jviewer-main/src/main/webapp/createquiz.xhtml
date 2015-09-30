@@ -22,6 +22,27 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3>
+                        <h:outputText value="Quiz name"/>
+                    </h3>
+                    <h:inputText value="#{createQuizDialog.quiz.name}" styleClass="form-control">
+                        <f:ajax event="blur"/>
+                    </h:inputText>
+                </div>
+                <div class="col-sm-6">
+                    <h3>
+                        <h:outputText value="Quiz pass criteria"/>
+                    </h3>
+                    <h:outputText value="The "/>
+                    <h:inputText value="#{createQuizDialog.quiz.questionsToAnswerToPassTheTest}">
+                        <f:ajax event="blur"/>
+                    </h:inputText>
+                    <h:outputText id="totalAnswers" value=" of #{createQuizDialog.quiz.totalQuestionsNumber} "/>
+                    <h:outputText value="answers should be correct to pass the quiz."/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>
                         <h:outputText value="Questions"/>
                     </h3>
                     <h:panelGroup layout="block" id="questions">
@@ -34,10 +55,16 @@
                                                 render="quizForm:questions quizForm:question"/>
                                         <f:param name="id" value="#{question.id}"/>
                                     </h:commandLink>
+                                    <h:commandLink value="Delete">
+                                        <f:ajax listener="#{createQuizDialog.onDeleteQuestionPressed}"
+                                                render="quizForm:questions quizForm:question"/>
+                                        <f:param name="id" value="#{question.id}"/>
+                                    </h:commandLink>
                                 </li>
                             </c:forEach>
                         </ul>
                     </h:panelGroup>
+
                     <div class="input-group">
                         <h:inputText id="newQuestionText" value="#{createQuizDialog.newQuestionText}" styleClass="form-control"
                                 onkeypress="return jviewer.quiz.press(event, 'quizForm:addQuestionBtn')"/>
@@ -45,7 +72,7 @@
                             <h:commandButton id="addQuestionBtn" value="Add question" styleClass="btn btn-default"
                                     onclick="return jviewer.quiz.hasText('quizForm:newQuestionText')">
                                 <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}"
-                                        execute="quizForm:newQuestionText" render="quizForm:questions"/>
+                                        execute="quizForm:newQuestionText" render="quizForm:totalAnswers quizForm:questions"/>
                             </h:commandButton>
                         </span>
                     </div>
@@ -57,11 +84,12 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <h3>
-                                            <h:outputText value="Question"/>
+                                            <h:outputLabel for="questionText">
+                                                <h:outputText value="Question"/>
+                                            </h:outputLabel>
                                         </h3>
 
                                         <div class="form-group">
-                                            <h:outputLabel for="questionText" value="Question text"/>
                                             <h:inputTextarea id="questionText" value="#{editingQuestion.text}"
                                                     styleClass="form-control">
                                                 <f:ajax event="blur" render="quizForm:q#{editingQuestion.id}"/>
@@ -85,46 +113,74 @@
                                         </h3>
                                         <h:panelGroup layout="block" id="answers">
                                             <c:if test="#{typeOfAnswers == 'RADIO_BUTTON'}">
-                                                <h:panelGroup layout="block" id="radioAnswers">
-                                                    <h:selectOneRadio value="#{editingQuestion.correctSingleChoiceAnswer}"
-                                                            layout="pageDirection">
-                                                        <f:selectItems value="#{editingQuestion.answers}"
-                                                                var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                        <f:ajax/>
-                                                    </h:selectOneRadio>
-                                                    <div class="input-group">
-                                                        <h:inputText id="newRadioAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
-                                                                onkeypress="return jviewer.quiz.press(event, 'quizForm:addRadioAnswerBtn')"/>
-                                                        <span class="input-group-btn">
-                                                            <h:commandButton id="addRadioAnswerBtn" value="Add answer" styleClass="btn btn-default"
-                                                                    onclick="return jviewer.quiz.hasText('quizForm:newRadioAnswerText')">
-                                                                <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
-                                                                        execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers"/>
-                                                            </h:commandButton>
-                                                        </span>
+                                                <h:panelGroup layout="block" id="radioAnswers" styleClass="row">
+                                                    <div class="col-xs-10">
+                                                        <h:selectOneRadio value="#{editingQuestion.correctSingleChoiceAnswer}"
+                                                                layout="pageDirection">
+                                                            <f:selectItems value="#{editingQuestion.answers}"
+                                                                    var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                                            <f:ajax/>
+                                                        </h:selectOneRadio>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <c:forEach var="a" items="#{editingQuestion.answers}">
+                                                            <div>
+                                                                <h:commandLink value="Delete">
+                                                                    <f:ajax listener="#{createQuizDialog.onDeleteAnswerPressed}"
+                                                                            render="quizForm:radioAnswers"/>
+                                                                    <f:param name="id" value="#{a.id}"/>
+                                                                </h:commandLink>
+                                                            </div>
+                                                        </c:forEach>
                                                     </div>
                                                 </h:panelGroup>
+
+                                                <div class="input-group">
+                                                    <h:inputText id="newRadioAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
+                                                            onkeypress="return jviewer.quiz.press(event, 'quizForm:addRadioAnswerBtn')"/>
+                                                    <span class="input-group-btn">
+                                                        <h:commandButton id="addRadioAnswerBtn" value="Add answer" styleClass="btn btn-default"
+                                                                onclick="return jviewer.quiz.hasText('quizForm:newRadioAnswerText')">
+                                                            <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
+                                                                    execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers"/>
+                                                        </h:commandButton>
+                                                    </span>
+                                                </div>
                                             </c:if>
                                             <c:if test="#{typeOfAnswers == 'CHECK_BOX'}">
-                                                <h:panelGroup layout="block" id="checkAnswers">
-                                                    <h:selectManyCheckbox value="#{editingQuestion.correctMultipleChoiceAnswers}"
-                                                            layout="pageDirection">
-                                                        <f:selectItems value="#{editingQuestion.answers}"
-                                                                var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                        <f:ajax/>
-                                                    </h:selectManyCheckbox>
-                                                    <div class="input-group">
-                                                        <h:inputText id="newCheckAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
-                                                                onkeypress="return jviewer.quiz.press(event, 'quizForm:addCheckAnswerBtn')"/>
-                                                        <span class="input-group-btn">
-                                                            <h:commandButton id="addCheckAnswerBtn" value="Add answer" styleClass="btn btn-default"
-                                                                    onclick="return jviewer.quiz.hasText('quizForm:newCheckAnswerText')">
-                                                                <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
-                                                                        execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers"/>
-                                                            </h:commandButton>
-                                                        </span>
+                                                <h:panelGroup layout="block" id="checkAnswers" styleClass="row">
+                                                    <div class="col-xs-10">
+                                                        <h:selectManyCheckbox value="#{editingQuestion.correctMultipleChoiceAnswers}"
+                                                                layout="pageDirection">
+                                                            <f:selectItems value="#{editingQuestion.answers}"
+                                                                    var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
+                                                            <f:ajax/>
+                                                        </h:selectManyCheckbox>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <c:forEach var="a" items="#{editingQuestion.answers}">
+                                                            <div>
+                                                                <h:commandLink value="Delete">
+                                                                    <f:ajax listener="#{createQuizDialog.onDeleteAnswerPressed}"
+                                                                            render="quizForm:checkAnswers"/>
+                                                                    <f:param name="id" value="#{a.id}"/>
+                                                                </h:commandLink>
+                                                            </div>
+                                                        </c:forEach>
                                                     </div>
                                                 </h:panelGroup>
+
+                                                <div class="input-group">
+                                                    <h:inputText id="newCheckAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
+                                                            onkeypress="return jviewer.quiz.press(event, 'quizForm:addCheckAnswerBtn')"/>
+                                                    <span class="input-group-btn">
+                                                        <h:commandButton id="addCheckAnswerBtn" value="Add answer" styleClass="btn btn-default"
+                                                                onclick="return jviewer.quiz.hasText('quizForm:newCheckAnswerText')">
+                                                            <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
+                                                                    execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers"/>
+                                                        </h:commandButton>
+                                                    </span>
+                                                </div>
                                             </c:if>
                                             <c:if test="#{typeOfAnswers == 'TEXT_FIELD'}">
                                                 <div class="form-group">

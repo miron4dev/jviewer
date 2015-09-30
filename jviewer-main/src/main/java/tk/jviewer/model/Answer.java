@@ -18,10 +18,6 @@ public class Answer implements Serializable {
     public Answer() {
     }
 
-    public Answer(final String text, final AnswerType type) {
-        this(null, text, type);
-    }
-
     public Answer(String id, String text, AnswerType type) {
         this.id = id;
         this.text = text;

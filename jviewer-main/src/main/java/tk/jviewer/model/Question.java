@@ -138,4 +138,9 @@ public class Question implements Serializable {
     public void setCorrectSingleChoiceAnswer(String correctSingleChoiceAnswer) {
         this.correctSingleChoiceAnswer = correctSingleChoiceAnswer;
     }
+
+    public void removeAnswer(Answer answer) {
+        answers.remove(answer);
+    }
+
 }

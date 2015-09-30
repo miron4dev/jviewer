@@ -14,9 +14,9 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 3480658726164313166L;
 
-    private final String name;
+    private String name;
     private final List<Question> questions;
-    private final int questionsToAnswerToPassTheTest;
+    private int questionsToAnswerToPassTheTest;
 
     private int currentQuestionIndex;
 
@@ -28,6 +28,10 @@ public class Test implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Question getCurrentQuestion() {
@@ -62,6 +66,10 @@ public class Test implements Serializable {
         questions.add(question);
     }
 
+    public void removeQuestion(Question question) {
+        questions.remove(question);
+    }
+
     public int getCorrectlyAnsweredQuestionsNumber() {
         int number = 0;
         for (final Question question : questions) {
@@ -71,6 +79,14 @@ public class Test implements Serializable {
         }
 
         return number;
+    }
+
+    public int getQuestionsToAnswerToPassTheTest() {
+        return questionsToAnswerToPassTheTest;
+    }
+
+    public void setQuestionsToAnswerToPassTheTest(int questionsToAnswerToPassTheTest) {
+        this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
     }
 
     public int getTotalQuestionsNumber() {
