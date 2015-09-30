@@ -94,7 +94,8 @@
                                         <div class="form-group">
                                             <h:inputTextarea id="questionText" value="#{editingQuestion.text}"
                                                     styleClass="form-control">
-                                                <f:ajax event="blur" render="quizForm:q#{editingQuestion.id}"/>
+                                                <f:ajax event="blur" listener="#{createQuizDialog.onQuestionUpdated}"
+                                                        render="quizForm:q#{editingQuestion.id}"/>
                                             </h:inputTextarea>
                                         </div>
                                     </div>
@@ -106,7 +107,7 @@
                                             <f:selectItem itemValue="RADIO_BUTTON" itemLabel="Select one"/>
                                             <f:selectItem itemValue="CHECK_BOX" itemLabel="Select many"/>
                                             <f:selectItem itemValue="TEXT_FIELD" itemLabel="Plain text"/>
-                                            <f:ajax render="quizForm:answers"/>
+                                            <f:ajax listener="#{createQuizDialog.onQuestionUpdated}" render="quizForm:answers"/>
                                         </h:selectOneRadio>
                                     </div>
                                     <div class="col-sm-12">
@@ -121,7 +122,7 @@
                                                                 layout="pageDirection">
                                                             <f:selectItems value="#{editingQuestion.answers}"
                                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                            <f:ajax/>
+                                                            <f:ajax listener="#{createQuizDialog.onCorrectAnswerChanged}"/>
                                                         </h:selectOneRadio>
                                                     </div>
                                                     <div class="col-xs-2">
@@ -156,7 +157,7 @@
                                                                 layout="pageDirection">
                                                             <f:selectItems value="#{editingQuestion.answers}"
                                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
-                                                            <f:ajax/>
+                                                            <f:ajax listener="#{createQuizDialog.onCorrectAnswerChanged}"/>
                                                         </h:selectManyCheckbox>
                                                     </div>
                                                     <div class="col-xs-2">

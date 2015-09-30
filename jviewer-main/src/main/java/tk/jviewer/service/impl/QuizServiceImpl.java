@@ -10,13 +10,12 @@ import tk.jviewer.model.Question;
 import tk.jviewer.model.Test;
 import tk.jviewer.service.QuizService;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.max;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static org.springframework.util.Assert.notEmpty;
 import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 import static tk.jviewer.model.AnswerType.TEXT_FIELD;
@@ -65,7 +64,9 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Question findQuestion(final long id) {
-        return questionDao.findQuestion(id);
+        final Question question = questionDao.findQuestion(id);
+        findAnswersForQuestions(question);
+        return question;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public void createAnswer(final Question question, final Answer answer) {
-        long id = answerDao.createAnswer(question.getId(), answer.getText());
+        long id = answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
         answer.setId(id);
         question.addAnswer(answer);
     }
@@ -87,6 +88,50 @@ public class QuizServiceImpl implements QuizService {
     public void removeAnswer(final Question question, final long answerId) {
         answerDao.removeAnswer(answerId);
         question.removeAnswer(answerId);
+    }
+
+    @Override
+    public void findAnswersForQuestions(final Question... questions) {
+        notEmpty(questions);
+        for (final Question question : questions) {
+            final List<Answer> answers = answerDao.findAnswers(question.getId());
+            question.setAnswers(answers);
+            answers.stream().filter(Answer::isCorrect).forEach(answer -> {
+                addCorrectAnswer(question, answer);
+            });
+        }
+    }
+
+    @Override
+    public void updateQuestion(Question question) {
+        questionDao.updateQuestion(question);
+        for (final Answer answer : answerDao.findAnswers(question.getId())) {
+            final AnswerType typeOfAnswers = question.getTypeOfAnswers();
+            if (typeOfAnswers == AnswerType.CHECK_BOX) {
+                answer.setCorrect(question.getCorrectMultipleChoiceAnswers().contains(answer.getId()));
+            } else if (typeOfAnswers == AnswerType.RADIO_BUTTON) {
+                final Long singleChoiceAnswer = question.getCorrectSingleChoiceAnswer();
+                if (singleChoiceAnswer != null) {
+                    answer.setCorrect(singleChoiceAnswer.equals(answer.getId()));
+                }
+            }
+            answerDao.updateAnswer(answer);
+        }
+    }
+
+    @Override
+    public void removeQuestion(Test quiz, long id) {
+        final Question question = questionDao.findQuestion(id);
+        questionDao.removeQuestion(question.getId());
+        quiz.removeQuestion(question);
+    }
+
+    private static void addCorrectAnswer(final Question question, final Answer answer) {
+        if (question.getTypeOfAnswers() == CHECK_BOX) {
+            question.addCorrectMultipleChoiceAnswer(answer.getId());
+        } else if (question.getTypeOfAnswers() == RADIO_BUTTON) {
+            question.setCorrectSingleChoiceAnswer(answer.getId());
+        }
     }
 
     /**
@@ -113,7 +158,7 @@ public class QuizServiceImpl implements QuizService {
         Answer answer23 = new Answer(2, "Earthworm Jim");
         Answer answer24 = new Answer(3, "Princess Nesmeyana");
         question2.setAnswers(new ArrayList<>(asList(answer21, answer22, answer23, answer24)));
-        question2.setCorrectMultipleChoiceAnswers(new ArrayList<>(asList("1", "2")));
+        question2.setCorrectMultipleChoiceAnswers(new ArrayList<>(asList(1L, 2L)));
 
         Question question3 = new Question(TEXT_FIELD);
         question3.setId(3);

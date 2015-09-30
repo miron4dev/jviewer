@@ -6,7 +6,6 @@ package tk.jviewer.model;
 public class ViewerManagedBean {
 
     private Room currentRoom;
-    private Test currentQuiz;
 
     public Room getCurrentRoom() {
         return currentRoom;
@@ -16,11 +15,4 @@ public class ViewerManagedBean {
         this.currentRoom = currentRoom;
     }
 
-    public Test getCurrentQuiz() {
-        return currentQuiz;
-    }
-
-    public void setCurrentQuiz(Test currentQuiz) {
-        this.currentQuiz = currentQuiz;
-    }
 }

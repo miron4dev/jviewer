@@ -17,4 +17,6 @@
 
     <bean id="viewerManagedBean" class="tk.jviewer.model.ViewerManagedBean" scope="session"/>
 
+    <bean id="quizManagedBean" class="tk.jviewer.model.QuizManagedBean" scope="session"/>
+
 </beans>

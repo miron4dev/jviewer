@@ -33,6 +33,17 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     }
 
     @Override
+    public void updateQuestion(final Question question) {
+        getJdbcTemplate().update("update questions set answers_type = ?, text = ? where id = ?",
+                question.getTypeOfAnswers(), question.getText(), question.getId());
+    }
+
+    @Override
+    public void removeQuestion(final long id) {
+        getJdbcTemplate().update("delete from questions where id = ?", id);
+    }
+
+    @Override
     public long createQuestion(final long quizId, final AnswerType answersType, final String text) {
         final Number id = new SimpleJdbcInsert(getJdbcTemplate())
                 .withTableName("questions")

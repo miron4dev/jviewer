@@ -27,7 +27,7 @@ public class Question implements Serializable {
     private String text;
     private List<Answer> answers = new ArrayList<>();
     private Long correctSingleChoiceAnswer;
-    private List<String> correctMultipleChoiceAnswers = new ArrayList<>();
+    private List<Long> correctMultipleChoiceAnswers = new ArrayList<>();
     private Long userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
@@ -93,13 +93,18 @@ public class Question implements Serializable {
         answers.add(answer);
     }
 
-    public List<String> getCorrectMultipleChoiceAnswers() {
+    public List<Long> getCorrectMultipleChoiceAnswers() {
         return correctMultipleChoiceAnswers;
     }
 
-    public void setCorrectMultipleChoiceAnswers(List<String> correctMultipleChoiceAnswers) {
+    public void addCorrectMultipleChoiceAnswer(final Long answerId) {
+        correctMultipleChoiceAnswers.add(answerId);
+    }
+
+    public void setCorrectMultipleChoiceAnswers(List<Long> correctMultipleChoiceAnswers) {
         this.correctMultipleChoiceAnswers = correctMultipleChoiceAnswers;
     }
+
 
     public String getCorrectTextualAnswer() {
         return correctTextualAnswer;

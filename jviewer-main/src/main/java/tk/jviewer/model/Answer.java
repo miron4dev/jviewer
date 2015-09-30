@@ -16,6 +16,7 @@ public class Answer implements Serializable {
 
     private long id; // TODO: primitive or object?
     private String text;
+    private boolean correct;
 
     public Answer() {
     }
@@ -29,8 +30,13 @@ public class Answer implements Serializable {
     }
 
     public Answer(long id, String text) {
+        this(id, text, false);
+    }
+
+    public Answer(long id, String text, boolean correct) {
         this.id = id;
         this.text = text;
+        this.correct = correct;
     }
 
     public long getId() {
@@ -47,6 +53,14 @@ public class Answer implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package tk.jviewer.dao.quiz;
 
+import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 
@@ -15,4 +16,8 @@ public interface QuestionDao {
     Question findQuestion(long id);
 
     List<Question> findQuestions(long quizId);
+
+    void updateQuestion(Question question);
+
+    void removeQuestion(long id);
 }

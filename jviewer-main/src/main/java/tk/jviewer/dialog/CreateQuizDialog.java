@@ -3,14 +3,15 @@ package tk.jviewer.dialog;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
+import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.model.Test;
-import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.Long.parseLong;
@@ -26,20 +27,20 @@ public class CreateQuizDialog implements Serializable {
 
     private QuizService quizService;
 
-    private ViewerManagedBean viewerManagedBean; // TODO replace with separate one
+    private QuizManagedBean quizManagedBean;
 
     private Test quiz;
-
-    private Question editingQuestion;
 
     private String newQuestionText;
     private String newAnswerText;
 
     @PostConstruct
     public void init() {
-        final Test emptyQuiz = viewerManagedBean.getCurrentQuiz(); // TODO: refactor
-        quiz = new Test(emptyQuiz.getId(), emptyQuiz.getName(), quizService.findQuestionsForQuiz(emptyQuiz.getId()), emptyQuiz.getQuestionsToAnswerToPassTheTest());
-        editingQuestion = quiz.getCurrentQuestion();
+        final Test emptyQuiz = quizManagedBean.getCurrentQuiz(); // TODO: refactor
+        final List<Question> questions = quizService.findQuestionsForQuiz(emptyQuiz.getId());
+        quiz = new Test(emptyQuiz.getId(), emptyQuiz.getName(), questions, emptyQuiz.getQuestionsToAnswerToPassTheTest());
+        quizManagedBean.setEditingQuestion(quiz.getCurrentQuestion());
+        quizService.findAnswersForQuestions(quizManagedBean.getEditingQuestion());
     }
 
     public Test getQuiz() {
@@ -47,7 +48,7 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public Question getEditingQuestion() {
-        return editingQuestion;
+        return quizManagedBean.getEditingQuestion();
     }
 
     public String getNewQuestionText() {
@@ -72,7 +73,7 @@ public class CreateQuizDialog implements Serializable {
 
     public void onEditingQuestionChanged() {
         final long id = getIdFromRequest();
-        editingQuestion = quizService.findQuestion(id);
+        quizManagedBean.setEditingQuestion(quizService.findQuestion(id));
     }
 
     public void onAddNewQuestionPressed() {
@@ -82,27 +83,36 @@ public class CreateQuizDialog implements Serializable {
 
     public void onDeleteQuestionPressed() {
         final long id = getIdFromRequest();
-        final Question question = quizService.findQuestion(id);
-        quiz.removeQuestion(question);
+        quizService.removeQuestion(quiz, id);
     }
 
     public void onAddNewAnswerPressed() {
         hasText(newAnswerText);
         final Answer answer = new Answer(newAnswerText);
+        final Question editingQuestion = quizManagedBean.getEditingQuestion();
         quizService.createAnswer(editingQuestion, answer);
         final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
         if (typeOfAnswers == RADIO_BUTTON && editingQuestion.getCorrectSingleChoiceAnswer() == null) {
             editingQuestion.setCorrectSingleChoiceAnswer(answer.getId());
+            answer.setCorrect(true); // TODO: remove information about correctness from question
         }
     }
 
     public void onDeleteAnswerPressed() {
         final long answerId = getIdFromRequest();
-        quizService.removeAnswer(editingQuestion, answerId);
+        quizService.removeAnswer(quizManagedBean.getEditingQuestion(), answerId);
+    }
+
+    public void onCorrectAnswerChanged() {
+        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
     }
 
     public void onQuizChanged() {
         quizService.updateQuiz(quiz);
+    }
+
+    public void onQuestionUpdated() {
+        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
     }
 
     //
@@ -113,8 +123,8 @@ public class CreateQuizDialog implements Serializable {
         this.quizService = quizService;
     }
 
-    public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
-        this.viewerManagedBean = viewerManagedBean;
+    public void setQuizManagedBean(QuizManagedBean quizManagedBean) {
+        this.quizManagedBean = quizManagedBean;
     }
 
     //

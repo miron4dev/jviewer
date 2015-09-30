@@ -2,6 +2,7 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.ManagementController;
 import tk.jviewer.model.Test;
@@ -34,6 +35,7 @@ public class MainPageDialog implements Serializable {
     private UserProfile userProfile;
     private ManagementController controller;
     private ViewerManagedBean viewerManagedBean;
+    private QuizManagedBean quizManagedBean;
 
     private QuizService quizService;
 
@@ -62,7 +64,7 @@ public class MainPageDialog implements Serializable {
     }
 
     public void chooseQuiz(Test quiz) {
-        viewerManagedBean.setCurrentQuiz(quiz);
+        quizManagedBean.setCurrentQuiz(quiz);
     }
 
     public List<Room> getAvailableRooms() {
@@ -138,6 +140,10 @@ public class MainPageDialog implements Serializable {
 
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
         this.viewerManagedBean = viewerManagedBean;
+    }
+
+    public void setQuizManagedBean(QuizManagedBean quizManagedBean) {
+        this.quizManagedBean = quizManagedBean;
     }
 
     public void setQuizService(QuizService quizService) {

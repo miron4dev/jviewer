@@ -27,4 +27,9 @@ public interface QuizService {
 
     void removeAnswer(Question question, long answerId);
 
+    void findAnswersForQuestions(final Question... questions);
+
+    void updateQuestion(Question question);
+
+    void removeQuestion(Test quiz, long id);
 }

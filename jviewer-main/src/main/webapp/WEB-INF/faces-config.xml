@@ -27,8 +27,8 @@
             <value>#{quizService}</value>
         </managed-property>
         <managed-property>
-            <property-name>viewerManagedBean</property-name>
-            <value>#{viewerManagedBean}</value>
+            <property-name>quizManagedBean</property-name>
+            <value>#{quizManagedBean}</value>
         </managed-property>
     </managed-bean>
 
@@ -65,6 +65,10 @@
         <managed-property>
             <property-name>viewerManagedBean</property-name>
             <value>#{viewerManagedBean}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>quizManagedBean</property-name>
+            <value>#{quizManagedBean}</value>
         </managed-property>
         <managed-property>
             <property-name>quizService</property-name>
