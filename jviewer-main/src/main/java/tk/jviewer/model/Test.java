@@ -1,6 +1,10 @@
 package tk.jviewer.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.unmodifiableList;
@@ -14,16 +18,26 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 3480658726164313166L;
 
+    private final long id;
     private String name;
     private final List<Question> questions;
     private int questionsToAnswerToPassTheTest;
 
     private int currentQuestionIndex;
 
-    public Test(final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
+    public Test(final long id, final String name, final int questionsToAnswerToPassTheTest) {
+        this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
+    }
+
+    public Test(final long id, final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
+        this.id = id;
         this.name = name;
         this.questions = questions;
         this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -99,6 +113,26 @@ public class Test implements Serializable {
 
     public boolean isPassed() {
         return getCorrectlyAnsweredQuestionsNumber() >= questionsToAnswerToPassTheTest;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Test test = (Test) o;
+
+        return new EqualsBuilder()
+                .append(id, test.id)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .toHashCode();
     }
 
     //

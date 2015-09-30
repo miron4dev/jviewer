@@ -1,5 +1,8 @@
 package tk.jviewer.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +26,9 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
-    private String correctSingleChoiceAnswer;
+    private Long correctSingleChoiceAnswer;
     private List<String> correctMultipleChoiceAnswers = new ArrayList<>();
-    private String userSingleChoiceAnswer;
+    private Long userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
     private List<String> userMultipleChoiceAnswers;
@@ -37,6 +40,17 @@ public class Question implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Question(final long id, final String text, final AnswerType typeOfAnswers) {
+        this.id = id;
+        this.text = text;
+        this.typeOfAnswers = typeOfAnswers;
+    }
+
+    public Question(final String text, final AnswerType typeOfAnswers) {
+        this.text = text;
+        this.typeOfAnswers = typeOfAnswers;
     }
 
     public Question(final AnswerType typeOfAnswers) {
@@ -103,11 +117,11 @@ public class Question implements Serializable {
         this.userTextualAnswer = userTextualAnswer;
     }
 
-    public String getUserSingleChoiceAnswer() {
+    public Long getUserSingleChoiceAnswer() {
         return userSingleChoiceAnswer;
     }
 
-    public void setUserSingleChoiceAnswer(String userSingleChoiceAnswer) {
+    public void setUserSingleChoiceAnswer(Long userSingleChoiceAnswer) {
         this.userSingleChoiceAnswer = userSingleChoiceAnswer;
     }
 
@@ -131,16 +145,36 @@ public class Question implements Serializable {
         throw new RuntimeException("Unsupported multipleChoiceAnswers type " + typeOfAnswers);
     }
 
-    public String getCorrectSingleChoiceAnswer() {
+    public Long getCorrectSingleChoiceAnswer() {
         return correctSingleChoiceAnswer;
     }
 
-    public void setCorrectSingleChoiceAnswer(String correctSingleChoiceAnswer) {
+    public void setCorrectSingleChoiceAnswer(Long correctSingleChoiceAnswer) {
         this.correctSingleChoiceAnswer = correctSingleChoiceAnswer;
     }
 
-    public void removeAnswer(Answer answer) {
-        answers.remove(answer);
+    public void removeAnswer(long answerId) {
+        answers.remove(new Answer(answerId)); // TODO
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Question question = (Question) o;
+
+        return new EqualsBuilder()
+                .append(id, question.id)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .toHashCode();
     }
 
 }

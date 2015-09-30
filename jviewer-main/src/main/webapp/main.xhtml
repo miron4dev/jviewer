@@ -29,6 +29,7 @@
             <br/>
             <h:form id="roomList-form">
                 <p:remoteCommand name="redirect" action="viewer?faces-redirect=true"/>
+                <p:remoteCommand name="redirectToEditQuizDialog" action="createquiz?faces-redirect=true"/>
                 <p:growl id="notification" showDetail="true" />
 
                 <p:dataTable id="rooms-tbl" value="#{mainPageDialog.availableRooms}" var="room" widgetVar="rooms-tbl">
@@ -59,6 +60,17 @@
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
+            </h:form>
+            <h:form>
+                <p:dataTable value="#{mainPageDialog.availableQuizzes}" var="quiz" widgetVar="rooms-tbl">
+                    <p:column headerText="Name">
+                        <h:outputText value="#{quiz.name}"/>
+                    </p:column>
+                    <p:column style="text-align:center">
+                        <p:commandLink value="Edit" actionListener="#{mainPageDialog.chooseQuiz(quiz)}" process="@this"
+                                oncomplete="redirectToEditQuizDialog()"/>
+                    </p:column>
+                </p:dataTable>
             </h:form>
             <h:panelGroup id="createNewRoom-pnl" rendered="#{mainPageDialog.roomCreationAllowed}">
                 <h:form>

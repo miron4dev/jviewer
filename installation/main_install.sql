@@ -37,6 +37,28 @@ CREATE TABLE localization (
   dialog_name TEXT NOT NULL
 );
 
+-- Quizzes --
+CREATE TABLE IF NOT EXISTS quizzes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  questions_to_answer_to_pass INTEGER NOT NULL
+);
+
+-- Questions --
+CREATE TABLE IF NOT EXISTS questions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+  quiz_id INTEGER NOT NULL,
+  answers_type TEXT NOT NULL,
+  text TEXT NOT NULL
+);
+
+-- Answers --
+CREATE TABLE IF NOT EXISTS answers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+  question_id INTEGER NOT NULL,
+  text TEXT NOT NULL
+);
+
 -- Russian --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Добро пожаловать на JViewer', 'ru', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Создать новый профиль', 'ru', 'index');

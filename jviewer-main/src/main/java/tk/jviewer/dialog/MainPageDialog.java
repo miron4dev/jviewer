@@ -4,9 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.ManagementController;
+import tk.jviewer.model.Test;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
+import tk.jviewer.service.QuizService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -33,6 +35,8 @@ public class MainPageDialog implements Serializable {
     private ManagementController controller;
     private ViewerManagedBean viewerManagedBean;
 
+    private QuizService quizService;
+
     public void createRoom() {
         try {
             controller.createRoom(new Room(roomName, roomPassword, roomType));
@@ -57,6 +61,10 @@ public class MainPageDialog implements Serializable {
         viewerManagedBean.setCurrentRoom(room);
     }
 
+    public void chooseQuiz(Test quiz) {
+        viewerManagedBean.setCurrentQuiz(quiz);
+    }
+
     public List<Room> getAvailableRooms() {
         try {
             return controller.getRooms();
@@ -65,6 +73,10 @@ public class MainPageDialog implements Serializable {
             addMessage(FacesMessage.SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
             return new ArrayList<>();
         }
+    }
+
+    public List<Test> getAvailableQuizzes() {
+        return quizService.findQuizzes();
     }
 
     public boolean isRoomCreationAllowed() {
@@ -127,4 +139,9 @@ public class MainPageDialog implements Serializable {
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
         this.viewerManagedBean = viewerManagedBean;
     }
+
+    public void setQuizService(QuizService quizService) {
+        this.quizService = quizService;
+    }
+
 }

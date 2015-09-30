@@ -1,10 +1,10 @@
 package tk.jviewer.dialog;
 
-import org.springframework.util.Assert;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Test;
+import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +12,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.Map;
-import java.util.UUID;
 
 import static java.lang.Long.parseLong;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.springframework.util.Assert.hasText;
-import static org.springframework.util.Assert.notNull;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
 /**
@@ -29,6 +26,8 @@ public class CreateQuizDialog implements Serializable {
 
     private QuizService quizService;
 
+    private ViewerManagedBean viewerManagedBean; // TODO replace with separate one
+
     private Test quiz;
 
     private Question editingQuestion;
@@ -38,7 +37,8 @@ public class CreateQuizDialog implements Serializable {
 
     @PostConstruct
     public void init() {
-        quiz = quizService.createQuiz();
+        final Test emptyQuiz = viewerManagedBean.getCurrentQuiz(); // TODO: refactor
+        quiz = new Test(emptyQuiz.getId(), emptyQuiz.getName(), quizService.findQuestionsForQuiz(emptyQuiz.getId()), emptyQuiz.getQuestionsToAnswerToPassTheTest());
         editingQuestion = quiz.getCurrentQuestion();
     }
 
@@ -67,50 +67,42 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public String cancelQuizCreation() {
-        quizService.saveQuiz(quiz);
         return "main?faces-redirect=true";
     }
 
     public void onEditingQuestionChanged() {
-        final long id = parseLong(getIdFromRequest());
-        editingQuestion = quizService.getQuestion(id);
+        final long id = getIdFromRequest();
+        editingQuestion = quizService.findQuestion(id);
     }
 
     public void onAddNewQuestionPressed() {
         hasText(newQuestionText);
-        final Question question = new Question(RADIO_BUTTON);
-        question.setText(newQuestionText);
-        quizService.addQuestion(quiz, question);
+        quizService.createQuestion(quiz, newQuestionText);
     }
 
     public void onDeleteQuestionPressed() {
-        final long id = parseLong(getIdFromRequest());
-        final Question question = quizService.getQuestion(id);
+        final long id = getIdFromRequest();
+        final Question question = quizService.findQuestion(id);
         quiz.removeQuestion(question);
     }
 
     public void onAddNewAnswerPressed() {
         hasText(newAnswerText);
+        final Answer answer = new Answer(newAnswerText);
+        quizService.createAnswer(editingQuestion, answer);
         final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
-        final Answer answer = new Answer(UUID.randomUUID().toString(), newAnswerText, typeOfAnswers);
-        editingQuestion.addAnswer(answer);
-        if (typeOfAnswers == RADIO_BUTTON && isBlank(editingQuestion.getCorrectSingleChoiceAnswer())) {
+        if (typeOfAnswers == RADIO_BUTTON && editingQuestion.getCorrectSingleChoiceAnswer() == null) {
             editingQuestion.setCorrectSingleChoiceAnswer(answer.getId());
         }
     }
 
     public void onDeleteAnswerPressed() {
-        final String answerId = getIdFromRequest();
-        Answer answerToDelete = null;
-        for (final Answer answer : editingQuestion.getAnswers()) {
-            if (answer.getId().equals(answerId)) {
-                answerToDelete = answer;
-                break;
-            }
-        }
+        final long answerId = getIdFromRequest();
+        quizService.removeAnswer(editingQuestion, answerId);
+    }
 
-        notNull(answerToDelete);
-        editingQuestion.removeAnswer(answerToDelete);
+    public void onQuizChanged() {
+        quizService.updateQuiz(quiz);
     }
 
     //
@@ -121,16 +113,20 @@ public class CreateQuizDialog implements Serializable {
         this.quizService = quizService;
     }
 
+    public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
+        this.viewerManagedBean = viewerManagedBean;
+    }
+
     //
     // Helper Methods
     //
 
-    private String getIdFromRequest() {
+    private long getIdFromRequest() {
         final FacesContext facesContext = FacesContext.getCurrentInstance();
         final ExternalContext externalContext = facesContext.getExternalContext();
         final Map<String, String> params = externalContext.getRequestParameterMap();
 
-        return params.get("id");
+        return parseLong(params.get("id"));
     }
 
 }

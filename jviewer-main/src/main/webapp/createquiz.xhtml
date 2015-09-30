@@ -10,6 +10,7 @@
 <h:head>
     <title>Create new quiz</title>
     <h:outputStylesheet name="css/bootstrap.css"/>
+    <h:outputStylesheet name="css/quiz.css"/>
     <h:outputScript name="js/quiz.js"/>
 </h:head>
 
@@ -25,7 +26,7 @@
                         <h:outputText value="Quiz name"/>
                     </h3>
                     <h:inputText value="#{createQuizDialog.quiz.name}" styleClass="form-control">
-                        <f:ajax event="blur"/>
+                        <f:ajax listener="#{createQuizDialog.onQuizChanged}" event="blur"/>
                     </h:inputText>
                 </div>
                 <div class="col-sm-6">
@@ -33,11 +34,12 @@
                         <h:outputText value="Quiz pass criteria"/>
                     </h3>
                     <h:outputText value="The "/>
-                    <h:inputText value="#{createQuizDialog.quiz.questionsToAnswerToPassTheTest}">
-                        <f:ajax event="blur"/>
+                    <h:inputText value="#{createQuizDialog.quiz.questionsToAnswerToPassTheTest}"
+                            styleClass="width-30px">
+                        <f:ajax listener="#{createQuizDialog.onQuizChanged}" event="blur"/>
                     </h:inputText>
                     <h:outputText id="totalAnswers" value=" of #{createQuizDialog.quiz.totalQuestionsNumber} "/>
-                    <h:outputText value="answers should be correct to pass the quiz."/>
+                    <h:outputText value="questions should be answered correctly to pass the quiz."/>
                 </div>
             </div>
             <div class="row">

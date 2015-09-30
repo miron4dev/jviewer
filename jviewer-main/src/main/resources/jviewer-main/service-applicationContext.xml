@@ -23,5 +23,10 @@
         <property name="dao" ref="resourceDao"/>
     </bean>
 
-    <bean id="quizService" class="tk.jviewer.service.impl.DummyQuizService"/>
+    <bean id="quizService" class="tk.jviewer.service.impl.QuizServiceImpl">
+        <property name="quizDao" ref="quizDao"/>
+        <property name="questionDao" ref="questionDao"/>
+        <property name="answerDao" ref="answerDao"/>
+    </bean>
+
 </beans>
