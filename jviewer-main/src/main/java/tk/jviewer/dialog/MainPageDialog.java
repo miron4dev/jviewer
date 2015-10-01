@@ -11,6 +11,7 @@ import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.QuizService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
@@ -18,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
+import static javax.faces.application.FacesMessage.SEVERITY_INFO;
+import static tk.jviewer.profile.Permission.CREATE_ROOM;
+import static tk.jviewer.profile.Permission.DELETE_ROOM;
 
 /**
  * Main page dialog.
@@ -39,23 +45,32 @@ public class MainPageDialog implements Serializable {
 
     private QuizService quizService;
 
+    private List<Room> availableRooms;
+    private List<Test> availableQuizzes;
+
+    @PostConstruct
+    public void init() {
+        availableRooms = findAvailableRooms();
+        availableQuizzes = findAvailableQuizzes();
+    }
+
     public void createRoom() {
         try {
             controller.createRoom(new Room(roomName, roomPassword, roomType));
-            addMessage(FacesMessage.SEVERITY_INFO, "Success!", "Room has been successfully created.");
+            addMessage(SEVERITY_INFO, "Success!", "Room has been successfully created.");
         } catch (DataAccessException e) {
             LOG.error(e);
-            addMessage(FacesMessage.SEVERITY_ERROR, "Failed", "Room has not been created, because of system error. Please refer to your system administrator");
+            addMessage(SEVERITY_ERROR, "Failed", "Room has not been created, because of system error. Please refer to your system administrator");
         }
     }
 
     public void deleteRoom(Room room) {
         try {
             controller.deleteRoom(room);
-            addMessage(FacesMessage.SEVERITY_INFO, "Success!", "Room has been successfully removed.");
+            addMessage(SEVERITY_INFO, "Success!", "Room has been successfully removed.");
         } catch (DataAccessException e) {
             LOG.error(e);
-            addMessage(FacesMessage.SEVERITY_ERROR, "Failed", "Room has not been deleted, because of system error. Please refer to your system administrator");
+            addMessage(SEVERITY_ERROR, "Failed", "Room has not been deleted, because of system error. Please refer to your system administrator");
         }
     }
 
@@ -63,30 +78,29 @@ public class MainPageDialog implements Serializable {
         viewerManagedBean.setCurrentRoom(room);
     }
 
-    public void chooseQuiz(Test quiz) {
+    public void chooseQuiz(final Test quiz) {
         quizManagedBean.setCurrentQuiz(quiz);
     }
 
+    public void deleteQuiz(final Test quiz) {
+        quizService.removeQuiz(quiz);
+        addMessage(SEVERITY_INFO, "Success!", "Quiz has been successfully removed.");
+    }
+
     public List<Room> getAvailableRooms() {
-        try {
-            return controller.getRooms();
-        } catch (DataAccessException e) {
-            LOG.error(e);
-            addMessage(FacesMessage.SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
-            return new ArrayList<>();
-        }
+        return availableRooms;
     }
 
     public List<Test> getAvailableQuizzes() {
-        return quizService.findQuizzes();
+        return availableQuizzes;
     }
 
     public boolean isRoomCreationAllowed() {
-        return userProfile.hasPermission(Permission.CREATE_ROOM);
+        return userProfile.hasPermission(CREATE_ROOM);
     }
 
     public boolean isRoomDeletionAllowed() {
-        return userProfile.hasPermission(Permission.DELETE_ROOM);
+        return userProfile.hasPermission(DELETE_ROOM);
     }
 
     public List<String> getPossibleRoomTypes() {
@@ -120,6 +134,20 @@ public class MainPageDialog implements Serializable {
     //
     // Helper methods
     //
+
+    private List<Room> findAvailableRooms() {
+        try {
+            return controller.getRooms();
+        } catch (DataAccessException e) {
+            LOG.error("Cannot find available rooms", e);
+            addMessage(SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Test> findAvailableQuizzes() {
+        return quizService.findQuizzes();
+    }
 
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesMessage message = new FacesMessage(severity, summary, detail);

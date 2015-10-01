@@ -69,6 +69,8 @@
                     <p:column style="text-align:center">
                         <p:commandLink value="Edit" actionListener="#{mainPageDialog.chooseQuiz(quiz)}" process="@this"
                                 oncomplete="redirectToEditQuizDialog()"/>
+                        <h:outputText value=" | "/>
+                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteQuiz(quiz)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

@@ -58,11 +58,6 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<Question> findQuestionsForQuiz(final long quizId) {
-        return questionDao.findQuestions(quizId);
-    }
-
-    @Override
     public Question findQuestion(final long id) {
         final Question question = questionDao.findQuestion(id);
         findAnswersForQuestions(question);
@@ -124,6 +119,11 @@ public class QuizServiceImpl implements QuizService {
         final Question question = questionDao.findQuestion(id);
         questionDao.removeQuestion(question.getId());
         quiz.removeQuestion(question);
+    }
+
+    @Override
+    public void removeQuiz(final Test quiz) {
+        quizDao.removeQuiz(quiz);
     }
 
     private static void addCorrectAnswer(final Question question, final Answer answer) {

@@ -36,11 +36,9 @@ public class CreateQuizDialog implements Serializable {
 
     @PostConstruct
     public void init() {
-        final Test emptyQuiz = quizManagedBean.getCurrentQuiz(); // TODO: refactor
-        final List<Question> questions = quizService.findQuestionsForQuiz(emptyQuiz.getId());
-        quiz = new Test(emptyQuiz.getId(), emptyQuiz.getName(), questions, emptyQuiz.getQuestionsToAnswerToPassTheTest());
+        final Test quizFromSession = quizManagedBean.getCurrentQuiz();
+        quiz = quizFromSession == null ? quizService.createQuiz() : quizFromSession;
         quizManagedBean.setEditingQuestion(quiz.getCurrentQuestion());
-        quizService.findAnswersForQuestions(quizManagedBean.getEditingQuestion());
     }
 
     public Test getQuiz() {

@@ -17,8 +17,6 @@ public interface QuizService {
 
     void updateQuiz(Test quiz);
 
-    List<Question> findQuestionsForQuiz(long quizId);
-
     Question findQuestion(long id);
 
     void createQuestion(Test quiz, String text);
@@ -32,4 +30,7 @@ public interface QuizService {
     void updateQuestion(Question question);
 
     void removeQuestion(Test quiz, long id);
+
+    void removeQuiz(Test quiz);
+
 }

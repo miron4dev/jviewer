@@ -17,10 +17,8 @@ public interface QuizDao {
 
     void updateQuiz(Test quiz);
 
-    List<Question> getQuestions(String topic);
-
-    List<Result> getResults(String userName);
-
     List<Test> findQuizzes();
+
+    void removeQuiz(Test quiz);
 
 }
