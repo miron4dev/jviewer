@@ -99,7 +99,7 @@
                 <p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();" type="button"/>
             </h:panelGroup>
             <h:form><p:commandButton value="Take test" action="testing?faces-redirect=true"/></h:form>
-            <h:form><p:commandButton value="Create test" action="createquiz?faces-redirect=true"/></h:form>
+            <h:form><p:commandButton value="Create test" action="#{mainPageDialog.createQuiz}"/></h:form>
             <h:form><p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>
     </div>

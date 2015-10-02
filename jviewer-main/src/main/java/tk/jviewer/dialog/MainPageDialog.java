@@ -83,6 +83,11 @@ public class MainPageDialog implements Serializable {
         quizManagedBean.setCurrentQuiz(quiz);
     }
 
+    public String createQuiz() {
+        quizManagedBean.setCurrentQuiz(null);
+        return "createquiz?faces-redirect=true";
+    }
+
     public void deleteQuiz(final Test quiz) {
         availableQuizzes.remove(quiz);
         quizService.removeQuiz(quiz);
