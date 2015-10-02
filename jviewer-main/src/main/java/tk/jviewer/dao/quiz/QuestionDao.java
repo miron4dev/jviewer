@@ -11,13 +11,12 @@ import java.util.List;
  */
 public interface QuestionDao {
 
-    long createQuestion(long quizId, AnswerType answerType, final String text);
+    long createQuestion(long quizId, String text, AnswerType answerType, String correctTextualAnswer);
 
     Question findQuestion(long id);
-
-    List<Question> findQuestions(long quizId);
 
     void updateQuestion(Question question);
 
     void removeQuestion(long id);
+
 }

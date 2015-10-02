@@ -42,7 +42,7 @@ public class TakeTestDialog implements Serializable {
      */
     @PostConstruct
     public void lookupAvailableTests() {
-        List<Test> availableTests = singletonList(quizService.createQuiz());
+        List<Test> availableTests = quizService.findQuizzes();
         managedBean.setAvailableTests(availableTests);
         logger.info("Found " + availableTests.size() + " available tests for user " + userProfile.getName());
     }

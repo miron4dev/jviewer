@@ -136,4 +136,10 @@
         </managed-property>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>answerIdConverter</managed-bean-name>
+        <managed-bean-class>tk.jviewer.converter.AnswerIdConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 </faces-config>

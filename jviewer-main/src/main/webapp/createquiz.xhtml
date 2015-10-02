@@ -154,7 +154,7 @@
                                                 <h:panelGroup layout="block" id="checkAnswers" styleClass="row">
                                                     <div class="col-xs-10">
                                                         <h:selectManyCheckbox value="#{editingQuestion.correctMultipleChoiceAnswers}"
-                                                                layout="pageDirection">
+                                                                layout="pageDirection" converter="#{answerIdConverter}">
                                                             <f:selectItems value="#{editingQuestion.answers}"
                                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                                             <f:ajax listener="#{createQuizDialog.onCorrectAnswerChanged}"/>
@@ -190,7 +190,7 @@
                                                     <h:outputLabel for="textualAnswer" value="Please write the correct answer"/>
                                                     <h:inputText id="textualAnswer" value="#{editingQuestion.correctTextualAnswer}"
                                                             styleClass="form-control">
-                                                        <f:ajax event="blur"/>
+                                                        <f:ajax listener="#{createQuizDialog.onTextualAnswerChanged()}" event="blur"/>
                                                     </h:inputText>
                                                 </div>
                                             </c:if>
@@ -204,7 +204,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <p:commandLink action="#{createQuizDialog.cancelQuizCreation}" value="Cancel quiz creation"/>
+                    <p:commandLink action="#{createQuizDialog.cancelQuizCreation}" value="Done with quiz creation"/>
                 </div>
             </div>
         </div>

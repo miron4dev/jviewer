@@ -37,23 +37,24 @@ CREATE TABLE localization (
   dialog_name TEXT NOT NULL
 );
 
--- Quizzes --
-CREATE TABLE IF NOT EXISTS quizzes (
+-- Quiz --
+CREATE TABLE IF NOT EXISTS quiz (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   name TEXT NOT NULL,
   questions_to_answer_to_pass INTEGER NOT NULL
 );
 
--- Questions --
-CREATE TABLE IF NOT EXISTS questions (
+-- Question --
+CREATE TABLE IF NOT EXISTS question (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   quiz_id INTEGER NOT NULL,
+  text TEXT NOT NULL,
   answers_type TEXT NOT NULL,
-  text TEXT NOT NULL
+  correct_textual_answer TEXT NOT NULL
 );
 
--- Answers --
-CREATE TABLE IF NOT EXISTS answers (
+-- Answer --
+CREATE TABLE IF NOT EXISTS answer (
   id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
   question_id INTEGER NOT NULL,
   text TEXT NOT NULL,

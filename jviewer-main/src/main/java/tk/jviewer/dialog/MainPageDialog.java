@@ -66,6 +66,7 @@ public class MainPageDialog implements Serializable {
 
     public void deleteRoom(Room room) {
         try {
+            availableRooms.remove(room);
             controller.deleteRoom(room);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully removed.");
         } catch (DataAccessException e) {
@@ -83,6 +84,7 @@ public class MainPageDialog implements Serializable {
     }
 
     public void deleteQuiz(final Test quiz) {
+        availableQuizzes.remove(quiz);
         quizService.removeQuiz(quiz);
         addMessage(SEVERITY_INFO, "Success!", "Quiz has been successfully removed.");
     }

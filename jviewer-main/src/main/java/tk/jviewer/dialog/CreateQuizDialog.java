@@ -11,10 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import static java.lang.Long.parseLong;
+import static javax.faces.context.FacesContext.getCurrentInstance;
 import static org.springframework.util.Assert.hasText;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
@@ -92,7 +92,6 @@ public class CreateQuizDialog implements Serializable {
         final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
         if (typeOfAnswers == RADIO_BUTTON && editingQuestion.getCorrectSingleChoiceAnswer() == null) {
             editingQuestion.setCorrectSingleChoiceAnswer(answer.getId());
-            answer.setCorrect(true); // TODO: remove information about correctness from question
         }
     }
 
@@ -102,7 +101,7 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public void onCorrectAnswerChanged() {
-        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
+        updateEditingQuestion();
     }
 
     public void onQuizChanged() {
@@ -110,7 +109,11 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public void onQuestionUpdated() {
-        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
+        updateEditingQuestion();
+    }
+
+    public void onTextualAnswerChanged() {
+        updateEditingQuestion();
     }
 
     //
@@ -130,11 +133,15 @@ public class CreateQuizDialog implements Serializable {
     //
 
     private long getIdFromRequest() {
-        final FacesContext facesContext = FacesContext.getCurrentInstance();
+        final FacesContext facesContext = getCurrentInstance();
         final ExternalContext externalContext = facesContext.getExternalContext();
         final Map<String, String> params = externalContext.getRequestParameterMap();
 
         return parseLong(params.get("id"));
+    }
+
+    private void updateEditingQuestion() {
+        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
     }
 
 }

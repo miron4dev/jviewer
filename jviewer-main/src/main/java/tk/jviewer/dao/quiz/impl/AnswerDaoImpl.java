@@ -11,24 +11,29 @@ import java.util.List;
 import static com.google.common.collect.ImmutableMap.of;
 
 /**
- * Created by Sergey Yaskov on 30.09.2015.
+ * See {@link AnswerDao}.
  */
 public class AnswerDaoImpl extends JdbcDaoSupport implements AnswerDao {
 
-    private static final String SQL_FIND_ANSWERS = "select id, text, correct from answers where question_id = ?";
+    private static final String SQL_FIND_ANSWERS_FOR_QUESTION =
+            "select id, text, correct from answer where question_id = ?";
+
+    private static final String SQL_UPDATE_ANSWER = "update answer set text = ?, correct = ? where id = ?";
+
+    private static final String SQL_DELETE_ANSWER = "delete from answer where id = ?";
 
     private static final RowMapper<Answer> ANSWER_ROW_MAPPER =
             (rs, rowNum) -> new Answer(rs.getLong("id"), rs.getString("text"), rs.getBoolean("correct"));
 
     @Override
     public List<Answer> findAnswers(final Long questionId) {
-        return getJdbcTemplate().query(SQL_FIND_ANSWERS, new Object[]{questionId}, ANSWER_ROW_MAPPER);
+        return getJdbcTemplate().query(SQL_FIND_ANSWERS_FOR_QUESTION, new Object[]{questionId}, ANSWER_ROW_MAPPER);
     }
 
     @Override
     public long createAnswer(final long questionId, final String text, final boolean correct) {
         final Number id = new SimpleJdbcInsert(getJdbcTemplate())
-                .withTableName("answers")
+                .withTableName("answer")
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(of("question_id", questionId, "text", text, "correct", correct));
 
@@ -37,13 +42,12 @@ public class AnswerDaoImpl extends JdbcDaoSupport implements AnswerDao {
 
     @Override
     public void updateAnswer(final Answer answer) {
-        getJdbcTemplate().update("update answers set text = ?, correct = ? where id = ?",
-                answer.getText(), answer.isCorrect(), answer.getId());
+        getJdbcTemplate().update(SQL_UPDATE_ANSWER, answer.getText(), answer.isCorrect(), answer.getId());
     }
 
     @Override
     public void removeAnswer(final long id) {
-        getJdbcTemplate().update("delete from answers where id = ?", id);
+        getJdbcTemplate().update(SQL_DELETE_ANSWER, id);
     }
 
 }

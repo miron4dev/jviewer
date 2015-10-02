@@ -29,6 +29,7 @@
 
     <bean id="questionDao" class="tk.jviewer.dao.quiz.impl.QuestionDaoImpl">
         <property name="dataSource" ref="dataSource"/>
+        <property name="answerDao" ref="answerDao"/>
     </bean>
 
     <bean id="answerDao" class="tk.jviewer.dao.quiz.impl.AnswerDaoImpl">

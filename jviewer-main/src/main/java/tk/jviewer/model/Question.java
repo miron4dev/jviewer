@@ -26,8 +26,6 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
-    private Long correctSingleChoiceAnswer;
-    private List<Long> correctMultipleChoiceAnswers = new ArrayList<>();
     private Long userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
@@ -46,6 +44,13 @@ public class Question implements Serializable {
         this.id = id;
         this.text = text;
         this.typeOfAnswers = typeOfAnswers;
+    }
+
+    public Question(final long id, final String text, final AnswerType typeOfAnswers, final String correctTextualAnswer) {
+        this.id = id;
+        this.text = text;
+        this.typeOfAnswers = typeOfAnswers;
+        this.correctTextualAnswer = correctTextualAnswer;
     }
 
     public Question(final String text, final AnswerType typeOfAnswers) {
@@ -93,16 +98,39 @@ public class Question implements Serializable {
         answers.add(answer);
     }
 
-    public List<Long> getCorrectMultipleChoiceAnswers() {
-        return correctMultipleChoiceAnswers;
+    public Long getCorrectSingleChoiceAnswer() {
+        for (final Answer answer : answers) {
+            if (answer.isCorrect()) {
+                return answer.getId();
+            }
+        }
+        return null;
     }
 
-    public void addCorrectMultipleChoiceAnswer(final Long answerId) {
-        correctMultipleChoiceAnswers.add(answerId);
+    public void setCorrectSingleChoiceAnswer(Long correctSingleChoiceAnswer) {
+        if (correctSingleChoiceAnswer == null) {
+            return;
+        }
+
+        for (final Answer answer : answers) {
+            answer.setCorrect(answer.getId() == correctSingleChoiceAnswer.intValue());
+        }
+    }
+
+    public List<Long> getCorrectMultipleChoiceAnswers() {
+        final List<Long> correct = new ArrayList<>();
+        for (final Answer answer : answers) {
+            if (answer.isCorrect()) {
+                correct.add(answer.getId());
+            }
+        }
+        return correct;
     }
 
     public void setCorrectMultipleChoiceAnswers(List<Long> correctMultipleChoiceAnswers) {
-        this.correctMultipleChoiceAnswers = correctMultipleChoiceAnswers;
+        for (final Answer answer : answers) {
+            answer.setCorrect(correctMultipleChoiceAnswers.contains(answer.getId()));
+        }
     }
 
 
@@ -140,22 +168,16 @@ public class Question implements Serializable {
 
     public boolean isCorrectlyAnswered() {
         if (typeOfAnswers == RADIO_BUTTON) {
+            final Long correctSingleChoiceAnswer = getCorrectSingleChoiceAnswer();
             return correctSingleChoiceAnswer.equals(userSingleChoiceAnswer);
         } else if (typeOfAnswers == CHECK_BOX) {
+            final List<Long> correctMultipleChoiceAnswers = getCorrectMultipleChoiceAnswers();
             return isEqualCollection(correctMultipleChoiceAnswers, userMultipleChoiceAnswers);
         } else if (typeOfAnswers == TEXT_FIELD) {
             return correctTextualAnswer.equalsIgnoreCase(trim(userTextualAnswer));
         }
 
         throw new RuntimeException("Unsupported multipleChoiceAnswers type " + typeOfAnswers);
-    }
-
-    public Long getCorrectSingleChoiceAnswer() {
-        return correctSingleChoiceAnswer;
-    }
-
-    public void setCorrectSingleChoiceAnswer(Long correctSingleChoiceAnswer) {
-        this.correctSingleChoiceAnswer = correctSingleChoiceAnswer;
     }
 
     public void removeAnswer(long answerId) {

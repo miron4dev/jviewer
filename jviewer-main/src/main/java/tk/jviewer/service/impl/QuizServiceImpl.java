@@ -1,5 +1,6 @@
 package tk.jviewer.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import tk.jviewer.converter.TestConverter;
 import tk.jviewer.dao.quiz.AnswerDao;
 import tk.jviewer.dao.quiz.QuestionDao;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static org.springframework.util.Assert.notEmpty;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 import static tk.jviewer.model.AnswerType.TEXT_FIELD;
@@ -41,7 +42,7 @@ public class QuizServiceImpl implements QuizService {
     public Test createQuiz() {
         final long quizId = quizDao.createQuiz(DEFAULT_QUIZ_NAME, DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
         final Question question = new Question(DEFAULT_QUESTION_TEXT, DEFAULT_ANSWERS_TYPE);
-        final long questionId = questionDao.createQuestion(quizId, DEFAULT_ANSWERS_TYPE, DEFAULT_QUESTION_TEXT);
+        final long questionId = questionDao.createQuestion(quizId, DEFAULT_QUESTION_TEXT, DEFAULT_ANSWERS_TYPE, EMPTY);
         question.setId(questionId);
 
         return new Test(quizId, DEFAULT_QUIZ_NAME, new ArrayList<>(singletonList(question)), DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
@@ -59,15 +60,13 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Question findQuestion(final long id) {
-        final Question question = questionDao.findQuestion(id);
-        findAnswersForQuestions(question);
-        return question;
+        return questionDao.findQuestion(id);
     }
 
     @Override
     public void createQuestion(final Test quiz, final String text) {
         final Question question = new Question(text, RADIO_BUTTON);
-        final long id = questionDao.createQuestion(quiz.getId(), question.getTypeOfAnswers(), question.getText());
+        final long id = questionDao.createQuestion(quiz.getId(), question.getText(), question.getTypeOfAnswers(), EMPTY);
         question.setId(id);
         quiz.addQuestion(question);
     }
@@ -86,30 +85,9 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void findAnswersForQuestions(final Question... questions) {
-        notEmpty(questions);
-        for (final Question question : questions) {
-            final List<Answer> answers = answerDao.findAnswers(question.getId());
-            question.setAnswers(answers);
-            answers.stream().filter(Answer::isCorrect).forEach(answer -> {
-                addCorrectAnswer(question, answer);
-            });
-        }
-    }
-
-    @Override
-    public void updateQuestion(Question question) {
+    public void updateQuestion(final Question question) {
         questionDao.updateQuestion(question);
-        for (final Answer answer : answerDao.findAnswers(question.getId())) {
-            final AnswerType typeOfAnswers = question.getTypeOfAnswers();
-            if (typeOfAnswers == AnswerType.CHECK_BOX) {
-                answer.setCorrect(question.getCorrectMultipleChoiceAnswers().contains(answer.getId()));
-            } else if (typeOfAnswers == AnswerType.RADIO_BUTTON) {
-                final Long singleChoiceAnswer = question.getCorrectSingleChoiceAnswer();
-                if (singleChoiceAnswer != null) {
-                    answer.setCorrect(singleChoiceAnswer.equals(answer.getId()));
-                }
-            }
+        for (final Answer answer : question.getAnswers()) {
             answerDao.updateAnswer(answer);
         }
     }
@@ -124,54 +102,6 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void removeQuiz(final Test quiz) {
         quizDao.removeQuiz(quiz);
-    }
-
-    private static void addCorrectAnswer(final Question question, final Answer answer) {
-        if (question.getTypeOfAnswers() == CHECK_BOX) {
-            question.addCorrectMultipleChoiceAnswer(answer.getId());
-        } else if (question.getTypeOfAnswers() == RADIO_BUTTON) {
-            question.setCorrectSingleChoiceAnswer(answer.getId());
-        }
-    }
-
-    /**
-     * Returns dummy test. It should be removed after real implementation. Also please take care about {@link TestConverter}.
-     *
-     * @return see description.
-     */
-    private Test fillDummyTest() {
-        Question question1 = new Question(RADIO_BUTTON);
-        question1.setId(1);
-        question1.setTopic("That is the question");
-        question1.setText("To be or not to be?");
-        Answer answer1 = new Answer(0, "To be");
-        Answer answer2 = new Answer(1, "Not to be");
-        question1.setAnswers(new ArrayList<>(asList(answer1, answer2)));
-        question1.setCorrectSingleChoiceAnswer(0L);
-
-        Question question2 = new Question(CHECK_BOX);
-        question2.setId(2);
-        question2.setTopic("Random test");
-        question2.setText("Who lives in a pineapple under the sea?");
-        Answer answer21 = new Answer(0, "Barmaley");
-        Answer answer22 = new Answer(1, "Sponge Bob Square Pants");
-        Answer answer23 = new Answer(2, "Earthworm Jim");
-        Answer answer24 = new Answer(3, "Princess Nesmeyana");
-        question2.setAnswers(new ArrayList<>(asList(answer21, answer22, answer23, answer24)));
-        question2.setCorrectMultipleChoiceAnswers(new ArrayList<>(asList(1L, 2L)));
-
-        Question question3 = new Question(TEXT_FIELD);
-        question3.setId(3);
-        question3.setTopic("Arithmetical question");
-        question3.setText("2 + 2 = ?");
-        question3.setCorrectTextualAnswer("4");
-
-        List<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-        questions.add(question3);
-
-        return new Test(0, "Test", questions, 2);
     }
 
     //
