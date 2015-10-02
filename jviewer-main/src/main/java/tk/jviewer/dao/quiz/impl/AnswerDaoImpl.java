@@ -46,8 +46,8 @@ public class AnswerDaoImpl extends JdbcDaoSupport implements AnswerDao {
     }
 
     @Override
-    public void removeAnswer(final long id) {
-        getJdbcTemplate().update(SQL_DELETE_ANSWER, id);
+    public void removeAnswer(final Answer answer) {
+        getJdbcTemplate().update(SQL_DELETE_ANSWER, answer.getId());
     }
 
 }

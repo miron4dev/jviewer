@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.Long.parseLong;
@@ -81,7 +82,7 @@ public class CreateQuizDialog implements Serializable {
 
     public void onDeleteQuestionPressed() {
         final long id = getIdFromRequest();
-        quizService.removeQuestion(quiz, id);
+        quizService.removeQuestion(quiz, findQuestionById(quiz.getQuestions(), id));
     }
 
     public void onAddNewAnswerPressed() {
@@ -92,12 +93,13 @@ public class CreateQuizDialog implements Serializable {
         final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
         if (typeOfAnswers == RADIO_BUTTON && editingQuestion.getCorrectSingleChoiceAnswer() == null) {
             editingQuestion.setCorrectSingleChoiceAnswer(answer.getId());
+            updateEditingQuestion();
         }
     }
 
     public void onDeleteAnswerPressed() {
         final long answerId = getIdFromRequest();
-        quizService.removeAnswer(quizManagedBean.getEditingQuestion(), answerId);
+        quizService.removeAnswer(quizManagedBean.getEditingQuestion(), findAnswerById(getEditingQuestion().getAnswers(), answerId));
     }
 
     public void onCorrectAnswerChanged() {
@@ -142,6 +144,26 @@ public class CreateQuizDialog implements Serializable {
 
     private void updateEditingQuestion() {
         quizService.updateQuestion(quizManagedBean.getEditingQuestion());
+    }
+
+    private Question findQuestionById(final List<Question> questions, final Long id) {
+        for (final Question question : questions) {
+            if (question.getId().equals(id)) {
+                return question;
+            }
+        }
+
+        throw new RuntimeException("No question with id " + id + " found");
+    }
+
+    private Answer findAnswerById(final List<Answer> answers, final Long id) {
+        for (final Answer answer : answers) {
+            if (answer.getId().equals(id)) {
+                return answer;
+            }
+        }
+
+        throw new RuntimeException("No answer with id " + id + " found");
     }
 
 }

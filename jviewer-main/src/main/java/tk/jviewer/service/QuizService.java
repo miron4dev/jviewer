@@ -23,11 +23,11 @@ public interface QuizService {
 
     void createAnswer(Question question, Answer answer);
 
-    void removeAnswer(Question question, long answerId);
+    void removeAnswer(Question question, Answer answer);
 
     void updateQuestion(Question question);
 
-    void removeQuestion(Test quiz, long id);
+    void removeQuestion(Test quiz, Question question);
 
     void removeQuiz(Test quiz);
 

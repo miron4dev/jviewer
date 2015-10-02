@@ -17,6 +17,6 @@ public interface QuestionDao {
 
     void updateQuestion(Question question);
 
-    void removeQuestion(long id);
+    void removeQuestion(Question question);
 
 }

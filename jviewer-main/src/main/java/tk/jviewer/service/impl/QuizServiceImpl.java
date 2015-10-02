@@ -79,9 +79,9 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void removeAnswer(final Question question, final long answerId) {
-        answerDao.removeAnswer(answerId);
-        question.removeAnswer(answerId);
+    public void removeAnswer(final Question question, final Answer answer) {
+        answerDao.removeAnswer(answer);
+        question.removeAnswer(answer);
     }
 
     @Override
@@ -93,9 +93,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void removeQuestion(Test quiz, long id) {
-        final Question question = questionDao.findQuestion(id);
-        questionDao.removeQuestion(question.getId());
+    public void removeQuestion(final Test quiz, final Question question) {
+        questionDao.removeQuestion(question);
         quiz.removeQuestion(question);
     }
 

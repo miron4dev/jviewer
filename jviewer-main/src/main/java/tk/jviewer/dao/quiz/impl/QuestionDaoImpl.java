@@ -1,6 +1,5 @@
 package tk.jviewer.dao.quiz.impl;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -56,8 +55,11 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     }
 
     @Override
-    public void removeQuestion(final long id) {
-        getJdbcTemplate().update(SQL_DELETE_QUESTION, id);
+    public void removeQuestion(final Question question) {
+        getJdbcTemplate().update(SQL_DELETE_QUESTION, question.getId());
+        for (final Answer answer : question.getAnswers()) {
+            answerDao.removeAnswer(answer);
+        }
     }
 
     @Override

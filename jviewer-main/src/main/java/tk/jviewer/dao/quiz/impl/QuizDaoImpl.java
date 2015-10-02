@@ -3,6 +3,7 @@ package tk.jviewer.dao.quiz.impl;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import tk.jviewer.dao.quiz.QuestionDao;
 import tk.jviewer.dao.quiz.QuizDao;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
@@ -43,6 +44,8 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
             "update quiz set name = ?, questions_to_answer_to_pass = ? where id = ?";
 
     private static final String SQL_DELETE_QUIZ = "delete from quiz where id = ?";
+
+    private QuestionDao questionDao;
 
     private static class QuizToRowMapper implements ResultSetExtractor<List<Test>> {
 
@@ -114,6 +117,17 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
     @Override
     public void removeQuiz(final Test quiz) {
         getJdbcTemplate().update(SQL_DELETE_QUIZ, quiz.getId());
+        for (final Question question : quiz.getQuestions()) {
+            questionDao.removeQuestion(question);
+        }
+    }
+
+    //
+    // Dependency Injection
+    //
+
+    public void setQuestionDao(QuestionDao questionDao) {
+        this.questionDao = questionDao;
     }
 
 }

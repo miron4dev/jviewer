@@ -22,7 +22,7 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = -1512807566188743676L;
 
-    private long id;
+    private Long id;
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
@@ -32,21 +32,21 @@ public class Question implements Serializable {
     private List<String> userMultipleChoiceAnswers;
     private AnswerType typeOfAnswers;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Question(final long id, final String text, final AnswerType typeOfAnswers) {
+    public Question(final Long id, final String text, final AnswerType typeOfAnswers) {
         this.id = id;
         this.text = text;
         this.typeOfAnswers = typeOfAnswers;
     }
 
-    public Question(final long id, final String text, final AnswerType typeOfAnswers, final String correctTextualAnswer) {
+    public Question(final Long id, final String text, final AnswerType typeOfAnswers, final String correctTextualAnswer) {
         this.id = id;
         this.text = text;
         this.typeOfAnswers = typeOfAnswers;
@@ -180,8 +180,8 @@ public class Question implements Serializable {
         throw new RuntimeException("Unsupported multipleChoiceAnswers type " + typeOfAnswers);
     }
 
-    public void removeAnswer(long answerId) {
-        answers.remove(new Answer(answerId)); // TODO
+    public void removeAnswer(Answer answer) {
+        answers.remove(answer);
     }
 
     @Override

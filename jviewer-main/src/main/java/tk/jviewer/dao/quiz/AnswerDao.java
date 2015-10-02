@@ -14,7 +14,7 @@ public interface AnswerDao {
 
     long createAnswer(long questionId, final String text, final boolean correct);
 
-    void removeAnswer(long id);
+    void removeAnswer(Answer answer);
 
     void updateAnswer(Answer answer);
 

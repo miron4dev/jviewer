@@ -14,7 +14,7 @@ public class Answer implements Serializable {
 
     private static final long serialVersionUID = -1283565263146494192L;
 
-    private long id; // TODO: primitive or object?
+    private Long id; // TODO: primitive or object?
     private String text;
     private boolean correct;
 
@@ -39,11 +39,11 @@ public class Answer implements Serializable {
         this.correct = correct;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
