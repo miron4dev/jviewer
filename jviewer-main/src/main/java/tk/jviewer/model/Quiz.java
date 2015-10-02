@@ -49,7 +49,7 @@ public class Quiz implements Serializable {
     }
 
     public Question getCurrentQuestion() {
-        return questions.get(currentQuestionIndex);
+        return questions.isEmpty() ? null : questions.get(currentQuestionIndex);
     }
 
     public boolean isCurrentQuestionTheLast() {

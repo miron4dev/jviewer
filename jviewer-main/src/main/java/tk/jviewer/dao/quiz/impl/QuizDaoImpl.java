@@ -66,24 +66,28 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                 }
 
                 final long questionId = rs.getLong("question_id");
-                final String questionText = rs.getString("question_text");
-                final AnswerType answersType = valueOf(rs.getString("answers_type"));
-                final String correctTextualAnswer = rs.getString("correct_textual_answer");
-                Question question = questionById.get(questionId);
-                if (question == null) {
-                    question = new Question(questionId, questionText, answersType, correctTextualAnswer);
-                    questionById.put(questionId, question);
-                    quiz.addQuestion(question);
-                }
+                if (!rs.wasNull()) {
+                    final String questionText = rs.getString("question_text");
+                    final AnswerType answersType = valueOf(rs.getString("answers_type"));
+                    final String correctTextualAnswer = rs.getString("correct_textual_answer");
+                    Question question = questionById.get(questionId);
+                    if (question == null) {
+                        question = new Question(questionId, questionText, answersType, correctTextualAnswer);
+                        questionById.put(questionId, question);
+                        quiz.addQuestion(question);
+                    }
 
-                final long answerId = rs.getLong("answer_id");
-                final String answerTest = rs.getString("answer_text");
-                final boolean answerCorrect = rs.getBoolean("correct");
-                Answer answer = answerById.get(answerId);
-                if (answer == null) {
-                    answer = new Answer(answerId, answerTest, answerCorrect);
-                    answerById.put(answerId, answer);
-                    question.addAnswer(answer);
+                    final long answerId = rs.getLong("answer_id");
+                    if (!rs.wasNull()) {
+                        final String answerTest = rs.getString("answer_text");
+                        final boolean answerCorrect = rs.getBoolean("correct");
+                        Answer answer = answerById.get(answerId);
+                        if (answer == null) {
+                            answer = new Answer(answerId, answerTest, answerCorrect);
+                            answerById.put(answerId, answer);
+                            question.addAnswer(answer);
+                        }
+                    }
                 }
             }
 

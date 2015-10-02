@@ -19,7 +19,7 @@ public interface QuizService {
 
     Question findQuestion(long id);
 
-    void createQuestion(Quiz quiz, String text);
+    Question createQuestion(Quiz quiz, String text);
 
     void createAnswer(Question question, Answer answer);
 

@@ -3,8 +3,8 @@ package tk.jviewer.dialog;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
-import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.model.Quiz;
+import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -20,30 +20,28 @@ import static org.springframework.util.Assert.hasText;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
 /**
- * Serves "create quiz" use case.
+ * Serves "edit quiz" use case.
  */
-public class CreateQuizDialog implements Serializable {
+public class EditQuizDialog implements Serializable {
 
     private static final long serialVersionUID = -2334735949960107078L;
 
     private QuizService quizService;
-
     private QuizManagedBean quizManagedBean;
-
-    private Quiz quiz;
 
     private String newQuestionText;
     private String newAnswerText;
 
     @PostConstruct
     public void init() {
-        final Quiz quizFromSession = quizManagedBean.getCurrentQuiz();
-        quiz = quizFromSession == null ? quizService.createQuiz() : quizFromSession;
-        quizManagedBean.setEditingQuestion(quiz.getCurrentQuestion());
+        if (getQuiz() == null) {
+            quizManagedBean.setCurrentQuiz(quizService.createQuiz());
+        }
+        quizManagedBean.setEditingQuestion(getQuiz().getCurrentQuestion());
     }
 
     public Quiz getQuiz() {
-        return quiz;
+        return quizManagedBean.getCurrentQuiz();
     }
 
     public Question getEditingQuestion() {
@@ -77,12 +75,16 @@ public class CreateQuizDialog implements Serializable {
 
     public void onAddNewQuestionPressed() {
         hasText(newQuestionText);
-        quizService.createQuestion(quiz, newQuestionText);
+        final Question question = quizService.createQuestion(getQuiz(), newQuestionText);
+        quizManagedBean.setEditingQuestion(question);
     }
 
     public void onDeleteQuestionPressed() {
         final long id = getIdFromRequest();
-        quizService.removeQuestion(quiz, findQuestionById(quiz.getQuestions(), id));
+        final Quiz quiz = getQuiz();
+        final List<Question> questions = quiz.getQuestions();
+        quizService.removeQuestion(quiz, findQuestionById(questions, id));
+        quizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
     }
 
     public void onAddNewAnswerPressed() {
@@ -107,7 +109,7 @@ public class CreateQuizDialog implements Serializable {
     }
 
     public void onQuizChanged() {
-        quizService.updateQuiz(quiz);
+        quizService.updateQuiz(getQuiz());
     }
 
     public void onQuestionUpdated() {

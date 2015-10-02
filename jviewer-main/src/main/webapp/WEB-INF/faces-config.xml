@@ -20,7 +20,7 @@
 
     <managed-bean>
         <managed-bean-name>createQuizDialog</managed-bean-name>
-        <managed-bean-class>tk.jviewer.dialog.CreateQuizDialog</managed-bean-class>
+        <managed-bean-class>tk.jviewer.dialog.EditQuizDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>quizService</property-name>

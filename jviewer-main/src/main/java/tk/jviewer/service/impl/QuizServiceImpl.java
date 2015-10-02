@@ -12,7 +12,6 @@ import tk.jviewer.service.QuizService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
 
@@ -35,12 +34,8 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Quiz createQuiz() {
-        final long quizId = quizDao.createQuiz(DEFAULT_QUIZ_NAME, DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
-        final Question question = new Question(DEFAULT_QUESTION_TEXT, DEFAULT_ANSWERS_TYPE);
-        final long questionId = questionDao.createQuestion(quizId, DEFAULT_QUESTION_TEXT, DEFAULT_ANSWERS_TYPE, EMPTY);
-        question.setId(questionId);
-
-        return new Quiz(quizId, DEFAULT_QUIZ_NAME, new ArrayList<>(singletonList(question)), DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
+        final long quizId = quizDao.createQuiz(DEFAULT_QUIZ_NAME, DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS); // TODO do not create Quiz object here
+        return new Quiz(quizId, DEFAULT_QUIZ_NAME, new ArrayList<>(), DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
     }
 
     @Override
@@ -64,11 +59,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void createQuestion(final Quiz quiz, final String text) {
+    public Question createQuestion(final Quiz quiz, final String text) {
         final Question question = new Question(text, RADIO_BUTTON);
-        final long id = questionDao.createQuestion(quiz.getId(), question.getText(), question.getTypeOfAnswers(), EMPTY);
+        final long id = questionDao.createQuestion(quiz.getId(), question.getText(), question.getTypeOfAnswers(), EMPTY); // TODO do not create Question object here
         question.setId(id);
         quiz.addQuestion(question);
+        return question;
     }
 
     @Override
