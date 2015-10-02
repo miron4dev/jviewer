@@ -29,6 +29,8 @@ public class EditQuizDialog implements Serializable {
     private QuizService quizService;
     private QuizManagedBean quizManagedBean;
 
+    private boolean quizJustCreated = false;
+
     private String newQuestionText;
     private String newAnswerText;
 
@@ -36,6 +38,7 @@ public class EditQuizDialog implements Serializable {
     public void init() {
         if (getQuiz() == null) {
             quizManagedBean.setCurrentQuiz(quizService.createQuiz());
+            quizJustCreated = true;
         }
         quizManagedBean.setEditingQuestion(getQuiz().getCurrentQuestion());
     }
@@ -62,6 +65,10 @@ public class EditQuizDialog implements Serializable {
 
     public void setNewAnswerText(String newAnswerText) {
         this.newAnswerText = newAnswerText;
+    }
+
+    public boolean isQuizJustCreated() {
+        return quizJustCreated;
     }
 
     public String cancelQuizCreation() {

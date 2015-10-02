@@ -225,6 +225,11 @@
                 jviewer.quiz.selectText('quizForm:newQuestionText');
             </script>
         </h:panelGroup>
+        <h:panelGroup rendered="#{createQuizDialog.quizJustCreated}" layout="block">
+            <script type="text/javascript">
+                jviewer.quiz.selectText('quizForm:quizName');
+            </script>
+        </h:panelGroup>
     </h:form>
 </h:body>
 </html>
