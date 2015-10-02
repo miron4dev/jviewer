@@ -31,8 +31,9 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                     "  name, " +
                     "  questions_to_answer_to_pass, " +
                     "  question.id   question_id, " +
-                    "  answers_type, " +
                     "  question.text question_text, " +
+                    "  answers_type, " +
+                    "  correct_textual_answer, " +
                     "  answer.id     answer_id, " +
                     "  answer.text   answer_text, " +
                     "  correct " +
@@ -65,11 +66,12 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                 }
 
                 final long questionId = rs.getLong("question_id");
-                final AnswerType answersType = valueOf(rs.getString("answers_type"));
                 final String questionText = rs.getString("question_text");
+                final AnswerType answersType = valueOf(rs.getString("answers_type"));
+                final String correctTextualAnswer = rs.getString("correct_textual_answer");
                 Question question = questionById.get(questionId);
                 if (question == null) {
-                    question = new Question(questionId, questionText, answersType);
+                    question = new Question(questionId, questionText, answersType, correctTextualAnswer);
                     questionById.put(questionId, question);
                     quiz.addQuestion(question);
                 }
