@@ -8,7 +8,7 @@
         xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
-    <title>Take test</title>
+    <title>Take quiz</title>
     <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 <h:body>
@@ -62,7 +62,7 @@
                                 <h:panelGroup id="controls">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <p:commandLink action="#{takeTestDialog.cancelTest}" value="Cancel test"/>
+                                            <p:commandLink action="#{takeTestDialog.cancelTest}" value="Cancel quiz"/>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="pull-right">
@@ -71,7 +71,7 @@
                                                 <p:commandButton actionListener="#{takeTestDialog.nextQuestion}" onclick="sendAnswers()"
                                                         rendered="#{not takeTestDialog.lastQuestion}" update="question" value="Next"/>
                                                 <p:commandButton action="#{takeTestDialog.redirectToResults}" onclick="sendAnswers()"
-                                                        rendered="#{takeTestDialog.lastQuestion}" update="question" value="Finish test"/>
+                                                        rendered="#{takeTestDialog.lastQuestion}" update="question" value="Finish quiz"/>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                         <hr/>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p:progressBar value="#{takeTestDialog.chosenTest.progress}"
+                                <p:progressBar value="#{takeTestDialog.chosenQuiz.progress}"
                                         labelTemplate="{value}%" displayOnly="true"/>
                             </div>
                         </div>

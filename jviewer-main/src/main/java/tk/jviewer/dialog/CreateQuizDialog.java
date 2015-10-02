@@ -4,7 +4,7 @@ import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.QuizManagedBean;
-import tk.jviewer.model.Test;
+import tk.jviewer.model.Quiz;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -30,19 +30,19 @@ public class CreateQuizDialog implements Serializable {
 
     private QuizManagedBean quizManagedBean;
 
-    private Test quiz;
+    private Quiz quiz;
 
     private String newQuestionText;
     private String newAnswerText;
 
     @PostConstruct
     public void init() {
-        final Test quizFromSession = quizManagedBean.getCurrentQuiz();
+        final Quiz quizFromSession = quizManagedBean.getCurrentQuiz();
         quiz = quizFromSession == null ? quizService.createQuiz() : quizFromSession;
         quizManagedBean.setEditingQuestion(quiz.getCurrentQuestion());
     }
 
-    public Test getQuiz() {
+    public Quiz getQuiz() {
         return quiz;
     }
 

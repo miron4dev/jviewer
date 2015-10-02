@@ -9,7 +9,7 @@
 <f:view locale="#{localeModel.currentLocale}"/>
 
 <h:head>
-    <title>Choose your test</title>
+    <title>Choose your quiz</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
 </h:head>
 
@@ -26,14 +26,14 @@
     </h:form>
 
     <div style="text-align: center; margin-top: 5%;">
-        <p:panel header="Choose your test" styleClass="common-panel">
+        <p:panel header="Choose your quiz" styleClass="common-panel">
             <h:form>
-                <p:selectOneMenu id="testList" styleClass="select-menu" value="#{takeTestDialog.chosenTest}" converter="#{testConverter}">
-                    <f:selectItems value="#{takeTestDialog.availableTests}" var="test" itemLabel="#{test.name}"/>
+                <p:selectOneMenu id="testList" styleClass="select-menu" value="#{takeTestDialog.chosenQuiz}" converter="#{testConverter}">
+                    <f:selectItems value="#{takeTestDialog.availableQuizzes}" var="quiz" itemLabel="#{quiz.name}"/>
                 </p:selectOneMenu>
                 <br/>
                 <br/>
-                <p:commandButton action="taketest?faces-redirect=true" value="Take test"/>
+                <p:commandButton action="taketest?faces-redirect=true" value="Take quiz"/>
             </h:form>
             <h:form><p:commandButton value="Back" action="main?faces-redirect=true"/></h:form>
         </p:panel>

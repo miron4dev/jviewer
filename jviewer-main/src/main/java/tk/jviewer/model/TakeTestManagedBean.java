@@ -6,38 +6,38 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * Contains Take Test dialog state.
+ * Contains Take Quiz dialog state.
  */
 public class TakeTestManagedBean implements Serializable {
 
     private static final long serialVersionUID = -413311231242850151L;
 
-    private Test chosenTest;
-    private List<Test> availableTests;
+    private Quiz chosenQuiz;
+    private List<Quiz> availableQuizzes;
 
-    public Test getChosenTest() {
-        return chosenTest;
+    public Quiz getChosenQuiz() {
+        return chosenQuiz;
     }
 
-    public void setChosenTest(Test chosenTest) {
-        this.chosenTest = chosenTest;
+    public void setChosenQuiz(Quiz chosenQuiz) {
+        this.chosenQuiz = chosenQuiz;
     }
 
-    public List<Test> getAvailableTests() {
-        return availableTests;
+    public List<Quiz> getAvailableQuizzes() {
+        return availableQuizzes;
     }
 
-    public void setAvailableTests(List<Test> availableTests) {
-        this.availableTests = availableTests;
+    public void setAvailableQuizzes(List<Quiz> availableQuizzes) {
+        this.availableQuizzes = availableQuizzes;
     }
 
-    public Test lookupTestByName(String name) {
+    public Quiz lookupTestByName(String name) {
         if (isEmpty(name)) {
             return null;
         }
-        for (Test test: availableTests) {
-            if (name.equals(test.getName())) {
-                return test;
+        for (Quiz quiz : availableQuizzes) {
+            if (name.equals(quiz.getName())) {
+                return quiz;
             }
         }
         return null;

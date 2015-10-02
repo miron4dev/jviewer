@@ -1,8 +1,6 @@
 package tk.jviewer.dao.quiz;
 
-import tk.jviewer.model.Question;
-import tk.jviewer.model.Result;
-import tk.jviewer.model.Test;
+import tk.jviewer.model.Quiz;
 
 import java.util.List;
 
@@ -20,10 +18,10 @@ public interface QuizDao {
      *
      * @return the list of the quizzes, not null.
      */
-    List<Test> findQuizzes();
+    List<Quiz> findQuizzes();
 
-    void updateQuiz(Test quiz);
+    void updateQuiz(Quiz quiz);
 
-    void removeQuiz(Test quiz);
+    void removeQuiz(Quiz quiz);
 
 }

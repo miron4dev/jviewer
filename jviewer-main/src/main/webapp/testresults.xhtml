@@ -24,10 +24,10 @@
                                         <h:outputText value="Your results"/>
                                     </div>
                                     <div class="h4">
-                                        <h:outputText value="#{takeTestDialog.chosenTest.correctlyAnsweredQuestionsNumber} of #{takeTestDialog.chosenTest.totalQuestionsNumber}"/>
+                                        <h:outputText value="#{takeTestDialog.chosenQuiz.correctlyAnsweredQuestionsNumber} of #{takeTestDialog.chosenQuiz.totalQuestionsNumber}"/>
                                     </div>
                                     <div class="h4">
-                                        <h:outputText value="#{takeTestDialog.chosenTest.passed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
+                                        <h:outputText value="#{takeTestDialog.chosenQuiz.passed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h:panelGroup id="controls" styleClass="pull-right">
-                                <p:commandButton action="#{takeTestDialog.cancelTest}" value="Cancel test"/>
+                                <p:commandButton action="#{takeTestDialog.cancelTest}" value="Cancel quiz"/>
                             </h:panelGroup>
                         </div>
                     </div>

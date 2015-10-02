@@ -10,11 +10,11 @@ import java.util.List;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * Test representation.
+ * Quiz representation.
  *
  * @author Evgeny Mironenko
  */
-public class Test implements Serializable {
+public class Quiz implements Serializable {
 
     private static final long serialVersionUID = 3480658726164313166L;
 
@@ -25,11 +25,11 @@ public class Test implements Serializable {
 
     private int currentQuestionIndex;
 
-    public Test(final long id, final String name, final int questionsToAnswerToPassTheTest) {
+    public Quiz(final long id, final String name, final int questionsToAnswerToPassTheTest) {
         this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
     }
 
-    public Test(final long id, final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
+    public Quiz(final long id, final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
         this.id = id;
         this.name = name;
         this.questions = questions;
@@ -121,10 +121,10 @@ public class Test implements Serializable {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Test test = (Test) o;
+        Quiz quiz = (Quiz) o;
 
         return new EqualsBuilder()
-                .append(id, test.id)
+                .append(id, quiz.id)
                 .isEquals();
     }
 

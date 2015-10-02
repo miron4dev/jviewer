@@ -1,7 +1,7 @@
 package tk.jviewer.converter;
 
+import tk.jviewer.model.Quiz;
 import tk.jviewer.model.TakeTestManagedBean;
-import tk.jviewer.model.Test;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -10,7 +10,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 /**
- * Implementation of {@link Converter} for the instance of {@link tk.jviewer.model.Test}.
+ * Implementation of {@link Converter} for the instance of {@link Quiz}.
  */
 public class TestConverter implements Converter {
 
@@ -29,8 +29,8 @@ public class TestConverter implements Converter {
         if (o == null) {
             return null;
         }
-        if (o instanceof Test) {
-            return ((Test) o).getName();
+        if (o instanceof Quiz) {
+            return ((Quiz) o).getName();
         } else {
             throw new ConverterException(new FacesMessage(String.format("%s is not a valid User", o)));
         }

@@ -8,7 +8,7 @@ import tk.jviewer.dao.quiz.QuizDao;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
-import tk.jviewer.model.Test;
+import tk.jviewer.model.Quiz;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,20 +47,20 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
 
     private QuestionDao questionDao;
 
-    private static class QuizToRowMapper implements ResultSetExtractor<List<Test>> {
+    private static class QuizToRowMapper implements ResultSetExtractor<List<Quiz>> {
 
         @Override
-        public List<Test> extractData(final ResultSet rs) throws SQLException {
-            final Map<Long, Test> quizById = new HashMap<>();
+        public List<Quiz> extractData(final ResultSet rs) throws SQLException {
+            final Map<Long, Quiz> quizById = new HashMap<>();
             final Map<Long, Question> questionById = new HashMap<>();
             final Map<Long, Answer> answerById = new HashMap<>();
             while (rs.next()) {
                 final long quizId = rs.getLong("quiz_id");
                 final String name = rs.getString("name");
                 final int questionsToAnswerToPass = rs.getInt("questions_to_answer_to_pass");
-                Test quiz = quizById.get(quizId);
+                Quiz quiz = quizById.get(quizId);
                 if (quiz == null) {
-                    quiz = new Test(quizId, name, questionsToAnswerToPass);
+                    quiz = new Quiz(quizId, name, questionsToAnswerToPass);
                     quizById.put(quizId, quiz);
                 }
 
@@ -104,18 +104,18 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
      * Finds quiz and all its questions with their answers. Makes one query to a database.
      */
     @Override
-    public List<Test> findQuizzes() {
+    public List<Quiz> findQuizzes() {
         return getJdbcTemplate().query(SQL_FIND_QUIZZES, new QuizToRowMapper());
     }
 
     @Override
-    public void updateQuiz(final Test quiz) {
+    public void updateQuiz(final Quiz quiz) {
         getJdbcTemplate().update(SQL_UPDATE_QUIZ,
                 quiz.getName(), quiz.getQuestionsToAnswerToPassTheTest(), quiz.getId());
     }
 
     @Override
-    public void removeQuiz(final Test quiz) {
+    public void removeQuiz(final Quiz quiz) {
         getJdbcTemplate().update(SQL_DELETE_QUIZ, quiz.getId());
         for (final Question question : quiz.getQuestions()) {
             questionDao.removeQuestion(question);

@@ -13,11 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * Take Test dialog implementation.
+ * Take Quiz dialog implementation.
  */
 public class TakeTestDialog implements Serializable {
 
@@ -42,36 +41,40 @@ public class TakeTestDialog implements Serializable {
      */
     @PostConstruct
     public void lookupAvailableTests() {
-        List<Test> availableTests = quizService.findQuizzes();
-        managedBean.setAvailableTests(availableTests);
-        logger.info("Found " + availableTests.size() + " available tests for user " + userProfile.getName());
+        List<Quiz> availableQuizzes = quizService.findQuizzes();
+        managedBean.setAvailableQuizzes(availableQuizzes);
+        logger.info("Found " + availableQuizzes.size() + " available tests for user " + userProfile.getName());
     }
 
-    public List<Test> getAvailableTests() {
-        return managedBean.getAvailableTests();
+    public List<Quiz> getAvailableQuizzes() {
+        return managedBean.getAvailableQuizzes();
     }
 
-    public Test getChosenTest() {
-        return managedBean.getChosenTest();
+    public Quiz getChosenQuiz() {
+        return managedBean.getChosenQuiz();
+    }
+
+    public void setChosenQuiz(Quiz quiz) {
+        managedBean.setChosenQuiz(quiz);
     }
 
     public Question getCurrentQuestion() {
-        Test chosenTest = getChosenTest();
-        return chosenTest.getCurrentQuestion();
+        final Quiz chosenQuiz = getChosenQuiz();
+        return chosenQuiz.getCurrentQuestion();
     }
 
     public boolean isFirstQuestion() {
-        Test chosenTest = getChosenTest();
-        return chosenTest.isCurrentQuestionTheFirst();
+        final Quiz chosenQuiz = getChosenQuiz();
+        return chosenQuiz.isCurrentQuestionTheFirst();
     }
 
     public boolean isLastQuestion() {
-        Test chosenTest = getChosenTest();
-        return chosenTest.isCurrentQuestionTheLast();
+        final Quiz chosenQuiz = getChosenQuiz();
+        return chosenQuiz.isCurrentQuestionTheLast();
     }
 
     public void nextQuestion() {
-        getChosenTest().nextQuestion();
+        getChosenQuiz().nextQuestion();
     }
 
     public String redirectToResults() {
@@ -79,15 +82,11 @@ public class TakeTestDialog implements Serializable {
     }
 
     public void previousQuestion() {
-        getChosenTest().previousQuestion();
+        getChosenQuiz().previousQuestion();
     }
 
     public String cancelTest() {
         return "testing?faces-redirect=true";
-    }
-
-    public void setChosenTest(Test chosenTest) {
-        managedBean.setChosenTest(chosenTest);
     }
 
     public void saveAnswer() {

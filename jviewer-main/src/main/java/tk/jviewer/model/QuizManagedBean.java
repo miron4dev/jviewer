@@ -5,15 +5,15 @@ package tk.jviewer.model;
  */
 public class QuizManagedBean {
 
-    private Test currentQuiz;
+    private Quiz currentQuiz;
 
     private Question editingQuestion;
 
-    public Test getCurrentQuiz() {
+    public Quiz getCurrentQuiz() {
         return currentQuiz;
     }
 
-    public void setCurrentQuiz(Test currentQuiz) {
+    public void setCurrentQuiz(Quiz currentQuiz) {
         this.currentQuiz = currentQuiz;
     }
 

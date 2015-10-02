@@ -2,7 +2,7 @@ package tk.jviewer.service;
 
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.Question;
-import tk.jviewer.model.Test;
+import tk.jviewer.model.Quiz;
 
 import java.util.List;
 
@@ -11,15 +11,15 @@ import java.util.List;
  */
 public interface QuizService {
 
-    Test createQuiz();
+    Quiz createQuiz();
 
-    List<Test> findQuizzes();
+    List<Quiz> findQuizzes();
 
-    void updateQuiz(Test quiz);
+    void updateQuiz(Quiz quiz);
 
     Question findQuestion(long id);
 
-    void createQuestion(Test quiz, String text);
+    void createQuestion(Quiz quiz, String text);
 
     void createAnswer(Question question, Answer answer);
 
@@ -27,8 +27,8 @@ public interface QuizService {
 
     void updateQuestion(Question question);
 
-    void removeQuestion(Test quiz, Question question);
+    void removeQuestion(Quiz quiz, Question question);
 
-    void removeQuiz(Test quiz);
+    void removeQuiz(Quiz quiz);
 
 }

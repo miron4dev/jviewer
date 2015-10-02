@@ -2,12 +2,11 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import tk.jviewer.model.Quiz;
 import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.ManagementController;
-import tk.jviewer.model.Test;
 import tk.jviewer.model.ViewerManagedBean;
-import tk.jviewer.profile.Permission;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.QuizService;
 
@@ -46,7 +45,7 @@ public class MainPageDialog implements Serializable {
     private QuizService quizService;
 
     private List<Room> availableRooms;
-    private List<Test> availableQuizzes;
+    private List<Quiz> availableQuizzes;
 
     @PostConstruct
     public void init() {
@@ -79,7 +78,7 @@ public class MainPageDialog implements Serializable {
         viewerManagedBean.setCurrentRoom(room);
     }
 
-    public void chooseQuiz(final Test quiz) {
+    public void chooseQuiz(final Quiz quiz) {
         quizManagedBean.setCurrentQuiz(quiz);
     }
 
@@ -88,7 +87,7 @@ public class MainPageDialog implements Serializable {
         return "createquiz?faces-redirect=true";
     }
 
-    public void deleteQuiz(final Test quiz) {
+    public void deleteQuiz(final Quiz quiz) {
         availableQuizzes.remove(quiz);
         quizService.removeQuiz(quiz);
         addMessage(SEVERITY_INFO, "Success!", "Quiz has been successfully removed.");
@@ -98,7 +97,7 @@ public class MainPageDialog implements Serializable {
         return availableRooms;
     }
 
-    public List<Test> getAvailableQuizzes() {
+    public List<Quiz> getAvailableQuizzes() {
         return availableQuizzes;
     }
 
@@ -152,7 +151,7 @@ public class MainPageDialog implements Serializable {
         }
     }
 
-    private List<Test> findAvailableQuizzes() {
+    private List<Quiz> findAvailableQuizzes() {
         return quizService.findQuizzes();
     }
 
