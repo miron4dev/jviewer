@@ -70,7 +70,8 @@ public class EditQuizDialog implements Serializable {
 
     public void onEditingQuestionChanged() {
         final long id = getIdFromRequest();
-        quizManagedBean.setEditingQuestion(quizService.findQuestion(id));
+        final Question question = findQuestionById(getQuiz().getQuestions(), id);
+        quizManagedBean.setEditingQuestion(question);
     }
 
     public void onAddNewQuestionPressed() {

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface QuestionDao {
 
-    long createQuestion(long quizId, String text, AnswerType answerType, String correctTextualAnswer);
+    Question createQuestion(long quizId, String text, AnswerType answerType, String correctTextualAnswer);
 
     Question findQuestion(long id);
 

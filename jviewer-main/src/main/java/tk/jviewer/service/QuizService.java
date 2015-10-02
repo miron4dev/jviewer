@@ -17,8 +17,6 @@ public interface QuizService {
 
     void updateQuiz(Quiz quiz);
 
-    Question findQuestion(long id);
-
     Question createQuestion(Quiz quiz, String text);
 
     void createAnswer(Question question, Answer answer);

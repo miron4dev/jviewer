@@ -66,7 +66,7 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     }
 
     @Override
-    public long createQuestion(final long quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
+    public Question createQuestion(final long quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
         final Map<String, ?> params = of("quiz_id", quizId, "text", text, "answers_type", answersType,
                 "correct_textual_answer", correctTextualAnswer);
 
@@ -75,7 +75,7 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(params);
 
-        return id.longValue();
+        return new Question(id.longValue(), text, answersType, correctTextualAnswer);
     }
 
     //

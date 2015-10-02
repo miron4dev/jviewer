@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface QuizDao {
 
-    long createQuiz(String name, int questionsToAnswerToPass);
+    Quiz createQuiz(String name, int questionsToAnswerToPass);
 
     /**
      * Finds all quizzes.

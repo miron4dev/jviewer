@@ -97,13 +97,13 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
     }
 
     @Override
-    public long createQuiz(final String name, final int questionsToAnswerToPass) {
+    public Quiz createQuiz(final String name, final int questionsToAnswerToPass) {
         final Number id = new SimpleJdbcInsert(getJdbcTemplate())
                 .withTableName("quiz")
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(of("name", name, "questions_to_answer_to_pass", questionsToAnswerToPass));
 
-        return id.longValue();
+        return new Quiz(id.longValue(), name, questionsToAnswerToPass);
     }
 
     /**

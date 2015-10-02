@@ -24,18 +24,13 @@ public class QuizServiceImpl implements QuizService {
 
     private static final int DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS = 0;
 
-    private static final String DEFAULT_QUESTION_TEXT = "Who lives in a pineapple under the sea?";
-
-    private static final AnswerType DEFAULT_ANSWERS_TYPE = RADIO_BUTTON;
-
     private QuizDao quizDao;
     private QuestionDao questionDao;
     private AnswerDao answerDao;
 
     @Override
     public Quiz createQuiz() {
-        final long quizId = quizDao.createQuiz(DEFAULT_QUIZ_NAME, DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS); // TODO do not create Quiz object here
-        return new Quiz(quizId, DEFAULT_QUIZ_NAME, new ArrayList<>(), DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
+        return quizDao.createQuiz(DEFAULT_QUIZ_NAME, DEFAULT_QUESTIONS_TO_ANSWER_TO_PASS);
     }
 
     @Override
@@ -54,15 +49,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Question findQuestion(final long id) {
-        return questionDao.findQuestion(id);
-    }
-
-    @Override
     public Question createQuestion(final Quiz quiz, final String text) {
-        final Question question = new Question(text, RADIO_BUTTON);
-        final long id = questionDao.createQuestion(quiz.getId(), question.getText(), question.getTypeOfAnswers(), EMPTY); // TODO do not create Question object here
-        question.setId(id);
+        final Question question = questionDao.createQuestion(quiz.getId(), text, RADIO_BUTTON, EMPTY);
         quiz.addQuestion(question);
         return question;
     }
