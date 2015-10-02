@@ -52,6 +52,9 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     public void updateQuestion(final Question question) {
         getJdbcTemplate().update(SQL_UPDATE_QUESTION, question.getText(),
                 question.getTypeOfAnswers(), trimToEmpty(question.getCorrectTextualAnswer()), question.getId());
+        for (final Answer answer : question.getAnswers()) {
+            answerDao.updateAnswer(answer);
+        }
     }
 
     @Override

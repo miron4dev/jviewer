@@ -54,6 +54,11 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    public void removeQuiz(final Quiz quiz) {
+        quizDao.removeQuiz(quiz);
+    }
+
+    @Override
     public Question findQuestion(final long id) {
         return questionDao.findQuestion(id);
     }
@@ -74,17 +79,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void removeAnswer(final Question question, final Answer answer) {
-        answerDao.removeAnswer(answer);
-        question.removeAnswer(answer);
-    }
-
-    @Override
     public void updateQuestion(final Question question) {
         questionDao.updateQuestion(question);
-        for (final Answer answer : question.getAnswers()) {
-            answerDao.updateAnswer(answer);
-        }
     }
 
     @Override
@@ -94,8 +90,9 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void removeQuiz(final Quiz quiz) {
-        quizDao.removeQuiz(quiz);
+    public void removeAnswer(final Question question, final Answer answer) {
+        answerDao.removeAnswer(answer);
+        question.removeAnswer(answer);
     }
 
     //
