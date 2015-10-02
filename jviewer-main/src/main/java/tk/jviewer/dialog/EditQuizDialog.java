@@ -80,11 +80,13 @@ public class EditQuizDialog implements Serializable {
     }
 
     public void onDeleteQuestionPressed() {
-        final long id = getIdFromRequest();
         final Quiz quiz = getQuiz();
         final List<Question> questions = quiz.getQuestions();
-        quizService.removeQuestion(quiz, findQuestionById(questions, id));
-        quizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
+        final Question questionToRemove = findQuestionById(questions, getIdFromRequest());
+        quizService.removeQuestion(quiz, questionToRemove);
+        if (questionToRemove.equals(quizManagedBean.getEditingQuestion())) {
+            quizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
+        }
     }
 
     public void onAddNewAnswerPressed() {

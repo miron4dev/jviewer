@@ -20,6 +20,14 @@ jviewer.quiz = function (){
             return true;
         },
 
+        selectText: function (inputId) {
+            var input = _$(inputId);
+            if (input !== null) {
+                input.focus();
+                input.select();
+            }
+        },
+
         press: function(event, buttonId) {
             if (event.keyCode === 13) {
                 $(_$(buttonId)).click();

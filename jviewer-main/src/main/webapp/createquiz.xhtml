@@ -25,7 +25,7 @@
                     <h3>
                         <h:outputText value="Quiz name"/>
                     </h3>
-                    <h:inputText value="#{createQuizDialog.quiz.name}" styleClass="form-control">
+                    <h:inputText id="quizName" value="#{createQuizDialog.quiz.name}" styleClass="form-control">
                         <f:ajax listener="#{createQuizDialog.onQuizChanged}" event="blur"/>
                     </h:inputText>
                 </div>
@@ -73,8 +73,8 @@
                         <span class="input-group-btn">
                             <h:commandButton id="addQuestionBtn" value="Add question" styleClass="btn btn-default"
                                     onclick="return jviewer.quiz.hasText('quizForm:newQuestionText')">
-                                <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}"
-                                        execute="quizForm:newQuestionText" render="quizForm:totalAnswers quizForm:questions quizForm:question"/>
+                                <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}" execute="quizForm:newQuestionText"
+                                        render="quizForm:totalAnswers quizForm:questions quizForm:question quizForm:selectNewQuestionText"/>
                             </h:commandButton>
                         </span>
                     </div>
@@ -146,7 +146,7 @@
                                                             <h:commandButton id="addRadioAnswerBtn" value="Add answer" styleClass="btn btn-default"
                                                                     onclick="return jviewer.quiz.hasText('quizForm:newRadioAnswerText')">
                                                                 <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
-                                                                        execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers"/>
+                                                                        execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers quizForm:selectRadioText"/>
                                                             </h:commandButton>
                                                         </span>
                                                     </div>
@@ -181,7 +181,7 @@
                                                             <h:commandButton id="addCheckAnswerBtn" value="Add answer" styleClass="btn btn-default"
                                                                     onclick="return jviewer.quiz.hasText('quizForm:newCheckAnswerText')">
                                                                 <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
-                                                                        execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers"/>
+                                                                        execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers quizForm:selectCheckText"/>
                                                             </h:commandButton>
                                                         </span>
                                                     </div>
@@ -210,6 +210,21 @@
                 </div>
             </div>
         </div>
+        <h:panelGroup id="selectRadioText" layout="block">
+            <script type="text/javascript">
+                jviewer.quiz.selectText('quizForm:newRadioAnswerText');
+            </script>
+        </h:panelGroup>
+        <h:panelGroup id="selectCheckText" layout="block">
+            <script type="text/javascript">
+                jviewer.quiz.selectText('quizForm:newCheckAnswerText');
+            </script>
+        </h:panelGroup>
+        <h:panelGroup id="selectNewQuestionText" layout="block">
+            <script type="text/javascript">
+                jviewer.quiz.selectText('quizForm:newQuestionText');
+            </script>
+        </h:panelGroup>
     </h:form>
 </h:body>
 </html>
