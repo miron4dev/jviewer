@@ -23,21 +23,21 @@ public class AnswerDaoImpl extends JdbcDaoSupport implements AnswerDao {
     private static final String SQL_DELETE_ANSWER = "delete from answer where id = ?";
 
     private static final RowMapper<Answer> ANSWER_ROW_MAPPER =
-            (rs, rowNum) -> new Answer(rs.getLong("id"), rs.getString("text"), rs.getBoolean("correct"));
+            (rs, rowNum) -> new Answer(rs.getInt("id"), rs.getString("text"), rs.getBoolean("correct"));
 
     @Override
-    public List<Answer> findAnswers(final Long questionId) {
+    public List<Answer> findAnswers(final Integer questionId) {
         return getJdbcTemplate().query(SQL_FIND_ANSWERS_FOR_QUESTION, new Object[]{questionId}, ANSWER_ROW_MAPPER);
     }
 
     @Override
-    public long createAnswer(final long questionId, final String text, final boolean correct) {
+    public Integer createAnswer(final Integer questionId, final String text, final boolean correct) {
         final Number id = new SimpleJdbcInsert(getJdbcTemplate())
                 .withTableName("answer")
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(of("question_id", questionId, "text", text, "correct", correct));
 
-        return id.longValue();
+        return id.intValue();
     }
 
     @Override

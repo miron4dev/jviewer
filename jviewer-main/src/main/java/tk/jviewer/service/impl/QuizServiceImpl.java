@@ -57,7 +57,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public void createAnswer(final Question question, final Answer answer) {
-        long id = answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
+        Integer id = answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
         answer.setId(id);
         question.addAnswer(answer);
     }

@@ -22,31 +22,31 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = -1512807566188743676L;
 
-    private Long id;
+    private Integer id;
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
-    private Long userSingleChoiceAnswer;
+    private Integer userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
     private List<String> userMultipleChoiceAnswers;
     private AnswerType typeOfAnswers;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Question(final Long id, final String text, final AnswerType typeOfAnswers) {
+    public Question(final Integer id, final String text, final AnswerType typeOfAnswers) {
         this.id = id;
         this.text = text;
         this.typeOfAnswers = typeOfAnswers;
     }
 
-    public Question(final Long id, final String text, final AnswerType typeOfAnswers, final String correctTextualAnswer) {
+    public Question(final Integer id, final String text, final AnswerType typeOfAnswers, final String correctTextualAnswer) {
         this.id = id;
         this.text = text;
         this.typeOfAnswers = typeOfAnswers;
@@ -98,7 +98,7 @@ public class Question implements Serializable {
         answers.add(answer);
     }
 
-    public Long getCorrectSingleChoiceAnswer() {
+    public Integer getCorrectSingleChoiceAnswer() {
         for (final Answer answer : answers) {
             if (answer.isCorrect()) {
                 return answer.getId();
@@ -107,7 +107,7 @@ public class Question implements Serializable {
         return null;
     }
 
-    public void setCorrectSingleChoiceAnswer(Long correctSingleChoiceAnswer) {
+    public void setCorrectSingleChoiceAnswer(Integer correctSingleChoiceAnswer) {
         if (correctSingleChoiceAnswer == null) {
             return;
         }
@@ -117,8 +117,8 @@ public class Question implements Serializable {
         }
     }
 
-    public List<Long> getCorrectMultipleChoiceAnswers() {
-        final List<Long> correct = new ArrayList<>();
+    public List<Integer> getCorrectMultipleChoiceAnswers() {
+        final List<Integer> correct = new ArrayList<>();
         for (final Answer answer : answers) {
             if (answer.isCorrect()) {
                 correct.add(answer.getId());
@@ -127,7 +127,7 @@ public class Question implements Serializable {
         return correct;
     }
 
-    public void setCorrectMultipleChoiceAnswers(List<Long> correctMultipleChoiceAnswers) {
+    public void setCorrectMultipleChoiceAnswers(List<Integer> correctMultipleChoiceAnswers) {
         for (final Answer answer : answers) {
             answer.setCorrect(correctMultipleChoiceAnswers.contains(answer.getId()));
         }
@@ -150,11 +150,11 @@ public class Question implements Serializable {
         this.userTextualAnswer = userTextualAnswer;
     }
 
-    public Long getUserSingleChoiceAnswer() {
+    public Integer getUserSingleChoiceAnswer() {
         return userSingleChoiceAnswer;
     }
 
-    public void setUserSingleChoiceAnswer(Long userSingleChoiceAnswer) {
+    public void setUserSingleChoiceAnswer(Integer userSingleChoiceAnswer) {
         this.userSingleChoiceAnswer = userSingleChoiceAnswer;
     }
 
@@ -168,10 +168,10 @@ public class Question implements Serializable {
 
     public boolean isCorrectlyAnswered() {
         if (typeOfAnswers == RADIO_BUTTON) {
-            final Long correctSingleChoiceAnswer = getCorrectSingleChoiceAnswer();
+            final Integer correctSingleChoiceAnswer = getCorrectSingleChoiceAnswer();
             return correctSingleChoiceAnswer.equals(userSingleChoiceAnswer);
         } else if (typeOfAnswers == CHECK_BOX) {
-            final List<Long> correctMultipleChoiceAnswers = getCorrectMultipleChoiceAnswers();
+            final List<Integer> correctMultipleChoiceAnswers = getCorrectMultipleChoiceAnswers();
             return isEqualCollection(correctMultipleChoiceAnswers, userMultipleChoiceAnswers);
         } else if (typeOfAnswers == TEXT_FIELD) {
             return correctTextualAnswer.equalsIgnoreCase(trim(userTextualAnswer));

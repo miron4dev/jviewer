@@ -18,7 +18,7 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
 
     @Override
     public List<Room> getRooms() throws DataAccessException {
-        List<Map<String, Object>> rows = getJdbcTemplate().queryForList("select * from rooms");
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList("select id, name, password, type from rooms");
         List<Room> rooms = new ArrayList<>();
         for (Map<String, Object> row : rows) {
             final Room room = new Room(get(row, "name"), get(row, "password"), Room.Type.valueOf(get(row, "type")));

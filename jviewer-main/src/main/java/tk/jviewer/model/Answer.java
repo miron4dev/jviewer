@@ -14,36 +14,32 @@ public class Answer implements Serializable {
 
     private static final long serialVersionUID = -1283565263146494192L;
 
-    private Long id; // TODO: primitive or object?
+    private Integer id;
     private String text;
     private boolean correct;
 
     public Answer() {
     }
 
-    public Answer(long id) {
-        this.id = id;
-    }
-
     public Answer(String text) {
-        this.text = text;
+        this(null, text);
     }
 
-    public Answer(long id, String text) {
+    public Answer(Integer id, String text) {
         this(id, text, false);
     }
 
-    public Answer(long id, String text, boolean correct) {
+    public Answer(Integer id, String text, boolean correct) {
         this.id = id;
         this.text = text;
         this.correct = correct;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,4 +78,5 @@ public class Answer implements Serializable {
                 .append(id)
                 .toHashCode();
     }
+
 }

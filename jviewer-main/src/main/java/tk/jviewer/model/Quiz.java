@@ -18,25 +18,25 @@ public class Quiz implements Serializable {
 
     private static final long serialVersionUID = 3480658726164313166L;
 
-    private final long id;
+    private final Integer id;
     private String name;
     private final List<Question> questions;
     private int questionsToAnswerToPassTheTest;
 
     private int currentQuestionIndex;
 
-    public Quiz(final long id, final String name, final int questionsToAnswerToPassTheTest) {
+    public Quiz(final Integer id, final String name, final int questionsToAnswerToPassTheTest) {
         this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
     }
 
-    public Quiz(final long id, final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
+    public Quiz(final Integer id, final String name, final List<Question> questions, final int questionsToAnswerToPassTheTest) {
         this.id = id;
         this.name = name;
         this.questions = questions;
         this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,7 +67,7 @@ public class Quiz implements Serializable {
     }
 
     public void previousQuestion() {
-        if (currentQuestionIndex != 0) {
+        if (!isCurrentQuestionTheFirst()) {
             currentQuestionIndex--;
         }
     }

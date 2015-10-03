@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface AnswerDao {
 
-    List<Answer> findAnswers(Long questionId);
+    List<Answer> findAnswers(Integer questionId);
 
-    long createAnswer(long questionId, final String text, final boolean correct);
+    Integer createAnswer(Integer questionId, final String text, final boolean correct);
 
     void removeAnswer(Answer answer);
 

@@ -4,7 +4,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import static java.lang.Long.valueOf;
+import static java.lang.Integer.valueOf;
 
 /**
  * JSF does not converts list of strings to list of longs and vice versa out of box. Custom converter created.

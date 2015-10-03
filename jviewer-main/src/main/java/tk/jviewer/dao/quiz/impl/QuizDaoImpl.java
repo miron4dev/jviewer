@@ -52,11 +52,11 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
 
         @Override
         public List<Quiz> extractData(final ResultSet rs) throws SQLException {
-            final Map<Long, Quiz> quizById = new HashMap<>();
-            final Map<Long, Question> questionById = new HashMap<>();
-            final Map<Long, Answer> answerById = new HashMap<>();
+            final Map<Integer, Quiz> quizById = new HashMap<>();
+            final Map<Integer, Question> questionById = new HashMap<>();
+            final Map<Integer, Answer> answerById = new HashMap<>();
             while (rs.next()) {
-                final long quizId = rs.getLong("quiz_id");
+                final int quizId = rs.getInt("quiz_id");
                 final String name = rs.getString("name");
                 final int questionsToAnswerToPass = rs.getInt("questions_to_answer_to_pass");
                 Quiz quiz = quizById.get(quizId);
@@ -65,7 +65,7 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                     quizById.put(quizId, quiz);
                 }
 
-                final long questionId = rs.getLong("question_id");
+                final int questionId = rs.getInt("question_id");
                 if (!rs.wasNull()) {
                     final String questionText = rs.getString("question_text");
                     final AnswerType answersType = valueOf(rs.getString("answers_type"));
@@ -77,7 +77,7 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                         quiz.addQuestion(question);
                     }
 
-                    final long answerId = rs.getLong("answer_id");
+                    final int answerId = rs.getInt("answer_id");
                     if (!rs.wasNull()) {
                         final String answerTest = rs.getString("answer_text");
                         final boolean answerCorrect = rs.getBoolean("correct");
@@ -103,7 +103,7 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(of("name", name, "questions_to_answer_to_pass", questionsToAnswerToPass));
 
-        return new Quiz(id.longValue(), name, questionsToAnswerToPass);
+        return new Quiz(id.intValue(), name, questionsToAnswerToPass);
     }
 
     /**

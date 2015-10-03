@@ -1,6 +1,6 @@
 package tk.jviewer.model;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
@@ -18,7 +18,7 @@ public class Room implements Serializable {
         JAVA
     }
 
-    private int id;
+    private Integer id;
     private String name;
     private String password;
     private Type type;
@@ -32,11 +32,11 @@ public class Room implements Serializable {
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -67,14 +67,27 @@ public class Room implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
 
         Room room = (Room) o;
-        return id == room.id && name.equals(room.name) && StringUtils.equals(password, room.password) && type == room.type;
+
+        return new EqualsBuilder()
+                .append(id, room.id)
+                .append(name, room.name)
+                .append(password, room.password)
+                .append(type, room.type)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(password).append(type).build();
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(name)
+                .append(password)
+                .append(type)
+                .toHashCode();
     }
+
 }

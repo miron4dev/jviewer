@@ -23,30 +23,13 @@ import static tk.jviewer.model.AnswerType.valueOf;
  */
 public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
 
-    private static final String SQL_FIND_QUESTION =
-            "select id, text, answers_type, correct_textual_answer from question where id = ?";
-
     private static final String SQL_UPDATE_QUESTION =
             "update question set text = ?, answers_type = ?, correct_textual_answer = ? where id = ?";
 
     private static final String SQL_DELETE_QUESTION = "delete from question where id = ?";
 
-    private static final RowMapper<Question> QUESTION_ROW_MAPPER = (rs, rowNum) -> fromResultSet(rs);
 
     private AnswerDao answerDao;
-
-    /**
-     * Finds question and all its answers, makes two queries: the first for question itself,
-     * the second for all answers for this question.
-     */
-    @Override
-    public Question findQuestion(final long id) {
-        final Question question =
-                getJdbcTemplate().queryForObject(SQL_FIND_QUESTION, new Object[]{id}, QUESTION_ROW_MAPPER);
-        final List<Answer> answers = answerDao.findAnswers(question.getId());
-        question.setAnswers(answers);
-        return question;
-    }
 
     @Override
     public void updateQuestion(final Question question) {
@@ -66,7 +49,7 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     }
 
     @Override
-    public Question createQuestion(final long quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
+    public Question createQuestion(final Integer quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
         final Map<String, ?> params = of("quiz_id", quizId, "text", text, "answers_type", answersType,
                 "correct_textual_answer", correctTextualAnswer);
 
@@ -75,7 +58,7 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
                 .usingGeneratedKeyColumns("id")
                 .executeAndReturnKey(params);
 
-        return new Question(id.longValue(), text, answersType, correctTextualAnswer);
+        return new Question(id.intValue(), text, answersType, correctTextualAnswer);
     }
 
     //
@@ -84,15 +67,6 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
 
     public void setAnswerDao(AnswerDao answerDao) {
         this.answerDao = answerDao;
-    }
-
-    //
-    // Helper Methods
-    //
-
-    private static Question fromResultSet(final ResultSet rs) throws SQLException {
-        return new Question(rs.getLong("id"), rs.getString("text"),
-                valueOf(rs.getString("answers_type")), rs.getString("correct_textual_answer"));
     }
 
 }

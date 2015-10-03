@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.Long.parseLong;
+import static java.lang.Integer.parseInt;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 import static org.springframework.util.Assert.hasText;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
@@ -71,12 +71,8 @@ public class EditQuizDialog implements Serializable {
         return quizJustCreated;
     }
 
-    public String cancelQuizCreation() {
-        return "main?faces-redirect=true";
-    }
-
     public void onEditingQuestionChanged() {
-        final long id = getIdFromRequest();
+        final int id = getIdFromRequest();
         final Question question = findQuestionById(getQuiz().getQuestions(), id);
         quizManagedBean.setEditingQuestion(question);
     }
@@ -110,7 +106,7 @@ public class EditQuizDialog implements Serializable {
     }
 
     public void onDeleteAnswerPressed() {
-        final long answerId = getIdFromRequest();
+        final int answerId = getIdFromRequest();
         quizService.removeAnswer(quizManagedBean.getEditingQuestion(), findAnswerById(getEditingQuestion().getAnswers(), answerId));
     }
 
@@ -146,19 +142,19 @@ public class EditQuizDialog implements Serializable {
     // Helper Methods
     //
 
-    private long getIdFromRequest() {
+    private int getIdFromRequest() {
         final FacesContext facesContext = getCurrentInstance();
         final ExternalContext externalContext = facesContext.getExternalContext();
         final Map<String, String> params = externalContext.getRequestParameterMap();
 
-        return parseLong(params.get("id"));
+        return parseInt(params.get("id"));
     }
 
     private void updateEditingQuestion() {
         quizService.updateQuestion(quizManagedBean.getEditingQuestion());
     }
 
-    private Question findQuestionById(final List<Question> questions, final Long id) {
+    private Question findQuestionById(final List<Question> questions, final Integer id) {
         for (final Question question : questions) {
             if (question.getId().equals(id)) {
                 return question;
@@ -168,7 +164,7 @@ public class EditQuizDialog implements Serializable {
         throw new RuntimeException("No question with id " + id + " found");
     }
 
-    private Answer findAnswerById(final List<Answer> answers, final Long id) {
+    private Answer findAnswerById(final List<Answer> answers, final Integer id) {
         for (final Answer answer : answers) {
             if (answer.getId().equals(id)) {
                 return answer;
