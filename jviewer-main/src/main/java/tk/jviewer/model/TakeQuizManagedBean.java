@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 /**
  * Contains Take Quiz dialog state.
  */
-public class TakeTestManagedBean implements Serializable {
+public class TakeQuizManagedBean implements Serializable {
 
     private static final long serialVersionUID = -413311231242850151L;
 
@@ -31,15 +31,16 @@ public class TakeTestManagedBean implements Serializable {
         this.availableQuizzes = availableQuizzes;
     }
 
-    public Quiz lookupTestByName(String name) {
+    public Quiz lookupTestByName(final String name) {
         if (isEmpty(name)) {
             return null;
         }
-        for (Quiz quiz : availableQuizzes) {
+        for (final Quiz quiz : availableQuizzes) {
             if (name.equals(quiz.getName())) {
                 return quiz;
             }
         }
         return null;
     }
+
 }

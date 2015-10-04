@@ -28,15 +28,13 @@
             <p>#{msg['J48']}</p>
             <br/>
             <h:form id="roomList-form">
-                <p:remoteCommand name="redirect" action="viewer?faces-redirect=true"/>
-                <p:remoteCommand name="redirectToEditQuizDialog" action="createquiz?faces-redirect=true"/>
                 <p:growl id="notification" showDetail="true" />
 
                 <p:dataTable id="rooms-tbl" value="#{mainPageDialog.availableRooms}" var="room" widgetVar="rooms-tbl">
                     <p:column headerText="Room" filterBy="#{room.name}" filterMatchMode="contains">
                         <h:outputText value="#{room.name}"/>
                     </p:column>
-                    <p:column headerText="Type"  filterBy="#{room.type}" filterMatchMode="exact">
+                    <p:column headerText="Type" filterBy="#{room.type}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('rooms-tbl').filter()" >
                                 <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true" />
@@ -46,8 +44,7 @@
                         <h:outputText value="#{room.type}"/>
                     </p:column>
                     <p:column style="text-align:center">
-                        <p:commandLink value="Login" actionListener="#{mainPageDialog.chooseRoom(room)}" process="@this"
-                                       oncomplete="redirect()"/>
+                        <p:commandLink value="Login" action="#{mainPageDialog.enterRoom(room)}" process="@this"/>
                     </p:column>
                     <p:column rendered="#{mainPageDialog.roomDeletionAllowed}">
                         <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteRoom(room)}" update="@form">
@@ -64,11 +61,10 @@
             <h:form>
                 <p:dataTable value="#{mainPageDialog.availableQuizzes}" var="quiz" widgetVar="rooms-tbl">
                     <p:column headerText="Name">
-                        <h:outputText value="#{quiz.name}"/>
+                        <p:commandLink value="#{quiz.name}" action="#{mainPageDialog.takeQuiz(quiz)}" process="@this"/>
                     </p:column>
                     <p:column style="text-align:center">
-                        <p:commandLink value="Edit" actionListener="#{mainPageDialog.chooseQuiz(quiz)}" process="@this"
-                                oncomplete="redirectToEditQuizDialog()"/>
+                        <p:commandLink value="Edit" action="#{mainPageDialog.editQuiz(quiz)}" process="@this"/>
                         <h:outputText value=" | "/>
                         <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteQuiz(quiz)}" update="@form"/>
                     </p:column>
@@ -98,7 +94,6 @@
                 </h:form>
                 <p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();" type="button"/>
             </h:panelGroup>
-            <h:form><p:commandButton value="Take quiz" action="testing?faces-redirect=true"/></h:form>
             <h:form><p:commandButton value="Create quiz" action="#{mainPageDialog.createQuiz}"/></h:form>
             <h:form><p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" /></h:form>
         </p:panel>

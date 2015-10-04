@@ -2,9 +2,9 @@ package tk.jviewer.dialog;
 
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
+import tk.jviewer.model.EditQuizManagedBean;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
-import tk.jviewer.model.QuizManagedBean;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -27,7 +27,7 @@ public class EditQuizDialog implements Serializable {
     private static final long serialVersionUID = -2334735949960107078L;
 
     private QuizService quizService;
-    private QuizManagedBean quizManagedBean;
+    private EditQuizManagedBean editQuizManagedBean;
 
     private boolean quizJustCreated = false;
 
@@ -37,18 +37,18 @@ public class EditQuizDialog implements Serializable {
     @PostConstruct
     public void init() {
         if (getQuiz() == null) {
-            quizManagedBean.setCurrentQuiz(quizService.createQuiz());
+            editQuizManagedBean.setCurrentQuiz(quizService.createQuiz());
             quizJustCreated = true;
         }
-        quizManagedBean.setEditingQuestion(getQuiz().getCurrentQuestion());
+        editQuizManagedBean.setEditingQuestion(getQuiz().getCurrentQuestion());
     }
 
     public Quiz getQuiz() {
-        return quizManagedBean.getCurrentQuiz();
+        return editQuizManagedBean.getCurrentQuiz();
     }
 
     public Question getEditingQuestion() {
-        return quizManagedBean.getEditingQuestion();
+        return editQuizManagedBean.getEditingQuestion();
     }
 
     public String getNewQuestionText() {
@@ -73,30 +73,30 @@ public class EditQuizDialog implements Serializable {
 
     public void onEditingQuestionChanged() {
         final int id = getIdFromRequest();
-        final Question question = findQuestionById(getQuiz().getQuestions(), id);
-        quizManagedBean.setEditingQuestion(question);
+        final Question question = lookupQuestionById(getQuiz().getQuestions(), id);
+        editQuizManagedBean.setEditingQuestion(question);
     }
 
     public void onAddNewQuestionPressed() {
         hasText(newQuestionText);
         final Question question = quizService.createQuestion(getQuiz(), newQuestionText);
-        quizManagedBean.setEditingQuestion(question);
+        editQuizManagedBean.setEditingQuestion(question);
     }
 
     public void onDeleteQuestionPressed() {
         final Quiz quiz = getQuiz();
         final List<Question> questions = quiz.getQuestions();
-        final Question questionToRemove = findQuestionById(questions, getIdFromRequest());
+        final Question questionToRemove = lookupQuestionById(questions, getIdFromRequest());
         quizService.removeQuestion(quiz, questionToRemove);
-        if (questionToRemove.equals(quizManagedBean.getEditingQuestion())) {
-            quizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
+        if (questionToRemove.equals(editQuizManagedBean.getEditingQuestion())) {
+            editQuizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
         }
     }
 
     public void onAddNewAnswerPressed() {
         hasText(newAnswerText);
         final Answer answer = new Answer(newAnswerText);
-        final Question editingQuestion = quizManagedBean.getEditingQuestion();
+        final Question editingQuestion = editQuizManagedBean.getEditingQuestion();
         quizService.createAnswer(editingQuestion, answer);
         final AnswerType typeOfAnswers = editingQuestion.getTypeOfAnswers();
         if (typeOfAnswers == RADIO_BUTTON && editingQuestion.getCorrectSingleChoiceAnswer() == null) {
@@ -107,7 +107,7 @@ public class EditQuizDialog implements Serializable {
 
     public void onDeleteAnswerPressed() {
         final int answerId = getIdFromRequest();
-        quizService.removeAnswer(quizManagedBean.getEditingQuestion(), findAnswerById(getEditingQuestion().getAnswers(), answerId));
+        quizService.removeAnswer(editQuizManagedBean.getEditingQuestion(), lookupAnswerById(getEditingQuestion().getAnswers(), answerId));
     }
 
     public void onCorrectAnswerChanged() {
@@ -134,8 +134,8 @@ public class EditQuizDialog implements Serializable {
         this.quizService = quizService;
     }
 
-    public void setQuizManagedBean(QuizManagedBean quizManagedBean) {
-        this.quizManagedBean = quizManagedBean;
+    public void setEditQuizManagedBean(EditQuizManagedBean editQuizManagedBean) {
+        this.editQuizManagedBean = editQuizManagedBean;
     }
 
     //
@@ -151,10 +151,10 @@ public class EditQuizDialog implements Serializable {
     }
 
     private void updateEditingQuestion() {
-        quizService.updateQuestion(quizManagedBean.getEditingQuestion());
+        quizService.updateQuestion(editQuizManagedBean.getEditingQuestion());
     }
 
-    private Question findQuestionById(final List<Question> questions, final Integer id) {
+    private static Question lookupQuestionById(final List<Question> questions, final Integer id) {
         for (final Question question : questions) {
             if (question.getId().equals(id)) {
                 return question;
@@ -164,7 +164,7 @@ public class EditQuizDialog implements Serializable {
         throw new RuntimeException("No question with id " + id + " found");
     }
 
-    private Answer findAnswerById(final List<Answer> answers, final Integer id) {
+    private static Answer lookupAnswerById(final List<Answer> answers, final Integer id) {
         for (final Answer answer : answers) {
             if (answer.getId().equals(id)) {
                 return answer;

@@ -3,9 +3,10 @@ package tk.jviewer.dialog;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import tk.jviewer.model.Quiz;
-import tk.jviewer.model.QuizManagedBean;
+import tk.jviewer.model.EditQuizManagedBean;
 import tk.jviewer.model.Room;
 import tk.jviewer.controller.ManagementController;
+import tk.jviewer.model.TakeQuizManagedBean;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.profile.UserProfile;
 import tk.jviewer.service.QuizService;
@@ -30,7 +31,9 @@ import static tk.jviewer.profile.Permission.DELETE_ROOM;
 public class MainPageDialog implements Serializable {
 
     private static final long serialVersionUID = -8729752510193178635L;
-    private static final Logger LOG = Logger.getLogger(MainPageDialog.class);
+
+    private static final Logger logger = Logger.getLogger(MainPageDialog.class);
+
     private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(Room.Type.values()).map(Enum::name).collect(Collectors.toList());
 
     private String roomName;
@@ -39,8 +42,10 @@ public class MainPageDialog implements Serializable {
 
     private UserProfile userProfile;
     private ManagementController controller;
+
     private ViewerManagedBean viewerManagedBean;
-    private QuizManagedBean quizManagedBean;
+    private EditQuizManagedBean editQuizManagedBean;
+    private TakeQuizManagedBean takeQuizManagedBean;
 
     private QuizService quizService;
 
@@ -58,7 +63,7 @@ public class MainPageDialog implements Serializable {
             controller.createRoom(new Room(roomName, roomPassword, roomType));
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully created.");
         } catch (DataAccessException e) {
-            LOG.error(e);
+            logger.error("Cannot create room", e);
             addMessage(SEVERITY_ERROR, "Failed", "Room has not been created, because of system error. Please refer to your system administrator");
         }
     }
@@ -69,21 +74,28 @@ public class MainPageDialog implements Serializable {
             controller.deleteRoom(room);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully removed.");
         } catch (DataAccessException e) {
-            LOG.error(e);
+            logger.error("Cannot delete room", e);
             addMessage(SEVERITY_ERROR, "Failed", "Room has not been deleted, because of system error. Please refer to your system administrator");
         }
     }
 
-    public void chooseRoom(Room room) {
+    public String enterRoom(final Room room) {
         viewerManagedBean.setCurrentRoom(room);
+        return "viewer?faces-redirect=true";
     }
 
-    public void chooseQuiz(final Quiz quiz) {
-        quizManagedBean.setCurrentQuiz(quiz);
+    public String takeQuiz(final Quiz quiz) {
+        takeQuizManagedBean.setChosenQuiz(quiz);
+        return "taketest?faces-redirect=true";
+    }
+
+    public String editQuiz(final Quiz quiz) {
+        editQuizManagedBean.setCurrentQuiz(quiz);
+        return "createquiz?faces-redirect=true";
     }
 
     public String createQuiz() {
-        quizManagedBean.setCurrentQuiz(null);
+        editQuizManagedBean.setCurrentQuiz(null);
         return "createquiz?faces-redirect=true";
     }
 
@@ -145,7 +157,7 @@ public class MainPageDialog implements Serializable {
         try {
             return controller.getRooms();
         } catch (DataAccessException e) {
-            LOG.error("Cannot find available rooms", e);
+            logger.error("Cannot find available rooms", e);
             addMessage(SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
             return new ArrayList<>();
         }
@@ -176,8 +188,12 @@ public class MainPageDialog implements Serializable {
         this.viewerManagedBean = viewerManagedBean;
     }
 
-    public void setQuizManagedBean(QuizManagedBean quizManagedBean) {
-        this.quizManagedBean = quizManagedBean;
+    public void setEditQuizManagedBean(EditQuizManagedBean editQuizManagedBean) {
+        this.editQuizManagedBean = editQuizManagedBean;
+    }
+
+    public void setTakeQuizManagedBean(TakeQuizManagedBean takeQuizManagedBean) {
+        this.takeQuizManagedBean = takeQuizManagedBean;
     }
 
     public void setQuizService(QuizService quizService) {

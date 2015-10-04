@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS quiz (
   name TEXT NOT NULL,
   questions_to_answer_to_pass INTEGER NOT NULL
 );
+INSERT INTO quiz (id, name, questions_to_answer_to_pass) VALUES (26, 'Java SE junior quiz', 2);
+INSERT INTO quiz (id, name, questions_to_answer_to_pass) VALUES (27, 'Sample quiz', 3);
 
 -- Question --
 CREATE TABLE IF NOT EXISTS question (
@@ -52,6 +54,12 @@ CREATE TABLE IF NOT EXISTS question (
   answers_type TEXT NOT NULL,
   correct_textual_answer TEXT NOT NULL
 );
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (39, 26, 'What is better in sense of search: ArrayList or LinkedList?', 'RADIO_BUTTON', '');
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (59, 26, 'Choose JMS implementations from the list.', 'CHECK_BOX', '');
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (61, 26, 'What is not the method of the Object class?', 'RADIO_BUTTON', '');
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (62, 27, 'To be or not to be?', 'RADIO_BUTTON', '');
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (63, 27, 'Who lives in a pineapple under the sea?', 'CHECK_BOX', '');
+INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (64, 27, '2 + 2 = ?', 'TEXT_FIELD', '4');
 
 -- Answer --
 CREATE TABLE IF NOT EXISTS answer (
@@ -60,6 +68,23 @@ CREATE TABLE IF NOT EXISTS answer (
   text TEXT NOT NULL,
   correct BOOLEAN NOT NULL
 );
+INSERT INTO answer (id, question_id, text, correct) VALUES (25, 39, 'ArrayList', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (26, 39, 'LinkedList', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (34, 59, 'TIBCO EMS', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (35, 59, 'Websphere MQ', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (36, 59, 'Solace JMS', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (37, 59, 'Fiorano MQ', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (38, 59, 'Sonic MQ', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (39, 59, 'Active MQ', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (40, 61, 'clone', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (41, 61, 'equals', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (42, 61, 'finalize', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (43, 61, 'close', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (44, 62, 'To be', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (45, 62, 'Not to be', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (46, 63, 'Sponge Bob Square Pants', 1);
+INSERT INTO answer (id, question_id, text, correct) VALUES (47, 63, 'Earthworm Jim', 0);
+INSERT INTO answer (id, question_id, text, correct) VALUES (48, 63, 'Princess Nesmeyana', 0);
 
 -- Russian --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Добро пожаловать на JViewer', 'ru', 'index');

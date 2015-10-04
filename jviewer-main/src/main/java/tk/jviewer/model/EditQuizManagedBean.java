@@ -1,9 +1,13 @@
 package tk.jviewer.model;
 
+import java.io.Serializable;
+
 /**
- * Created by Sergey Yaskov on 01.10.2015.
+ * Contains Edit Quiz dialog state.
  */
-public class QuizManagedBean {
+public class EditQuizManagedBean implements Serializable {
+
+    private static final long serialVersionUID = 7478910365189392773L;
 
     private Quiz currentQuiz;
 

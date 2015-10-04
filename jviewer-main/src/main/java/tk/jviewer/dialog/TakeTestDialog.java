@@ -30,7 +30,7 @@ public class TakeTestDialog implements Serializable {
 
     private static final String IDS_OF_ANSWERS_SEPARATOR = ",";
 
-    private TakeTestManagedBean managedBean;
+    private TakeQuizManagedBean managedBean;
 
     private UserProfile userProfile;
 
@@ -41,7 +41,7 @@ public class TakeTestDialog implements Serializable {
      */
     @PostConstruct
     public void lookupAvailableTests() {
-        List<Quiz> availableQuizzes = quizService.findQuizzes();
+        final List<Quiz> availableQuizzes = quizService.findQuizzes();
         managedBean.setAvailableQuizzes(availableQuizzes);
         logger.info("Found " + availableQuizzes.size() + " available tests for user " + userProfile.getName());
     }
@@ -86,7 +86,7 @@ public class TakeTestDialog implements Serializable {
     }
 
     public String cancelTest() {
-        return "testing?faces-redirect=true";
+        return "main?faces-redirect=true";
     }
 
     public void saveAnswer() {
@@ -111,7 +111,7 @@ public class TakeTestDialog implements Serializable {
     // Dependency Injection
     //
 
-    public void setManagedBean(TakeTestManagedBean managedBean) {
+    public void setManagedBean(TakeQuizManagedBean managedBean) {
         this.managedBean = managedBean;
     }
 

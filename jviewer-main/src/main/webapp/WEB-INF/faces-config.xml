@@ -27,8 +27,8 @@
             <value>#{quizService}</value>
         </managed-property>
         <managed-property>
-            <property-name>quizManagedBean</property-name>
-            <value>#{quizManagedBean}</value>
+            <property-name>editQuizManagedBean</property-name>
+            <value>#{editQuizManagedBean}</value>
         </managed-property>
     </managed-bean>
 
@@ -42,7 +42,7 @@
         </managed-property>
         <managed-property>
             <property-name>managedBean</property-name>
-            <value>#{takeTestManagedBean}</value>
+            <value>#{takeQuizManagedBean}</value>
         </managed-property>
         <managed-property>
             <property-name>quizService</property-name>
@@ -67,8 +67,12 @@
             <value>#{viewerManagedBean}</value>
         </managed-property>
         <managed-property>
-            <property-name>quizManagedBean</property-name>
-            <value>#{quizManagedBean}</value>
+            <property-name>takeQuizManagedBean</property-name>
+            <value>#{takeQuizManagedBean}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>editQuizManagedBean</property-name>
+            <value>#{editQuizManagedBean}</value>
         </managed-property>
         <managed-property>
             <property-name>quizService</property-name>
@@ -127,12 +131,12 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>testConverter</managed-bean-name>
-        <managed-bean-class>tk.jviewer.converter.TestConverter</managed-bean-class>
+        <managed-bean-name>quizConverter</managed-bean-name>
+        <managed-bean-class>tk.jviewer.converter.QuizConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>managedBean</property-name>
-            <value>#{takeTestManagedBean}</value>
+            <value>#{takeQuizManagedBean}</value>
         </managed-property>
     </managed-bean>
 
