@@ -73,7 +73,7 @@ public class EditQuizDialog implements Serializable {
 
     public void onEditingQuestionChanged() {
         final int id = getIdFromRequest();
-        final Question question = lookupQuestionById(getQuiz().getQuestions(), id);
+        final Question question = Question.lookupById(getQuiz().getQuestions(), id);
         editQuizManagedBean.setEditingQuestion(question);
     }
 
@@ -86,7 +86,7 @@ public class EditQuizDialog implements Serializable {
     public void onDeleteQuestionPressed() {
         final Quiz quiz = getQuiz();
         final List<Question> questions = quiz.getQuestions();
-        final Question questionToRemove = lookupQuestionById(questions, getIdFromRequest());
+        final Question questionToRemove = Question.lookupById(questions, getIdFromRequest());
         quizService.removeQuestion(quiz, questionToRemove);
         if (questionToRemove.equals(editQuizManagedBean.getEditingQuestion())) {
             editQuizManagedBean.setEditingQuestion(questions.isEmpty() ? null : questions.get(questions.size() - 1));
@@ -107,7 +107,8 @@ public class EditQuizDialog implements Serializable {
 
     public void onDeleteAnswerPressed() {
         final int answerId = getIdFromRequest();
-        quizService.removeAnswer(editQuizManagedBean.getEditingQuestion(), lookupAnswerById(getEditingQuestion().getAnswers(), answerId));
+        final Answer answerToRemove = Answer.lookupById(getEditingQuestion().getAnswers(), answerId);
+        quizService.removeAnswer(editQuizManagedBean.getEditingQuestion(), answerToRemove);
     }
 
     public void onCorrectAnswerChanged() {
@@ -152,26 +153,6 @@ public class EditQuizDialog implements Serializable {
 
     private void updateEditingQuestion() {
         quizService.updateQuestion(editQuizManagedBean.getEditingQuestion());
-    }
-
-    private static Question lookupQuestionById(final List<Question> questions, final Integer id) {
-        for (final Question question : questions) {
-            if (question.getId().equals(id)) {
-                return question;
-            }
-        }
-
-        throw new RuntimeException("No question with id " + id + " found");
-    }
-
-    private static Answer lookupAnswerById(final List<Answer> answers, final Integer id) {
-        for (final Answer answer : answers) {
-            if (answer.getId().equals(id)) {
-                return answer;
-            }
-        }
-
-        throw new RuntimeException("No answer with id " + id + " found");
     }
 
 }

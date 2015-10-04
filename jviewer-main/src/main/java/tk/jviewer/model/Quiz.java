@@ -24,6 +24,7 @@ public class Quiz implements Serializable {
     private int questionsToAnswerToPassTheTest;
 
     private int currentQuestionIndex;
+    private QuizResult result;
 
     public Quiz(final Integer id, final String name, final int questionsToAnswerToPassTheTest) {
         this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
@@ -111,8 +112,16 @@ public class Quiz implements Serializable {
         return (int) (getPassedQuestionsPortion() * 100);
     }
 
-    public boolean isPassed() {
+    public boolean isSuccessfullyPassed() {
         return getCorrectlyAnsweredQuestionsNumber() >= questionsToAnswerToPassTheTest;
+    }
+
+    public QuizResult getResult() {
+        return result;
+    }
+
+    public void setResult(QuizResult result) {
+        this.result = result;
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Answer representation.
@@ -77,6 +78,16 @@ public class Answer implements Serializable {
         return new HashCodeBuilder(17, 37)
                 .append(id)
                 .toHashCode();
+    }
+
+    public static Answer lookupById(final List<Answer> answers, final Integer id) {
+        for (final Answer answer : answers) {
+            if (answer.getId().equals(id)) {
+                return answer;
+            }
+        }
+
+        throw new RuntimeException("No answer with id " + id + " found");
     }
 
 }

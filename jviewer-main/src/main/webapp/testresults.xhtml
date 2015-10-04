@@ -27,12 +27,21 @@
                                         <h:outputText value="#{takeTestDialog.chosenQuiz.correctlyAnsweredQuestionsNumber} of #{takeTestDialog.chosenQuiz.totalQuestionsNumber}"/>
                                     </div>
                                     <div class="h4">
-                                        <h:outputText value="#{takeTestDialog.chosenQuiz.passed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
+                                        <h:outputText value="#{takeTestDialog.chosenQuiz.successfullyPassed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <hr/>
+                    <p:dataTable value="#{takeTestDialog.quizResults}" var="result">
+                        <p:column headerText="Question">
+                            <h:outputText value="#{result.key.text}"/>
+                        </p:column>
+                        <p:column headerText="Your answer">
+                            <h:outputText value="#{result.value}"/>
+                        </p:column>
+                    </p:dataTable>
                     <hr/>
                     <div class="row">
                         <div class="col-lg-12">

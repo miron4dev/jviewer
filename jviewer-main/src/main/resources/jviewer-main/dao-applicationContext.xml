@@ -37,4 +37,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="quizResultDao" class="tk.jviewer.dao.quiz.impl.QuizResultDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

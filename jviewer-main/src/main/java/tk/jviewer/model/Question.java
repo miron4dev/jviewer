@@ -29,7 +29,7 @@ public class Question implements Serializable {
     private Integer userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
-    private List<String> userMultipleChoiceAnswers;
+    private List<Integer> userMultipleChoiceAnswers;
     private AnswerType typeOfAnswers;
 
     public Integer getId() {
@@ -158,11 +158,11 @@ public class Question implements Serializable {
         this.userSingleChoiceAnswer = userSingleChoiceAnswer;
     }
 
-    public List<String> getUserMultipleChoiceAnswers() {
+    public List<Integer> getUserMultipleChoiceAnswers() {
         return userMultipleChoiceAnswers;
     }
 
-    public void setUserMultipleChoiceAnswers(List<String> userMultipleChoiceAnswers) {
+    public void setUserMultipleChoiceAnswers(List<Integer> userMultipleChoiceAnswers) {
         this.userMultipleChoiceAnswers = userMultipleChoiceAnswers;
     }
 
@@ -202,6 +202,16 @@ public class Question implements Serializable {
         return new HashCodeBuilder(17, 37)
                 .append(id)
                 .toHashCode();
+    }
+
+    public static Question lookupById(final List<Question> questions, final Integer id) {
+        for (final Question question : questions) {
+            if (question.getId().equals(id)) {
+                return question;
+            }
+        }
+
+        throw new RuntimeException("No question with id " + id + " found");
     }
 
 }

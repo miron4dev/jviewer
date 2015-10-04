@@ -34,12 +34,8 @@
 
     <managed-bean>
         <managed-bean-name>takeTestDialog</managed-bean-name>
-        <managed-bean-class>tk.jviewer.dialog.TakeTestDialog</managed-bean-class>
+        <managed-bean-class>tk.jviewer.dialog.TakeQuizDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
-        <managed-property>
-            <property-name>userProfile</property-name>
-            <value>#{userProfile}</value>
-        </managed-property>
         <managed-property>
             <property-name>managedBean</property-name>
             <value>#{takeQuizManagedBean}</value>

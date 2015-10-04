@@ -12,17 +12,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import static java.lang.Integer.getInteger;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Take Quiz dialog implementation.
  */
-public class TakeTestDialog implements Serializable {
+public class TakeQuizDialog implements Serializable {
 
     private static final long serialVersionUID = -2168142995752023300L;
 
-    private static final Logger logger = Logger.getLogger(TakeTestDialog.class);
+    private static final Logger logger = Logger.getLogger(TakeQuizDialog.class);
 
     private static final String IDS_OF_ANSWERS_PARAM = "idsOfAnswers";
 
@@ -32,23 +34,7 @@ public class TakeTestDialog implements Serializable {
 
     private TakeQuizManagedBean managedBean;
 
-    private UserProfile userProfile;
-
     private QuizService quizService;
-
-    /**
-     * Look ups available tests for the current user.
-     */
-    @PostConstruct
-    public void lookupAvailableTests() {
-        final List<Quiz> availableQuizzes = quizService.findQuizzes();
-        managedBean.setAvailableQuizzes(availableQuizzes);
-        logger.info("Found " + availableQuizzes.size() + " available tests for user " + userProfile.getName());
-    }
-
-    public List<Quiz> getAvailableQuizzes() {
-        return managedBean.getAvailableQuizzes();
-    }
 
     public Quiz getChosenQuiz() {
         return managedBean.getChosenQuiz();
@@ -78,7 +64,15 @@ public class TakeTestDialog implements Serializable {
     }
 
     public String redirectToResults() {
+        final Quiz quiz = getChosenQuiz();
+        quizService.createQuizResult(quiz);
+
         return "testresults?faces-redirect=true";
+    }
+
+    public List<Map.Entry<Question, String>> getQuizResults() {
+        final Set<Map.Entry<Question, String>> entries = getChosenQuiz().getResult().getUserAnswers().entrySet();
+        return new ArrayList<>(entries);
     }
 
     public void previousQuestion() {
@@ -99,9 +93,11 @@ public class TakeTestDialog implements Serializable {
 
         if (isNotBlank(idsOfAnswers)) {
             final String[] ids = idsOfAnswers.split(IDS_OF_ANSWERS_SEPARATOR);
-            final List<String> userAnswers = new ArrayList<>(ids.length);
-            Collections.addAll(userAnswers, ids);
-            currentQuestion.setUserMultipleChoiceAnswers(userAnswers); // stupid JSF does not support result of Arrays.asList() during rendering
+            final List<Integer> userAnswers = new ArrayList<>(ids.length);
+            for (final String id : ids) {
+                userAnswers.add(getInteger(id));
+            }
+            currentQuestion.setUserMultipleChoiceAnswers(userAnswers);
         } else if (isNotBlank(textualAnswer)) {
             currentQuestion.setUserTextualAnswer(textualAnswer);
         }
@@ -113,10 +109,6 @@ public class TakeTestDialog implements Serializable {
 
     public void setManagedBean(TakeQuizManagedBean managedBean) {
         this.managedBean = managedBean;
-    }
-
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
     }
 
     public void setQuizService(QuizService quizService) {

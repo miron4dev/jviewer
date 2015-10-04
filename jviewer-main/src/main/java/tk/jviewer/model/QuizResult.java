@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +17,11 @@ public class QuizResult implements Serializable {
     private static final long serialVersionUID = 3736246668014217404L;
 
     private Integer id;
-    private Map<Question, Boolean> question;
+    private Map<Question, String> userAnswers = new HashMap<>();
+
+    public QuizResult(final Map<Question, String> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
 
     public Integer getId() {
         return id;
@@ -26,21 +31,12 @@ public class QuizResult implements Serializable {
         this.id = id;
     }
 
-    public Map<Question, Boolean> getQuestion() {
-        return question;
+    public Map<Question, String> getUserAnswers() {
+        return userAnswers;
     }
 
-    public void setQuestion(Map<Question, Boolean> question) {
-        this.question = question;
-    }
-
-    /**
-     * Returns the score of the current result in 100 percentage scale.
-     *
-     * @return see description.
-     */
-    public int getScore() {
-        return (int) (100 * question.values().stream().filter(aBoolean -> aBoolean).count() / question.size());
+    public void setUserAnswers(Map<Question, String> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 
     @Override

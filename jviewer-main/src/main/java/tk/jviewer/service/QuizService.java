@@ -3,6 +3,7 @@ package tk.jviewer.service;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
+import tk.jviewer.model.QuizResult;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public interface QuizService {
     void removeQuestion(Quiz quiz, Question question);
 
     void removeQuiz(Quiz quiz);
+
+    QuizResult createQuizResult(Quiz quiz);
 
 }

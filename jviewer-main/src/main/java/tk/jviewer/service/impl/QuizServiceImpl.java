@@ -3,17 +3,24 @@ package tk.jviewer.service.impl;
 import tk.jviewer.dao.quiz.AnswerDao;
 import tk.jviewer.dao.quiz.QuestionDao;
 import tk.jviewer.dao.quiz.QuizDao;
+import tk.jviewer.dao.quiz.QuizResultDao;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
+import tk.jviewer.model.QuizResult;
 import tk.jviewer.service.QuizService;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
+import static tk.jviewer.model.Answer.lookupById;
+import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
+import static tk.jviewer.model.AnswerType.TEXT_FIELD;
 
 /**
  * See {@link QuizService}.
@@ -27,6 +34,7 @@ public class QuizServiceImpl implements QuizService {
     private QuizDao quizDao;
     private QuestionDao questionDao;
     private AnswerDao answerDao;
+    private QuizResultDao quizResultDao;
 
     @Override
     public Quiz createQuiz() {
@@ -46,6 +54,18 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void removeQuiz(final Quiz quiz) {
         quizDao.removeQuiz(quiz);
+    }
+
+    @Override
+    public QuizResult createQuizResult(final Quiz quiz) {
+        final Map<Question, String> userAnswers = new HashMap<>();
+        for (final Question question : quiz.getQuestions()) {
+            userAnswers.put(question, formatUserAnswers(question));
+        }
+        final QuizResult quizResult = new QuizResult(userAnswers);
+        quizResultDao.createQuizResult(quiz, quizResult);
+        quiz.setResult(quizResult);
+        return quizResult;
     }
 
     @Override
@@ -93,6 +113,39 @@ public class QuizServiceImpl implements QuizService {
 
     public void setAnswerDao(AnswerDao answerDao) {
         this.answerDao = answerDao;
+    }
+
+    public void setQuizResultDao(QuizResultDao quizResultDao) {
+        this.quizResultDao = quizResultDao;
+    }
+
+    //
+    // Helper Methods
+    //
+
+    private static String formatUserAnswers(final Question question) {
+        final List<Answer> answers = question.getAnswers();
+        final AnswerType typeOfAnswers = question.getTypeOfAnswers();
+
+        if (typeOfAnswers == RADIO_BUTTON) {
+            final Integer userSingleChoiceAnswer = question.getUserSingleChoiceAnswer();
+            if (userSingleChoiceAnswer == null) {
+                return EMPTY;
+            }
+            final Answer userAnswer = lookupById(answers, userSingleChoiceAnswer);
+            return userAnswer.getText();
+        } else if (typeOfAnswers == CHECK_BOX) {
+            final StringBuilder builder = new StringBuilder();
+            for (Integer answerId : question.getUserMultipleChoiceAnswers()) {
+                final Answer userAnswer = lookupById(answers, answerId);
+                builder.append(userAnswer.getText()).append(", ");
+            }
+            return substringBeforeLast(builder.toString(), ", ");
+        } else if (typeOfAnswers == TEXT_FIELD) {
+            return question.getUserTextualAnswer();
+        }
+
+        throw new IllegalArgumentException("The answers type " + typeOfAnswers + " is not supported");
     }
 
 }
