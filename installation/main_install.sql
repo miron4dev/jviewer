@@ -112,7 +112,6 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J23', 'Не�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Управление комнатами', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Управление комнатами', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'С возвращением', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J48', 'Выберите действие', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J49', 'Создать новую комнату', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J50', 'Удалить', 'ru', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J51', 'Войти', 'ru', 'rooms');
@@ -160,7 +159,6 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J23', 'Invit
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Rooms management page', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Rooms management page', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'Welcome back', 'en', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J48', 'What do you want to do?', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J49', 'Create new room', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J50', 'Delete', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J51', 'Enter', 'en', 'rooms');

@@ -10,6 +10,7 @@
     <security:http>
         <security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
         <security:intercept-url pattern="/main.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/createquiz.xhtml" access="hasRole('ROLE_ADMIN')"/>
         <security:form-login login-page="/index.xhtml"/>
         <security:logout logout-success-url="/index.xhtml" />
         <!-- CSRF protection is enabled by default in JSF -->

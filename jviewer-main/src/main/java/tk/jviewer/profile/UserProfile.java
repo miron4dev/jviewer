@@ -1,6 +1,6 @@
 package tk.jviewer.profile;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
@@ -19,25 +19,20 @@ public class UserProfile implements Serializable {
     private String name;
     private String password;
     private String role;
-    private String invitationID;
     private String faculty;
     private boolean enabled;
+    private String firstName;
+    private String lastName;
     private List<Permission> permissions = new ArrayList<>();
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof UserProfile) {
-            UserProfile user = (UserProfile)obj;
-            return id == user.id && enabled == user.isEnabled() && StringUtils.equals(name, user.getName()) &&
-                    StringUtils.equals(password, user.getPassword()) && StringUtils.equals(role, user.getRole()) &&
-                    StringUtils.equals(invitationID, user.getInvitationID()) && StringUtils.equals(faculty, user.getFaculty());
-        }
-        return false;
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(name).append(password).append(role).append(invitationID).append(faculty).build();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     public int getId() {
@@ -72,14 +67,6 @@ public class UserProfile implements Serializable {
         this.role = role;
     }
 
-    public String getInvitationID() {
-        return invitationID;
-    }
-
-    public void setInvitationID(String invitationID) {
-        this.invitationID = invitationID;
-    }
-
     public String getFaculty() {
         return faculty;
     }
@@ -94,6 +81,22 @@ public class UserProfile implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean hasPermission(Permission permission) {

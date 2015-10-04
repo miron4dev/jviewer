@@ -38,15 +38,16 @@ public class SecurityService implements AuthenticationProvider {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        userProfile.setEnabled(user.isEnabled());
-        userProfile.setRole(user.getRole());
-        userProfile.setFaculty(user.getFaculty());
         userProfile.setId(user.getId());
-        userProfile.setInvitationID(user.getInvitationID());
         userProfile.setName(user.getName());
         userProfile.setPassword(user.getPassword());
+        userProfile.setRole(user.getRole());
+        userProfile.setFaculty(user.getFaculty());
+        userProfile.setEnabled(user.isEnabled());
+        userProfile.setFirstName(user.getFirstName());
+        userProfile.setLastName(user.getLastName());
         if ("ROLE_ADMIN".equals(user.getRole())) {
-            userProfile.setPermissions(Arrays.asList(CREATE_ROOM, DELETE_ROOM, EDIT_VIEWER));
+            userProfile.setPermissions(Arrays.asList(CREATE_ROOM, DELETE_ROOM, EDIT_VIEWER, CREATE_QUIZ, EDIT_QUIZ, DELETE_QUIZ));
         }
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }

@@ -25,16 +25,15 @@
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="#{msg['J45']}" styleClass="common-panel">
             <p>#{msg['J47']}, #{userProfile.name}</p>
-            <p>#{msg['J48']}</p>
-            <br/>
+            <p:growl id="notification" showDetail="true" />
             <h:form id="roomList-form">
-                <p:growl id="notification" showDetail="true" />
+                <h:outputText value="List of available rooms"/>
 
                 <p:dataTable id="rooms-tbl" value="#{mainPageDialog.availableRooms}" var="room" widgetVar="rooms-tbl">
                     <p:column headerText="Room" filterBy="#{room.name}" filterMatchMode="contains">
                         <h:outputText value="#{room.name}"/>
                     </p:column>
-                    <p:column headerText="Type" filterBy="#{room.type}" filterMatchMode="exact">
+                    <p:column headerText="Type"  filterBy="#{room.type}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('rooms-tbl').filter()" >
                                 <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true" />
@@ -45,57 +44,71 @@
                     </p:column>
                     <p:column style="text-align:center">
                         <p:commandLink value="Login" action="#{mainPageDialog.enterRoom(room)}" process="@this"/>
-                    </p:column>
-                    <p:column rendered="#{mainPageDialog.roomDeletionAllowed}">
-                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteRoom(room)}" update="@form">
+                        <h:outputText value=" | " rendered="#{mainPageDialog.roomDeletionAllowed}"/>
+                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteRoom(room)}"
+                                       update="notification, @form" rendered="#{mainPageDialog.roomDeletionAllowed}">
                             <p:confirm header="Confirmation" message="Are you sure that you want to delete this room?"/>
                         </p:commandLink>
                     </p:column>
                 </p:dataTable>
+                <br/>
+
+                <p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();" type="button" process="@none"/>
 
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
             </h:form>
+            <h:form rendered="#{mainPageDialog.roomCreationAllowed}">
+                <p:dialog header="Create new room" widgetVar="createRoomDialog" resizable="false" showEffect="clip" hideEffect="clip">
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <p:watermark for="roomName" value="Name"/>
+                        <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
+
+                        <p:watermark for="roomPassword" value="Password"/>
+                        <p:password id="roomPassword" value="#{mainPageDialog.roomPassword}"/>
+
+                        <p:watermark for="roomType" value="Type"/>
+                        <p:selectOneMenu id="roomType" required="true" value="#{mainPageDialog.roomType}">
+                            <f:selectItems value="#{mainPageDialog.possibleRoomTypes}"/>
+                        </p:selectOneMenu>
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Create" update="notification, roomList-form" actionListener="#{mainPageDialog.createRoom}"
+                                             oncomplete="PF('createRoomDialog').hide()"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            <br/>
+            <br/>
             <h:form>
+                <h:outputText value="List of available quizzes"/>
+
                 <p:dataTable value="#{mainPageDialog.availableQuizzes}" var="quiz" widgetVar="rooms-tbl">
-                    <p:column headerText="Name">
+                    <p:column headerText="Name" filterBy="#{quiz.name}">
                         <p:commandLink value="#{quiz.name}" action="#{mainPageDialog.takeQuiz(quiz)}" process="@this"/>
                     </p:column>
                     <p:column style="text-align:center">
-                        <p:commandLink value="Edit" action="#{mainPageDialog.editQuiz(quiz)}" process="@this"/>
-                        <h:outputText value=" | "/>
-                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteQuiz(quiz)}" update="@form"/>
+                        <p:commandLink value="Edit" action="#{mainPageDialog.editQuiz(quiz)}" process="@this"
+                                       rendered="#{mainPageDialog.quizEditionAllowed}"/>
+
+                        <h:outputText value=" | " rendered="#{mainPageDialog.quizEditionAllowed and mainPageDialog.quizDeletionAllowed}"/>
+
+                        <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteQuiz(quiz)}"
+                                       update="notification, @form" rendered="#{mainPageDialog.quizDeletionAllowed}">
+                            <p:confirm header="Confirmation" message="Are you sure that you want to delete this quiz?"/>
+                        </p:commandLink>
                     </p:column>
                 </p:dataTable>
             </h:form>
-            <h:panelGroup id="createNewRoom-pnl" rendered="#{mainPageDialog.roomCreationAllowed}">
-                <h:form>
-                    <p:dialog header="Create new room" widgetVar="createRoomDialog" resizable="false" showEffect="clip" hideEffect="clip">
-                        <h:panelGrid columns="2" cellpadding="3">
-                            <p:watermark for="roomName" value="Name"/>
-                            <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
-
-                            <p:watermark for="roomPassword" value="Password"/>
-                            <p:password id="roomPassword" value="#{mainPageDialog.roomPassword}"/>
-
-                            <p:watermark for="roomType" value="Type"/>
-                            <p:selectOneMenu id="roomType" required="true" value="#{mainPageDialog.roomType}">
-                                <f:selectItems value="#{mainPageDialog.possibleRoomTypes}"/>
-                            </p:selectOneMenu>
-
-                            <f:facet name="footer">
-                                <p:commandButton value="Create" update="roomList-form" actionListener="#{mainPageDialog.createRoom}"
-                                                 oncomplete="PF('createRoomDialog').hide()"/>
-                            </f:facet>
-                        </h:panelGrid>
-                    </p:dialog>
-                </h:form>
-                <p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();" type="button"/>
-            </h:panelGroup>
-            <h:form><p:commandButton value="Create quiz" action="#{mainPageDialog.createQuiz}"/></h:form>
-            <h:form><p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" /></h:form>
+            <br/>
+            <h:form>
+                <p:commandButton value="Create quiz" action="#{mainPageDialog.createQuiz}" partialSubmit="true" process="@this"
+                                 rendered="#{mainPageDialog.quizCreationAllowed}"/>
+                <p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" partialSubmit="true" process="@this"/>
+            </h:form>
         </p:panel>
     </div>
 </h:body>
