@@ -11,15 +11,6 @@ jviewer.quiz = function (){
 
     return {
 
-        hasText: function (inputId) {
-            var input = _$(inputId);
-            if ($.trim(input.value) === '') {
-                input.focus();
-                return false;
-            }
-            return true;
-        },
-
         selectText: function (inputId) {
             var input = _$(inputId);
             if (input !== null) {

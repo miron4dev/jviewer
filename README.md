@@ -37,3 +37,5 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
 2. Replace "secret" with a real value for the keystorePass
 3. Create the "keystore" directory inside the ${catalina.home} one
 4. Put the jviewer.tk.jks key file into the "keystore" directory
+5. Create the "database" directory inside the ${catalina.home} one
+6. Put the JViewer\database\*.db files into the "database" directory

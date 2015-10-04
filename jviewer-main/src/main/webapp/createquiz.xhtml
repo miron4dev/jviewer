@@ -71,8 +71,7 @@
                         <h:inputText id="newQuestionText" value="#{createQuizDialog.newQuestionText}" styleClass="form-control"
                                 onkeypress="return jviewer.quiz.press(event, 'quizForm:addQuestionBtn')"/>
                         <span class="input-group-btn">
-                            <h:commandButton id="addQuestionBtn" value="Add question" styleClass="btn btn-default"
-                                    onclick="return jviewer.quiz.hasText('quizForm:newQuestionText')">
+                            <h:commandButton id="addQuestionBtn" value="Add question" styleClass="btn btn-default">
                                 <f:ajax listener="#{createQuizDialog.onAddNewQuestionPressed()}" execute="quizForm:newQuestionText"
                                         render="quizForm:totalAnswers quizForm:questions quizForm:question quizForm:selectNewQuestionText"/>
                             </h:commandButton>
@@ -143,8 +142,7 @@
                                                         <h:inputText id="newRadioAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
                                                                 onkeypress="return jviewer.quiz.press(event, 'quizForm:addRadioAnswerBtn')"/>
                                                         <span class="input-group-btn">
-                                                            <h:commandButton id="addRadioAnswerBtn" value="Add answer" styleClass="btn btn-default"
-                                                                    onclick="return jviewer.quiz.hasText('quizForm:newRadioAnswerText')">
+                                                            <h:commandButton id="addRadioAnswerBtn" value="Add answer" styleClass="btn btn-default">
                                                                 <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
                                                                         execute="quizForm:newRadioAnswerText" render="quizForm:radioAnswers quizForm:selectRadioText"/>
                                                             </h:commandButton>
@@ -178,8 +176,7 @@
                                                         <h:inputText id="newCheckAnswerText" value="#{createQuizDialog.newAnswerText}" styleClass="form-control"
                                                                 onkeypress="return jviewer.quiz.press(event, 'quizForm:addCheckAnswerBtn')"/>
                                                         <span class="input-group-btn">
-                                                            <h:commandButton id="addCheckAnswerBtn" value="Add answer" styleClass="btn btn-default"
-                                                                    onclick="return jviewer.quiz.hasText('quizForm:newCheckAnswerText')">
+                                                            <h:commandButton id="addCheckAnswerBtn" value="Add answer" styleClass="btn btn-default">
                                                                 <f:ajax listener="#{createQuizDialog.onAddNewAnswerPressed()}"
                                                                         execute="quizForm:newCheckAnswerText" render="quizForm:checkAnswers quizForm:selectCheckText"/>
                                                             </h:commandButton>

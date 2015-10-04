@@ -1,6 +1,5 @@
 package tk.jviewer.dao.quiz.impl;
 
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import tk.jviewer.dao.quiz.AnswerDao;
@@ -9,14 +8,10 @@ import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
-import static tk.jviewer.model.AnswerType.valueOf;
 
 /**
  * See {@link QuestionDao}.
