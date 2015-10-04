@@ -7,11 +7,11 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * Result representation.
+ * QuizResult representation.
  *
  * @author Evgeny Mironenko
  */
-public class Result implements Serializable {
+public class QuizResult implements Serializable {
 
     private static final long serialVersionUID = 3736246668014217404L;
 
@@ -49,10 +49,10 @@ public class Result implements Serializable {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Result result = (Result) o;
+        QuizResult quizResult = (QuizResult) o;
 
         return new EqualsBuilder()
-                .append(id, result.id)
+                .append(id, quizResult.id)
                 .isEquals();
     }
 
