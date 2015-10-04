@@ -75,10 +75,6 @@
             <value>#{editQuizManagedBean}</value>
         </managed-property>
         <managed-property>
-            <property-name>takeTestManagedBean</property-name>
-            <value>#{takeTestManagedBean}</value>
-        </managed-property>
-        <managed-property>
             <property-name>quizService</property-name>
             <value>#{quizService}</value>
         </managed-property>

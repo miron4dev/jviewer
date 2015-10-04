@@ -22,8 +22,7 @@ import java.util.stream.Stream;
 
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_INFO;
-import static tk.jviewer.profile.Permission.CREATE_ROOM;
-import static tk.jviewer.profile.Permission.DELETE_ROOM;
+import static tk.jviewer.profile.Permission.*;
 
 /**
  * Main page dialog.
@@ -31,9 +30,7 @@ import static tk.jviewer.profile.Permission.DELETE_ROOM;
 public class MainPageDialog implements Serializable {
 
     private static final long serialVersionUID = -8729752510193178635L;
-
-    private static final Logger logger = Logger.getLogger(MainPageDialog.class);
-
+    private static final Logger LOG = Logger.getLogger(MainPageDialog.class);
     private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(Room.Type.values()).map(Enum::name).collect(Collectors.toList());
 
     private String roomName;
@@ -60,10 +57,12 @@ public class MainPageDialog implements Serializable {
 
     public void createRoom() {
         try {
-            controller.createRoom(new Room(roomName, roomPassword, roomType));
+            Room newRoom = new Room(roomName, roomPassword ,roomType);
+            controller.createRoom(newRoom);
+            availableRooms.add(newRoom);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully created.");
         } catch (DataAccessException e) {
-            logger.error("Cannot create room", e);
+            LOG.error("Cannot create room", e);
             addMessage(SEVERITY_ERROR, "Failed", "Room has not been created, because of system error. Please refer to your system administrator");
         }
     }
@@ -74,7 +73,7 @@ public class MainPageDialog implements Serializable {
             controller.deleteRoom(room);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully removed.");
         } catch (DataAccessException e) {
-            logger.error("Cannot delete room", e);
+            LOG.error("Cannot delete room", e);
             addMessage(SEVERITY_ERROR, "Failed", "Room has not been deleted, because of system error. Please refer to your system administrator");
         }
     }
@@ -86,7 +85,7 @@ public class MainPageDialog implements Serializable {
 
     public String takeQuiz(final Quiz quiz) {
         takeQuizManagedBean.setChosenQuiz(quiz);
-        return "taketest?faces-redirect=true";
+        return "takequiz?faces-redirect=true";
     }
 
     public String editQuiz(final Quiz quiz) {
@@ -119,6 +118,18 @@ public class MainPageDialog implements Serializable {
 
     public boolean isRoomDeletionAllowed() {
         return userProfile.hasPermission(DELETE_ROOM);
+    }
+
+    public boolean isQuizCreationAllowed() {
+        return userProfile.hasPermission(CREATE_QUIZ);
+    }
+
+    public boolean isQuizEditionAllowed() {
+        return userProfile.hasPermission(EDIT_QUIZ);
+    }
+
+    public boolean isQuizDeletionAllowed() {
+        return userProfile.hasPermission(DELETE_QUIZ);
     }
 
     public List<String> getPossibleRoomTypes() {
@@ -157,7 +168,7 @@ public class MainPageDialog implements Serializable {
         try {
             return controller.getRooms();
         } catch (DataAccessException e) {
-            logger.error("Cannot find available rooms", e);
+            LOG.error("Cannot find available rooms", e);
             addMessage(SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
             return new ArrayList<>();
         }
