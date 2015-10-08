@@ -12,6 +12,8 @@ import static org.apache.commons.collections4.CollectionUtils.isEqualCollection;
  */
 public class MultipleChoiceQuestion extends AbstractQuestion<List<Answer>> {
 
+    private static final long serialVersionUID = -6327260023638562691L;
+
     private List<Answer> answers = new ArrayList<>();
 
     @Override

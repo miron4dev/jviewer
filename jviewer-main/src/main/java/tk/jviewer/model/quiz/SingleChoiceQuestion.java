@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class SingleChoiceQuestion extends AbstractQuestion<Answer> {
 
+    private static final long serialVersionUID = -4041702749485979156L;
+
     private List<Answer> answers = new ArrayList<>();
 
     @Override
