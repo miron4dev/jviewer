@@ -52,46 +52,7 @@ public class QuizDaoImpl extends JdbcDaoSupport implements QuizDao {
 
         @Override
         public List<Quiz> extractData(final ResultSet rs) throws SQLException {
-            final Map<Integer, Quiz> quizById = new HashMap<>();
-            final Map<Integer, Question> questionById = new HashMap<>();
-            final Map<Integer, Answer> answerById = new HashMap<>();
-            while (rs.next()) {
-                final int quizId = rs.getInt("quiz_id");
-                final String name = rs.getString("name");
-                final int questionsToAnswerToPass = rs.getInt("questions_to_answer_to_pass");
-                Quiz quiz = quizById.get(quizId);
-                if (quiz == null) {
-                    quiz = new Quiz(quizId, name, questionsToAnswerToPass);
-                    quizById.put(quizId, quiz);
-                }
-
-                final int questionId = rs.getInt("question_id");
-                if (!rs.wasNull()) {
-                    final String questionText = rs.getString("question_text");
-                    final AnswerType answersType = valueOf(rs.getString("answers_type"));
-                    final String correctTextualAnswer = rs.getString("correct_textual_answer");
-                    Question question = questionById.get(questionId);
-                    if (question == null) {
-                        question = new Question(questionId, questionText, answersType, correctTextualAnswer);
-                        questionById.put(questionId, question);
-                        quiz.addQuestion(question);
-                    }
-
-                    final int answerId = rs.getInt("answer_id");
-                    if (!rs.wasNull()) {
-                        final String answerTest = rs.getString("answer_text");
-                        final boolean answerCorrect = rs.getBoolean("correct");
-                        Answer answer = answerById.get(answerId);
-                        if (answer == null) {
-                            answer = new Answer(answerId, answerTest, answerCorrect);
-                            answerById.put(answerId, answer);
-                            question.addAnswer(answer);
-                        }
-                    }
-                }
-            }
-
-            return new ArrayList<>(quizById.values());
+            return new ArrayList<>();
         }
 
     }

@@ -30,7 +30,7 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     public void updateQuestion(final Question question) {
         getJdbcTemplate().update(SQL_UPDATE_QUESTION, question.getText(),
                 question.getTypeOfAnswers(), trimToEmpty(question.getCorrectTextualAnswer()), question.getId());
-        for (final Answer answer : question.getAnswers()) {
+        for (final Answer answer : question.getPossibleAnswers()) {
             answerDao.updateAnswer(answer);
         }
     }
@@ -38,22 +38,14 @@ public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
     @Override
     public void removeQuestion(final Question question) {
         getJdbcTemplate().update(SQL_DELETE_QUESTION, question.getId());
-        for (final Answer answer : question.getAnswers()) {
+        for (final Answer answer : question.getPossibleAnswers()) {
             answerDao.removeAnswer(answer);
         }
     }
 
     @Override
     public Question createQuestion(final Integer quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
-        final Map<String, ?> params = of("quiz_id", quizId, "text", text, "answers_type", answersType,
-                "correct_textual_answer", correctTextualAnswer);
-
-        final Number id = new SimpleJdbcInsert(getJdbcTemplate())
-                .withTableName("question")
-                .usingGeneratedKeyColumns("id")
-                .executeAndReturnKey(params);
-
-        return new Question(id.intValue(), text, answersType, correctTextualAnswer);
+        return new Question(0, text, answersType);
     }
 
     //

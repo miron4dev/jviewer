@@ -36,14 +36,14 @@
                                     <c:if test="#{typeOfAnswers == 'RADIO_BUTTON'}">
                                         <h:selectOneRadio value="#{currentQuestion.userSingleChoiceAnswer}"
                                                 layout="pageDirection">
-                                            <f:selectItems value="#{currentQuestion.answers}"
+                                            <f:selectItems value="#{currentQuestion.possibleAnswers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectOneRadio>
                                     </c:if>
                                     <c:if test="#{typeOfAnswers == 'CHECK_BOX'}">
                                         <h:selectManyCheckbox value="#{currentQuestion.userMultipleChoiceAnswers}"
                                                 converter="#{answerIdConverter}" layout="pageDirection">
-                                            <f:selectItems value="#{currentQuestion.answers}"
+                                            <f:selectItems value="#{currentQuestion.possibleAnswers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectManyCheckbox>
                                     </c:if>

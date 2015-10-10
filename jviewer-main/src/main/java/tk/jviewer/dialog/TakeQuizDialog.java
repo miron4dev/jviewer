@@ -84,23 +84,7 @@ public class TakeQuizDialog implements Serializable {
     }
 
     public void saveAnswer() {
-        final FacesContext context = FacesContext.getCurrentInstance();
-        final Map<String, String> params = context.getExternalContext().getRequestParameterMap();
-        final String idsOfAnswers = params.get(IDS_OF_ANSWERS_PARAM);
-        final String textualAnswer = params.get(TEXTUAL_ANSWER_PARAM);
-
-        final Question currentQuestion = getCurrentQuestion();
-
-        if (isNotBlank(idsOfAnswers)) {
-            final String[] ids = idsOfAnswers.split(IDS_OF_ANSWERS_SEPARATOR);
-            final List<Integer> userAnswers = new ArrayList<>(ids.length);
-            for (final String id : ids) {
-                userAnswers.add(getInteger(id));
-            }
-            currentQuestion.setUserMultipleChoiceAnswers(userAnswers);
-        } else if (isNotBlank(textualAnswer)) {
-            currentQuestion.setUserTextualAnswer(textualAnswer);
-        }
+        // TODO yaskov
     }
 
     //

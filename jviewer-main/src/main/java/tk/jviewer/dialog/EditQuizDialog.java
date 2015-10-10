@@ -107,7 +107,7 @@ public class EditQuizDialog implements Serializable {
 
     public void onDeleteAnswerPressed() {
         final int answerId = getIdFromRequest();
-        final Answer answerToRemove = Answer.lookupById(getEditingQuestion().getAnswers(), answerId);
+        final Answer answerToRemove = Answer.lookupById(getEditingQuestion().getPossibleAnswers(), answerId);
         quizService.removeAnswer(editQuizManagedBean.getEditingQuestion(), answerToRemove);
     }
 

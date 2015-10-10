@@ -120,13 +120,13 @@
                                                         <div class="col-xs-10">
                                                             <h:selectOneRadio value="#{editingQuestion.correctSingleChoiceAnswer}"
                                                                     layout="pageDirection">
-                                                                <f:selectItems value="#{editingQuestion.answers}"
+                                                                <f:selectItems value="#{editingQuestion.possibleAnswers}"
                                                                         var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                                                 <f:ajax listener="#{createQuizDialog.onCorrectAnswerChanged}"/>
                                                             </h:selectOneRadio>
                                                         </div>
                                                         <div class="col-xs-2">
-                                                            <c:forEach var="a" items="#{editingQuestion.answers}">
+                                                            <c:forEach var="a" items="#{editingQuestion.possibleAnswers}">
                                                                 <div>
                                                                     <h:commandLink value="Delete">
                                                                         <f:ajax listener="#{createQuizDialog.onDeleteAnswerPressed}"
@@ -154,13 +154,13 @@
                                                         <div class="col-xs-10">
                                                             <h:selectManyCheckbox value="#{editingQuestion.correctMultipleChoiceAnswers}"
                                                                     layout="pageDirection" converter="#{answerIdConverter}">
-                                                                <f:selectItems value="#{editingQuestion.answers}"
+                                                                <f:selectItems value="#{editingQuestion.possibleAnswers}"
                                                                         var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                                                 <f:ajax listener="#{createQuizDialog.onCorrectAnswerChanged}"/>
                                                             </h:selectManyCheckbox>
                                                         </div>
                                                         <div class="col-xs-2">
-                                                            <c:forEach var="a" items="#{editingQuestion.answers}">
+                                                            <c:forEach var="a" items="#{editingQuestion.possibleAnswers}">
                                                                 <div>
                                                                     <h:commandLink value="Delete">
                                                                         <f:ajax listener="#{createQuizDialog.onDeleteAnswerPressed}"

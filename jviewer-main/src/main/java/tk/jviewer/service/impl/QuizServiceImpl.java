@@ -79,7 +79,7 @@ public class QuizServiceImpl implements QuizService {
     public void createAnswer(final Question question, final Answer answer) {
         final Integer id = answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
         answer.setId(id);
-        question.addAnswer(answer);
+        question.addPossibleAnswer(answer);
     }
 
     @Override
@@ -124,28 +124,12 @@ public class QuizServiceImpl implements QuizService {
     //
 
     private static String formatUserAnswers(final Question question) {
-        final List<Answer> answers = question.getAnswers();
-        final AnswerType typeOfAnswers = question.getTypeOfAnswers();
-
-        if (typeOfAnswers == RADIO_BUTTON) {
-            final Integer userSingleChoiceAnswer = question.getUserSingleChoiceAnswer();
-            if (userSingleChoiceAnswer == null) {
-                return EMPTY;
-            }
-            final Answer userAnswer = lookupById(answers, userSingleChoiceAnswer);
-            return userAnswer.getText();
-        } else if (typeOfAnswers == CHECK_BOX) {
-            final StringBuilder builder = new StringBuilder();
-            for (Integer answerId : question.getUserMultipleChoiceAnswers()) {
-                final Answer userAnswer = lookupById(answers, answerId);
-                builder.append(userAnswer.getText()).append(", ");
-            }
-            return substringBeforeLast(builder.toString(), ", ");
-        } else if (typeOfAnswers == TEXT_FIELD) {
-            return question.getUserTextualAnswer();
+        final StringBuilder builder = new StringBuilder();
+        for (final Answer answer : question.getUserAnswers()) {
+            builder.append(answer.getText()).append(", ");
         }
 
-        throw new IllegalArgumentException("The answers type " + typeOfAnswers + " is not supported");
+        return substringBeforeLast(builder.toString(), ", ");
     }
 
 }
