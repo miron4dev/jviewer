@@ -2,6 +2,7 @@ package tk.jviewer.profile;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import tk.jviewer.model.Quiz;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class UserProfile implements Serializable {
     private String firstName;
     private String lastName;
     private List<Permission> permissions = new ArrayList<>();
+
+    private List<Quiz> quizzes = new ArrayList<>();
 
     @Override
     public boolean equals(Object obj) {
@@ -106,4 +109,13 @@ public class UserProfile implements Serializable {
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
     }
+
+    public List<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public void setQuizzes(List<Quiz> quizzes) {
+        this.quizzes = quizzes;
+    }
+
 }

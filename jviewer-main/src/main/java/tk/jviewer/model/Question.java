@@ -26,6 +26,7 @@ public class Question implements Serializable {
     private String topic;
     private String text;
     private List<Answer> answers = new ArrayList<>();
+    private List<Answer> userAnswers = new ArrayList<>();
     private Integer userSingleChoiceAnswer;
     private String correctTextualAnswer;
     private String userTextualAnswer;
@@ -96,6 +97,14 @@ public class Question implements Serializable {
 
     public void addAnswer(Answer answer) {
         answers.add(answer);
+    }
+
+    public List<Answer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(List<Answer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 
     public Integer getCorrectSingleChoiceAnswer() {

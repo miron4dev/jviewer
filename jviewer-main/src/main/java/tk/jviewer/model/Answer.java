@@ -26,6 +26,10 @@ public class Answer implements Serializable {
         this(null, text);
     }
 
+    public Answer(String text, boolean correct) {
+        this(null, text, correct);
+    }
+
     public Answer(Integer id, String text) {
         this(id, text, false);
     }
@@ -69,14 +73,16 @@ public class Answer implements Serializable {
         Answer answer = (Answer) o;
 
         return new EqualsBuilder()
-                .append(id, answer.id)
+                .append(correct, answer.correct)
+                .append(text, answer.text)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(id)
+                .append(text)
+                .append(correct)
                 .toHashCode();
     }
 
@@ -88,6 +94,14 @@ public class Answer implements Serializable {
         }
 
         throw new RuntimeException("No answer with id " + id + " found");
+    }
+
+    public static Answer createTextualAnswer(final String text) {
+        return new Answer(text, true);
+    }
+
+    public static Answer createSelectableAnswer(final String text, final boolean correct) {
+        return new Answer(text, correct);
     }
 
 }
