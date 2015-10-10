@@ -40,6 +40,7 @@ public class QuestionDaoImpl implements QuestionDao {
         existing.setText(question.getText());
         existing.setPossibleAnswers(question.getPossibleAnswers());
         existing.setTypeOfAnswers(question.getTypeOfAnswers());
+        existing.setUserAnswers(question.getUserAnswers());
     }
 
     @Override
