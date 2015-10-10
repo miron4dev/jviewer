@@ -35,6 +35,9 @@ public class TakeQuizDialog implements Serializable {
     private TakeQuizManagedBean managedBean;
 
     private QuizService quizService;
+    private Integer userSingleChoiceAnswer;
+    private List<Integer> userMultipleChoiceAnswers;
+    private String userTextualAnswer;
 
     public Quiz getChosenQuiz() {
         return managedBean.getChosenQuiz();
@@ -97,6 +100,30 @@ public class TakeQuizDialog implements Serializable {
 
     public void setQuizService(QuizService quizService) {
         this.quizService = quizService;
+    }
+
+    public Integer getUserSingleChoiceAnswer() {
+        return userSingleChoiceAnswer;
+    }
+
+    public void setUserSingleChoiceAnswer(Integer userSingleChoiceAnswer) {
+        this.userSingleChoiceAnswer = userSingleChoiceAnswer;
+    }
+
+    public void setUserMultipleChoiceAnswers(List<Integer> userMultipleChoiceAnswers) {
+        this.userMultipleChoiceAnswers = userMultipleChoiceAnswers;
+    }
+
+    public List<Integer> getUserMultipleChoiceAnswers() {
+        return userMultipleChoiceAnswers;
+    }
+
+    public void setUserTextualAnswer(String userTextualAnswer) {
+        this.userTextualAnswer = userTextualAnswer;
+    }
+
+    public String getUserTextualAnswer() {
+        return userTextualAnswer;
     }
 
 }

@@ -23,18 +23,12 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="quizDao" class="tk.jviewer.dao.quiz.impl.QuizDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="questionDao" ref="questionDao"/>
-    </bean>
+    <bean id="quizDao" class="tk.jviewer.dao.quiz.impl.QuizDaoImpl"/>
 
-    <bean id="questionDao" class="tk.jviewer.dao.quiz.impl.QuestionDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="answerDao" ref="answerDao"/>
-    </bean>
+    <bean id="questionDao" class="tk.jviewer.dao.quiz.impl.QuestionDaoImpl"/>
 
     <bean id="answerDao" class="tk.jviewer.dao.quiz.impl.AnswerDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="questionDao" ref="questionDao"/>
     </bean>
 
     <bean id="quizResultDao" class="tk.jviewer.dao.quiz.impl.QuizResultDaoImpl">

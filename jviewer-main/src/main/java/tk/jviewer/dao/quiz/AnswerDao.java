@@ -10,12 +10,12 @@ import java.util.List;
  */
 public interface AnswerDao {
 
-    List<Answer> findAnswers(Integer questionId);
-
-    Integer createAnswer(Integer questionId, final String text, final boolean correct);
+    Answer createAnswer(Integer questionId, final String text, final boolean correct);
 
     void removeAnswer(Answer answer);
 
     void updateAnswer(Answer answer);
+
+    Answer findAnswer(Integer id);
 
 }

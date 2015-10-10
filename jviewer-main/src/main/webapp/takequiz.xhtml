@@ -24,24 +24,21 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="h2">
-                                            <h:outputText value="#{currentQuestion.topic}"/>
-                                        </div>
                                         <div class="h4">
                                             <h:outputText value="#{currentQuestion.text}"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="multipleChoiceAnswers-pnl">
+                                <h:panelGroup layout="block" id="answers" class="multipleChoiceAnswers-pnl">
                                     <c:if test="#{typeOfAnswers == 'RADIO_BUTTON'}">
-                                        <h:selectOneRadio value="#{currentQuestion.userSingleChoiceAnswer}"
+                                        <h:selectOneRadio value="#{takeTestDialog.userSingleChoiceAnswer}"
                                                 layout="pageDirection">
                                             <f:selectItems value="#{currentQuestion.possibleAnswers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
                                         </h:selectOneRadio>
                                     </c:if>
                                     <c:if test="#{typeOfAnswers == 'CHECK_BOX'}">
-                                        <h:selectManyCheckbox value="#{currentQuestion.userMultipleChoiceAnswers}"
+                                        <h:selectManyCheckbox value="#{takeTestDialog.userMultipleChoiceAnswers}"
                                                 converter="#{answerIdConverter}" layout="pageDirection">
                                             <f:selectItems value="#{currentQuestion.possibleAnswers}"
                                                     var="a" itemLabel="#{a.text}" itemValue="#{a.id}"/>
@@ -50,10 +47,10 @@
                                     <c:if test="#{typeOfAnswers == 'TEXT_FIELD'}">
                                         <label>
                                             <h:outputText value="Please write your answer"/>
-                                            <h:inputText value="#{currentQuestion.userTextualAnswer}"/>
+                                            <h:inputText value="#{takeTestDialog.userTextualAnswer}"/>
                                         </label>
                                     </c:if>
-                                </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                         <hr/>
@@ -66,12 +63,12 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="pull-right">
-                                                <p:commandButton actionListener="#{takeTestDialog.previousQuestion}" onclick="sendAnswers()"
-                                                        rendered="#{not takeTestDialog.firstQuestion}" update="question" value="Previous"/>
-                                                <p:commandButton actionListener="#{takeTestDialog.nextQuestion}" onclick="sendAnswers()"
-                                                        rendered="#{not takeTestDialog.lastQuestion}" update="question" value="Next"/>
-                                                <p:commandButton action="#{takeTestDialog.redirectToResults}" onclick="sendAnswers()"
-                                                        rendered="#{takeTestDialog.lastQuestion}" update="question" value="Finish quiz"/>
+                                                <p:commandButton actionListener="#{takeTestDialog.previousQuestion}"
+                                                        process="@this,answers" rendered="#{not takeTestDialog.firstQuestion}" update="question" value="Previous"/>
+                                                <p:commandButton actionListener="#{takeTestDialog.nextQuestion}"
+                                                        process="@this,answers" rendered="#{not takeTestDialog.lastQuestion}" update="question" value="Next"/>
+                                                <p:commandButton action="#{takeTestDialog.redirectToResults}"
+                                                        process="@this,answers" rendered="#{takeTestDialog.lastQuestion}" update="question" value="Finish quiz"/>
                                             </div>
                                         </div>
                                     </div>
@@ -93,28 +90,5 @@
         </div>
         <p:remoteCommand name="sendAnswersCommand" actionListener="#{takeTestDialog.saveAnswer}"/>
     </h:form>
-    <script type="text/javascript">
-        var getTextualAnswer = function () {
-            return $('.multipleChoiceAnswers-pnl input[type=text]').val();
-        };
-
-        var collectIdsOfAnswers = function () {
-            var result = [];
-            $('.multipleChoiceAnswers-pnl input').each(function () {
-                if ($(this).prop('checked')) {
-                    result.push(this.value);
-                }
-            });
-
-            return result;
-        };
-
-        var sendAnswers = function () {
-            var idsOfAnswers = collectIdsOfAnswers();
-            var textualAnswer = getTextualAnswer();
-            sendAnswersCommand([{name: 'idsOfAnswers', value: idsOfAnswers},
-                {name: 'textualAnswer', value: textualAnswer}]);
-        };
-    </script>
 </h:body>
 </html>

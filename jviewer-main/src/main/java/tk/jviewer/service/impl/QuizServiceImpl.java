@@ -77,9 +77,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public void createAnswer(final Question question, final Answer answer) {
-        final Integer id = answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
-        answer.setId(id);
-        question.addPossibleAnswer(answer);
+        answerDao.createAnswer(question.getId(), answer.getText(), answer.isCorrect());
     }
 
     @Override

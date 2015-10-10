@@ -17,4 +17,5 @@ public interface QuestionDao {
 
     void removeQuestion(Question question);
 
+    Question findQuestion(Integer questionId);
 }

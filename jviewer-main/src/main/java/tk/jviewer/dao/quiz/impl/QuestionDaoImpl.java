@@ -8,6 +8,8 @@ import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.ImmutableMap.of;
@@ -16,44 +18,40 @@ import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 /**
  * See {@link QuestionDao}.
  */
-public class QuestionDaoImpl extends JdbcDaoSupport implements QuestionDao {
+public class QuestionDaoImpl implements QuestionDao {
 
-    private static final String SQL_UPDATE_QUESTION =
-            "update question set text = ?, answers_type = ?, correct_textual_answer = ? where id = ?";
+    private int currentId = 0;
+    private List<Question> questions = new ArrayList<>();
 
-    private static final String SQL_DELETE_QUESTION = "delete from question where id = ?";
+    @Override
+    public Question findQuestion(Integer id) {
+        for (Question q : questions) {
+            if (q.getId().equals(id)) {
+                return q;
+            }
+        }
 
-
-    private AnswerDao answerDao;
+        throw new RuntimeException("No question with id " + id);
+    }
 
     @Override
     public void updateQuestion(final Question question) {
-        getJdbcTemplate().update(SQL_UPDATE_QUESTION, question.getText(),
-                question.getTypeOfAnswers(), trimToEmpty(question.getCorrectTextualAnswer()), question.getId());
-        for (final Answer answer : question.getPossibleAnswers()) {
-            answerDao.updateAnswer(answer);
-        }
+        final Question existing = findQuestion(question.getId());
+        existing.setText(question.getText());
+        existing.setPossibleAnswers(question.getPossibleAnswers());
+        existing.setTypeOfAnswers(question.getTypeOfAnswers());
     }
 
     @Override
     public void removeQuestion(final Question question) {
-        getJdbcTemplate().update(SQL_DELETE_QUESTION, question.getId());
-        for (final Answer answer : question.getPossibleAnswers()) {
-            answerDao.removeAnswer(answer);
-        }
+        questions.remove(question);
     }
 
     @Override
     public Question createQuestion(final Integer quizId, final String text, final AnswerType answersType, final String correctTextualAnswer) {
-        return new Question(0, text, answersType);
-    }
-
-    //
-    // Dependency Injection
-    //
-
-    public void setAnswerDao(AnswerDao answerDao) {
-        this.answerDao = answerDao;
+        final Question question = new Question(++currentId, text, answersType);
+        questions.add(question);
+        return question;
     }
 
 }
