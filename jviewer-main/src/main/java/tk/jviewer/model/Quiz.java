@@ -22,6 +22,7 @@ public class Quiz implements Serializable {
     private String name;
     private final List<Question> questions;
     private int questionsToAnswerToPassTheTest;
+    private Boolean alreadyTaken;
 
     public Quiz(final Integer id, final String name, final int questionsToAnswerToPassTheTest) {
         this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
@@ -46,7 +47,6 @@ public class Quiz implements Serializable {
         this.name = name;
     }
 
-
     public List<Question> getQuestions() {
         return unmodifiableList(questions);
     }
@@ -65,6 +65,14 @@ public class Quiz implements Serializable {
 
     public void setQuestionsToAnswerToPassTheTest(int questionsToAnswerToPassTheTest) {
         this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
+    }
+
+    public Boolean isAlreadyTaken() {
+        return alreadyTaken;
+    }
+
+    public void setAlreadyTaken(Boolean alreadyTaken) {
+        this.alreadyTaken = alreadyTaken;
     }
 
     @Override

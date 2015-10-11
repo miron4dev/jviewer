@@ -85,7 +85,7 @@ public class MainPageDialog implements Serializable {
 
     public String takeQuiz(final Quiz quiz) {
         takeQuizManagedBean.setChosenQuiz(quiz);
-        return "takequiz?faces-redirect=true";
+        return quiz.isAlreadyTaken() ? "quizresults?faces-redirect=true" : "takequiz?faces-redirect=true";
     }
 
     public String editQuiz(final Quiz quiz) {

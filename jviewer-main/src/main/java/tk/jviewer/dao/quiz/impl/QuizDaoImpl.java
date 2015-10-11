@@ -17,6 +17,7 @@ public class QuizDaoImpl implements QuizDao {
     @Override
     public Quiz createQuiz(final String name, final int questionsToAnswerToPass) {
         final Quiz quiz = new Quiz(++currentId, name, questionsToAnswerToPass);
+        quiz.setAlreadyTaken(false);
         quizzes.add(quiz);
         return quiz;
     }

@@ -30,6 +30,6 @@ public interface QuizService {
 
     void removeQuiz(Quiz quiz);
 
-    List<QuizResult> createQuizResult(final List<Question> questions);
+    List<QuizResult> createQuizResults(final List<Question> questions);
 
 }

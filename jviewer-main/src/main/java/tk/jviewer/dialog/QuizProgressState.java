@@ -20,10 +20,6 @@ public class QuizProgressState {
         this.quiz = quiz;
     }
 
-    public List<Question> getQuestions() {
-        return quiz.getQuestions();
-    }
-
     public Question getCurrentQuestion() {
         final List<Question> questions = quiz.getQuestions();
         return questions.isEmpty() ? null : questions.get(currentQuestionIndex);

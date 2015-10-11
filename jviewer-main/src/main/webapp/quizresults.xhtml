@@ -24,10 +24,10 @@
                                         <h:outputText value="Your results"/>
                                     </div>
                                     <div class="h4">
-                                        <h:outputText value="#{takeTestDialog.chosenQuiz.correctlyAnsweredQuestionsNumber} of #{takeTestDialog.chosenQuiz.totalQuestionsNumber}"/>
+                                        <h:outputText value="#{takeTestDialog.quizProgressState.correctlyAnsweredQuestionsNumber} of #{takeTestDialog.quizProgressState.totalQuestionsNumber}"/>
                                     </div>
                                     <div class="h4">
-                                        <h:outputText value="#{takeTestDialog.chosenQuiz.successfullyPassed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
+                                        <h:outputText value="#{takeTestDialog.quizProgressState.successfullyPassed ? 'Congratulations! Now you\'re a PhD.' : 'You\'re a stupid idiot.'}"/>
                                     </div>
                                 </div>
                             </div>

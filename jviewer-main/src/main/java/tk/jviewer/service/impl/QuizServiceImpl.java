@@ -50,7 +50,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<QuizResult> createQuizResult(final List<Question> questions) {
+    public List<QuizResult> createQuizResults(final List<Question> questions) {
         final List<QuizResult> results = new ArrayList<>(questions.size());
         for (final Question question : questions) {
             results.add(new QuizResult(question, formatCorrectAnswers(question), formatUserAnswers(question)));
