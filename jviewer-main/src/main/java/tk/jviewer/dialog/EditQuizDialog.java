@@ -40,7 +40,8 @@ public class EditQuizDialog implements Serializable {
             editQuizManagedBean.setCurrentQuiz(quizService.createQuiz());
             quizJustCreated = true;
         }
-        editQuizManagedBean.setEditingQuestion(getQuiz().getCurrentQuestion());
+        final List<Question> questions = getQuiz().getQuestions();
+        editQuizManagedBean.setEditingQuestion(questions.size() > 0 ? questions.get(0) : null);
     }
 
     public Quiz getQuiz() {

@@ -36,10 +36,13 @@
                     <hr/>
                     <p:dataTable value="#{takeTestDialog.quizResults}" var="result">
                         <p:column headerText="Question">
-                            <h:outputText value="#{result.key.text}"/>
+                            <h:outputText value="#{result.question.text}"/>
+                        </p:column>
+                        <p:column headerText="Correct answer">
+                            <h:outputText value="#{result.correctAnswers}"/>
                         </p:column>
                         <p:column headerText="Your answer">
-                            <h:outputText value="#{result.value}"/>
+                            <h:outputText value="#{result.userAnswers}"/>
                         </p:column>
                     </p:dataTable>
                     <hr/>

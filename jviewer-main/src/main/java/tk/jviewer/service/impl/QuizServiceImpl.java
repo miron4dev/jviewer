@@ -3,24 +3,18 @@ package tk.jviewer.service.impl;
 import tk.jviewer.dao.quiz.AnswerDao;
 import tk.jviewer.dao.quiz.QuestionDao;
 import tk.jviewer.dao.quiz.QuizDao;
-import tk.jviewer.dao.quiz.QuizResultDao;
 import tk.jviewer.model.Answer;
-import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
 import tk.jviewer.model.QuizResult;
 import tk.jviewer.service.QuizService;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
-import static tk.jviewer.model.Answer.lookupById;
-import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
-import static tk.jviewer.model.AnswerType.TEXT_FIELD;
 
 /**
  * See {@link QuizService}.
@@ -34,7 +28,6 @@ public class QuizServiceImpl implements QuizService {
     private QuizDao quizDao;
     private QuestionDao questionDao;
     private AnswerDao answerDao;
-    private QuizResultDao quizResultDao;
 
     @Override
     public Quiz createQuiz() {
@@ -57,15 +50,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizResult createQuizResult(final Quiz quiz) {
-        final Map<Question, String> userAnswers = new HashMap<>();
-        for (final Question question : quiz.getQuestions()) {
-            userAnswers.put(question, formatUserAnswers(question));
+    public List<QuizResult> createQuizResult(final List<Question> questions) {
+        final List<QuizResult> results = new ArrayList<>(questions.size());
+        for (final Question question : questions) {
+            results.add(new QuizResult(question, formatCorrectAnswers(question), formatUserAnswers(question)));
         }
-        final QuizResult quizResult = new QuizResult(userAnswers);
-        quizResultDao.createQuizResult(quiz, quizResult);
-        quiz.setResult(quizResult);
-        return quizResult;
+        return results;
     }
 
     @Override
@@ -113,13 +103,20 @@ public class QuizServiceImpl implements QuizService {
         this.answerDao = answerDao;
     }
 
-    public void setQuizResultDao(QuizResultDao quizResultDao) {
-        this.quizResultDao = quizResultDao;
-    }
-
     //
     // Helper Methods
     //
+
+    private static String formatCorrectAnswers(final Question question) {
+        final StringBuilder builder = new StringBuilder();
+        for (final Answer answer : question.getPossibleAnswers()) {
+            if (answer.isCorrect()) {
+                builder.append(answer.getText()).append(", ");
+            }
+        }
+
+        return substringBeforeLast(builder.toString(), ", ");
+    }
 
     private static String formatUserAnswers(final Question question) {
         final StringBuilder builder = new StringBuilder();

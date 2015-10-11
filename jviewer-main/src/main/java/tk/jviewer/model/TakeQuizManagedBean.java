@@ -14,6 +14,7 @@ public class TakeQuizManagedBean implements Serializable {
 
     private Quiz chosenQuiz;
     private List<Quiz> availableQuizzes;
+    private List<QuizResult> quizResults;
 
     public Quiz getChosenQuiz() {
         return chosenQuiz;
@@ -29,6 +30,14 @@ public class TakeQuizManagedBean implements Serializable {
 
     public void setAvailableQuizzes(List<Quiz> availableQuizzes) {
         this.availableQuizzes = availableQuizzes;
+    }
+
+    public List<QuizResult> getQuizResults() {
+        return quizResults;
+    }
+
+    public void setQuizResults(List<QuizResult> quizResults) {
+        this.quizResults = quizResults;
     }
 
     public Quiz lookupTestByName(final String name) {

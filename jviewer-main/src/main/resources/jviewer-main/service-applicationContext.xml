@@ -27,7 +27,6 @@
         <property name="quizDao" ref="quizDao"/>
         <property name="questionDao" ref="questionDao"/>
         <property name="answerDao" ref="answerDao"/>
-        <property name="quizResultDao" ref="quizResultDao"/>
     </bean>
 
 </beans>

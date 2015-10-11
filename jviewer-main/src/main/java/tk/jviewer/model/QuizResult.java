@@ -16,27 +16,26 @@ public class QuizResult implements Serializable {
 
     private static final long serialVersionUID = 3736246668014217404L;
 
-    private Integer id;
-    private Map<Question, String> userAnswers = new HashMap<>();
+    private final Question question;
+    private final String correctAnswers;
+    private final String userAnswers;
 
-    public QuizResult(final Map<Question, String> userAnswers) {
+    public QuizResult(Question question, String correctAnswers, String userAnswers) {
+        this.question = question;
+        this.correctAnswers = correctAnswers;
         this.userAnswers = userAnswers;
     }
 
-    public Integer getId() {
-        return id;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getCorrectAnswers() {
+        return correctAnswers;
     }
 
-    public Map<Question, String> getUserAnswers() {
+    public String getUserAnswers() {
         return userAnswers;
-    }
-
-    public void setUserAnswers(Map<Question, String> userAnswers) {
-        this.userAnswers = userAnswers;
     }
 
     @Override
@@ -45,17 +44,21 @@ public class QuizResult implements Serializable {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        QuizResult quizResult = (QuizResult) o;
+        QuizResult that = (QuizResult) o;
 
         return new EqualsBuilder()
-                .append(id, quizResult.id)
+                .append(question, that.question)
+                .append(correctAnswers, that.correctAnswers)
+                .append(userAnswers, that.userAnswers)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(id)
+                .append(question)
+                .append(correctAnswers)
+                .append(userAnswers)
                 .toHashCode();
     }
 

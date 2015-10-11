@@ -4,21 +4,17 @@ import org.apache.log4j.Logger;
 import tk.jviewer.model.Answer;
 import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.Question;
-import tk.jviewer.model.Quiz;
+import tk.jviewer.model.QuizResult;
 import tk.jviewer.model.TakeQuizManagedBean;
 import tk.jviewer.service.QuizService;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.springframework.util.Assert.state;
 import static tk.jviewer.model.Answer.createTextualAnswer;
 import static tk.jviewer.model.AnswerType.CHECK_BOX;
 import static tk.jviewer.model.AnswerType.RADIO_BUTTON;
@@ -40,26 +36,29 @@ public class TakeQuizDialog implements Serializable {
     private List<Integer> userMultipleChoiceAnswers;
     private String userTextualAnswer;
 
-    public Quiz getChosenQuiz() {
-        return managedBean.getChosenQuiz();
+    private QuizProgressState chosenQuiz;
+
+    @PostConstruct
+    public void init() {
+        chosenQuiz = new QuizProgressState(managedBean.getChosenQuiz());
     }
 
-    public void setChosenQuiz(Quiz quiz) {
-        managedBean.setChosenQuiz(quiz);
+    public QuizProgressState getChosenQuiz() {
+        return chosenQuiz;
     }
 
     public Question getCurrentQuestion() {
-        final Quiz chosenQuiz = getChosenQuiz();
+        final QuizProgressState chosenQuiz = getChosenQuiz();
         return chosenQuiz.getCurrentQuestion();
     }
 
     public boolean isFirstQuestion() {
-        final Quiz chosenQuiz = getChosenQuiz();
+        final QuizProgressState chosenQuiz = getChosenQuiz();
         return chosenQuiz.isCurrentQuestionTheFirst();
     }
 
     public boolean isLastQuestion() {
-        final Quiz chosenQuiz = getChosenQuiz();
+        final QuizProgressState chosenQuiz = getChosenQuiz();
         return chosenQuiz.isCurrentQuestionTheLast();
     }
 
@@ -74,15 +73,17 @@ public class TakeQuizDialog implements Serializable {
     }
 
     public String redirectToResults() {
-        final Quiz quiz = getChosenQuiz();
-        quizService.createQuizResult(quiz);
+        saveUserAnswers();
+
+        final QuizProgressState quiz = getChosenQuiz();
+        managedBean.setQuizResults(quizService.createQuizResult(quiz.getQuestions()));
+        logger.debug("Going to redirect to results page");
 
         return "testresults?faces-redirect=true";
     }
 
-    public List<Map.Entry<Question, String>> getQuizResults() {
-        final Set<Map.Entry<Question, String>> entries = getChosenQuiz().getResult().getUserAnswers().entrySet();
-        return new ArrayList<>(entries);
+    public List<QuizResult> getQuizResults() {
+        return managedBean.getQuizResults();
     }
 
     public String cancelTest() {

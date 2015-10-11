@@ -38,7 +38,7 @@
                             styleClass="width-30px">
                         <f:ajax listener="#{createQuizDialog.onQuizChanged}" event="blur"/>
                     </h:inputText>
-                    <h:outputText id="totalAnswers" value=" of #{createQuizDialog.quiz.totalQuestionsNumber} "/>
+                    <h:outputText id="totalAnswers" value=" of #{createQuizDialog.quiz.questions.size()} "/>
                     <h:outputText value="questions should be answered correctly to pass the quiz."/>
                 </div>
             </div>

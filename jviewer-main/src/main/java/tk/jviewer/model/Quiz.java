@@ -23,9 +23,6 @@ public class Quiz implements Serializable {
     private final List<Question> questions;
     private int questionsToAnswerToPassTheTest;
 
-    private int currentQuestionIndex;
-    private QuizResult result;
-
     public Quiz(final Integer id, final String name, final int questionsToAnswerToPassTheTest) {
         this(id, name, new ArrayList<>(), questionsToAnswerToPassTheTest);
     }
@@ -49,29 +46,6 @@ public class Quiz implements Serializable {
         this.name = name;
     }
 
-    public Question getCurrentQuestion() {
-        return questions.isEmpty() ? null : questions.get(currentQuestionIndex);
-    }
-
-    public boolean isCurrentQuestionTheLast() {
-        return currentQuestionIndex == questions.size() - 1;
-    }
-
-    public boolean isCurrentQuestionTheFirst() {
-        return currentQuestionIndex == 0;
-    }
-
-    public void nextQuestion() {
-        if (!isCurrentQuestionTheLast()) {
-            currentQuestionIndex++;
-        }
-    }
-
-    public void previousQuestion() {
-        if (!isCurrentQuestionTheFirst()) {
-            currentQuestionIndex--;
-        }
-    }
 
     public List<Question> getQuestions() {
         return unmodifiableList(questions);
@@ -85,43 +59,12 @@ public class Quiz implements Serializable {
         questions.remove(question);
     }
 
-    public int getCorrectlyAnsweredQuestionsNumber() {
-        int number = 0;
-        for (final Question question : questions) {
-            if (question.isCorrectlyAnswered()) {
-                number++;
-            }
-        }
-
-        return number;
-    }
-
     public int getQuestionsToAnswerToPassTheTest() {
         return questionsToAnswerToPassTheTest;
     }
 
     public void setQuestionsToAnswerToPassTheTest(int questionsToAnswerToPassTheTest) {
         this.questionsToAnswerToPassTheTest = questionsToAnswerToPassTheTest;
-    }
-
-    public int getTotalQuestionsNumber() {
-        return questions.size();
-    }
-
-    public Integer getProgress() {
-        return (int) (getPassedQuestionsPortion() * 100);
-    }
-
-    public boolean isSuccessfullyPassed() {
-        return getCorrectlyAnsweredQuestionsNumber() >= questionsToAnswerToPassTheTest;
-    }
-
-    public QuizResult getResult() {
-        return result;
-    }
-
-    public void setResult(QuizResult result) {
-        this.result = result;
     }
 
     @Override
@@ -142,14 +85,6 @@ public class Quiz implements Serializable {
         return new HashCodeBuilder(17, 37)
                 .append(id)
                 .toHashCode();
-    }
-
-    //
-    // Helper Methods
-    //
-
-    private double getPassedQuestionsPortion() {
-        return (double) currentQuestionIndex / getTotalQuestionsNumber();
     }
 
 }
