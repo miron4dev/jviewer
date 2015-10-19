@@ -13,6 +13,8 @@
     <import resource="classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml"/>
 
     <import resource="classpath:jviewer-main/controller-applicationContext.xml"/>
+    <import resource="classpath:jviewer-main/hibernate-applicationContext.xml"/>
+    <import resource="classpath:jviewer-main/repository-applicationContext.xml"/>
     <import resource="classpath:jviewer-main/dao-applicationContext.xml"/>
     <import resource="classpath:jviewer-main/jdbc-applicationContext.xml"/>
     <import resource="classpath:jviewer-main/model-applicationContext.xml"/>

@@ -83,9 +83,29 @@
                 <version>${sqlite.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgres.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.jolbox</groupId>
                 <artifactId>bonecp</artifactId>
-                <version>0.8.0.RELEASE</version>
+                <version>${bonecp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${jpa2.version}</version>
             </dependency>
 
             <!-- Spring -->
@@ -117,6 +137,21 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -233,6 +268,10 @@
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
         <primefaces-extensions.version>3.2.0</primefaces-extensions.version>
         <sqlite.version>3.8.7</sqlite.version>
+        <postgres.version>9.3-1104-jdbc41</postgres.version>
+        <bonecp.version>0.8.0.RELEASE</bonecp.version>
+        <hibernate.version>5.0.2.Final</hibernate.version>
+        <jpa2.version>1.0.0.Final</jpa2.version>
         <spring.version>4.2.1.RELEASE</spring.version>
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
         <websocket.version>1.1</websocket.version>
