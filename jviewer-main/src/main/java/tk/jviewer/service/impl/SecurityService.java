@@ -38,11 +38,9 @@ public class SecurityService implements AuthenticationProvider {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        userProfile.setId(user.getId());
         userProfile.setName(user.getName());
-        userProfile.setPassword(user.getPassword());
         userProfile.setRole(user.getRole());
-        userProfile.setFaculty(user.getFaculty());
+        userProfile.setDepartment(user.getDepartment());
         userProfile.setEnabled(user.isEnabled());
         userProfile.setFirstName(user.getFirstName());
         userProfile.setLastName(user.getLastName());

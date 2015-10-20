@@ -10,9 +10,8 @@
     </bean>
 
     <bean id="loginService" class="tk.jviewer.service.impl.LoginServiceImpl">
-        <property name="loginDao" ref="loginDao"/>
-        <property name="validationDao" ref="validationDao"/>
         <property name="encoder" ref="encoder"/>
+        <property name="repository" ref="userRepository"/>
     </bean>
 
     <bean id="managementController" class="tk.jviewer.controller.ManagementController">

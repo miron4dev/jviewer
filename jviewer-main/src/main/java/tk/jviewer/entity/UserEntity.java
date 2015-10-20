@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * User entity.
  */
 @Entity
-@Table(name = "USER", schema = "JVIEWER_MAIN")
+@Table(name = "user", schema = "jviewer_main")
 public class UserEntity {
 
     @Id

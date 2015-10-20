@@ -16,11 +16,9 @@ public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 1760830794494874370L;
 
-    private int id;
     private String name;
-    private String password;
     private String role;
-    private String faculty;
+    private String department;
     private boolean enabled;
     private String firstName;
     private String lastName;
@@ -38,28 +36,12 @@ public class UserProfile implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
@@ -70,12 +52,12 @@ public class UserProfile implements Serializable {
         this.role = role;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public boolean isEnabled() {

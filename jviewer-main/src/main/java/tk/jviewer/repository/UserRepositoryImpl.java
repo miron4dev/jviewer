@@ -1,5 +1,6 @@
 package tk.jviewer.repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.entity.UserEntity;
 
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.Root;
  */
 public class UserRepositoryImpl implements UserRepository {
 
-    @PersistenceContext(name = "jviewerUnit")
+    @PersistenceContext
     private EntityManager em;
 
     @Override
@@ -22,6 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserEntity getUser(String username) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);

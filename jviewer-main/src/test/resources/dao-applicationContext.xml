@@ -12,10 +12,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="loginDao" class="tk.jviewer.dao.impl.LoginDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
     <bean id="validationDao" class="tk.jviewer.dao.impl.ValidationDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>

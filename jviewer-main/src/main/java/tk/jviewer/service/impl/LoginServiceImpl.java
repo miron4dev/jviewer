@@ -1,11 +1,12 @@
 package tk.jviewer.service.impl;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import tk.jviewer.dao.LoginDao;
-import tk.jviewer.dao.ValidationDao;
+import tk.jviewer.entity.UserEntity;
 import tk.jviewer.profile.UserProfile;
+import tk.jviewer.repository.UserRepository;
 import tk.jviewer.service.LoginService;
+
+import javax.persistence.NoResultException;
 
 /**
  * Login service implementation.
@@ -13,8 +14,7 @@ import tk.jviewer.service.LoginService;
  */
 public class LoginServiceImpl implements LoginService {
 
-    private ValidationDao validationDao;
-    private LoginDao loginDao;
+    private UserRepository repository;
     private BCryptPasswordEncoder encoder;
 
     /**
@@ -24,28 +24,36 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserProfile getData(String username, String password) {
         try{
-            if(encoder.matches(password, validationDao.getUserPassword(username))){
-                return loginDao.getData(username);
+            UserEntity userEntity = repository.getUser(username);
+            if(encoder.matches(password, userEntity.getPassword())){
+                return mapToProfile(userEntity);
             }
             return null;
-        } catch(EmptyResultDataAccessException e){
+        } catch(NoResultException e){
             return null;
         }
+    }
+
+    private UserProfile mapToProfile(UserEntity entity) {
+        UserProfile profile = new UserProfile();
+        profile.setName(entity.getUsername());
+        profile.setRole(entity.getRole());
+        profile.setDepartment(entity.getDepartment());
+        profile.setEnabled(entity.isEnabled());
+        profile.setFirstName(entity.getFirstName());
+        profile.setLastName(entity.getLastName());
+        return profile;
     }
 
     //
     // Setters for Dependency Injection.
     //
 
-    public void setValidationDao(ValidationDao validationDao) {
-        this.validationDao = validationDao;
-    }
-
-    public void setLoginDao(LoginDao loginDao) {
-        this.loginDao = loginDao;
-    }
-
     public void setEncoder(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
+    }
+
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
     }
 }
