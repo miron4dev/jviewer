@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS "user" (
   last_name TEXT NOT NULL
 );
 
--- INSERT INTO user (username, password, role, department, first_name, last_name) VALUES ('admin', '$2a$11$z8Ym9XENSKNkVTy.XL5/aOzORzYyvtlc/b22PsQQBmX2p7Dlm/XwK', 'ROLE_ADMIN', 'IT', 'Admin', 'Admin');
+-- INSERT INTO "jviewer_main"."user" (username, password, role, department, first_name, last_name) VALUES ('admin', '$2a$11$z8Ym9XENSKNkVTy.XL5/aOzORzYyvtlc/b22PsQQBmX2p7Dlm/XwK', 'ROLE_ADMIN', 'IT', 'Admin', 'Admin');
 
 -- Config --
 DROP TABLE IF EXISTS config;

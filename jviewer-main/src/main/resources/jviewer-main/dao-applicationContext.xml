@@ -4,19 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="registrationDao" class="tk.jviewer.dao.impl.RegistrationDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="legacyDataSource"/>
     </bean>
 
     <bean id="validationDao" class="tk.jviewer.dao.impl.ValidationDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="legacyDataSource"/>
     </bean>
 
     <bean id="managementDao" class="tk.jviewer.dao.impl.ManagementDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="legacyDataSource"/>
     </bean>
 
     <bean id="resourceDao" class="tk.jviewer.dao.impl.ResourceDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="legacyDataSource"/>
     </bean>
 
     <bean id="quizDao" class="tk.jviewer.dao.quiz.impl.QuizDaoImpl"/>
