@@ -23,12 +23,12 @@
     <modules>
         <module>jviewer-info</module>
         <module>jviewer-main</module>
-        <module>jviewer-build</module>
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
         <module>jviewer-web</module>
         <module>jviewer-repository</module>
+        <module>jviewer-build</module>
     </modules>
 
     <dependencyManagement>
