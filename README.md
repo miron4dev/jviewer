@@ -38,7 +38,6 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
 3. Create the "keystore" directory inside the ${catalina.home} one
 4. Put the jviewer.tk.jks key file into the "keystore" directory
 5. Add the next jndi resource into the ${catalina.home}/conf/server.xml:
-
     ```
     <Resource name="jdbc/jviewer" auth="Container"
           type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
