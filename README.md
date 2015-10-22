@@ -35,7 +35,7 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
             keyAlias="tomcat"/>
     ```
 2. Replace "secret" with a real value for the keystorePass
-3. Create the "keystore" directory inside the ${catalina.home} and put jviewer.tk.jks key file inside.
+3. Create the "keystore" directory inside the ${catalina.home} and put jviewer.tk.jks key file inside
 4. Add the next jndi resource into the ${catalina.home}/conf/server.xml:
     ```
     <Resource name="jdbc/jviewer" auth="Container"
