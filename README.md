@@ -42,7 +42,6 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
 		  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
           url="jdbc:postgresql://localhost:5432/jviewer"
           username="postgres" password="databasePassword" maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
-          
     ```
 2. Replace "secret" with a real value for the keystorePass, "postgres" and "secret" with a real data to your database. Url also could be different.
 3. Create the "keystore" directory inside the ${catalina.home} and put jviewer.tk.jks key file inside
