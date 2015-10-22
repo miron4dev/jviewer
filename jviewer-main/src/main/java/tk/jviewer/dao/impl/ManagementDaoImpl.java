@@ -18,7 +18,7 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
 
     @Override
     public List<Room> getRooms() throws DataAccessException {
-        List<Map<String, Object>> rows = getJdbcTemplate().queryForList("select id, name, password, type from rooms");
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList("select id, name, password, type from \"jviewer_main\".\"room\"");
         List<Room> rooms = new ArrayList<>();
         for (Map<String, Object> row : rows) {
             final Room room = new Room(get(row, "name"), get(row, "password"), Room.Type.valueOf(get(row, "type")));
@@ -30,12 +30,12 @@ public class ManagementDaoImpl extends JdbcDaoSupport implements ManagementDao {
 
     @Override
     public void createRoom(String name, String password, String type) throws DataAccessException {
-        getJdbcTemplate().update("insert into rooms (name, password, type) values (?, ?, ?)", name, password, type);
+        getJdbcTemplate().update("insert into \"jviewer_main\".\"room\" (name, password, type) values (?, ?, ?)", name, password, type);
     }
 
     @Override
     public void deleteRoom(String name) throws DataAccessException {
-        getJdbcTemplate().update("delete from rooms where name = ?", name);
+        getJdbcTemplate().update("delete from \"jviewer_main\".\"room\" where name = ?", name);
     }
 
     //

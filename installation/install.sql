@@ -184,3 +184,12 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Clear
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Rooms', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Logout', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Room:', 'en', 'viewer');
+
+-- News --
+CREATE TABLE IF NOT EXISTS news (
+  id SERIAL PRIMARY KEY,
+  topic TEXT NOT NULL,
+  text TEXT NOT NULL,
+  date DATE NOT NULL,
+  author TEXT NOT NULL
+)

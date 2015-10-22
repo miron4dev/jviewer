@@ -3,7 +3,6 @@ package tk.jviewer.info.service;
 import tk.jviewer.info.dao.NewsDao;
 import tk.jviewer.info.model.News;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import java.util.List;
  * Implementation of {@link NewsServiceImpl}.
  */
 public class NewsServiceImpl implements NewsService {
-
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 'в' HH:mm:ss");
 
     private NewsDao dao;
 
@@ -23,12 +20,12 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void addNews(String topic, String text, String author) {
-        dao.addNews(topic, text, author, DATE_FORMAT.format(new Date()));
+        dao.addNews(topic, text, author, new Date());
     }
 
     @Override
     public void editNews(Integer id, String topic, String text, String author) {
-        dao.editNews(id, topic, text, author, DATE_FORMAT.format(new Date()));
+        dao.editNews(id, topic, text, author, new Date());
     }
 
     @Override

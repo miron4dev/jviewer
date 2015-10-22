@@ -76,22 +76,7 @@
                 <version>${primefaces-extensions.version}</version>
             </dependency>
 
-            <!-- Database -->
-            <dependency>
-                <groupId>org.xerial</groupId>
-                <artifactId>sqlite-jdbc</artifactId>
-                <version>${sqlite.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgres.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jolbox</groupId>
-                <artifactId>bonecp</artifactId>
-                <version>${bonecp.version}</version>
-            </dependency>
+            <!-- Hibernate -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
@@ -267,9 +252,6 @@
         <primefaces.version>5.2</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
         <primefaces-extensions.version>3.2.0</primefaces-extensions.version>
-        <sqlite.version>3.8.7</sqlite.version>
-        <postgres.version>9.3-1104-jdbc41</postgres.version>
-        <bonecp.version>0.8.0.RELEASE</bonecp.version>
         <hibernate.version>5.0.2.Final</hibernate.version>
         <jpa2.version>1.0.0.Final</jpa2.version>
         <spring.version>4.2.1.RELEASE</spring.version>

@@ -12,13 +12,12 @@
     <import resource="classpath:META-INF/jviewer-refresh-lib/applicationContext.xml"/>
     <import resource="classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml"/>
 
-    <import resource="classpath:jviewer-main/controller-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/orm-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/repository-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/dao-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/jdbc-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/model-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/security-applicationContext.xml"/>
-    <import resource="classpath:jviewer-main/service-applicationContext.xml"/>
+    <import resource="controller-applicationContext.xml"/>
+    <import resource="orm-applicationContext.xml"/>
+    <import resource="repository-applicationContext.xml"/>
+    <import resource="dao-applicationContext.xml"/>
+    <import resource="model-applicationContext.xml"/>
+    <import resource="security-applicationContext.xml"/>
+    <import resource="service-applicationContext.xml"/>
 
 </beans>

@@ -11,6 +11,11 @@
 
     <bean id="securityService" class="tk.jviewer.info.service.SecurityServiceImpl">
         <property name="dao" ref="userDao"/>
+        <property name="encoder" ref="encoder"/>
+    </bean>
+
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11" />
     </bean>
 
 </beans>

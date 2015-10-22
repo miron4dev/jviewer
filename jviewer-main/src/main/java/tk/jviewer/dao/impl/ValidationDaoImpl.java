@@ -15,7 +15,7 @@ public class ValidationDaoImpl extends JdbcDaoSupport implements ValidationDao {
      */
     @Override
     public void checkUser(final String username) {
-        final String query = "select username from users where username = ?";
+        final String query = "select username from \"jviewer_main\".\"user\" where username = ?";
         getJdbcTemplate().queryForObject(query, new Object[]{username}, String.class);
     }
 
@@ -24,7 +24,7 @@ public class ValidationDaoImpl extends JdbcDaoSupport implements ValidationDao {
      */
     @Override
     public String getUserPassword(final String username) {
-        final String query = "select password from users where username = ?";
+        final String query = "select password from \"jviewer_main\".\"user\" where username = ?";
         return getJdbcTemplate().queryForObject(query, new Object[]{username}, String.class);
     }
 

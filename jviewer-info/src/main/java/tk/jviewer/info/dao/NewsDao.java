@@ -2,6 +2,7 @@ package tk.jviewer.info.dao;
 
 import tk.jviewer.info.model.News;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public interface NewsDao {
      * @param author the news author.
      * @param date the news date.
      */
-    void addNews(String topic, String text, String author, String date);
+    void addNews(String topic, String text, String author, Date date);
 
     /**
      * Edits the news in the database.
@@ -32,7 +33,7 @@ public interface NewsDao {
      * @param author the news author.
      * @param date the news date.
      */
-    void editNews(Integer id, String topic, String text, String author, String date);
+    void editNews(Integer id, String topic, String text, String author, Date date);
 
     /**
      * Delete the news from the database.

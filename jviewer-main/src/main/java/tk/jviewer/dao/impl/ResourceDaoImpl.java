@@ -15,6 +15,6 @@ public class ResourceDaoImpl extends JdbcDaoSupport implements ResourceDao {
 
     @Override
     public List<Map<String, Object>> getResources() throws EmptyResultDataAccessException {
-        return getJdbcTemplate().queryForList("select locale, key, value from localization");
+        return getJdbcTemplate().queryForList("select locale, key, value from \"jviewer_main\".\"localization\"");
     }
 }
