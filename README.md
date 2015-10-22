@@ -37,5 +37,14 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
 2. Replace "secret" with a real value for the keystorePass
 3. Create the "keystore" directory inside the ${catalina.home} one
 4. Put the jviewer.tk.jks key file into the "keystore" directory
-5. Create the "database" directory inside the ${catalina.home} one
-6. Put the JViewer/database/*.db files into the "database" directory
+5. Add the next jndi resource into the ${catalina.home}/conf/server.xml:
+
+    ```
+    <Resource name="jdbc/jviewer" auth="Container"
+          type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
+		  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+          url="jdbc:postgresql://localhost:5432/jviewer"
+          username="postgres" password="secret" maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
+          
+    ```
+6. Replace "postgres" and "secret" with a real data to your database. Url also could be different.
