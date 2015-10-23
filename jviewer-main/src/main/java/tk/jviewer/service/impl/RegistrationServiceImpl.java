@@ -8,8 +8,6 @@ import tk.jviewer.messages.RegistrationMsg;
 import tk.jviewer.repository.UserRepository;
 import tk.jviewer.service.RegistrationService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -28,9 +26,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     //TODO: fix
     private static final String TEMPORARY_INVITATION_ID = "$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2";
 
-    @PersistenceContext
-    private EntityManager em;
-
+    private UserRepository repository;
     private BCryptPasswordEncoder encoder;
 
     @Override
@@ -43,7 +39,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 } else {
                     role = ADMIN_PERMISSIONS;
                 }
-                em.persist(new UserEntity(name, encoder.encode(password), role));
+                repository.addUser(new UserEntity(name, encoder.encode(password), role));
                 return SUCCESS;
             }
             return INVITATION_ID;
@@ -61,5 +57,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     public void setEncoder(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
+    }
+
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
     }
 }

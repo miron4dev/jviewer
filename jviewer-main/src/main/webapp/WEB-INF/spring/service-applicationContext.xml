@@ -5,6 +5,7 @@
 
     <bean id="registrationService" class="tk.jviewer.service.impl.RegistrationServiceImpl">
         <property name="encoder" ref="encoder"/>
+        <property name="repository" ref="userRepository"/>
     </bean>
 
     <bean id="loginService" class="tk.jviewer.service.impl.LoginServiceImpl">
