@@ -18,10 +18,6 @@ public class UserProfile implements Serializable {
 
     private String name;
     private String role;
-    private String department;
-    private boolean enabled;
-    private String firstName;
-    private String lastName;
     private List<Permission> permissions = new ArrayList<>();
 
     private List<Quiz> quizzes = new ArrayList<>();
@@ -50,38 +46,6 @@ public class UserProfile implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public boolean hasPermission(Permission permission) {

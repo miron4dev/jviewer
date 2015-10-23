@@ -1,5 +1,6 @@
 package tk.jviewer.repository;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.entity.UserEntity;
 
@@ -18,6 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
     private EntityManager em;
 
     @Override
+    @Transactional
     public void addUser(UserEntity user) {
         em.persist(user);
     }

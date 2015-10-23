@@ -3,13 +3,9 @@ SET SCHEMA 'jviewer_main';
 -- User --
 CREATE TABLE IF NOT EXISTS "user" (
   id SERIAL PRIMARY KEY,
-  username TEXT NOT NULL,
+  username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  role TEXT NOT NULL DEFAULT 'ROLE_USER',
-  department TEXT NOT NULL,
-  enabled BOOLEAN NOT NULL DEFAULT TRUE,
-  first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL
+  role TEXT NOT NULL DEFAULT 'ROLE_USER'
 );
 
 -- INSERT INTO "jviewer_main"."user" (username, password, role, department, first_name, last_name) VALUES ('admin', '$2a$11$z8Ym9XENSKNkVTy.XL5/aOzORzYyvtlc/b22PsQQBmX2p7Dlm/XwK', 'ROLE_ADMIN', 'IT', 'Admin', 'Admin');

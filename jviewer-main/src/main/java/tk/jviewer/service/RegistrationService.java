@@ -13,8 +13,7 @@ public interface RegistrationService {
      * @param name username.
      * @param password password.
      * @param invitationId invitation id. It's not mandatory.
-     * @param department department.
      * @return state about registration action.
      */
-    RegistrationMsg createProfile(String name, String password, String invitationId, String department);
+    RegistrationMsg createProfile(String name, String password, String invitationId);
 }

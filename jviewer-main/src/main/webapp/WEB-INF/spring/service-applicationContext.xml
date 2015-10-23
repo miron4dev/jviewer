@@ -4,8 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="registrationService" class="tk.jviewer.service.impl.RegistrationServiceImpl">
-        <property name="validationDao" ref="validationDao"/>
-        <property name="registrationDao" ref="registrationDao"/>
         <property name="encoder" ref="encoder"/>
     </bean>
 

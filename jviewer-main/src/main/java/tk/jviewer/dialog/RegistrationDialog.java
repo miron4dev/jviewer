@@ -18,14 +18,13 @@ public class RegistrationDialog {
     private String name;
     private String password;
     private String invitationId;
-    private String department;
 
     private LocaleModel localeModel;
     private RegistrationService registrationService;
     private ResourceService resourceService;
 
     public String createProfile() {
-        RegistrationMsg result = registrationService.createProfile(name, password, invitationId, department);
+        RegistrationMsg result = registrationService.createProfile(name, password, invitationId);
         FacesContext currentInstance = FacesContext.getCurrentInstance();
         if (result == SUCCESS) {
             currentInstance.getExternalContext().getFlash().put("success", getResource("J6"));
@@ -62,14 +61,6 @@ public class RegistrationDialog {
 
     public void setInvitationId(String invitationId) {
         this.invitationId = invitationId;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     //

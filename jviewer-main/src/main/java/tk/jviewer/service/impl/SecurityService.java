@@ -40,10 +40,6 @@ public class SecurityService implements AuthenticationProvider {
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
         userProfile.setName(user.getName());
         userProfile.setRole(user.getRole());
-        userProfile.setDepartment(user.getDepartment());
-        userProfile.setEnabled(user.isEnabled());
-        userProfile.setFirstName(user.getFirstName());
-        userProfile.setLastName(user.getLastName());
         if ("ROLE_ADMIN".equals(user.getRole())) {
             userProfile.setPermissions(Arrays.asList(CREATE_ROOM, DELETE_ROOM, EDIT_VIEWER, CREATE_QUIZ, EDIT_QUIZ, DELETE_QUIZ));
         }

@@ -38,10 +38,6 @@ public class LoginServiceImpl implements LoginService {
         UserProfile profile = new UserProfile();
         profile.setName(entity.getUsername());
         profile.setRole(entity.getRole());
-        profile.setDepartment(entity.getDepartment());
-        profile.setEnabled(entity.isEnabled());
-        profile.setFirstName(entity.getFirstName());
-        profile.setLastName(entity.getLastName());
         return profile;
     }
 

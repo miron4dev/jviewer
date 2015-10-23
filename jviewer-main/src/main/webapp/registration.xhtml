@@ -61,13 +61,6 @@
                     <p:watermark for="inviteID" value="#{msg['J12']}"/>
                     <p:password id="inviteID" value="#{registrationDialog.invitationId}" styleClass="registration-input"/>
                 </p>
-                <p>
-                    <h:message class="alert" for="department"/>
-                    <br/>
-                    <p:watermark for="department" value="#{msg['J13']}"/>
-                    <p:inputText id="department" value="#{registrationDialog.department}" required="true" requiredMessage="#{msg['J18']}"
-                                 validatorMessage="#{msg['J18']}" styleClass="registration-input"/>
-                </p>
                 <br/>
                 <h:message class="alert" for="captcha"/>
                 <p:captcha id="captcha" language="#{localeModel.currentLocale.toString()}" theme="white" label="Captcha"
