@@ -1,6 +1,6 @@
 package tk.jviewer.service;
 
-import tk.jviewer.messages.RegistrationMsg;
+import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  * Registration service interface.
@@ -9,11 +9,13 @@ import tk.jviewer.messages.RegistrationMsg;
 public interface RegistrationService {
 
     /**
-     * Creates new profile in JViewer.
+     * Creates a new profile in JViewer, based on specified name, password and invitation id.
+     * Returns true if user was created. Returns false if invitation id is incorrect.
      * @param name username.
      * @param password password.
-     * @param invitationId invitation id. It's not mandatory.
-     * @return state about registration action.
+     * @param invitationId invitation id. It's not mandatory and could be null.
+     * @return boolean result.
+     * @throws DataIntegrityViolationException if user with specified name is already exist.
      */
-    RegistrationMsg createProfile(String name, String password, String invitationId);
+    boolean createProfile(String name, String password, String invitationId) throws DataIntegrityViolationException;
 }

@@ -9,11 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.entity.UserEntity;
-import tk.jviewer.repository.UserRepository;
 
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,17 +30,20 @@ public class SecurityService implements AuthenticationProvider {
     private static final Logger logger = Logger.getLogger(SecurityService.class);
     private static final String ADMIN_ROLE = "ROLE_ADMIN";
 
-    private UserRepository repository;
+    @PersistenceContext
+    private EntityManager em;
+
     private BCryptPasswordEncoder encoder;
 
     @Override
+    @Transactional(readOnly = true)
     public Authentication authenticate(Authentication authentication) {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         UserProfile user = null;
         GrantedAuthority authority = null;
-        try{
-            UserEntity userEntity = repository.getUser(username);
+        try {
+            UserEntity userEntity = em.find(UserEntity.class, username);
             if(encoder.matches(password, userEntity.getPassword())){
                 authority = new SimpleGrantedAuthority(userEntity.getRole());
                 List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Arrays.asList(Permission.values()) : new ArrayList<>();
@@ -89,11 +94,6 @@ public class SecurityService implements AuthenticationProvider {
     //
     // Setters for Dependency Injection.
     //
-
-
-    public void setRepository(UserRepository repository) {
-        this.repository = repository;
-    }
 
     public void setEncoder(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;

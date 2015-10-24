@@ -2,8 +2,7 @@ SET SCHEMA 'jviewer_main';
 
 -- User --
 CREATE TABLE IF NOT EXISTS "user" (
-  id SERIAL PRIMARY KEY,
-  username TEXT UNIQUE NOT NULL,
+  username TEXT PRIMARY KEY,
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'ROLE_USER'
 );

@@ -1,14 +1,12 @@
 package tk.jviewer.dialog;
 
-import tk.jviewer.messages.RegistrationMsg;
+import org.springframework.dao.DataIntegrityViolationException;
 import tk.jviewer.model.LocaleModel;
 import tk.jviewer.service.RegistrationService;
 import tk.jviewer.service.ResourceService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
-import static tk.jviewer.messages.RegistrationMsg.*;
 
 /**
  * Serves for "registration" use case.
@@ -24,19 +22,18 @@ public class RegistrationDialog {
     private ResourceService resourceService;
 
     public String createProfile() {
-        RegistrationMsg result = registrationService.createProfile(name, password, invitationId);
         FacesContext currentInstance = FacesContext.getCurrentInstance();
-        if (result == SUCCESS) {
-            currentInstance.getExternalContext().getFlash().put("success", getResource("J6"));
-            return "index?faces-redirect=true";
-        } else {
-            if (result == EXIST) {
-                currentInstance.addMessage("registrationForm:name", new FacesMessage(getResource("J22")));
-            } else if (result == INVITATION_ID) {
-                currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(getResource("J23")));
+        try {
+            boolean success = registrationService.createProfile(name, password, invitationId);
+            if (success) {
+                currentInstance.getExternalContext().getFlash().put("success", getResource("J6"));
+                return "index?faces-redirect=true";
             }
-            return null;
+            currentInstance.addMessage("registrationForm:inviteID", new FacesMessage(getResource("J23")));
+        } catch (DataIntegrityViolationException e) {
+            currentInstance.addMessage("registrationForm:name", new FacesMessage(getResource("J22")));
         }
+        return null;
     }
 
     public String getName() {

@@ -22,7 +22,6 @@
     </security:authentication-manager>
 
     <bean id="securityService" class="tk.jviewer.security.SecurityService">
-        <property name="repository" ref="userRepository"/>
         <property name="encoder" ref="encoder"/>
     </bean>
 
