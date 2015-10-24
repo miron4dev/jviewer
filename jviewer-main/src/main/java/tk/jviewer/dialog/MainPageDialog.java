@@ -110,6 +110,10 @@ public class MainPageDialog implements Serializable {
         return availableQuizzes;
     }
 
+    public String getUsername() {
+        return SecurityService.getUsername();
+    }
+
     public boolean isRoomCreationAllowed() {
         return SecurityService.userHasPermission(CREATE_ROOM);
     }

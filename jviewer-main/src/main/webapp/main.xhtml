@@ -24,7 +24,7 @@
     </h:form>
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="#{msg['J45']}" styleClass="common-panel">
-            <p>#{msg['J47']}, #{userProfile.name}</p>
+            <p><h:outputText value="#{msg['J47']}, #{mainPageDialog.username}"/></p>
             <p:growl id="notification" showDetail="true" />
             <h:form id="roomList-form">
                 <h:outputText value="List of available rooms"/>

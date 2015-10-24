@@ -71,6 +71,14 @@ public class SecurityService implements AuthenticationProvider {
     }
 
     /**
+     * Returns the name of authenticated user.
+     * @return see description.
+     */
+    public static String getUsername() {
+        return getCurrentProfile().getName();
+    }
+
+    /**
      * Returns the instance of authenticated user.
      * @return see description.
      */
