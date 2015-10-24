@@ -137,12 +137,12 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JView
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Welcome to JViewer', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Create new account', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J3', 'Login', 'en', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J4', 'Full name', 'en', 'index');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J4', 'Username', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J5', 'Password', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J6', 'Registration was successful, now you can login.', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J7', 'Create new account', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J8', 'Enter your data', 'en', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J9', 'Full name', 'en', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J9', 'Username', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J10', 'Password', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Confirm password', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Invitation ID', 'en', 'registration');
