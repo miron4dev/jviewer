@@ -12,7 +12,7 @@ Technologies and frameworks, which are used:
 - JSF
 - PrimeFaces
 - WebSocket
-- SQLite
+- PostgreSQL
 - Maven
 - JMX
 
