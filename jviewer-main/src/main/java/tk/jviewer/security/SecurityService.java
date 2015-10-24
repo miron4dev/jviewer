@@ -62,7 +62,7 @@ public class SecurityService implements AuthenticationProvider {
     }
 
     /**
-     * Returns true if authenticated user has permission;
+     * Returns true if authenticated user has specified permission.
      * @param permission permissions.
      * @return see description.
      */
