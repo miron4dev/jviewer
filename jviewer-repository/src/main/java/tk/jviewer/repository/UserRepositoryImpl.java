@@ -1,6 +1,5 @@
 package tk.jviewer.repository;
 
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.entity.UserEntity;
 

@@ -3,8 +3,8 @@ package tk.jviewer.dialog;
 import tk.jviewer.controller.LogoutController;
 import tk.jviewer.model.Room;
 import tk.jviewer.model.ViewerManagedBean;
-import tk.jviewer.profile.Permission;
-import tk.jviewer.profile.UserProfile;
+import tk.jviewer.security.Permission;
+import tk.jviewer.security.SecurityService;
 import tk.jviewer.services.jc_v1_00.JcResult;
 import tk.jviewer.wsc.jc.JcWsClient;
 
@@ -21,7 +21,6 @@ public class ViewerDialog implements Serializable {
     private String result;
     private boolean errorOccurred;
 
-    private UserProfile userProfile;
     private LogoutController logoutController;
     private JcWsClient jcWsClient;
     private ViewerManagedBean viewerManagedBean;
@@ -43,7 +42,7 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public boolean hasEditPermissions() {
-        return userProfile.hasPermission(Permission.EDIT_VIEWER);
+        return SecurityService.userHasPermission(Permission.EDIT_VIEWER);
     }
 
     /**
@@ -86,10 +85,6 @@ public class ViewerDialog implements Serializable {
     //
     // Dependency Injection
     //
-
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public void setLogoutController(LogoutController logoutController) {
         this.logoutController = logoutController;

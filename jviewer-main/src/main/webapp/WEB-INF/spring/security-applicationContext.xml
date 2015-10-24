@@ -21,9 +21,9 @@
         <security:authentication-provider ref="securityService"/>
     </security:authentication-manager>
 
-    <bean id="securityService" class="tk.jviewer.service.impl.SecurityService">
-        <property name="loginService" ref="loginService"/>
-        <property name="userProfile" ref="userProfile"/>
+    <bean id="securityService" class="tk.jviewer.security.SecurityService">
+        <property name="repository" ref="userRepository"/>
+        <property name="encoder" ref="encoder"/>
     </bean>
 
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

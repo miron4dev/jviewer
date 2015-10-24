@@ -8,7 +8,7 @@ import tk.jviewer.model.Room;
 import tk.jviewer.controller.ManagementController;
 import tk.jviewer.model.TakeQuizManagedBean;
 import tk.jviewer.model.ViewerManagedBean;
-import tk.jviewer.profile.UserProfile;
+import tk.jviewer.security.SecurityService;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_INFO;
-import static tk.jviewer.profile.Permission.*;
+import static tk.jviewer.security.Permission.*;
 
 /**
  * Main page dialog.
@@ -36,8 +36,6 @@ public class MainPageDialog implements Serializable {
     private String roomName;
     private String roomPassword;
     private Room.Type roomType;
-
-    private UserProfile userProfile;
     private ManagementController controller;
 
     private ViewerManagedBean viewerManagedBean;
@@ -113,23 +111,23 @@ public class MainPageDialog implements Serializable {
     }
 
     public boolean isRoomCreationAllowed() {
-        return userProfile.hasPermission(CREATE_ROOM);
+        return SecurityService.userHasPermission(CREATE_ROOM);
     }
 
     public boolean isRoomDeletionAllowed() {
-        return userProfile.hasPermission(DELETE_ROOM);
+        return SecurityService.userHasPermission(DELETE_ROOM);
     }
 
     public boolean isQuizCreationAllowed() {
-        return userProfile.hasPermission(CREATE_QUIZ);
+        return SecurityService.userHasPermission(CREATE_QUIZ);
     }
 
     public boolean isQuizEditionAllowed() {
-        return userProfile.hasPermission(EDIT_QUIZ);
+        return SecurityService.userHasPermission(EDIT_QUIZ);
     }
 
     public boolean isQuizDeletionAllowed() {
-        return userProfile.hasPermission(DELETE_QUIZ);
+        return SecurityService.userHasPermission(DELETE_QUIZ);
     }
 
     public List<String> getPossibleRoomTypes() {
@@ -186,10 +184,6 @@ public class MainPageDialog implements Serializable {
     //
     // Dependency Injection
     //
-
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public void setController(ManagementController controller) {
         this.controller = controller;

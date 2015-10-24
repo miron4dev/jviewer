@@ -1,4 +1,4 @@
-package tk.jviewer.profile;
+package tk.jviewer.security;
 
 /**
  * Possible set of user permissions.
