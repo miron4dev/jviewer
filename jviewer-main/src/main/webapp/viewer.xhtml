@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pe="http://primefaces.org/ui/extensions"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:tk="http://jviewer.tk/main"
+    xmlns:p="http://primefaces.org/ui">
 
 <f:view locale="#{localeModel.currentLocale}"/>
 <h:head>
-    <title>#{msg['J68']} #{viewerDialog.currentRoom}</title>
+    <title>#{msg['J68']} #{viewerDialog.roomName}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
-    <c:set var="editPermission" value="#{viewerDialog.hasEditPermissions()}"/>
-    <c:set var="isJavaRoom" value="#{viewerDialog.javaRoom}"/>
-
-    <h:outputScript library="js" name="chat_admin.js" rendered="#{editPermission}"/>
-    <h:outputScript library="js" name="chat_user.js" rendered="#{!editPermission}"/>
 </h:head>
 
-<h:body onload="initViewer()">
+<h:body>
     <h:form>
         <h:commandLink action="#{localeModel.switchLocale('en')}">
             <h:graphicImage library="images" name="us_logo.png"/>
@@ -29,36 +23,24 @@
             <h:graphicImage library="images" name="ru_logo.png"/>
         </h:commandLink>
     </h:form>
-    #{msg['J63']}: <h:outputText id="currentRoom" value="#{viewerDialog.currentRoom}"/>
-        <h:form id="displayForm">
-            <pe:remoteCommand name="executeJavaCode" actionListener="#{viewerDialog.sendContent}" process="@this" rendered="#{editPermission}">
-                <pe:assignableParam name="content" assignTo="#{viewerDialog.content}"/>
-            </pe:remoteCommand>
-            <p:remoteCommand name="clearJavaResult" actionListener="#{viewerDialog.clear}" update="javaResult" process="@this"
-                             rendered="#{isJavaRoom}"/>
+    #{msg['J63']}: <h:outputText id="currentRoom" value="#{viewerDialog.roomName}"/>
 
-            <p:commandButton value="#{msg['J64']}"
-                onclick="if (#{isJavaRoom}) { executeJavaCode(editor.getValue()); } else { executeCode(); }"
-                update="#{isJavaRoom ? 'javaResult' : ''}" rendered="#{editPermission}"/>
-            <p:commandButton value="#{msg['J65']}" onclick="clearIO(); if(#{isJavaRoom}) { clearJavaResult() }" rendered="#{editPermission}"/>
-            <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true"/>
-            <p:commandButton value="#{msg['J67']}" action="#{viewerDialog.logout}" onclick="leaveRoom();"/>
-            <pe:codeMirror mode="#{isJavaRoom ? 'text/x-java' : 'htmlmixed'}" lineNumbers="true" lineWrapping="true"
-                matchBrackets="true" theme="eclipse" escape="false" widgetVar="viewerContent" readonly="#{!editPermission}">
-                <pe:javascript event="change" execute="sendContent()"/>
-            </pe:codeMirror>
-            <br/>
-            <c:choose>
-                <c:when test="#{isJavaRoom}">
-                    <pre><h:outputText id="javaResult" value="#{viewerDialog.result}" escape="false"
-                                       style="#{viewerDialog.errorOccurred ? 'color:red' : ''}"/></pre>
-                </c:when>
-                <c:otherwise>
-                    <iframe id="result" frameBorder="0" width="1900" height="300"></iframe>
-                </c:otherwise>
-            </c:choose>
+    <h:form id="displayForm">
+        <h:panelGroup layout="block" rendered="#{viewerDialog.roomType == 'JAVA'}">
+            <tk:javaViewer bean="#{javaViewerTag}" editPermissions="#{viewerDialog.hasEditPermissions()}">
+                <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true" immediate="true" process="@this"/>
+                <p:commandButton value="#{msg['J67']}" action="#{viewerDialog.logout}" onclick="leaveRoom();" immediate="true" process="@this"/>
+            </tk:javaViewer>
+        </h:panelGroup>
+        <h:panelGroup layout="block" rendered="#{viewerDialog.roomType == 'HTML'}">
+            <tk:htmlViewer editPermissions="#{viewerDialog.hasEditPermissions()}" >
+                <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true" immediate="true" process="@this"/>
+                <p:commandButton value="#{msg['J67']}" action="#{viewerDialog.logout}" onclick="leaveRoom();" immediate="true" process="@this"/>
+            </tk:htmlViewer>
+        </h:panelGroup>
+    </h:form>
 
-        </h:form>
+    <tk:connection channel="/#{viewerDialog.roomName}" sendingAllowed="#{viewerDialog.hasEditPermissions()}"/>
 </h:body>
 
 </html>

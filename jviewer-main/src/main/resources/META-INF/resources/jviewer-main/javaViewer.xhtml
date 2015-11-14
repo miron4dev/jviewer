@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.tag.JavaViewerTag"/>
+    <composite:attribute name="editPermissions" required="true" type="java.lang.Boolean"/>
+</composite:interface>
+
+<composite:implementation>
+    <pe:remoteCommand name="sendContent" actionListener="#{cc.attrs.bean.sendContent}" process="@this" immediate="true"
+        rendered="#{cc.attrs.editPermissions}">
+        <pe:assignableParam name="content" assignTo="#{cc.attrs.bean.content}"/>
+    </pe:remoteCommand>
+    <p:remoteCommand name="clearResult" actionListener="#{cc.attrs.bean.clear}" immediate="true" process="@this"/>
+
+    <p:commandButton value="#{msg['J64']}" onclick="sendContent(PF('viewerContent').instance.getValue());" process="@this"
+        immediate="true" update="scriptPnl" oncomplete="execute(); notify();" rendered="#{cc.attrs.editPermissions}"/>
+    <p:commandButton value="#{msg['J65']}" onclick="clearIO(); clearResult();" process="@this" immediate="true"
+        rendered="#{cc.attrs.editPermissions}"/>
+    <composite:insertChildren/>
+
+    <pe:codeMirror id="viewerContent" mode="text/x-java" lineNumbers="true" lineWrapping="true"
+        matchBrackets="true" theme="eclipse" escape="false" widgetVar="viewerContent" readonly="#{not cc.attrs.editPermissions}">
+        <pe:javascript event="change" execute="notify()"/>
+    </pe:codeMirror>
+    <br/>
+    <iframe id="result" frameBorder="0" width="1900" height="300" src=""></iframe>
+
+    <h:panelGroup id="scriptPnl" layout="block">
+        <script type="text/javascript">
+            //<![CDATA[
+            function execute() {
+                $('#result').attr('src', 'data:text/html;charset=utf-8,' + escape('#{cc.attrs.bean.formattedResult}'));
+            }
+            //]]>
+        </script>
+    </h:panelGroup>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        function notify() {
+            sendMessage({
+                input: PF('viewerContent').instance.getValue(),
+                output: $('#result').attr('src')
+            });
+        }
+        function clearIO() {
+            $('#result').attr('src', '');
+            PF('viewerContent').instance.setValue('');
+        }
+        //]]>
+    </script>
+</composite:implementation>
+
+</html>

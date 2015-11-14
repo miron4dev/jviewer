@@ -103,10 +103,10 @@
             <artifactId>spring-security-config</artifactId>
         </dependency>
 
-        <!-- WebSocket -->
+        <!-- Atmosphere -->
         <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-runtime</artifactId>
         </dependency>
 
         <!-- Logging -->
@@ -115,10 +115,14 @@
             <artifactId>log4j</artifactId>
         </dependency>
 
-        <!-- Servlets -->
+        <!-- J2EE -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
         </dependency>
 
         <!-- JSTL tags -->

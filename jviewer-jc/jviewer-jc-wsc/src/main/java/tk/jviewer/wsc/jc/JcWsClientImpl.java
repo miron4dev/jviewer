@@ -2,6 +2,7 @@ package tk.jviewer.wsc.jc;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.apache.log4j.Logger;
 import tk.jviewer.services.jc_v1_00.JcFault_Exception;
 import tk.jviewer.services.jc_v1_00.JcResult;
 import tk.jviewer.services.jc_v1_00.JcServicePortType;
@@ -10,6 +11,8 @@ import tk.jviewer.services.jc_v1_00.JcServicePortType;
  * Implementation of {@link JcWsClient}.
  */
 public class JcWsClientImpl implements JcWsClient {
+
+    private static final Logger logger = Logger.getLogger(JcWsClientImpl.class);
 
     private static final String ENDPOINT = "http://localhost:8080/jc/services/jcService";
 
@@ -27,6 +30,7 @@ public class JcWsClientImpl implements JcWsClient {
         try {
             return service.compileAndExecute(sourceCode);
         } catch (JcFault_Exception e) {
+            logger.error(e);
             JcResult result = new JcResult();
             result.setOutput(ExceptionUtils.getMessage(e));
             result.setErrorOccurred(true);

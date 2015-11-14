@@ -155,12 +155,11 @@
                 <version>${spring-security.version}</version>
             </dependency>
 
-            <!-- WebSocket -->
+            <!-- Atmosphere -->
             <dependency>
-                <groupId>javax.websocket</groupId>
-                <artifactId>javax.websocket-api</artifactId>
-                <version>${websocket.version}</version>
-                <scope>provided</scope>
+                <groupId>org.atmosphere</groupId>
+                <artifactId>atmosphere-runtime</artifactId>
+                <version>${atmosphere.version}</version>
             </dependency>
 
             <!-- Logging -->
@@ -170,11 +169,16 @@
                 <version>${log4j.version}</version>
             </dependency>
 
-            <!-- Servlets -->
+            <!-- J2EE -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
             </dependency>
 
             <!-- Apache Commons -->
@@ -249,14 +253,14 @@
 
         <!-- Dependencies -->
         <jsf.version>2.2.12</jsf.version>
-        <primefaces.version>5.2</primefaces.version>
+        <primefaces.version>5.3</primefaces.version>
         <primefaces-theme.version>1.0.10</primefaces-theme.version>
         <primefaces-extensions.version>3.2.0</primefaces-extensions.version>
+        <atmosphere.version>2.4.0</atmosphere.version>
         <hibernate.version>5.0.2.Final</hibernate.version>
         <jpa2.version>1.0.0.Final</jpa2.version>
         <spring.version>4.2.1.RELEASE</spring.version>
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
-        <websocket.version>1.1</websocket.version>
         <log4j.version>1.2.17</log4j.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <commons.lang.version>3.4</commons.lang.version>

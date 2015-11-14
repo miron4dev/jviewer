@@ -5,40 +5,40 @@ import tk.jviewer.model.Room;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.Permission;
 import tk.jviewer.security.SecurityService;
-import tk.jviewer.services.jc_v1_00.JcResult;
-import tk.jviewer.wsc.jc.JcWsClient;
 
 import java.io.Serializable;
 
 /**
- * Viewer dialog.
+ * Viewer dialog backing bean.
  */
 public class ViewerDialog implements Serializable {
 
     private static final long serialVersionUID = 5961684911167350079L;
 
-    private String content;
-    private String result;
-    private boolean errorOccurred;
-
     private LogoutController logoutController;
-    private JcWsClient jcWsClient;
     private ViewerManagedBean viewerManagedBean;
 
     /**
-     * Returns the current room.
+     * Returns the name of the current room.
+     *
      * @return see description.
      */
-    public String getCurrentRoom() {
+    public String getRoomName() {
         return viewerManagedBean.getCurrentRoom().getName();
     }
 
-    public boolean isJavaRoom() {
-        return viewerManagedBean.getCurrentRoom().getType() == Room.Type.JAVA;
+    /**
+     * Returns the type of the current room.
+     *
+     * @return see description.
+     */
+    public Room.Type getRoomType() {
+        return viewerManagedBean.getCurrentRoom().getType();
     }
 
     /**
-     * Returns true if user has the permissions for edit viewer.
+     * Returns true if user has edit permissions.
+     *
      * @return see description.
      */
     public boolean hasEditPermissions() {
@@ -46,40 +46,12 @@ public class ViewerDialog implements Serializable {
     }
 
     /**
-     * Logging out from the application.
-     * @return navigation rule.
+     * Logs out from JViewer.
+     *
+     * @return see description.
      */
     public String logout() {
         return logoutController.logout();
-    }
-
-    /**
-     * Sends entered content to JC Web Service and saves a result.
-     */
-    public void sendContent() {
-        JcResult jcResult = jcWsClient.compileAndExecute(content);
-        result = jcResult.getOutput();
-        errorOccurred = jcResult.isErrorOccurred();
-    }
-
-    /**
-     * Clears the current state of dialog.
-     */
-    public void clear() {
-        result = null;
-        errorOccurred = false;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public boolean isErrorOccurred() {
-        return errorOccurred;
     }
 
     //
@@ -88,10 +60,6 @@ public class ViewerDialog implements Serializable {
 
     public void setLogoutController(LogoutController logoutController) {
         this.logoutController = logoutController;
-    }
-
-    public void setJcWsClient(JcWsClient jcWsClient) {
-        this.jcWsClient = jcWsClient;
     }
 
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {

@@ -126,7 +126,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J59', 'Уп�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J60', 'Вы действительно хотите удалить комнату', 'ru', 'delroom');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J61', 'Да', 'ru', 'delroom');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J62', 'Нет', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J63', 'Текущая комната:', 'ru', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J63', 'Текущая комната', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J64', 'Выполнить', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Очистить', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Список комнат', 'ru', 'viewer');
@@ -173,7 +173,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J59', 'Rooms
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J60', 'Are you sure that you want to delete', 'en', 'delroom');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J61', 'Yes', 'en', 'delroom');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J62', 'No', 'en', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J63', 'Current room:', 'en', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J63', 'Current room', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J64', 'Execute', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Clear', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Rooms', 'en', 'viewer');

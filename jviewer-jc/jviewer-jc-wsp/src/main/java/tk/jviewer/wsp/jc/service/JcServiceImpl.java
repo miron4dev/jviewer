@@ -67,7 +67,7 @@ public class JcServiceImpl implements JcServicePortType {
                 return result;
             }
         } catch (Exception e) {
-            throw new JcFault_Exception(ExceptionUtils.getStackTrace(e));
+            throw new JcFault_Exception(e.getMessage(), e);
         } finally {
             deleteDirectory(workingDirectory);
         }
