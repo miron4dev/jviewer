@@ -87,12 +87,20 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>javaViewerTag</managed-bean-name>
-        <managed-bean-class>tk.jviewer.tag.JavaViewerTag</managed-bean-class>
+        <managed-bean-name>javaViewerDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.JavaViewerDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>jcWsClient</property-name>
             <value>#{jcWsClient}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>logoutController</property-name>
+            <value>#{logoutController}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>viewerManagedBean</property-name>
+            <value>#{viewerManagedBean}</value>
         </managed-property>
     </managed-bean>
 
@@ -102,7 +110,7 @@
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>localeModel</property-name>
-            <value>#{localeModel}</value>
+            <value>#{localeManagedBean}</value>
         </managed-property>
         <managed-property>
             <property-name>registrationService</property-name>

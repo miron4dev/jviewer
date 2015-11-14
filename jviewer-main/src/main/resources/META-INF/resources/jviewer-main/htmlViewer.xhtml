@@ -7,17 +7,17 @@
     xmlns:p="http://primefaces.org/ui">
 
 <composite:interface>
-    <composite:attribute name="dialog" required="true" type="tk.jviewer.dialog.ViewerDialog"/>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.dialog.ViewerDialog"/>
 </composite:interface>
 
 <composite:implementation>
-    <p:button value="#{msg['J64']}" onclick="execute(); return false;" rendered="#{cc.attrs.dialog.hasEditPermissions()}"/>
-    <p:button value="#{msg['J65']}" onclick="clearIO(); return false;" rendered="#{cc.attrs.dialog.hasEditPermissions()}"/>
+    <p:button value="#{msg['J64']}" onclick="execute(); return false;" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
+    <p:button value="#{msg['J65']}" onclick="clearIO(); return false;" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
     <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true" immediate="true" process="@this"/>
-    <p:commandButton value="#{msg['J67']}" action="#{cc.attrs.dialog.logout}" immediate="true" process="@this"/>
+    <p:commandButton value="#{msg['J67']}" action="#{cc.attrs.bean.logout}" immediate="true" process="@this"/>
 
     <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true" theme="eclipse" escape="false"
-        widgetVar="viewerContent" readonly="#{not cc.attrs.dialog.hasEditPermissions()}">
+        widgetVar="viewerContent" readonly="#{not cc.attrs.bean.hasEditPermissions()}">
         <pe:javascript event="change" execute="notify()"/>
     </pe:codeMirror>
     <br/>

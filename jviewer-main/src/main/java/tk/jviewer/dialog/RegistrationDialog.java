@@ -1,7 +1,7 @@
 package tk.jviewer.dialog;
 
 import org.springframework.dao.DataIntegrityViolationException;
-import tk.jviewer.model.LocaleModel;
+import tk.jviewer.model.LocaleManagedBean;
 import tk.jviewer.service.RegistrationService;
 import tk.jviewer.service.ResourceService;
 
@@ -17,7 +17,7 @@ public class RegistrationDialog {
     private String password;
     private String invitationId;
 
-    private LocaleModel localeModel;
+    private LocaleManagedBean localeModel;
     private RegistrationService registrationService;
     private ResourceService resourceService;
 
@@ -65,14 +65,14 @@ public class RegistrationDialog {
     //
 
     private String getResource(String resourceId) {
-        return resourceService.getValue(localeModel.getCurrentLocale(), resourceId);
+        return resourceService.getValue(localeModel.getLocale(), resourceId);
     }
 
     //
     // Dependency Injection
     //
 
-    public void setLocaleModel(LocaleModel localeModel) {
+    public void setLocaleModel(LocaleManagedBean localeModel) {
         this.localeModel = localeModel;
     }
 

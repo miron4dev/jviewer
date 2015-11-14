@@ -1,19 +1,18 @@
-package tk.jviewer.tag;
+package tk.jviewer.dialog;
 
 import org.atmosphere.util.StringEscapeUtils;
 import tk.jviewer.services.jc_v1_00.JcResult;
 import tk.jviewer.wsc.jc.JcWsClient;
 
-import java.io.Serializable;
-
 import static java.text.MessageFormat.format;
 
 /**
- * Java Viewer tag backing bean.
+ * Extension of {@link ViewerDialog} for Java rooms.
  */
-public class JavaViewerTag implements Serializable {
+public class JavaViewerDialog extends ViewerDialog {
 
-    private static final long serialVersionUID = -5365273343706509768L;
+    private static final long serialVersionUID = -5057592154732709229L;
+
     private static final String RESULT_TEMPLATE = "<body>{0}</body>";
     private static final String ERROR_RESULT_TEMPLATE = "<body style=\"color:red\">{0}</body>";
 

@@ -5,7 +5,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:tk="http://jviewer.tk/main">
 
-<f:view locale="#{localeModel.currentLocale}"/>
+<f:view locale="#{localeManagedBean.locale}"/>
 <h:head>
     <title>#{msg['J68']} #{viewerDialog.roomName}</title>
     <h:outputStylesheet library="css" name="jviewer.css"/>
@@ -13,20 +13,13 @@
 
 <h:body>
     <h:form>
-        <h:commandLink action="#{localeModel.switchLocale('en')}">
-            <h:graphicImage library="images" name="us_logo.png"/>
-        </h:commandLink>
-    </h:form>
-    <h:form>
-        <h:commandLink action="#{localeModel.switchLocale('ru')}">
-            <h:graphicImage library="images" name="ru_logo.png"/>
-        </h:commandLink>
+        <tk:switchLocale bean="#{localeManagedBean}"/>
     </h:form>
     <h:outputText id="currentRoom" value="#{msg['J63']}: #{viewerDialog.roomName}"/>
 
     <h:form id="displayForm">
-        <tk:javaViewer bean="#{javaViewerTag}" dialog="#{viewerDialog}" rendered="#{viewerDialog.roomType == 'JAVA'}"/>
-        <tk:htmlViewer dialog="#{viewerDialog}" rendered="#{viewerDialog.roomType == 'HTML'}"/>
+        <tk:javaViewer bean="#{javaViewerDialog}" rendered="#{viewerDialog.roomType == 'JAVA'}"/>
+        <tk:htmlViewer bean="#{viewerDialog}" rendered="#{viewerDialog.roomType == 'HTML'}"/>
     </h:form>
 
     <tk:connection channel="/#{viewerDialog.roomName}" sendingAllowed="#{viewerDialog.hasEditPermissions()}"/>

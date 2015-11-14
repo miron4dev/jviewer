@@ -8,26 +8,25 @@
     xmlns:p="http://primefaces.org/ui">
 
 <composite:interface>
-    <composite:attribute name="bean" required="true" type="tk.jviewer.tag.JavaViewerTag"/>
-    <composite:attribute name="dialog" required="true" type="tk.jviewer.dialog.ViewerDialog"/>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.dialog.JavaViewerDialog"/>
 </composite:interface>
 
 <composite:implementation>
     <pe:remoteCommand name="sendContent" actionListener="#{cc.attrs.bean.sendContent}" process="@this" immediate="true"
-        rendered="#{cc.attrs.dialog.hasEditPermissions()}">
+        rendered="#{cc.attrs.bean.hasEditPermissions()}">
         <pe:assignableParam name="content" assignTo="#{cc.attrs.bean.content}"/>
     </pe:remoteCommand>
     <p:remoteCommand name="clearResult" actionListener="#{cc.attrs.bean.clear}" immediate="true" process="@this"/>
 
     <p:commandButton value="#{msg['J64']}" onclick="sendContent(PF('viewerContent').instance.getValue());" process="@this"
-        immediate="true" update="scriptPnl" oncomplete="execute(); notify();" rendered="#{cc.attrs.dialog.hasEditPermissions()}"/>
+        immediate="true" update="scriptPnl" oncomplete="execute(); notify();" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
     <p:commandButton value="#{msg['J65']}" onclick="clearIO(); clearResult();" process="@this" immediate="true"
-        rendered="#{cc.attrs.dialog.hasEditPermissions()}"/>
+        rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
     <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true" immediate="true" process="@this"/>
-    <p:commandButton value="#{msg['J67']}" action="#{cc.attrs.dialog.logout}" immediate="true" process="@this"/>
+    <p:commandButton value="#{msg['J67']}" action="#{cc.attrs.bean.logout}" immediate="true" process="@this"/>
 
     <pe:codeMirror id="viewerContent" mode="text/x-java" lineNumbers="true" lineWrapping="true" matchBrackets="true"
-        theme="eclipse" escape="false" widgetVar="viewerContent" readonly="#{not cc.attrs.dialog.hasEditPermissions()}">
+        theme="eclipse" escape="false" widgetVar="viewerContent" readonly="#{not cc.attrs.bean.hasEditPermissions()}">
         <pe:javascript event="change" execute="notify()"/>
     </pe:codeMirror>
     <br/>
