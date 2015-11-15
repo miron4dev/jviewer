@@ -17,7 +17,7 @@
     </h:form>
     <h:outputText id="currentRoom" value="#{msg['J63']}: #{viewerDialog.roomName}"/>
 
-    <h:form id="displayForm">
+    <h:form>
         <tk:javaViewer bean="#{javaViewerDialog}" rendered="#{viewerDialog.roomType == 'JAVA'}"/>
         <tk:htmlViewer bean="#{viewerDialog}" rendered="#{viewerDialog.roomType == 'HTML'}"/>
     </h:form>

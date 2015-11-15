@@ -1,12 +1,16 @@
 package tk.jviewer.dialog;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import tk.jviewer.controller.LogoutController;
 import tk.jviewer.model.Room;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.Permission;
 import tk.jviewer.security.SecurityService;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Viewer dialog backing bean.
@@ -17,6 +21,8 @@ public class ViewerDialog implements Serializable {
 
     private LogoutController logoutController;
     private ViewerManagedBean viewerManagedBean;
+
+    private String result;
 
     /**
      * Returns the name of the current room.
@@ -52,6 +58,30 @@ public class ViewerDialog implements Serializable {
      */
     public String logout() {
         return logoutController.logout();
+    }
+
+    /**
+     * Returns the downloadable result in html format.
+     * @return see description.
+     */
+    public StreamedContent getFile() {
+        return new DefaultStreamedContent(new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8)), "text/html", "result.html");
+    }
+
+    /**
+     * Returns the result of code execution. It is used only for export and can contain not the last value!
+     * @return see description.
+     */
+    public String getResult() {
+        return result;
+    }
+
+    /**
+     * Sets the result of code execution.
+     * @param result escaped html, which is ready to be downloaded.
+     */
+    public void setResult(String result) {
+        this.result = result;
     }
 
     //
