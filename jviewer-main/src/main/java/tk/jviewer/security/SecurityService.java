@@ -14,7 +14,6 @@ import tk.jviewer.entity.UserEntity;
 
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,20 +41,15 @@ public class SecurityService implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
         UserProfile user = null;
         GrantedAuthority authority = null;
-        try {
-            UserEntity userEntity = em.find(UserEntity.class, username);
-            if(encoder.matches(password, userEntity.getPassword())){
-                authority = new SimpleGrantedAuthority(userEntity.getRole());
-                List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Arrays.asList(Permission.values()) : new ArrayList<>();
-                user = new UserProfile(userEntity.getUsername(), permissions);
-            }
-        } catch(NoResultException e){
-            logger.warn("Authentication was failed. Username: " + username);
-        }
-
-        if (user == null) {
+        UserEntity userEntity = em.find(UserEntity.class, username);
+        if (userEntity == null) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
             throw new BadCredentialsException("Data is invalid.");
+        }
+        if(encoder.matches(password, userEntity.getPassword())){
+            authority = new SimpleGrantedAuthority(userEntity.getRole());
+            List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Arrays.asList(Permission.values()) : new ArrayList<>();
+            user = new UserProfile(userEntity.getUsername(), permissions);
         }
 
         return new UsernamePasswordAuthenticationToken(user, password, Collections.singletonList(authority));
