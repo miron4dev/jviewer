@@ -22,7 +22,7 @@
         <pe:javascript event="change" execute="notify()"/>
     </pe:codeMirror>
     <br/>
-    <p:commandButton id="export-btn" value="Export results" onclick="setHiddenValue()" ajax="false" icon="ui-icon-arrowthick-1-s">
+    <p:commandButton id="export-btn" value="#{msg['J69']}" onclick="setHiddenValue()" ajax="false" icon="ui-icon-arrowthick-1-s">
         <h:inputHidden id="resultHidden" value="#{cc.attrs.bean.result}" />
         <p:fileDownload value="#{cc.attrs.bean.file}"/>
     </p:commandButton>

@@ -38,6 +38,12 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <!-- Apache CXF -->
         <dependency>
             <groupId>org.apache.cxf</groupId>

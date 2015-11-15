@@ -19,9 +19,9 @@
     <p:remoteCommand name="clearResult" actionListener="#{cc.attrs.bean.clear}" immediate="true" process="@this"/>
 
     <p:commandButton value="#{msg['J64']}" onclick="sendContent(PF('viewerContent').instance.getValue());" process="@this"
-        immediate="true" update="scriptPnl" oncomplete="execute(); notify();" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
+        immediate="true" update="scriptPnl, export-btn" oncomplete="execute(); notify();" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
     <p:commandButton value="#{msg['J65']}" onclick="clearIO(); clearResult();" process="@this" immediate="true"
-        rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
+        update="scriptPnl, export-btn" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
     <p:commandButton value="#{msg['J66']}" action="main?faces-redirect=true" immediate="true" process="@this"/>
     <p:commandButton value="#{msg['J67']}" action="#{cc.attrs.bean.logout}" immediate="true" process="@this"/>
 
@@ -30,6 +30,10 @@
         <pe:javascript event="change" execute="notify()"/>
     </pe:codeMirror>
     <br/>
+    <p:commandButton id="export-btn" value="#{msg['J69']}" ajax="false" icon="ui-icon-arrowthick-1-s"
+        disabled="#{!cc.attrs.bean.fileAvailable}">
+        <p:fileDownload value="#{cc.attrs.bean.file}"/>
+    </p:commandButton>
     <iframe id="result" frameBorder="0" width="1900" height="300" src=""></iframe>
 
     <h:panelGroup id="scriptPnl" layout="block">

@@ -1,8 +1,12 @@
 package tk.jviewer.dialog;
 
 import org.atmosphere.util.StringEscapeUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import tk.jviewer.services.jc_v1_00.JcResult;
 import tk.jviewer.wsc.jc.JcWsClient;
+
+import java.io.ByteArrayInputStream;
 
 import static java.text.MessageFormat.format;
 
@@ -19,6 +23,7 @@ public class JavaViewerDialog extends ViewerDialog {
     private String content;
     private String result;
     private boolean errorOccurred;
+    private StreamedContent file;
 
     private JcWsClient jcWsClient;
 
@@ -30,6 +35,10 @@ public class JavaViewerDialog extends ViewerDialog {
             JcResult jcResult = jcWsClient.compileAndExecute(content);
             result = StringEscapeUtils.escapeJavaScript(jcResult.getOutput().replaceAll("\n", "<br/>"));
             errorOccurred = jcResult.isErrorOccurred();
+            if (!errorOccurred) {
+                file = new DefaultStreamedContent(new ByteArrayInputStream(jcResult.getBinaryResult()), "application/java-archive",
+                    "result.jar");
+            }
         } catch (Exception e) {
             result = e.getMessage();
             errorOccurred = true;
@@ -43,6 +52,7 @@ public class JavaViewerDialog extends ViewerDialog {
         content = null;
         result = null;
         errorOccurred = false;
+        file = null;
     }
 
     /**
@@ -61,6 +71,14 @@ public class JavaViewerDialog extends ViewerDialog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public StreamedContent getFile() {
+        return file;
+    }
+
+    public boolean isFileAvailable() {
+        return file != null;
     }
 
     //

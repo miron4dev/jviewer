@@ -132,6 +132,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Оч�
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Список комнат', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Выйти', 'ru', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Комната:', 'ru', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J69', 'Сохранить результат', 'ru', 'viewer');
 
 -- English --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Welcome to JViewer', 'en', 'index');
@@ -179,6 +180,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Clear
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Rooms', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Logout', 'en', 'viewer');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Room:', 'en', 'viewer');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J69', 'Export result', 'en', 'viewer');
 
 -- News --
 CREATE TABLE IF NOT EXISTS news (
