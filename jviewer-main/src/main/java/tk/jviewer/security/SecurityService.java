@@ -43,16 +43,24 @@ public class SecurityService implements AuthenticationProvider {
         GrantedAuthority authority = null;
         UserEntity userEntity = em.find(UserEntity.class, username);
         if (userEntity == null) {
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
-            throw new BadCredentialsException("Data is invalid.");
+            authenticationFailed();
+            return null;
         }
         if(encoder.matches(password, userEntity.getPassword())){
             authority = new SimpleGrantedAuthority(userEntity.getRole());
             List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Arrays.asList(Permission.values()) : new ArrayList<>();
             user = new UserProfile(userEntity.getUsername(), permissions);
+        } else {
+            authenticationFailed();
+            return null;
         }
 
         return new UsernamePasswordAuthenticationToken(user, password, Collections.singletonList(authority));
+    }
+
+    private void authenticationFailed() {
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
+        throw new BadCredentialsException("Data is invalid.");
     }
 
     @Override

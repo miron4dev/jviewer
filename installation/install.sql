@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS room (
 );
 
 -- Quiz --
+DROP TABLE IF EXISTS quiz;
 CREATE TABLE IF NOT EXISTS quiz (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -38,6 +39,7 @@ INSERT INTO quiz (id, name, questions_to_answer_to_pass) VALUES (26, 'Java SE ju
 INSERT INTO quiz (id, name, questions_to_answer_to_pass) VALUES (27, 'Sample quiz', 3);
 
 -- Question --
+DROP TABLE IF EXISTS question;
 CREATE TABLE IF NOT EXISTS question (
   id SERIAL PRIMARY KEY,
   quiz_id INTEGER NOT NULL,
@@ -53,6 +55,7 @@ INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) V
 INSERT INTO question (id, quiz_id, text, answers_type, correct_textual_answer) VALUES (64, 27, '2 + 2 = ?', 'TEXT_FIELD', '4');
 
 -- Answer --
+DROP TABLE IF EXISTS answer;
 CREATE TABLE IF NOT EXISTS answer (
   id SERIAL PRIMARY KEY,
   question_id INTEGER NOT NULL,
@@ -82,7 +85,7 @@ DROP TABLE IF EXISTS localization;
 
 CREATE TABLE localization (
   id SERIAL PRIMARY KEY,
-  key TEXT UNIQUE NOT NULL,
+  key TEXT NOT NULL,
   value TEXT NOT NULL,
   locale TEXT NOT NULL,
   dialog_name TEXT NOT NULL
