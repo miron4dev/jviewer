@@ -2,8 +2,7 @@ package tk.jviewer.dialog;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import tk.jviewer.controller.LogoutController;
-import tk.jviewer.model.Room;
+import tk.jviewer.entity.RoomEntity;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.Permission;
 import tk.jviewer.security.SecurityService;
@@ -19,7 +18,6 @@ public class ViewerDialog implements Serializable {
 
     private static final long serialVersionUID = 5961684911167350079L;
 
-    private LogoutController logoutController;
     private ViewerManagedBean viewerManagedBean;
 
     private String result;
@@ -38,7 +36,7 @@ public class ViewerDialog implements Serializable {
      *
      * @return see description.
      */
-    public Room.Type getRoomType() {
+    public RoomEntity.Type getRoomType() {
         return viewerManagedBean.getCurrentRoom().getType();
     }
 
@@ -57,7 +55,7 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public String logout() {
-        return logoutController.logout();
+        return SecurityService.logout();
     }
 
     /**
@@ -87,10 +85,6 @@ public class ViewerDialog implements Serializable {
     //
     // Dependency Injection
     //
-
-    public void setLogoutController(LogoutController logoutController) {
-        this.logoutController = logoutController;
-    }
 
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
         this.viewerManagedBean = viewerManagedBean;

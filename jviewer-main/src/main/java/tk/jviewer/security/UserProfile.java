@@ -1,12 +1,15 @@
 package tk.jviewer.security;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * User profile implementation.
  * @author Evgeny Mironenko
  */
-class UserProfile {
+class UserProfile implements Serializable {
+
+    private static final long serialVersionUID = -3700564961683923927L;
 
     private String name;
     private List<Permission> permissions;

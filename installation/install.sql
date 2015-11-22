@@ -12,18 +12,19 @@ CREATE TABLE IF NOT EXISTS "user" (
 -- Config --
 DROP TABLE IF EXISTS config;
 CREATE TABLE config (
-  name	TEXT NOT NULL,
+  name	TEXT UNIQUE NOT NULL,
   value	TEXT DEFAULT NULL,
   description TEXT NOT NULL
 );
 INSERT INTO config (name, value, description) VALUES ('invitationID', '$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2', 'Value of invitation id for admin registration');
 
 -- Rooms --
+DROP TABLE IF EXISTS room;
+CREATE TYPE ROOM_TYPE as ENUM ('HTML', 'JAVA');
+
 CREATE TABLE IF NOT EXISTS room (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
-  password TEXT DEFAULT NULL,
-  TYPE TEXT NOT NULL
+  name TEXT PRIMARY KEY,
+  type ROOM_TYPE NOT NULL
 );
 
 -- Quiz --
@@ -80,7 +81,7 @@ DROP TABLE IF EXISTS localization;
 
 CREATE TABLE localization (
   id SERIAL PRIMARY KEY,
-  key TEXT NOT NULL,
+  key TEXT UNIQUE NOT NULL,
   value TEXT NOT NULL,
   locale TEXT NOT NULL,
   dialog_name TEXT NOT NULL

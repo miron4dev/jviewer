@@ -12,7 +12,6 @@
     <import resource="classpath:META-INF/jviewer-refresh-lib/applicationContext.xml"/>
     <import resource="classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml"/>
 
-    <import resource="controller-applicationContext.xml"/>
     <import resource="orm-applicationContext.xml"/>
     <import resource="dao-applicationContext.xml"/>
     <import resource="model-applicationContext.xml"/>

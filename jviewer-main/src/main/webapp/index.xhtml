@@ -19,6 +19,7 @@
     <div style="text-align: center; margin-top: 5%;">
         <p:panel header="#{msg['J1']}" styleClass="common-panel">
             <h:form id="loginForm" prependId="false">
+                <p:focus/>
                 <p>
                     <h:outputText styleClass="alert" value="#{flash['success']}"/>
                     <h:message class="alert" for="j_username"/>

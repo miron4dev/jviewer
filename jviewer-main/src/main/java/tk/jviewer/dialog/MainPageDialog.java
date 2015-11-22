@@ -2,13 +2,13 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import tk.jviewer.entity.RoomEntity;
 import tk.jviewer.model.Quiz;
 import tk.jviewer.model.EditQuizManagedBean;
-import tk.jviewer.model.Room;
-import tk.jviewer.controller.ManagementController;
 import tk.jviewer.model.TakeQuizManagedBean;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
+import tk.jviewer.service.ManagementService;
 import tk.jviewer.service.QuizService;
 
 import javax.annotation.PostConstruct;
@@ -31,12 +31,11 @@ public class MainPageDialog implements Serializable {
 
     private static final long serialVersionUID = -8729752510193178635L;
     private static final Logger LOG = Logger.getLogger(MainPageDialog.class);
-    private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(Room.Type.values()).map(Enum::name).collect(Collectors.toList());
+    private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(RoomEntity.Type.values()).map(Enum::name).collect(Collectors.toList());
 
     private String roomName;
-    private String roomPassword;
-    private Room.Type roomType;
-    private ManagementController controller;
+    private RoomEntity.Type roomType;
+    private ManagementService managementService;
 
     private ViewerManagedBean viewerManagedBean;
     private EditQuizManagedBean editQuizManagedBean;
@@ -44,7 +43,7 @@ public class MainPageDialog implements Serializable {
 
     private QuizService quizService;
 
-    private List<Room> availableRooms;
+    private List<RoomEntity> availableRooms;
     private List<Quiz> availableQuizzes;
 
     @PostConstruct
@@ -55,8 +54,7 @@ public class MainPageDialog implements Serializable {
 
     public void createRoom() {
         try {
-            Room newRoom = new Room(roomName, roomPassword ,roomType);
-            controller.createRoom(newRoom);
+            RoomEntity newRoom = managementService.createRoom(roomName, roomType);
             availableRooms.add(newRoom);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully created.");
         } catch (DataAccessException e) {
@@ -65,10 +63,10 @@ public class MainPageDialog implements Serializable {
         }
     }
 
-    public void deleteRoom(Room room) {
+    public void deleteRoom(RoomEntity room) {
         try {
+            managementService.deleteRoom(room);
             availableRooms.remove(room);
-            controller.deleteRoom(room);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully removed.");
         } catch (DataAccessException e) {
             LOG.error("Cannot delete room", e);
@@ -76,7 +74,7 @@ public class MainPageDialog implements Serializable {
         }
     }
 
-    public String enterRoom(final Room room) {
+    public String enterRoom(final RoomEntity room) {
         viewerManagedBean.setCurrentRoom(room);
         return "viewer?faces-redirect=true";
     }
@@ -102,7 +100,16 @@ public class MainPageDialog implements Serializable {
         addMessage(SEVERITY_INFO, "Success!", "Quiz has been successfully removed.");
     }
 
-    public List<Room> getAvailableRooms() {
+    /**
+     * Logs out from JViewer.
+     *
+     * @return see description.
+     */
+    public String logout() {
+        return SecurityService.logout();
+    }
+
+    public List<RoomEntity> getAvailableRooms() {
         return availableRooms;
     }
 
@@ -146,19 +153,11 @@ public class MainPageDialog implements Serializable {
         this.roomName = roomName;
     }
 
-    public String getRoomPassword() {
-        return roomPassword;
-    }
-
-    public void setRoomPassword(String roomPassword) {
-        this.roomPassword = roomPassword;
-    }
-
-    public Room.Type getRoomType() {
+    public RoomEntity.Type getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(Room.Type roomType) {
+    public void setRoomType(RoomEntity.Type roomType) {
         this.roomType = roomType;
     }
 
@@ -166,9 +165,9 @@ public class MainPageDialog implements Serializable {
     // Helper methods
     //
 
-    private List<Room> findAvailableRooms() {
+    private List<RoomEntity> findAvailableRooms() {
         try {
-            return controller.getRooms();
+            return managementService.getRooms();
         } catch (DataAccessException e) {
             LOG.error("Cannot find available rooms", e);
             addMessage(SEVERITY_ERROR, "Failed", "We can't retrieve the list of rooms, because of system error. Please refer to your system administrator");
@@ -189,10 +188,6 @@ public class MainPageDialog implements Serializable {
     // Dependency Injection
     //
 
-    public void setController(ManagementController controller) {
-        this.controller = controller;
-    }
-
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
         this.viewerManagedBean = viewerManagedBean;
     }
@@ -209,4 +204,7 @@ public class MainPageDialog implements Serializable {
         this.quizService = quizService;
     }
 
+    public void setManagementService(ManagementService managementService) {
+        this.managementService = managementService;
+    }
 }

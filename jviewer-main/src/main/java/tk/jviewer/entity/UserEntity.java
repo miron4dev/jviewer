@@ -6,10 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * User entity.
+ * A user entity.
  */
 @Entity
-@Table(name = "user", schema = "jviewer_main")
+@Table(name = "user", schema = "jviewer_main", catalog = "jviewer")
 public class UserEntity {
 
     @Id

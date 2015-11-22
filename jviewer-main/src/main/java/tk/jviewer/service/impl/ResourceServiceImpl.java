@@ -3,11 +3,14 @@ package tk.jviewer.service.impl;
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 import org.springframework.dao.EmptyResultDataAccessException;
-import tk.jviewer.dao.ResourceDao;
+import org.springframework.transaction.annotation.Transactional;
+import tk.jviewer.entity.LocalizationEntity;
 import tk.jviewer.refresh.Refresh;
 import tk.jviewer.refresh.Refreshable;
 import tk.jviewer.service.ResourceService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.*;
 
@@ -21,13 +24,15 @@ public class ResourceServiceImpl implements ResourceService, Serializable {
     private static final long serialVersionUID = 4046286891272354949L;
 
     private MultiKeyMap<String, String> cache = new MultiKeyMap<>();
-    private ResourceDao dao;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Refresh
     public void fillCache() {
         try {
-            for (Map<String, Object> resource: dao.getResources()) {
-                cache.put((String) resource.get("locale"), (String) resource.get("key"), (String) resource.get("value"));
+            for (LocalizationEntity entity: getAllValues()) {
+                cache.put(entity.getLocale(), entity.getKey(), entity.getValue());
             }
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalStateException("Empty or invalid 'localization' table. Please check the data in your database.", e);
@@ -48,7 +53,9 @@ public class ResourceServiceImpl implements ResourceService, Serializable {
         return cache.get(locale.getLanguage(), key);
     }
 
-    public void setDao(ResourceDao dao) {
-        this.dao = dao;
+    @SuppressWarnings("unchecked")
+    @Transactional(readOnly = true)
+    private List<LocalizationEntity> getAllValues() {
+        return entityManager.createQuery("SELECT e FROM LocalizationEntity e").getResultList();
     }
 }

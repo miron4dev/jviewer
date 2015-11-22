@@ -2,6 +2,7 @@ package tk.jviewer.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import tk.jviewer.entity.ConfigEntity;
 import tk.jviewer.entity.UserEntity;
 import tk.jviewer.service.RegistrationService;
 
@@ -18,8 +19,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private static final String USER_PERMISSIONS = "ROLE_USER";
     private static final String ADMIN_PERMISSIONS = "ROLE_ADMIN";
-    //TODO: fix
-    private static final String TEMPORARY_INVITATION_ID = "$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2";
 
     @PersistenceContext
     private EntityManager em;
@@ -29,7 +28,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     @Transactional
     public boolean createProfile(String name, String password, String invitationId) {
-        if (!isEmpty(invitationId) && !encoder.matches(invitationId, TEMPORARY_INVITATION_ID)) {
+        if (!isEmpty(invitationId) && !encoder.matches(invitationId, getInvitationId())) {
             return false;
         }
         String role;
@@ -40,6 +39,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
         em.persist(new UserEntity(name, encoder.encode(password), role));
         return true;
+    }
+
+    private String getInvitationId() {
+        return em.find(ConfigEntity.class, "invitationID").getValue();
     }
 
     //

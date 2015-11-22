@@ -77,6 +77,17 @@ public class SecurityService implements AuthenticationProvider {
         return getCurrentProfile().getName();
     }
 
+
+    /**
+     * Invalidates the current session and logs out
+     * @return main page URL for redirect.
+     */
+    public static String logout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "index?faces-redirect=true";
+    }
+
     /**
      * Returns the instance of authenticated user.
      * @return see description.

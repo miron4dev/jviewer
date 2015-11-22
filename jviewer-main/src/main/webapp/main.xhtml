@@ -55,23 +55,20 @@
             </h:form>
             <h:form rendered="#{mainPageDialog.roomCreationAllowed}">
                 <p:dialog header="Create new room" widgetVar="createRoomDialog" resizable="false" showEffect="clip" hideEffect="clip">
-                    <h:panelGrid columns="2" cellpadding="3">
-                        <p:watermark for="roomName" value="Name"/>
-                        <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
+                    <p:watermark for="roomName" value="Name"/>
+                    <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
 
-                        <p:watermark for="roomPassword" value="Password"/>
-                        <p:password id="roomPassword" value="#{mainPageDialog.roomPassword}"/>
+                    <br/>
+                    <br/>
+                    <p:watermark for="roomType" value="Type"/>
+                    <p:selectOneMenu id="roomType" required="true" value="#{mainPageDialog.roomType}" style="width: 105px">
+                        <f:selectItems value="#{mainPageDialog.possibleRoomTypes}"/>
+                    </p:selectOneMenu>
 
-                        <p:watermark for="roomType" value="Type"/>
-                        <p:selectOneMenu id="roomType" required="true" value="#{mainPageDialog.roomType}">
-                            <f:selectItems value="#{mainPageDialog.possibleRoomTypes}"/>
-                        </p:selectOneMenu>
-
-                        <f:facet name="footer">
-                            <p:commandButton value="Create" update="notification, roomList-form" actionListener="#{mainPageDialog.createRoom}"
-                                             oncomplete="PF('createRoomDialog').hide()"/>
-                        </f:facet>
-                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Create" update="notification, roomList-form" actionListener="#{mainPageDialog.createRoom}"
+                                         oncomplete="PF('createRoomDialog').hide()"/>
+                    </f:facet>
                 </p:dialog>
             </h:form>
             <br/>
@@ -100,7 +97,7 @@
             <h:form>
                 <p:commandButton value="Create quiz" action="#{mainPageDialog.createQuiz}" partialSubmit="true" process="@this"
                                  rendered="#{mainPageDialog.quizCreationAllowed}"/>
-                <p:commandButton action="#{logoutController.logout}" value="#{msg['J52']}" partialSubmit="true" process="@this"/>
+                <p:commandButton action="#{mainPageDialog.logout}" value="#{msg['J52']}" partialSubmit="true" process="@this"/>
             </h:form>
         </p:panel>
     </div>

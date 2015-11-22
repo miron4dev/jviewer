@@ -7,18 +7,14 @@
         <property name="encoder" ref="encoder"/>
     </bean>
 
-    <bean id="managementController" class="tk.jviewer.controller.ManagementController">
-        <property name="managementDao" ref="managementDao"/>
-    </bean>
-
-    <bean id="resourceService" class="tk.jviewer.service.impl.ResourceServiceImpl">
-        <property name="dao" ref="resourceDao"/>
-    </bean>
+    <bean id="resourceService" class="tk.jviewer.service.impl.ResourceServiceImpl"/>
 
     <bean id="quizService" class="tk.jviewer.service.impl.QuizServiceImpl">
         <property name="quizDao" ref="quizDao"/>
         <property name="questionDao" ref="questionDao"/>
         <property name="answerDao" ref="answerDao"/>
     </bean>
+
+    <bean id="managementService" class="tk.jviewer.service.impl.ManagementServiceImpl"/>
 
 </beans>

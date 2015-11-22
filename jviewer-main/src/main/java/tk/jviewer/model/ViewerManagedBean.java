@@ -1,17 +1,19 @@
 package tk.jviewer.model;
 
+import tk.jviewer.entity.RoomEntity;
+
 /**
  * Contains state of the Viewer dialog.
  */
 public class ViewerManagedBean {
 
-    private Room currentRoom;
+    private RoomEntity currentRoom;
 
-    public Room getCurrentRoom() {
+    public RoomEntity getCurrentRoom() {
         return currentRoom;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
+    public void setCurrentRoom(RoomEntity currentRoom) {
         this.currentRoom = currentRoom;
     }
 
