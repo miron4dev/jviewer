@@ -28,7 +28,6 @@
         <module>jviewer-jc</module>
         <!-- TODO uncomment when development will be started -->
         <!--<module>jviewer-web</module>-->
-        <module>jviewer-build</module>
     </modules>
 
     <dependencyManagement>
@@ -251,6 +250,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
 
         <!-- Dependencies -->
         <jsf.version>2.2.12</jsf.version>
@@ -276,7 +276,6 @@
 
         <!-- Plugins -->
         <war.plugin.version>2.6</war.plugin.version>
-        <assembly.plugin.version>2.5.3</assembly.plugin.version>
     </properties>
 
     <build>
@@ -331,6 +330,12 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>production-deploy</id>
+            <properties>
+                <tomcat.url>http://jviewer.tk:8080/manager/text</tomcat.url>
+            </properties>
         </profile>
     </profiles>
 
