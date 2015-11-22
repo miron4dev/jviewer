@@ -63,6 +63,7 @@ public class JcServiceImpl implements JcServicePortType {
                 if (execute.waitFor() != RESULT_SUCCESS) {
                     result.setOutput(new JcStreamReader(execute.getErrorStream()).read());
                     result.setErrorOccurred(true);
+                    return result;
                 }
                 result.setOutput(new JcStreamReader(execute.getInputStream()).read());
                 result.setErrorOccurred(false);

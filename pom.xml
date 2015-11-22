@@ -26,7 +26,8 @@
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
-        <module>jviewer-web</module>
+        <!-- TODO uncomment when development will be started -->
+        <!--<module>jviewer-web</module>-->
         <module>jviewer-build</module>
     </modules>
 
@@ -276,7 +277,6 @@
         <!-- Plugins -->
         <war.plugin.version>2.6</war.plugin.version>
         <assembly.plugin.version>2.5.3</assembly.plugin.version>
-        <surefire.plguin.version>2.18.1</surefire.plguin.version>
     </properties>
 
     <build>
@@ -284,12 +284,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.plguin.version}</version>
+                <version>2.18.1</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
             </plugin>
         </plugins>
     </build>
