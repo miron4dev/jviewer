@@ -19,9 +19,10 @@ CREATE TABLE config (
 INSERT INTO config (name, value, description) VALUES ('invitationID', '$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2', 'Value of invitation id for admin registration');
 
 -- Rooms --
-DROP TABLE IF EXISTS room;
+DROP TYPE IF EXISTS ROOM_TYPE;
 CREATE TYPE ROOM_TYPE as ENUM ('HTML', 'JAVA');
 
+DROP TABLE IF EXISTS room;
 CREATE TABLE IF NOT EXISTS room (
   name TEXT PRIMARY KEY,
   type ROOM_TYPE NOT NULL
