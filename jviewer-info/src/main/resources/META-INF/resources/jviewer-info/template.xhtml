@@ -25,8 +25,8 @@
                     <li><p:link styleClass="navbar-brand" outcome="index" value="JViewer"/></li>
                     <li class="#{cc.attrs.currentPage == 'MAIN' ? 'active': ''}"><p:link outcome="index" value="Главная"/></li>
                     <li class="#{cc.attrs.currentPage == 'NEWS' ? 'active': ''}"><p:link outcome="news" value="Новости"/></li>
-                    <li class="#{cc.attrs.currentPage == 'DOWNLOAD' ? 'active': ''}"><p:link outcome="download" value="Скачать"/></li>
-                    <li class="#{cc.attrs.currentPage == 'HOWTO' ? 'active': ''}"><p:link outcome="howto" value="Инструкция"/></li>
+                    <!--<li class="#{cc.attrs.currentPage == 'DOWNLOAD' ? 'active': ''}"><p:link outcome="download" value="Скачать"/></li>-->
+                    <!--<li class="#{cc.attrs.currentPage == 'HOWTO' ? 'active': ''}"><p:link outcome="howto" value="Инструкция"/></li>-->
                     <li class="#{cc.attrs.currentPage == 'CONTACTS' ? 'active': ''}"><p:link outcome="contacts" value="Разработчик"/></li>
                     <c:if test="#{userProfile.authenticated}">
                         <li style="margin-left: 45px; margin-top: 23px">
