@@ -46,7 +46,7 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public boolean hasEditPermissions() {
-        return SecurityService.userHasPermission(Permission.EDIT_VIEWER);
+        return SecurityService.userHasPermission(Permission.ADMIN);
     }
 
     /**

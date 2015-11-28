@@ -16,7 +16,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import java.util.List;
  */
 public class SecurityService implements AuthenticationProvider {
 
-    private static final Logger logger = Logger.getLogger(SecurityService.class);
     private static final String ADMIN_ROLE = "ROLE_ADMIN";
 
     @PersistenceContext
@@ -48,7 +46,7 @@ public class SecurityService implements AuthenticationProvider {
         }
         if(encoder.matches(password, userEntity.getPassword())){
             authority = new SimpleGrantedAuthority(userEntity.getRole());
-            List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Arrays.asList(Permission.values()) : new ArrayList<>();
+            List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Collections.singletonList(Permission.ADMIN) : new ArrayList<>();
             user = new UserProfile(userEntity.getUsername(), permissions);
         } else {
             authenticationFailed();

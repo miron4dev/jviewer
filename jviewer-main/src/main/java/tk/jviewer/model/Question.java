@@ -176,7 +176,6 @@ public class Question implements Serializable {
     //
 
     private Answer getTheOnlyPossibleAnswer() {
-        state(possibleAnswers.size() == 1);
         return possibleAnswers.get(0);
     }
 

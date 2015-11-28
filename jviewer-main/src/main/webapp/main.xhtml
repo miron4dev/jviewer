@@ -36,7 +36,7 @@
                         </f:facet>
                         <h:outputText value="#{room.type}"/>
                     </p:column>
-                    <p:column style="text-align:center" rendered="#{mainPageDialog.roomDeletionAllowed}">
+                    <p:column style="text-align:center" rendered="#{mainPageDialog.admin}">
                         <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteRoom(room)}"
                                        update="notification, @form">
                             <p:confirm header="Confirmation" message="Are you sure that you want to delete this room?"/>
@@ -46,14 +46,14 @@
                 <br/>
 
                 <p:commandButton value="#{msg['J49']}" onclick="PF('createRoomDialog').show();" type="button" process="@none"
-                        rendered="#{mainPageDialog.roomCreationAllowed}"/>
+                        rendered="#{mainPageDialog.admin}"/>
 
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
             </h:form>
-            <h:form rendered="#{mainPageDialog.roomCreationAllowed}">
+            <h:form rendered="#{mainPageDialog.admin}">
                 <p:dialog header="Create new room" widgetVar="createRoomDialog" resizable="false" showEffect="clip" hideEffect="clip">
                     <p:watermark for="roomName" value="Name"/>
                     <p:inputText id="roomName" value="#{mainPageDialog.roomName}" required="true"/>
@@ -80,14 +80,14 @@
                     <p:column headerText="Name">
                         <p:commandLink value="#{quiz.name}" action="#{mainPageDialog.takeQuiz(quiz)}" process="@this"/>
                     </p:column>
-                    <p:column style="text-align:center" rendered="#{mainPageDialog.quizEditionAllowed or mainPageDialog.quizDeletionAllowed}">
+                    <p:column style="text-align:center" rendered="#{mainPageDialog.admin}">
                         <p:commandLink value="Edit" action="#{mainPageDialog.editQuiz(quiz)}" process="@this"
-                                       rendered="#{mainPageDialog.quizEditionAllowed}"/>
+                                       rendered="#{mainPageDialog.admin}"/>
 
-                        <h:outputText value=" | " rendered="#{mainPageDialog.quizEditionAllowed and mainPageDialog.quizDeletionAllowed}"/>
+                        <h:outputText value=" | " rendered="#{mainPageDialog.admin}"/>
 
                         <p:commandLink value="Delete" actionListener="#{mainPageDialog.deleteQuiz(quiz)}"
-                                       update="notification, @form" rendered="#{mainPageDialog.quizDeletionAllowed}">
+                                       update="notification, @form" rendered="#{mainPageDialog.admin}">
                             <p:confirm header="Confirmation" message="Are you sure that you want to delete this quiz?"/>
                         </p:commandLink>
                     </p:column>
@@ -96,7 +96,7 @@
             <br/>
             <h:form>
                 <p:commandButton value="Create quiz" action="#{mainPageDialog.createQuiz}" partialSubmit="true" process="@this"
-                                 rendered="#{mainPageDialog.quizCreationAllowed}"/>
+                                 rendered="#{mainPageDialog.admin}" disabled="true"/>
                 <p:commandButton action="#{mainPageDialog.logout}" value="#{msg['J52']}" partialSubmit="true" process="@this"/>
             </h:form>
         </p:panel>

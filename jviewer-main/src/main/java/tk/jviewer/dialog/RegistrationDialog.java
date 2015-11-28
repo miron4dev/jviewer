@@ -7,11 +7,14 @@ import tk.jviewer.service.ResourceService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 
 /**
  * Serves for "registration" use case.
  */
-public class RegistrationDialog {
+public class RegistrationDialog implements Serializable {
+
+    private static final long serialVersionUID = -6429124304116355292L;
 
     private String name;
     private String password;

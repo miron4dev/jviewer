@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_INFO;
+import static javax.faces.application.FacesMessage.SEVERITY_WARN;
 import static tk.jviewer.security.Permission.*;
 
 /**
@@ -46,14 +47,23 @@ public class MainPageDialog implements Serializable {
     private List<RoomEntity> availableRooms;
     private List<Quiz> availableQuizzes;
 
+    /**
+     * Init method for loading of available rooms and quizzes.
+     */
     @PostConstruct
     public void init() {
         availableRooms = findAvailableRooms();
         availableQuizzes = findAvailableQuizzes();
     }
 
+    /**
+     * Creates new room.
+     */
     public void createRoom() {
         try {
+            if (isRoomExist(roomName)) {
+                addMessage(SEVERITY_WARN, "Failed", "Room with specified name is already exist!");
+            }
             RoomEntity newRoom = managementService.createRoom(roomName, roomType);
             availableRooms.add(newRoom);
             addMessage(SEVERITY_INFO, "Success!", "Room has been successfully created.");
@@ -63,6 +73,10 @@ public class MainPageDialog implements Serializable {
         }
     }
 
+    /**
+     * Delets specified room.
+     * @param room room for deletion.
+     */
     public void deleteRoom(RoomEntity room) {
         try {
             managementService.deleteRoom(room);
@@ -74,26 +88,49 @@ public class MainPageDialog implements Serializable {
         }
     }
 
+    /**
+     * Goes to specified room.
+     * @param room viewer room.
+     * @return JSF navigation rule for Viewer page.
+     */
     public String enterRoom(final RoomEntity room) {
         viewerManagedBean.setCurrentRoom(room);
         return "viewer?faces-redirect=true";
     }
 
+    /**
+     * Takes specified quiz.
+     * @param quiz quiz for taking.
+     * @return JSF navigation rule.
+     */
     public String takeQuiz(final Quiz quiz) {
         takeQuizManagedBean.setChosenQuiz(quiz);
         return quiz.isAlreadyTaken() ? "quizresults?faces-redirect=true" : "takequiz?faces-redirect=true";
     }
 
+    /**
+     * Edits the specified quiz.
+     * @param quiz quiz for edition.
+     * @return JSf navigation rule.
+     */
     public String editQuiz(final Quiz quiz) {
         editQuizManagedBean.setCurrentQuiz(quiz);
         return "createquiz?faces-redirect=true";
     }
 
+    /**
+     * Goes to Create Quiz dialog.
+     * @return JSF navigation rule.
+     */
     public String createQuiz() {
         editQuizManagedBean.setCurrentQuiz(null);
         return "createquiz?faces-redirect=true";
     }
 
+    /**
+     * Deletes specified quiz.
+     * @param quiz quiz for deletion.
+     */
     public void deleteQuiz(final Quiz quiz) {
         availableQuizzes.remove(quiz);
         quizService.removeQuiz(quiz);
@@ -109,38 +146,42 @@ public class MainPageDialog implements Serializable {
         return SecurityService.logout();
     }
 
+    /**
+     * Returns a list of all available rooms.
+     * @return see description.
+     */
     public List<RoomEntity> getAvailableRooms() {
         return availableRooms;
     }
 
+    /**
+     * Returns a list of all available quizzes.
+     * @return see description.
+     */
     public List<Quiz> getAvailableQuizzes() {
         return availableQuizzes;
     }
 
+    /**
+     * Returns a name of user.
+     * @return see description.
+     */
     public String getUsername() {
         return SecurityService.getUsername();
     }
 
-    public boolean isRoomCreationAllowed() {
-        return SecurityService.userHasPermission(CREATE_ROOM);
+    /**
+     * Returns true if user is admin.
+     * @return see description.
+     */
+    public boolean isAdmin() {
+        return SecurityService.userHasPermission(ADMIN);
     }
 
-    public boolean isRoomDeletionAllowed() {
-        return SecurityService.userHasPermission(DELETE_ROOM);
-    }
-
-    public boolean isQuizCreationAllowed() {
-        return SecurityService.userHasPermission(CREATE_QUIZ);
-    }
-
-    public boolean isQuizEditionAllowed() {
-        return SecurityService.userHasPermission(EDIT_QUIZ);
-    }
-
-    public boolean isQuizDeletionAllowed() {
-        return SecurityService.userHasPermission(DELETE_QUIZ);
-    }
-
+    /**
+     * Returns a list of all possible types of room.
+     * @return see description.
+     */
     public List<String> getPossibleRoomTypes() {
         return POSSIBLE_ROOM_TYPES;
     }
@@ -182,6 +223,15 @@ public class MainPageDialog implements Serializable {
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesMessage message = new FacesMessage(severity, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    private boolean isRoomExist(String roomName) {
+        for (RoomEntity room: availableRooms) {
+            if (room.getName().equals(roomName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //

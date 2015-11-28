@@ -1,17 +1,19 @@
 package tk.jviewer.dialog;
 
-import org.springframework.util.Assert;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
 
+import java.io.Serializable;
 import java.util.List;
 
 import static org.springframework.util.Assert.state;
 
 /**
- * Created by Sergey Yaskov on 11.10.2015.
+ * Contains a progress state for the current quiz.
  */
-public class QuizProgressState {
+public class QuizProgressState implements Serializable {
+
+    private static final long serialVersionUID = 8300658586039882718L;
 
     private final Quiz quiz;
     private int currentQuestionIndex;

@@ -114,7 +114,6 @@ public class QuizServiceImpl implements QuizService {
                 builder.append(answer.getText()).append(", ");
             }
         }
-
         return substringBeforeLast(builder.toString(), ", ");
     }
 

@@ -5,10 +5,6 @@ package tk.jviewer.security;
  */
 public enum Permission {
 
-    CREATE_ROOM,
-    DELETE_ROOM,
-    CREATE_QUIZ,
-    EDIT_QUIZ,
-    DELETE_QUIZ,
-    EDIT_VIEWER
+    ADMIN,
+    SUPER_ADMIN
 }
