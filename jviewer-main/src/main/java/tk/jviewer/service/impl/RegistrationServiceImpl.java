@@ -17,8 +17,9 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 public class RegistrationServiceImpl implements RegistrationService {
 
-    private static final String USER_PERMISSIONS = "ROLE_USER";
-    private static final String ADMIN_PERMISSIONS = "ROLE_ADMIN";
+    static final String INVITATION_ID = "invitationID";
+    static final String USER_PERMISSIONS = "ROLE_USER";
+    static final String ADMIN_PERMISSIONS = "ROLE_ADMIN";
 
     @PersistenceContext
     private EntityManager em;
@@ -42,7 +43,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     private String getInvitationId() {
-        return em.find(ConfigEntity.class, "invitationID").getValue();
+        return em.find(ConfigEntity.class, INVITATION_ID).getValue();
     }
 
     //

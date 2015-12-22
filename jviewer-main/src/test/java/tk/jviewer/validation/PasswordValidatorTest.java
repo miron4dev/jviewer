@@ -36,8 +36,7 @@ public class PasswordValidatorTest {
     }
 
     @Test
-    public void testValidate_success() throws Exception
-    {
+    public void testValidate_success() throws Exception {
         Map<String, Object> attributes = createMock(Map.class);
         String password = "123456";
         String retypePassword = "123456";
