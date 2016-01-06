@@ -3,6 +3,20 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
+    <managed-bean>
+        <managed-bean-name>registrationDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.RegistrationDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>registrationService</property-name>
+            <value>#{registrationService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>resourceService</property-name>
+            <value>#{resourceService}</value>
+        </managed-property>
+    </managed-bean>
+
     <component>
         <component-type>org.primefaces.component.AdamantiumMenu</component-type>
         <component-class>org.primefaces.adamantium.component.menu.AdamantiumMenu</component-class>

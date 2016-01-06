@@ -7,6 +7,36 @@
 
     <display-name>web</display-name>
 
+
+    <!--Filters-->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
     <!--Servlets-->
     <servlet>
         <servlet-name>JSF Servlet</servlet-name>
@@ -20,6 +50,12 @@
     <!-- Listeners -->
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
     <!--Params-->
@@ -44,6 +80,11 @@
         <param-value>/WEB-INF/primefaces-adamantium.taglib.xml</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/META-INF/applicationContext.xml</param-value>
+    </context-param>
+
     <!-- Support parameters -->
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
@@ -52,6 +93,16 @@
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SSL</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 
     <!-- Error pages -->
     <error-page>
@@ -112,5 +163,4 @@
         <extension>svg#fontawesomeregular</extension>
         <mime-type>image/svg+xml</mime-type>
     </mime-mapping>
-
 </web-app>

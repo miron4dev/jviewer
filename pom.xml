@@ -26,8 +26,7 @@
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
-        <!-- TODO uncomment when development will be started -->
-        <!--<module>jviewer-web</module>-->
+        <module>jviewer-web</module>
     </modules>
 
     <dependencyManagement>
