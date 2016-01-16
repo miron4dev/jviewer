@@ -12,8 +12,8 @@
     <import resource="classpath:META-INF/jviewer-refresh-lib/applicationContext.xml"/>
     <import resource="classpath:META-INF/jviewer-jc-wsc/client-applicationContext.xml"/>
 
-    <import resource="orm-applicationContext.xml"/>
-    <import resource="security-applicationContext.xml"/>
-    <import resource="service-applicationContext.xml"/>
+    <import resource="classpath:/META-INF/orm-applicationContext.xml"/>
+    <import resource="classpath:/META-INF/security-applicationContext.xml"/>
+    <import resource="classpath:/META-INF/service-applicationContext.xml"/>
 
 </beans>

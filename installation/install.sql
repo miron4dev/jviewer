@@ -3,6 +3,7 @@ SET SCHEMA 'jviewer_main';
 -- User --
 CREATE TABLE IF NOT EXISTS "user" (
   username TEXT PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'ROLE_USER'
 );
@@ -91,54 +92,6 @@ CREATE TABLE localization (
   dialog_name TEXT NOT NULL
 );
 
--- Russian --
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Добро пожаловать на JViewer', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Создать новый профиль', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J3', 'Войти', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J4', 'Имя', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J5', 'Пароль', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J6', 'Регистрация прошла успешно, теперь вы можете войти.', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J7', 'Создать новый профиль', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J8', 'Введите ваши данные', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J9', 'Имя', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J10', 'Пароль', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J11', 'Повторите пароль', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J12', 'Пригласительный ID', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J13', 'Факультет', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J14', 'Минимальная длина имени составляет 5 символов', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J16', 'Создать новый профиль', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J17', 'Назад', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Поле не может быть пустым', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Минимальная длина имени составляет 5 символов', 'ru', 'index');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J20', 'Пароль должен быть не менее 6 символов.', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J21', 'Код с картинки неверен.', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J22', 'Пользователь с таким именем уже существует.', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J23', 'Неправильный пригласительный ID.', 'ru', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Управление комнатами', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Управление комнатами', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J47', 'С возвращением', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J49', 'Создать новую комнату', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J50', 'Удалить', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J51', 'Войти', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J52', 'Выйти', 'ru', 'rooms');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J53', 'Создать новую комнату', 'ru', 'newroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J54', 'Управление комнатами', 'ru', 'newroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J55', 'Имя', 'ru', 'newroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J56', 'Создать', 'ru', 'newroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J57', 'Назад', 'ru', 'newroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J58', 'Удалить выбранную комнату', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J59', 'Управление комнатами', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J60', 'Вы действительно хотите удалить комнату', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J61', 'Да', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J62', 'Нет', 'ru', 'delroom');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J63', 'Текущая комната', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J64', 'Выполнить', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J65', 'Очистить', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J66', 'Список комнат', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J67', 'Выйти', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J68', 'JViewer. Комната:', 'ru', 'viewer');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J69', 'Сохранить результат', 'ru', 'viewer');
-
 -- English --
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J1', 'Welcome to JViewer', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J2', 'Create new account', 'en', 'index');
@@ -160,7 +113,7 @@ INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J18', 'Field
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J19', 'Name must be less than 5 characters', 'en', 'index');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J20', 'Password must be less than 6 characters.', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J21', 'Captcha is wrong.', 'en', 'registration');
-INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J22', 'User with that name is already exist.', 'en', 'registration');
+INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J22', 'User with specified name or email is already exist.', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J23', 'Invitation ID is wrong.', 'en', 'registration');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J45', 'Rooms management page', 'en', 'rooms');
 INSERT INTO localization (key, value, locale, dialog_name) VALUES ('J46', 'Rooms management page', 'en', 'rooms');

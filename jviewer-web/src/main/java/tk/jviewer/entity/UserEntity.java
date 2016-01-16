@@ -16,23 +16,30 @@ public class UserEntity {
     @Column(name = "USERNAME", unique = true, nullable = false)
     private String username;
 
+    @Column(name = "EMAIL", unique = true, nullable = false)
+    private String email;
+
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Column(name = "ROLE", nullable = false)
-    private String role;
+    private String role = "ROLE_USER";
 
     public UserEntity() {
     }
 
-    public UserEntity(String username, String password, String role) {
+    public UserEntity(String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {

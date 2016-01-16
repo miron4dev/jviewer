@@ -17,17 +17,22 @@
         </managed-property>
     </managed-bean>
 
-    <component>
-        <component-type>org.primefaces.component.AdamantiumMenu</component-type>
-        <component-class>org.primefaces.adamantium.component.menu.AdamantiumMenu</component-class>
-    </component>
-    
-    <render-kit>
-        <renderer>
-            <component-family>org.primefaces.component</component-family>
-            <renderer-type>org.primefaces.component.AdamantiumMenuRenderer</renderer-type>
-            <renderer-class>org.primefaces.adamantium.component.menu.AdamantiumMenuRenderer</renderer-class>
-        </renderer>
-    </render-kit>
+    <factory>
+        <exception-handler-factory>
+            org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
+
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <resource-bundle>
+            <base-name>tk.jviewer.bundle.DatabaseResourceBundle</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
     
 </faces-config>

@@ -6,6 +6,7 @@ import tk.jviewer.service.ResourceService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -24,13 +25,14 @@ public class RegistrationDialog implements Serializable {
     private ResourceService resourceService;
 
     public String createProfile() {
-        FacesContext currentInstance = FacesContext.getCurrentInstance();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         try {
             registrationService.createProfile(name, email, password);
-            currentInstance.getExternalContext().getFlash().put("success", getResource("J6"));
+            facesContext.getExternalContext().getFlash().setKeepMessages(true);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getResource("J6"), null));
             return "login?faces-redirect=true";
         } catch (DataIntegrityViolationException e) {
-            currentInstance.addMessage("registrationForm:name", new FacesMessage(getResource("J22")));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, getResource("J22"), null));
         }
         return null;
     }

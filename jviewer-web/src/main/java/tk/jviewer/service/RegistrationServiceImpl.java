@@ -6,15 +6,15 @@ import tk.jviewer.entity.UserEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 
 /**
  * Registration service implementation.
  * @author Evgeny Mironenko
  */
-public class RegistrationServiceImpl implements RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService, Serializable {
 
-    static final String USER_PERMISSIONS = "ROLE_USER";
-    static final String ADMIN_PERMISSIONS = "ROLE_ADMIN";
+    private static final long serialVersionUID = -4988532465845828054L;
 
     @PersistenceContext
     private EntityManager em;
@@ -24,7 +24,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     @Transactional
     public void createProfile(String name, String email, String password) {
-        em.persist(new UserEntity(name, encoder.encode(password), USER_PERMISSIONS));
+        em.persist(new UserEntity(name, email, encoder.encode(password)));
     }
 
     //

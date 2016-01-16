@@ -32,18 +32,31 @@
                         <div class="EmptyBox20"></div>
                         <div class="Card SoftGrayBack">
                             <h:form>
-                                <p:inputText placeholder="Username" value="#{registrationDialog.name}" required="true" styleClass="Wid90 TexAlCenter"/>
+                                <p:messages autoUpdate="true" />
+                                <p:inputText placeholder="Username" value="#{registrationDialog.name}" required="true"
+                                    requiredMessage="Name is empty" styleClass="Wid90 TexAlCenter"/>
                                 <div class="EmptyBox10"></div>
-                                <p:inputText placeholder="Email" value="#{registrationDialog.email}" required="true" styleClass="Wid90 TexAlCenter"/>
+                                <p:inputText placeholder="Email" value="#{registrationDialog.email}" required="true"
+                                    requiredMessage="Email is empty" styleClass="Wid90 TexAlCenter"/>
                                 <div class="EmptyBox10"></div>
-                                <p:inputText type="password" value="#{registrationDialog.password}" placeholder="Password" styleClass="Wid90 TexAlCenter"/>
+                                <p:inputText placeholder="Password" value="#{registrationDialog.password}" required="true"
+                                    requiredMessage="Password is empty" type="password" styleClass="Wid90 TexAlCenter">
+                                    <f:validator validatorId="passwordValidator"/>
+                                    <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                                </p:inputText>
+                                <div class="EmptyBox10"></div>
+                                <p:inputText placeholder="Confirm password" required="true" binding="#{confirmPassword}"
+                                    requiredMessage="Confirm password is empty" type="password" styleClass="Wid90 TexAlCenter"/>
                                 <div class="EmptyBox30"></div>
-                                <p:selectBooleanCheckbox value="accept" itemLabel="I Accept Terms And Policies" required="true"/>
+                                <p:selectBooleanCheckbox value="accept" itemLabel="I Accept Terms And Policies" required="true"
+                                    requiredMessage="You must accept Terms and Policies">
+                                    <f:validator validatorId="requiredCheckboxValidator"/>
+                                </p:selectBooleanCheckbox>
                                 <div class="EmptyBox30"></div>
                                 <p:commandButton action="#{registrationDialog.createProfile}" value="Sign up" icon="fa fa-sign-in" styleClass="CyanButton"/>
                                 <p:button value="Go back" icon="icon-arrow-left" href="login.xhtml" styleClass="RaisedButton"/>
-                                <div class="EmptyBox10 ShowOnMobile"></div>
                             </h:form>
+                            <div class="EmptyBox10 ShowOnMobile"></div>
                         </div>
                         <div class="EmptyBox20"></div>
                         <div class="Separator"></div>

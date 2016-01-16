@@ -82,7 +82,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/META-INF/applicationContext.xml</param-value>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
     <!-- Support parameters -->
@@ -107,15 +107,15 @@
     <!-- Error pages -->
     <error-page>
         <error-code>403</error-code>
-        <location>/WEB-INF/pages/403.xhtml</location>
+        <location>/error/403.xhtml</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/pages/404.xhtml</location>
+        <location>/error/404.xhtml</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/pages/error.xhtml</location>
+        <location>/error/error.xhtml</location>
     </error-page>
 
     <!-- Mime Mapping -->

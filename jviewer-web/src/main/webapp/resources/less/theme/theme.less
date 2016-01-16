@@ -406,9 +406,9 @@ label{font-weight:normal !important;}
 /*==============================================================================================================================================================*/
 /*==============================================================================================================================================================*/
 
-.ui-shadow{-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important; -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important; box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important;}
+.ui-shadow,#ui-datepicker-div{-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important; -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important; box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3) !important;}
 @media @ie9-10{ 
-    .ui-shadow{box-shadow: 0px 0px 8px 0px rgba(43,59,93,0.4) !important;}
+    .ui-shadow,#ui-datepicker-div{box-shadow: 0px 0px 8px 0px rgba(43,59,93,0.4) !important;}
 }
 
 /*Style For Breadcrumb ------------------------------------------------------------------------------------- */
@@ -607,7 +607,7 @@ label{font-weight:normal !important;}
     .ui-picklist .ui-picklist-buttons .ui-button {border-radius:2px !important; -webkit-border-radius:2px !important; -moz-border-radius:2px !important;}
 .ui-picklist .ui-picklist-caption{border:solid 1px @picklist-caption-border-color; background-color:@picklist-caption-bg-color; color:@picklist-caption-color; padding:10px 0px !important; margin:6px 0px 0px 0px; font-size:@picklist-caption-font-size;
         .medium-transition; border-top-right-radius:2px; border-top-left-radius:2px; font-family:'latobold';}
-.ui-picklist .ui-picklist-list{border:solid 1px @picklist-list-border-color; padding:0px !important; background-color: @picklist-list-bg-color; border-bottom-right-radius:2px; border-bottom-left-radius:2px; border-top: 0px @picklist-list-border-top-color !important;width: auto !important; min-width: 200px;}
+.ui-picklist .ui-picklist-list{border:solid 1px @picklist-list-border-color; padding:0px !important; background-color: @picklist-list-bg-color; border-bottom-right-radius:2px; border-bottom-left-radius:2px; border-top: 0px @picklist-list-border-top-color !important;width: auto !important; min-width:200px;}
 .ui-picklist .ui-picklist-list:hover, .ui-picklist .ui-picklist-list:focus{}
 .ui-picklist .ui-picklist-list .ui-picklist-item{padding:10px 8px !important; color:@picklist-item-color; border-radius:0px; font-size:14px; margin:0px;}
 .ui-picklist .ui-picklist-list .ui-state-hover{background-color:@picklist-item-hover-bg-color !important; color:@picklist-item-hover-color;}
@@ -718,7 +718,7 @@ label{font-weight:normal !important;}
                                      color:@carousel-footer-color; border-top-left-radius:0px !important; border-top-right-radius:0px !important;
                                      -webkit-border-top-left-radius:0px !important; -webkit-border-top-right-radius:0px !important;
                                      -moz-border-top-left-radius:0px !important; -moz-border-top-right-radius:0px !important;}
-    
+    .ui-carousel .ui-carousel-mobiledropdown{margin-top:8px !important;}
 
 /*Style For Schedule (5.1) --------------------------------------------------------------------------------------*/
 
@@ -944,8 +944,12 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
     .ui-panelgrid tbody tr td{border-color: @panelgrid-body-cell-border-color !important;}
     .ui-panelgrid tbody tr td:hover{}
     
-    @media (max-width: 35em)
-    {.ui-panelgrid .ui-grid-responsive .ui-grid-row {border-color: @panelgrid-mobile-row-border-color !important;}}
+.ui-panelgrid.ui-panelgrid-blank {border: 0 none;background: none}
+    @media (max-width: 640px)
+    {
+        .ui-panelgrid .ui-grid-responsive .ui-grid-row {border-color: @panelgrid-mobile-row-border-color !important;}
+        .ui-panelgrid.ui-panelgrid-blank .ui-grid-responsive .ui-grid-row {border: none}
+    }
     
 /*Style For UI ScrollPanel --------------------------------------------------------------------------------------*/
 
@@ -1228,6 +1232,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 }
 .ui-button-icon-only {
     min-width:36px !important; 
+    max-width:36px !important; 
     border-radius:30px !important; 
     -webkit-border-radius:30px !important; 
     -moz-border-radius:30px !important;
@@ -1243,6 +1248,15 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
     border-radius:30px !important;
     -webkit-border-radius:30px !important; 
     -moz-border-radius:30px !important;
+}
+.ui-datepicker-trigger,
+.ui-datepicker-trigger.ui-button-icon-only .ui-button-text{ 
+    border-radius:0px !important;
+    -webkit-border-radius:0px !important; 
+    -moz-border-radius:0px !important;
+}
+.ui-datepicker-trigger.ui-button-icon-only .ui-button-text{
+    padding:9px 0px !important;
 }
 .ui-button-text-icon-left .ui-button-text {
     padding:10px 20px 10px 40px !important; 
@@ -1266,10 +1280,10 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 
 /* Style For Button Sets -------------------------------------------------------------------------------------- */
 .ui-selectonebutton,
-.ui-selectmanybutton{border:solid 1px #0288D1; border-radius:2px !important; -webkit-border-radius:2px !important; -moz-border-radius:2px !important; padding:1px 0px 1px 1px !important;}
+.ui-selectmanybutton{border:solid 1px #0288D1; border-radius:2px !important; -webkit-border-radius:2px !important; -moz-border-radius:2px !important; padding:0px !important;}
 
 .ui-selectonebutton .ui-button,
-.ui-selectmanybutton .ui-button{margin-right:1px !important;}
+.ui-selectmanybutton .ui-button{border:solid 1px #ffffff;}
 
 .ui-selectonebutton .ui-button,
 .ui-selectonebutton .ui-button .ui-button-text,
@@ -1290,6 +1304,8 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
             -webkit-border-top-right-radius:2px !important; -webkit-border-bottom-right-radius:2px !important;
             -moz-border-top-right-radius:2px !important; -moz-border-bottom-right-radius:2px !important;}
 
+.ui-splitbutton.ui-buttonset .ui-menu-list .ui-menuitem.ui-state-hover { background-color:transparent;}
+
 
 /*Style For UI Menu ------------------------------------------------------------------------------------- */
 .ui-menu{background-color:@menu-bg-color; color:@menu-color; border-radius:2px; padding:0px !important; font-family:'latoregular';
@@ -1300,6 +1316,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 }
 
 .ui-menu:hover, .ui-menu:focus{}
+.ui-menu.ui-menu-toggleable{border-collapse:separate !important;}
     .ui-menu .ui-menu-list .ui-widget-header{font-size:@menu-submenu-text-font-size; color:@menu-submenu-text-color; background-color:@menu-submenu-text-bg-color; width:84% !important; border-radius:1px; font-family: 'latobold'; padding:7px 8%;}
     .ui-menu.ui-menu-toggleable li.ui-widget-header{font-size:@menu-submenu-text-font-size; color:@menu-submenu-text-color; background-color:@menu-submenu-text-bg-color; width:84% !important; border-radius:1px; font-family: 'latobold'; padding:7px 8%;}
     .ui-menu.ui-menu-toggleable li.ui-widget-header:hover{color:#ffffff; background-color:@menu-submenu-text-bg-color-hover;}
@@ -1349,7 +1366,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
         
         .ui-panelmenu .ui-panelmenu-panel .ui-panelmenu-content .ui-menuitem:hover{background-color:@panelmenu-menuitem-bg-color-hover;}
         .ui-panelmenu .ui-panelmenu-panel .ui-panelmenu-content .ui-menuitem .ui-state-hover{color:#03A9F4;}
-            .ui-panelmenu .ui-panelmenu-panel .ui-panelmenu-content .ui-menuitem a{color: @panelmenu-menuitem-text-color; font-size: @panelmenu-menuitem-text-font-size; font-family: 'latoregular'; padding: 14px 5% 14px 10%;
+            .ui-panelmenu .ui-panelmenu-panel .ui-panelmenu-content .ui-menuitem a{color: @panelmenu-menuitem-text-color; font-size: @panelmenu-menuitem-text-font-size; font-family: 'latoregular'; padding: 14px 5px 14px 32px;
                             overflow: hidden; width: auto !important; float:none !important;}
             .ui-panelmenu .ui-panelmenu-panel .ui-panelmenu-content .ui-menuitem .ui-menuitem-link .ui-icon-triangle-1-e{background-image:url("#{resource['primefaces-adamantium:images/rightarrow-navy.svg']}"); background-position: center !important; 
                          background-repeat: no-repeat; background-size: 90%;}
@@ -1403,6 +1420,11 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
         
 .ui-messages ul{margin-left:45px !important; margin-top:9px !important; margin-bottom: 10px !important;}
 
+.ui-dialog-message.ui-messages-info-icon,
+.ui-dialog-message.ui-messages-warn-icon,
+.ui-dialog-message.ui-messages-error-icon,
+.ui-dialog-message.ui-messages-fatal-icon{margin:-6px 0px 0px 0px !important;}
+
 /*Style For UI Panel ------------------------------------------------------------------------------------- */
 
 .ui-panel{border:1px solid @panel-border-color; padding:2px !important; background-color:@panel-bg-color; border-radius:2px;}
@@ -1432,7 +1454,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 .ui-selectonemenu .ui-selectonemenu-label{width:100% !important;
                        border-bottom-right-radius:0px !important; border-top-right-radius:0px !important; border-bottom-left-radius:0px !important; border-top-left-radius:0px !important;}
 .ui-selectonemenu, .ui-selectcheckboxmenu{font-size:@selectonemenu-font-size !important; font-family: 'latoregular' !important; padding:0px 56px 0px 0px !important; 
-                border-bottom:solid 1px #B0BEC5 !important; .medium-transition; color: #778D9B;
+                border-bottom:solid 1px #B0BEC5 !important; .no-transition; color: #778D9B;
                  border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px;}
 	.ui-selectonemenu .ui-selectonemenu-trigger, .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger{padding:0px 12px !important; font-size:@selectonemenu-trigger-font-size; color:@selectonemenu-trigger-color !important;
 			text-shadow:none; z-index:100; background-color:@selectonemenu-trigger-bg-color; border-bottom:solid 1px @selectonemenu-trigger-border-color !important;
@@ -1563,7 +1585,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
                                      transform: rotate(0deg) scale(1);}
 
         .ui-chkbox-box .ui-icon-check{border-radius: 0px; background-image:none !important; background-size: 100%; position: relative;
-                                      background-position: center; background-color:transparent; border-bottom:solid 3px #26C6DA; border-right:solid 3px #26C6DA;  width:5px; height:10px;
+                                      background-position: center; background-color:transparent; border-bottom:solid 3px @checkbox-check-icon-border-bottom-color; border-right:solid 3px @checkbox-check-icon-border-right-color;  width:5px; height:10px;
                                       margin-left:4px; margin-top:-4px;
                                       .short-transition;
                                       -webkit-transform: rotate(45deg) scale(1.7);
@@ -1578,7 +1600,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 /*Style For Radio Button --------------------------------------------------------------------------------------*/ 
 .ui-selectoneradio label{margin:2px 15px 0px 0px !important; color:@selectoneradio-label-color; font-size: @selectoneradio-label-font-size;}
 .ui-radiobutton{ margin:5px 5px 0px 0px !important; cursor:pointer;}
-.ui-radiobutton .ui-radiobutton-box{background:none; box-shadow: none; color:@radiobutton-color; border: solid 2px @radiobutton-border-color;}
+.ui-radiobutton .ui-radiobutton-box{background:none; box-shadow: none; color:@radiobutton-color; border: solid 2px @radiobutton-border-color; position: relative;}
 .ui-radiobutton .ui-state-hover, .ui-radiobutton .ui-state-active{border:solid 2px @radiobutton-border-color-checked}
 .ui-radiobutton .ui-state-focus{outline:dotted 1px @radiobutton-outline-color-focus; outline-offset:2px;}
 .ui-radiobutton .ui-radiobutton-icon{border-radius:50%; -webkit-border-radius:50%; -moz-border-radius:50%; background-size: 100%; background-position: center; margin: 0px !important;
@@ -1668,7 +1690,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
 .ui-slider-vertical{margin: 11px 5px;}
     .ui-slider-range{background-color:@slider-range-bg-color;}
     .ui-slider-handle{width:20px !important; height: 20px !important; cursor:move !important; border:solid 1px @slider-handle-border-color !important; background-color: @slider-handle-bg-color; border-radius:30px !important;
-                      opacity:1; -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4); -moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4); box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4);}
+                      opacity:1; -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4); -moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4); box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4); border-collapse:separate !important;}
     @media @ie9-10{ 
         .ui-slider-handle{box-shadow: 0px 0px 8px 0px rgba(43,59,93,0.4) !important;}
     }
@@ -1736,7 +1758,7 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
         .ui-datepicker-calendar tbody tr .ui-datepicker-current-day{background-color:@calendar-currentday-bg-color; border: solid 1px @calendar-currentday-border-color;}
         .ui-datepicker-calendar tbody tr .ui-datepicker-current-day a{color:@calendar-currentday-color !important;}
     
-    .ui-datepicker-trigger{margin-left:2px !important;}
+    .ui-datepicker-trigger{margin:0px !important;}
     .ui-datepicker-trigger .ui-icon{background-image:url("#{resource['primefaces-adamantium:images/calendar.svg']}"); background-position: center !important;
         background-size:145% !important;}
     
@@ -1999,5 +2021,90 @@ background-color:@inputswitch-handle-bg-color-focus;}
     -moz-box-shadow: inset 0px -3px 0px 0px rgba(84,110,122,1);
     box-shadow: inset 0px -3px 0px 0px rgba(84,110,122,1);
 }
+
+
+/* Fluid Elements Specific Styles ============================================================================================ */
+
+/* SelectOneMenu - SelectCheckboxMenu */
+.ui-fluid .ui-selectonemenu .ui-selectonemenu-trigger,
+.ui-fluid .ui-selectcheckboxmenu-trigger{width:38px !important; height:35px !important;}
+@media @ie9-10{
+   .ui-fluid .ui-selectonemenu .ui-selectonemenu-trigger{width:38px !important; height:100% !important; border-bottom:0px none !important;} 
+}
+.ui-fluid .ui-selectonemenu, .ui-selectcheckboxmenu{padding: 0px 32px 0px 0px !important;}
+.ui-fluid .ui-selectcheckboxmenu{box-sizing:border-box;}
+
+/* Spinner - Slider */
+.ui-fluid .ui-spinner{box-sizing:border-box;}
+.ui-fluid .ui-slider{margin-top:8px;}
+.ui-fluid .ui-spinner .ui-spinner-button .ui-icon{left:0px !important;}
+
+/* Calandar */
+.ui-fluid .ui-datepicker-trigger{margin:0px 0px 0px -36px !important; border-radius:0px !important; -webkit-border-radius:0px !important; -moz-border-radius:0px !important;}
+
+/* AutoComplete */
+.ui-fluid .ui-autocomplete .ui-autocomplete-dropdown{right: -2px;}
+.ui-fluid .ui-autocomplete .ui-autocomplete-input{padding-right: 2.5em !important;}
+
+/* RadioButton Checkbox */
+.ui-fluid .ui-radiobutton{margin:0px 8px 0px 0px !important;}
+.ui-fluid .ui-chkbox .ui-chkbox-box{margin:0px 7px 0px 0px;}
+.ui-fluid .ui-selectmanycheckbox label{margin-top:2px !important;}
+
+/* SelectOneButton - SelectMenyButton */
+.ui-fluid .ui-buttonset{box-sizing:border-box;}
+.ui-fluid .ui-buttonset.ui-buttonset-2 .ui-button,
+.ui-fluid .ui-buttonset.ui-buttonset-3 .ui-button{border: solid 1px #fff; box-sizing:border-box; margin:0px !important;}
+
+.ui-fluid .ui-selectonebutton.ui-buttonset-2,
+.ui-fluid .ui-selectonebutton.ui-buttonset-3{padding:0px !important;}
+
+/* ButtonSet - For 5.3 compatibility */
+.ui-fluid .ui-selectonebutton.ui-buttonset.ui-buttonset-3 .ui-button,
+.ui-fluid .ui-selectmanybutton.ui-buttonset.ui-buttonset-3 .ui-button{width: 33.3%;}
+.ui-fluid .ui-selectonebutton.ui-buttonset.ui-buttonset-6 .ui-button,
+.ui-fluid .ui-selectmanybutton.ui-buttonset.ui-buttonset-6 .ui-button{width: 16.65%;}
+
+@media (max-width: 640px) {
+    .ui-fluid .ui-selectonebutton.ui-buttonset.ui-buttonset-3 .ui-button,
+    .ui-fluid .ui-selectmanybutton.ui-buttonset.ui-buttonset-3 .ui-button,
+    .ui-fluid .ui-selectonebutton.ui-buttonset.ui-buttonset-6 .ui-button,
+    .ui-fluid .ui-selectmanybutton.ui-buttonset.ui-buttonset-6 .ui-button{width: 100%;}
+}
+
+/* Tree */
+.ui-fluid .ui-tree{box-sizing:border-box;}
+
+/* PickList */
+.ui-fluid .ui-picklist .ui-picklist-buttons-cell .ui-button .ui-icon,
+.ui-picklist-responsive .ui-picklist-buttons-cell .ui-button .ui-icon{position:static; margin:6px 0px -32px 0px; width:100%; background-size:18px;}
+.ui-picklist.ui-picklist-responsive .ui-picklist-buttons button{margin:0.3em auto; max-width: 100% !important;}
+.ui-picklist.ui-picklist-responsive .ui-picklist-list{min-width:0;}
+@media (max-width:640px){
+    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .ui-icon-arrow-1-e{background-image:url("#{resource['primefaces-adamantium:images/downarrow-white.svg']}"); }
+    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .ui-icon-arrow-1-w{background-image:url("#{resource['primefaces-adamantium:images/uparrow.svg']}"); }
+    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .ui-icon-arrowstop-1-e{background-image:url("#{resource['primefaces-adamantium:images/bottomarrow.svg']}"); }
+    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons .ui-icon-arrowstop-1-w{background-image:url("#{resource['primefaces-adamantium:images/toparrow.svg']}"); }
+    .ui-picklist.ui-picklist-responsive .ui-picklist-buttons button{max-width:50px; margin-right:0.1em;}
+}
+
+/* OrderList */
+.ui-fluid .ui-orderlist{box-sizing:border-box;}
+.ui-orderlist.ui-grid-responsive .ui-orderlist-controls{margin-right:0px !important;}
+.ui-fluid .ui-orderlist .ui-orderlist-controls .ui-button .ui-icon,
+.ui-orderlist.ui-grid-responsive .ui-orderlist-controls .ui-button .ui-icon{position:static; margin:6px 0px -32px 0px; width:100%; background-size:18px;}
+.ui-orderlist.ui-grid-responsive .ui-orderlist-controls button{max-width: 100% !important;}
+@media (max-width:640px){
+    .ui-fluid .ui-orderlist .ui-orderlist-controls .ui-button,
+    .ui-orderlist.ui-grid-responsive .ui-orderlist-controls .ui-button{max-width:50px;}
+}
+
+/* Menu - Panel Menu */
+.ui-fluid .ui-menu.ui-menu-toggleable li.ui-widget-header h3{padding-left:33px !important;}
+.ui-fluid .ui-menu.ui-menu-toggleable li.ui-widget-header{width:100% !important; padding:7px 0px;}
+
+
+/* ============================================================================================================================== */
+
 
 @import "../variables/theme-variables.less";
