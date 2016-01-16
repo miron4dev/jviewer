@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.dialog.ViewerDialog"/>
+</composite:interface>
+
+<composite:implementation>
+    <p:button value="#{msg['J64']}" onclick="execute(); return false;" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
+    <p:button value="#{msg['J65']}" onclick="clearIO(); return false;" rendered="#{cc.attrs.bean.hasEditPermissions()}"/>
+
+    <pe:codeMirror mode="htmlmixed" lineNumbers="true" lineWrapping="true" matchBrackets="true" theme="eclipse" escape="false"
+        widgetVar="viewerContent" readonly="#{not cc.attrs.bean.hasEditPermissions()}">
+        <pe:javascript event="change" execute="notify()"/>
+    </pe:codeMirror>
+    <br/>
+    <p:commandButton id="export-btn" value="#{msg['J69']}" onclick="setHiddenValue()" ajax="false" icon="ui-icon-arrowthick-1-s">
+        <h:inputHidden id="resultHidden" value="#{cc.attrs.bean.result}" />
+        <p:fileDownload value="#{cc.attrs.bean.file}"/>
+    </p:commandButton>
+    <iframe id="result" frameBorder="0" width="1900" height="300" src=""></iframe>
+
+    <script type="text/javascript">
+        function setHiddenValue(){
+            var value = unescape($('#result').attr('src').replace('data:text/html;charset=utf-8,', ''));
+            $('[id$="resultHidden"]').val(value);
+        }
+        function notify() {
+            sendMessage({
+                input: PF('viewerContent').instance.getValue(),
+                output: $('#result').attr('src')
+            });
+        }
+        function execute() {
+            $('#result').attr('src', 'data:text/html;charset=utf-8,' + escape(PF('viewerContent').instance.getValue()));
+            notify();
+        }
+        function clearIO() {
+            $('#result').attr('src', '');
+            PF('viewerContent').instance.setValue('');
+        }
+    </script>
+</composite:implementation>
+
+</html>

@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:tk="http://jviewer.tk"
+    template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h:panelGroup styleClass="Container100">
+            <h:panelGroup styleClass="ContainerIndent">
+                <h:panelGroup styleClass="Card TexAlCenter">
+                    <h:form>
+                        <tk:javaViewer bean="#{javaViewerDialog}" rendered="#{viewerDialog.roomType == 'JAVA'}"/>
+                        <tk:htmlViewer bean="#{viewerDialog}" rendered="#{viewerDialog.roomType == 'HTML'}"/>
+                    </h:form>
+
+                    <tk:connection channel="/#{viewerDialog.roomName}" sendingAllowed="#{viewerDialog.hasEditPermissions()}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>

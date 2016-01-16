@@ -44,6 +44,11 @@
             <artifactId>resources-codemirror</artifactId>
         </dependency>
 
+        <!-- Atmosphere -->
+        <dependency>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-runtime</artifactId>
+        </dependency>
 
         <!-- Hibernate -->
         <dependency>
