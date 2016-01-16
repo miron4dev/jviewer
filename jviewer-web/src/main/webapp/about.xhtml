@@ -5,23 +5,98 @@
     template="/WEB-INF/template.xhtml">
 
     <ui:define name="head">
-
+        <h:outputStylesheet library="custom" name="about.css"/>
     </ui:define>
 
     <ui:define name="content">
-        <h:panelGroup styleClass="Container100">
-            <h:panelGroup styleClass="ContainerIndent">
-                <h:panelGroup styleClass="Card TexAlCenter">
-                    <br/>
+        <div class="Container90 Responsive100" style="margin: 0 auto; float: none !important;">
+            <div class="ContainerIndent">
+                <div class="Card">
+                    <div class="CardTopic"><i class="icon-book-alt Fs30 Fleft MarRight10"></i>
 
-                    <h2>Empty Page</h2>
-                    <br/>
-                    <span class="gray">The content will be soon here..</span>
-                    <br/><br/>
-                </h:panelGroup>
-            </h:panelGroup>
-        </h:panelGroup>
+                        <div class="EmptyBox10 ShowOnMobile"></div>
+                        Evgeny Mironenko <br/>
+                        <span class="CardSubTopic">A student of the Herzen University, IT Department </span>
+                    </div>
+                    <div class="SeparatorFull"></div>
+                    <div class="EmptyBox20"></div>
 
+                    <div class="Fleft OvHidden">
+                        <h:graphicImage library="custom" name="myphoto.jpg" width="120" height="120" styleClass="myphoto"/>
+                    </div>
+
+                    <div class="Wid80 Fright OvHidden overrideWid50">
+                        <div class="Wid20 Fleft OvHidden overrideWid">
+                            <p:button icon="fa fa-skype White" styleClass="Fleft" href="skype:rustock1?chat"/>
+                            <span class="Fs16 FontAdamantiumBold description">Skype</span><br/>
+                            <span class="Fs16 FontAdamantiumLight description">rustock1</span>
+                        </div>
+                        <div class="Wid30 Fleft OvHidden overrideWid">
+                            <p:button icon="fa fa-envelope White" styleClass="Fleft RedButton"
+                                href="mailto:emironen0@gmail.com"/>
+                            <span class="Fs16 FontAdamantiumBold description">Email</span><br/>
+                            <span class="Fs16 FontAdamantiumLight description">emironen0@gmail.com</span>
+                        </div>
+                        <div class="Wid20 Fleft OvHidden overrideWid">
+                            <p:button icon="fa  fa-linkedin White" styleClass="Fleft"
+                                href="https://www.linkedin.com/in/emironen" target="_blank"/>
+                            <span class="Fs16 FontAdamantiumBold description">LinkedIn</span><br/>
+                        </div>
+                        <div class="EmptyBox20"></div>
+                        <div class="Wid20 Fleft OvHidden overrideWid">
+                            <p:button icon="fa fa-vk White" styleClass="Fleft" href="https://vk.com/emironen"
+                                target="_blank"/>
+                            <span class="Fs16 FontAdamantiumBold description">VK</span><br/>
+                        </div>
+                        <div class="Wid30 Fleft OvHidden overrideWid">
+                            <p:button icon="fa fa-github White" styleClass="Fleft BrownButton"
+                                href="https://github.com/rustock0" target="_blank"/>
+                            <span class="Fs16 FontAdamantiumBold description">GitHub</span><br/>
+                        </div>
+                        <div class="Wid20 Fleft OvHidden overrideWid">
+                            <p:button icon="fa fa-facebook White" styleClass="Fleft"
+                                href="https://www.facebook.com/evgeny.mironenko.0" target="_blank"/>
+                            <span class="Fs16 FontAdamantiumBold description">Facebook</span><br/>
+                        </div>
+                    </div>
+                    <div class="EmptyBox20"></div>
+                </div>
+            </div>
+
+            <div class="ContainerIndent">
+                <div class="Card">
+                    <div class="CardTopic"><i class="icon-chat Fs30 Fleft MarRight10"></i>
+                        Feedback <br/>
+                    </div>
+                    <div class="SeparatorFull"></div>
+                    <div class="EmptyBox20"></div>
+                    <p:messages autoUpdate="true" styleClass="Wid90"/>
+                    <h:form>
+                        <p:inputText placeholder="Name" styleClass="Wid90" required="true"
+                            requiredMessage="Name is empty"
+                            value="#{aboutDialog.name}"/>
+
+                        <div class="EmptyBox10"></div>
+                        <p:inputText placeholder="Email" styleClass="Wid90" required="true"
+                            requiredMessage="Email is empty"
+                            value="#{aboutDialog.email}"/>
+
+                        <div class="EmptyBox10"></div>
+                        <p:inputTextarea placeholder="Your Message" styleClass="Wid90" required="true"
+                            requiredMessage="Text is empty"
+                            value="#{aboutDialog.text}"/>
+
+                        <div class="EmptyBox30"></div>
+                        <p:commandButton value="Submit" action="#{aboutDialog.feedback}" icon="fa fa-check"
+                            styleClass="Wid40"/>
+
+                        <div class="EmptyBox10 ShowOnMobile"></div>
+                    </h:form>
+
+                    <div class="EmptyBox10"></div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 
 </ui:composition>

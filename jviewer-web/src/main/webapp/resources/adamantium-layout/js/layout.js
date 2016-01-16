@@ -191,8 +191,27 @@ var Adamantium = {
                 });
             }
         }
-        else {
-            this.menuWrapper.css('overflow-y', 'auto').removeClass('Animated05');
+        else {    
+            this.menuWrapper.removeClass('Animated05');
+            
+            if(this.menuWrapper.hasClass('layout-menu-cover-left')) {
+                this.menuWrapper.css('overflow-y', 'auto');
+            }
+            else {
+                var win = $(window);
+                if(win.width() <= 960 || win.height() <= 560) {
+                    this.menuWrapper.css('overflow-y', 'auto');
+                }
+            
+                win.on('resize', function() {
+                    if(win.width() <= 960 || win.height() <= 560) {
+                        $this.menuWrapper.css('overflow-y', 'auto');
+                    }
+                    else {
+                        $this.menuWrapper.css('overflow-y', 'visible');
+                    }
+                });
+            }  
         }
     },
     

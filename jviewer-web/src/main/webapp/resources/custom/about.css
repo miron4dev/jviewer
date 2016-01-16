@@ -1,0 +1,18 @@
+@media screen and (max-width:1200px) {
+    .description {
+        display: none;
+    }
+    .overrideWid20 {
+        width: 20% !important;
+    }
+    .myphoto {
+        width: 90px !important;
+        height: 90px !important;
+    }
+    .overrideWid50 {
+        width: 50% !important;
+    }
+    .overrideWid {
+        width: auto !important;
+    }
+}
