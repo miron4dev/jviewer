@@ -1,5 +1,6 @@
 package tk.jviewer.security;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.entity.UserEntity;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ import java.util.List;
 
 /**
  * Implementation of Authentication service.
+ *
  * @author Evgeny Mironenko
  */
 public class SecurityService implements AuthenticationProvider {
@@ -36,28 +39,27 @@ public class SecurityService implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        UserProfile user = null;
-        GrantedAuthority authority = null;
+        UserProfile user;
+        GrantedAuthority authority;
         UserEntity userEntity = em.find(UserEntity.class, username);
         if (userEntity == null) {
-            authenticationFailed();
+            handleAuthenticationFailed(username);
             return null;
         }
-        if(encoder.matches(password, userEntity.getPassword())){
+        if (encoder.matches(password, userEntity.getPassword())) {
             authority = new SimpleGrantedAuthority(userEntity.getRole());
             List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Collections.singletonList(Permission.ADMIN) : new ArrayList<>();
             user = new UserProfile(userEntity.getUsername(), permissions);
         } else {
-            authenticationFailed();
+            handleAuthenticationFailed(username);
             return null;
         }
 
         return new UsernamePasswordAuthenticationToken(user, password, Collections.singletonList(authority));
     }
 
-    private void authenticationFailed() {
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("success", "Data is invalid.");
-        throw new BadCredentialsException("Data is invalid.");
+    private void handleAuthenticationFailed(String username) {
+        throw new BadCredentialsException("User data is invalid! Name: "  + username);
     }
 
     @Override
@@ -67,27 +69,41 @@ public class SecurityService implements AuthenticationProvider {
 
     /**
      * Returns true if authenticated user has specified permission.
+     *
      * @param permission permissions.
      * @return see description.
      */
     public static boolean userHasPermission(Permission permission) {
-        return getCurrentProfile().hasPermission(permission);
+        UserProfile profile = getCurrentProfile();
+        return profile != null && profile.hasPermission(permission);
     }
 
     /**
      * Returns the name of authenticated user.
+     *
      * @return see description.
      */
     public static String getUsername() {
-        return getCurrentProfile().getName();
+        UserProfile profile = getCurrentProfile();
+        return profile != null ? profile.getName() : StringUtils.EMPTY;
+    }
+
+    /**
+     * Returns true if the user is authenticated.
+     *
+     * @return see description.
+     */
+    public static boolean isAuthenticated() {
+        return getCurrentProfile() != null;
     }
 
 
     /**
      * Invalidates the current session and logs out
+     *
      * @return main page URL for redirect.
      */
-    public static String logout(){
+    public static String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.getContext().setAuthentication(null);
         return "index?faces-redirect=true";
@@ -95,10 +111,15 @@ public class SecurityService implements AuthenticationProvider {
 
     /**
      * Returns the instance of authenticated user.
+     *
      * @return see description.
      */
     private static UserProfile getCurrentProfile() {
-        return (UserProfile) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserProfile) {
+            return (UserProfile) principal;
+        }
+        return null;
     }
 
     //

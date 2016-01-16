@@ -54,7 +54,8 @@
                                 </p:selectBooleanCheckbox>
                                 <div class="EmptyBox30"></div>
                                 <p:commandButton action="#{registrationDialog.createProfile}" value="Sign up" icon="fa fa-sign-in" styleClass="CyanButton"/>
-                                <p:button value="Go back" icon="icon-arrow-left" href="login.xhtml" styleClass="RaisedButton"/>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <p:button value="Go back" icon="fa fa-arrow-left" href="login.xhtml" styleClass="RaisedButton"/>
                             </h:form>
                             <div class="EmptyBox10 ShowOnMobile"></div>
                         </div>
@@ -63,9 +64,10 @@
                         <div class="Wid100 OvHidden BigTopic">Access Permission</div>
                         <div class="EmptyBox20"></div>
                         <div class="Card SoftGrayBack">
-                            <div class="Wid100"><p:inputText placeholder="Email" styleClass="Wid90 TexAlCenter"/></div>
+                            <!-- TODO: admin access request -->
+                            <div class="Wid100"><p:inputText placeholder="Email" styleClass="Wid90 TexAlCenter" disabled="true"/></div>
                             <div class="EmptyBox10"></div>
-                            <p:button value="Send Access Request" styleClass="OrangeButton"/>
+                            <p:button value="Send Access Request" styleClass="OrangeButton" disabled="true"/>
                         </div>
                     </div>
                 </div>

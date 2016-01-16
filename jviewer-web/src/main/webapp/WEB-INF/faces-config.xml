@@ -4,6 +4,12 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
     <managed-bean>
+        <managed-bean-name>mainDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.MainDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>registrationDialog</managed-bean-name>
         <managed-bean-class>tk.jviewer.dialog.RegistrationDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
@@ -14,6 +20,16 @@
         <managed-property>
             <property-name>resourceService</property-name>
             <value>#{resourceService}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>loginDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.LoginDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>authenticationManager</property-name>
+            <value>#{authenticationManager}</value>
         </managed-property>
     </managed-bean>
 

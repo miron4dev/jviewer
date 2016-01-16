@@ -1,31 +1,44 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/template.xhtml">
 
     <ui:define name="head">
 
     </ui:define>
-    
-    <ui:define name="subheader">
-        Dashboard
-    </ui:define>
 
     <ui:define name="content">
-        <div class="Container100">
-            <div class="ContainerIndent">
-                <div class="Card TexAlCenter">
+        <h:panelGroup styleClass="Container100" rendered="#{mainDialog.authenticated}">
+            <h:panelGroup styleClass="ContainerIndent">
+                <h:form>
+                    <p:splitButton value="Welcome, #{mainDialog.username}" icon="fa fa-slideshare" styleClass="Fleft">
+                        <p:menuitem value="My Settings" icon="fa fa-cogs" disabled="true"/>
+                        <p:menuitem value="Uploaded Codes" icon="fa fa-cloud-upload" disabled="true"/>
+                        <p:menuitem value="Download Codes" icon="fa fa-cloud-download" disabled="true"/>
+                    </p:splitButton>
+                </h:form>
+
+                <div class="EmptyBox10 ShowOnMobile"></div>
+                <p:button value="Code Editor" icon="fa fa-cubes" styleClass="Fright BrownButton FloatNoneOnMobile"/>
+                <p:button value="Write message" icon="fa fa-send" disabled="true" styleClass="Fright GreenButton FloatNoneOnMobile"/>
+                <p:button value="Take Quiz" icon="fa fa-question" disabled="true" styleClass="Fright FloatNoneOnMobile"/>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="Container100">
+            <h:panelGroup styleClass="ContainerIndent">
+                <h:panelGroup styleClass="Card TexAlCenter">
                     <br/>
+
                     <h2>Empty Page</h2>
                     <br/>
                     <span class="gray">The content will be soon here..</span>
                     <br/><br/>
-                </div>
-            </div>
-        </div>
-        
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+
     </ui:define>
 
 </ui:composition>

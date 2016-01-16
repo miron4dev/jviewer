@@ -1,23 +1,19 @@
 <ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pm="http://primefaces.org/adamantium">
 
-    <div class="layout-menu-cover-top Animated05" id="layout-menu-cover">
+    <div id="layout-menu-cover" class="layout-menu-cover-top Animated05" >
         <h:form id="menuform">
             <pm:menu>
-                <p:menuitem id="rm_dashboard" value=" Main page" icon="icon-feather" outcome="/index"/>
-                <p:menuitem id="rm_login" value=" Login" icon="icon-unlock-stroke" outcome="/login" />
-                <p:menuitem id="rm_news" value=" News" icon="icon-newspaper" outcome="/news" />
-                <p:menuitem id="rm_download" value=" Download" icon="icon-arrow-down-alt1" outcome="/download" />
-                <p:menuitem id="rm_docs" value=" Documentation" icon="icon-inbox" outcome="/documentation" />
+                <p:menuitem id="rm_dashboard" value=" Main page" icon="icon-home" outcome="/index"/>
+                <p:menuitem id="rm_login" value=" Login" icon="icon-unlock-stroke" outcome="/login" rendered="#{!mainDialog.authenticated}"/>
+                <p:menuitem id="rm_registration" value=" Registration" icon="icon-user2" outcome="/registration" rendered="#{!mainDialog.authenticated}"/>
                 <p:menuitem id="rm_about" value=" About" icon="icon-info" outcome="/about" />
             </pm:menu>
         </h:form>
-
     </div>
 
 </ui:composition>

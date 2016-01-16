@@ -28,18 +28,24 @@
                             <h:graphicImage name="logo.png" id="logo" library="custom" style="max-width:180px;"/>
                         </a>
                         <div class="SeparatorFull"></div>
-                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login / Sign Up</div>
+                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login / Sign In</div>
                         <div class="EmptyBox20"></div>
-                        <p:messages/>
+                        <p:messages autoUpdate="true"/>
                         <div class="Card SoftGrayBack">
-                            <p:inputText placeholder="Email" styleClass="Wid90 TexAlCenter"/>
-                            <div class="EmptyBox10"></div>
-                            <p:inputText type="password" placeholder="Password" styleClass="Wid90 TexAlCenter"/>
-                            <div class="EmptyBox30"></div>
-                            <p:button value="Sign In" icon="fa fa-sign-in" href="dashboard.xhtml" styleClass="CyanButton"/>
-                            <p:button value="Sign up" icon="fa fa-user-plus" href="registration.xhtml" styleClass="GreenButton"/>
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            <p:button value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton"/>
+                            <h:form>
+                                <p:inputText placeholder="Username" value="#{loginDialog.name}" required="true" requiredMessage="Name is empty"
+                                    styleClass="Wid90 TexAlCenter"/>
+                                <div class="EmptyBox10"></div>
+                                <p:inputText type="password" value="#{loginDialog.password}" placeholder="Password" required="true"
+                                    requiredMessage="Password is empty" styleClass="Wid90 TexAlCenter"/>
+                                <div class="EmptyBox30"></div>
+                                <p:commandButton value="Sign In" action="#{loginDialog.login}" icon="fa fa-sign-in" styleClass="CyanButton"/>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <p:button value="Sign up" icon="fa fa-user-plus" href="registration.xhtml" styleClass="GreenButton"/>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <!-- TODO: forgot password -->
+                                <p:button value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton" disabled="true"/>
+                            </h:form>
                         </div>
                     </div>
                 </div>
