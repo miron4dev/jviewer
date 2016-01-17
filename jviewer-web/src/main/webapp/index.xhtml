@@ -30,8 +30,8 @@
             <h:panelGroup styleClass="ContainerIndent" layout="block">
                 <p:dataList id="newsList" value="#{mainDialog.news}" var="var" varStatus="status" paginator="true" rows="5"
                     paginatorPosition="bottom" itemStyleClass="listWithoutPoints">
-                    <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}">
-                        <h:outputText value="#{var.text}" escape="false"/>
+                    <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}" styleClass="newsPanel">
+                        <h:outputText value="#{var.text}" escape="false" styleClass="fixRussianFont"/>
                     </p:panel>
                 </p:dataList>
             </h:panelGroup>

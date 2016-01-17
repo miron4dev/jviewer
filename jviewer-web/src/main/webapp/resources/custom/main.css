@@ -4,6 +4,10 @@
 #newsList .ui-panel .ui-panel-titlebar {
     background-color: #0277bd !important;
 }
-li {
+.newsPanel li {
     list-style: inherit !important;
+}
+
+.fixRussianFont {
+    font-family: Helvetica, sans-serif;
 }
