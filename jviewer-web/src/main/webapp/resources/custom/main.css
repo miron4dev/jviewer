@@ -1,0 +1,6 @@
+.listWithoutPoints {
+    list-style-type: none !important;
+}
+#newsList .ui-panel .ui-panel-titlebar {
+    background-color: #0277bd !important;
+}

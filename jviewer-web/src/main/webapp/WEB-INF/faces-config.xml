@@ -13,6 +13,10 @@
         <managed-bean-name>mainDialog</managed-bean-name>
         <managed-bean-class>tk.jviewer.dialog.MainDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>newsService</property-name>
+            <value>#{newsService}</value>
+        </managed-property>
     </managed-bean>
     
     <managed-bean>

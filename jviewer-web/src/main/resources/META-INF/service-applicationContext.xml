@@ -9,4 +9,6 @@
 
     <bean id="resourceService" class="tk.jviewer.service.ResourceServiceImpl"/>
 
+    <bean id="newsService" class="tk.jviewer.service.NewsServiceImpl"/>
+
 </beans>

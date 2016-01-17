@@ -8,17 +8,6 @@ CREATE TABLE IF NOT EXISTS "user" (
   role TEXT NOT NULL DEFAULT 'ROLE_USER'
 );
 
--- INSERT INTO "jviewer_main"."user" (username, password, role, department, first_name, last_name) VALUES ('admin', '$2a$11$z8Ym9XENSKNkVTy.XL5/aOzORzYyvtlc/b22PsQQBmX2p7Dlm/XwK', 'ROLE_ADMIN', 'IT', 'Admin', 'Admin');
-
--- Config --
-DROP TABLE IF EXISTS config;
-CREATE TABLE config (
-  name	TEXT UNIQUE NOT NULL,
-  value	TEXT DEFAULT NULL,
-  description TEXT NOT NULL
-);
-INSERT INTO config (name, value, description) VALUES ('invitationID', '$2a$11$xHcnk0MN5oZ9ROJIUlWmW.HNyMj5pu.slIvs4oISWhvw7ijHP0nL2', 'Value of invitation id for admin registration');
-
 -- Rooms --
 DROP TYPE IF EXISTS ROOM_TYPE;
 CREATE TYPE ROOM_TYPE as ENUM ('HTML', 'JAVA');

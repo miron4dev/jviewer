@@ -4,6 +4,10 @@
     xmlns:p="http://primefaces.org/ui"
     template="/WEB-INF/template.xhtml">
 
+    <ui:define name="head">
+        <h:outputStylesheet library="custom" name="main.css"/>
+    </ui:define>
+
     <ui:define name="content">
         <h:panelGroup styleClass="Container100" rendered="#{mainDialog.authenticated}">
             <h:panelGroup styleClass="ContainerIndent">
@@ -22,19 +26,16 @@
             </h:panelGroup>
         </h:panelGroup>
 
-        <h:panelGroup styleClass="Container100">
-            <h:panelGroup styleClass="ContainerIndent">
-                <h:panelGroup styleClass="Card TexAlCenter">
-                    <br/>
-
-                    <h2>Empty Page</h2>
-                    <br/>
-                    <span class="gray">The content will be soon here..</span>
-                    <br/><br/>
-                </h:panelGroup>
+        <h:panelGroup styleClass="Container50 Responsive100" style="margin: 0 auto; float: none !important;" layout="block">
+            <h:panelGroup styleClass="ContainerIndent" layout="block">
+                <p:dataList id="newsList" value="#{mainDialog.news}" var="var" varStatus="status" paginator="true" rows="5"
+                    paginatorPosition="bottom" itemStyleClass="listWithoutPoints">
+                    <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}">
+                        <h:outputText value="#{var.text}" escape="false"/>
+                    </p:panel>
+                </p:dataList>
             </h:panelGroup>
         </h:panelGroup>
-
     </ui:define>
 
 </ui:composition>
