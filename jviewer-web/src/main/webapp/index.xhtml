@@ -9,8 +9,8 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:panelGroup styleClass="Container100" rendered="#{mainDialog.authenticated}">
-            <h:panelGroup styleClass="ContainerIndent">
+        <h:panelGroup styleClass="Container100" layout="block" rendered="#{mainDialog.authenticated}">
+            <h:panelGroup styleClass="ContainerIndent" layout="block">
                 <h:form>
                     <p:splitButton value="Welcome, #{mainDialog.username}" icon="fa fa-slideshare" styleClass="Fleft">
                         <p:menuitem value="My Settings" icon="fa fa-cogs" disabled="true"/>
@@ -21,19 +21,24 @@
 
                 <div class="EmptyBox10 ShowOnMobile"></div>
                 <p:button value="Code Editor" icon="fa fa-cubes" styleClass="Fright BrownButton FloatNoneOnMobile"/>
-                <p:button value="Write message" icon="fa fa-send" disabled="true" styleClass="Fright GreenButton FloatNoneOnMobile"/>
-                <p:button value="Take Quiz" icon="fa fa-question" disabled="true" styleClass="Fright FloatNoneOnMobile"/>
+                <p:button value="Write message" icon="fa fa-send" disabled="true"
+                    styleClass="Fright GreenButton FloatNoneOnMobile"/>
+                <p:button value="Take Quiz" icon="fa fa-question" disabled="true"
+                    styleClass="Fright FloatNoneOnMobile"/>
             </h:panelGroup>
         </h:panelGroup>
 
         <h:panelGroup styleClass="Container50 Responsive100" style="margin: 0 auto; float: none !important;" layout="block">
-            <h:panelGroup styleClass="ContainerIndent" layout="block">
-                <p:dataList id="newsList" value="#{mainDialog.news}" var="var" varStatus="status" paginator="true" rows="5"
-                    paginatorPosition="bottom" itemStyleClass="listWithoutPoints">
-                    <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}" styleClass="newsPanel">
-                        <h:outputText value="#{var.text}" escape="false" styleClass="fixRussianFont"/>
-                    </p:panel>
-                </p:dataList>
+            <h:panelGroup styleClass="Container100" layout="block">
+                <h:panelGroup styleClass="ContainerIndent" layout="block">
+                    <p:dataList id="newsList" value="#{mainDialog.news}" var="var" varStatus="status" paginator="true"
+                        rows="5" paginatorPosition="bottom" itemStyleClass="listWithoutPoints">
+                        <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}"
+                            styleClass="newsPanel">
+                            <h:outputText value="#{var.text}" escape="false" styleClass="fixRussianFont"/>
+                        </p:panel>
+                    </p:dataList>
+                </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
     </ui:define>
