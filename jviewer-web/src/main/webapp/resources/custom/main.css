@@ -4,3 +4,6 @@
 #newsList .ui-panel .ui-panel-titlebar {
     background-color: #0277bd !important;
 }
+li {
+    list-style: inherit !important;
+}
