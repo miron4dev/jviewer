@@ -20,11 +20,14 @@
                 </h:form>
 
                 <div class="EmptyBox10 ShowOnMobile"></div>
-                <p:button value="Code Editor" icon="fa fa-cubes" styleClass="Fright BrownButton FloatNoneOnMobile"/>
+                <p:commandButton value="Rooms" icon="fa fa-list-alt" actionListener="#{mainDialog.openRoomList}"
+                    styleClass="Fright FloatNoneOnMobile">
+                    <p:ajax event="dialogReturn" listener="#{mainDialog.onRoomChosen}"/>
+                </p:commandButton>
+                <p:button value="Code Editor" icon="fa fa-cubes" disabled="true"
+                    styleClass="Fright BrownButton FloatNoneOnMobile" />
                 <p:button value="Write message" icon="fa fa-send" disabled="true"
                     styleClass="Fright GreenButton FloatNoneOnMobile"/>
-                <p:button value="Take Quiz" icon="fa fa-question" disabled="true"
-                    styleClass="Fright FloatNoneOnMobile"/>
             </h:panelGroup>
         </h:panelGroup>
 

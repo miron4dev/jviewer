@@ -17,8 +17,22 @@
             <property-name>newsService</property-name>
             <value>#{newsService}</value>
         </managed-property>
+        <managed-property>
+            <property-name>viewerManagedBean</property-name>
+            <value>#{viewerManagedBean}</value>
+        </managed-property>
     </managed-bean>
-    
+
+    <managed-bean>
+        <managed-bean-name>roomListDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.RoomListDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>roomService</property-name>
+            <value>#{roomService}</value>
+        </managed-property>
+    </managed-bean>
+
     <managed-bean>
         <managed-bean-name>aboutDialog</managed-bean-name>
         <managed-bean-class>tk.jviewer.dialog.AboutDialog</managed-bean-class>
@@ -89,6 +103,11 @@
             <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>
         </locale-config>
+
+        <!-- Primefaces Dialog Framework -->
+        <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
     </application>
-    
+
 </faces-config>

@@ -12,9 +12,14 @@
         <security:logout logout-success-url="/index.xhtml" />
         <security:intercept-url pattern="/login.xhtml" access="isAnonymous()"/>
         <security:intercept-url pattern="/registration.xhtml" access="isAnonymous()"/>
-        <security:intercept-url pattern="/editor.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>
         <!-- CSRF protection is enabled by default in JSF -->
         <security:csrf disabled="true"/>
+
+        <!-- Parameter should be defined as SAMEORIGIN, because of Primefaces Dialog Framework -->
+        <security:headers>
+            <security:frame-options policy="SAMEORIGIN"/>
+        </security:headers>
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">

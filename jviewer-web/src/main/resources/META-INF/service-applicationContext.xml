@@ -11,4 +11,6 @@
 
     <bean id="newsService" class="tk.jviewer.service.NewsServiceImpl"/>
 
+    <bean id="roomService" class="tk.jviewer.service.RoomServiceImpl"/>
+
 </beans>
