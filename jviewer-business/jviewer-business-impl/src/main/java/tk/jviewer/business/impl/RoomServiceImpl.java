@@ -1,5 +1,6 @@
 package tk.jviewer.business.impl;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.business.api.RoomService;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Implements {@link RoomService}.
  */
+@Component("roomService")
 public class RoomServiceImpl implements RoomService {
 
     @PersistenceContext

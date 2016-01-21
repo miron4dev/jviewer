@@ -3,6 +3,7 @@ package tk.jviewer.business.impl;
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.business.model.LocalizationEntity;
 import tk.jviewer.refresh.Refresh;
@@ -22,6 +23,7 @@ import java.util.Vector;
  * @author Evgeny Mironenko
  */
 @Refreshable
+@Component("resourceService")
 public class ResourceServiceImpl implements ResourceService, Serializable {
 
     private static final long serialVersionUID = 4046286891272354949L;

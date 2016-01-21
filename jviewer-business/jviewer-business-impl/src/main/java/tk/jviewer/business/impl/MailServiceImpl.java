@@ -1,5 +1,6 @@
 package tk.jviewer.business.impl;
 
+import org.springframework.stereotype.Component;
 import tk.jviewer.business.api.MailService;
 
 import javax.mail.Message;
@@ -13,6 +14,7 @@ import java.util.Properties;
 /**
  * JViewer Mail Client.
  */
+@Component("mailService")
 public class MailServiceImpl implements MailService {
 
     private static final Properties MAIL_PROPERTIES;
