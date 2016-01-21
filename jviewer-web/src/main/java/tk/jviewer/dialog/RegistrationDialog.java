@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import java.io.Serializable;
 
+import static tk.jviewer.model.JViewerUriPath.LOGIN_PAGE;
+
 /**
  * Serves for "registration" use case.
  */
@@ -29,7 +31,7 @@ public class RegistrationDialog implements Serializable {
             facesContext.getExternalContext().getFlash().setKeepMessages(true);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration is not finished yet. "
                 + "Please check your email", null));
-            return "login?faces-redirect=true";
+            return LOGIN_PAGE.getJsfUri();
         } catch (DataIntegrityViolationException | JViewerBusinessException e) {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "User with that name or email is already exist.",
                 null));

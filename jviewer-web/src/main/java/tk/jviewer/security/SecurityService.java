@@ -98,14 +98,11 @@ public class SecurityService implements AuthenticationProvider {
 
 
     /**
-     * Invalidates the current session and logs out
-     *
-     * @return main page URL for redirect.
+     * Invalidates the current session and logs out.
      */
-    public static String logout() {
+    public static void logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "index?faces-redirect=true";
     }
 
     /**

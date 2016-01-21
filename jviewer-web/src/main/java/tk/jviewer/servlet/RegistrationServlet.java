@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static tk.jviewer.model.JViewerUriPath.LOGIN_PAGE;
+
 /**
  * Servlet for users registration. Users get link to this servlet by email.
  */
@@ -42,6 +44,6 @@ public class RegistrationServlet extends HttpServlet {
             req.getSession().setAttribute(REGISTRATION_RESULT, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                 "Redirect link is outdated or incorrect. Registration has failed!", null));
         }
-        resp.sendRedirect("/login.xhtml");
+        resp.sendRedirect("/" + LOGIN_PAGE.getUri());
     }
 }

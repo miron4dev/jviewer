@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
+import static tk.jviewer.model.JViewerUriPath.INDEX_PAGE;
 import static tk.jviewer.servlet.RegistrationServlet.REGISTRATION_RESULT;
 
 /**
@@ -46,7 +47,7 @@ public class LoginDialog implements Serializable {
             Authentication request = new UsernamePasswordAuthenticationToken(name, password);
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
-            return "index?faces-redirect=true";
+            return INDEX_PAGE.getJsfUri();
         } catch (BadCredentialsException e) {
             logger.error("Authentication failed", e);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

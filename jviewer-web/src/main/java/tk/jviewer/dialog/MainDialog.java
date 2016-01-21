@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static tk.jviewer.model.JViewerUriPath.*;
+import static tk.jviewer.model.JViewerUriPath.INDEX_PAGE;
+
 /**
  * Main dialog backing bean.
  */
@@ -50,10 +53,12 @@ public class MainDialog implements Serializable {
     }
 
     /**
+     * @return JSF page for the navigation.
      * @see SecurityService#logout()
      */
     public String logout() {
-        return SecurityService.logout();
+        SecurityService.logout();
+        return INDEX_PAGE.getJsfUri();
     }
 
     /**
@@ -67,10 +72,16 @@ public class MainDialog implements Serializable {
         RequestContext.getCurrentInstance().openDialog("roomList", options, null);
     }
 
+    /**
+     * On room chosen listener.
+     *
+     * @param event select event.
+     * @throws IOException if the redirect to viewer page was failed.
+     */
     public void onRoomChosen(SelectEvent event) throws IOException {
         RoomEntity room = (RoomEntity) event.getObject();
         viewerManagedBean.setCurrentRoom(room);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("viewer.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect(VIEWER_PAGE.getUri());
     }
 
     //
