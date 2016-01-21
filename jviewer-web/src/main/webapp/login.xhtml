@@ -1,64 +1,74 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-        </f:facet>
-        <title>JViewer - Login</title>
-        <ui:insert name="head" />
-    </h:head>
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>JViewer - Login</title>
 
-    <h:body>
-        
-        <div class="Container100 BordBottom BlueBack loginback">
-            <div class="EmptyBox50"></div>
-            
-            <div class="Wid90 MarAuto">
-                <div class="Wid30 DispBlock MarAuto WidAutoOnMobile">
-                    <div class="Card TexAlCenter" style="margin-bottom:-650px;">
-                        <a href="index.xhtml">
-                            <h:graphicImage name="logo.png" id="logo" library="custom" style="max-width:180px;"/>
-                        </a>
-                        <div class="SeparatorFull"></div>
-                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login / Sign In</div>
-                        <div class="EmptyBox20"></div>
-                        <p:messages autoUpdate="true"/>
-                        <div class="Card SoftGrayBack">
-                            <h:form>
-                                <p:inputText placeholder="Username" value="#{loginDialog.name}" required="true" requiredMessage="Name is empty"
-                                    styleClass="Wid90 TexAlCenter"/>
-                                <div class="EmptyBox10"></div>
-                                <p:inputText type="password" value="#{loginDialog.password}" placeholder="Password" required="true"
-                                    requiredMessage="Password is empty" styleClass="Wid90 TexAlCenter"/>
-                                <div class="EmptyBox30"></div>
-                                <p:commandButton value="Sign In" action="#{loginDialog.login}" icon="fa fa-sign-in" styleClass="CyanButton"/>
-                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                <p:button value="Sign up" icon="fa fa-user-plus" href="registration.xhtml" styleClass="GreenButton"/>
-                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                <!-- TODO: forgot password -->
-                                <p:button value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton" disabled="true"/>
-                            </h:form>
-                        </div>
+    <f:metadata>
+        <f:viewAction action="#{loginDialog.init}"/>
+    </f:metadata>
+</h:head>
+
+<h:body>
+
+    <div class="Container100 BordBottom BlueBack loginback">
+        <div class="EmptyBox50"></div>
+
+        <div class="Wid90 MarAuto">
+            <div class="Wid30 DispBlock MarAuto WidAutoOnMobile">
+                <div class="Card TexAlCenter" style="margin-bottom:-650px;">
+                    <a href="index.xhtml">
+                        <h:graphicImage name="logo.png" id="logo" library="custom" style="max-width:180px;"/>
+                    </a>
+
+                    <div class="SeparatorFull"></div>
+                    <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login / Sign In</div>
+                    <div class="EmptyBox20"></div>
+                    <p:messages autoUpdate="true"/>
+
+                    <div class="Card SoftGrayBack">
+                        <h:form>
+                            <p:inputText placeholder="Username" value="#{loginDialog.name}" required="true"
+                                requiredMessage="Name is empty"
+                                styleClass="Wid90 TexAlCenter"/>
+
+                            <div class="EmptyBox10"></div>
+                            <p:inputText type="password" value="#{loginDialog.password}" placeholder="Password"
+                                required="true"
+                                requiredMessage="Password is empty" styleClass="Wid90 TexAlCenter"/>
+
+                            <div class="EmptyBox30"></div>
+                            <p:commandButton value="Sign In" action="#{loginDialog.login}" icon="fa fa-sign-in"
+                                styleClass="CyanButton"/>
+
+                            <div class="EmptyBox10 ShowOnMobile"></div>
+                            <p:button value="Sign up" icon="fa fa-user-plus" href="registration.xhtml"
+                                styleClass="GreenButton"/>
+
+                            <div class="EmptyBox10 ShowOnMobile"></div>
+                            <!-- TODO: forgot password -->
+                            <p:button value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton"
+                                disabled="true"/>
+                        </h:form>
                     </div>
                 </div>
             </div>
-            <div class="EmptyBox10"></div>
         </div>
-        
-        <h:outputStylesheet name="css/core-layout.css" library="adamantium-layout" />
-        <h:outputStylesheet name="css/animate.css" library="adamantium-layout" />
-        <h:outputStylesheet name="css/adamantium-font.css" library="adamantium-layout" />
-        <h:outputStylesheet name="css/ripple-effect.css" library="adamantium-layout" />
-        <h:outputStylesheet name="css/font-awesome.css" library="adamantium-layout" />
-        <h:outputStylesheet name="css/adamantium-layout.css" library="adamantium-layout" />
-    </h:body>
+        <div class="EmptyBox10"></div>
+    </div>
+
+    <h:outputStylesheet name="css/core-layout.css" library="adamantium-layout"/>
+    <h:outputStylesheet name="css/animate.css" library="adamantium-layout"/>
+    <h:outputStylesheet name="css/adamantium-font.css" library="adamantium-layout"/>
+    <h:outputStylesheet name="css/ripple-effect.css" library="adamantium-layout"/>
+    <h:outputStylesheet name="css/font-awesome.css" library="adamantium-layout"/>
+    <h:outputStylesheet name="css/adamantium-layout.css" library="adamantium-layout"/>
+</h:body>
 
 </html>

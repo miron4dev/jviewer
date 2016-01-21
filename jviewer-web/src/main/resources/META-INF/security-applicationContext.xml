@@ -33,4 +33,9 @@
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <constructor-arg name="strength" value="11" />
     </bean>
+
+    <bean id="encryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="delux">
+        <constructor-arg value="${security.encryptPassword}" />
+        <constructor-arg value="${security.encryptSalt}" />
+    </bean>
 </beans>

@@ -28,10 +28,10 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String username, String email, String password) {
+    public UserEntity(String username, String password, String email) {
         this.username = username;
-        this.email = email;
         this.password = password;
+        this.email = email;
     }
 
     public String getUsername() {

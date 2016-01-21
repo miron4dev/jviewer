@@ -6,11 +6,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import sun.rmi.runtime.Log;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+
+import static tk.jviewer.servlet.RegistrationServlet.REGISTRATION_RESULT;
 
 /**
  * Login Dialog backing bean.
@@ -24,6 +26,15 @@ public class LoginDialog implements Serializable {
     private String password;
 
     private AuthenticationManager authenticationManager;
+
+    public void init() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        FacesMessage facesMessage = (FacesMessage) session.getAttribute(REGISTRATION_RESULT);
+        if (facesMessage != null) {
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            session.setAttribute(REGISTRATION_RESULT, null);
+        }
+    }
 
     /**
      * Login to JViewer.

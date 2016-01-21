@@ -2,12 +2,12 @@ package tk.jviewer.dialog;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import tk.jviewer.business.api.RegistrationService;
-import tk.jviewer.business.api.ResourceService;
+import tk.jviewer.business.model.JViewerBusinessException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 import java.io.Serializable;
-import java.util.Locale;
 
 /**
  * Serves for "registration" use case.
@@ -21,18 +21,22 @@ public class RegistrationDialog implements Serializable {
     private String password;
 
     private RegistrationService registrationService;
-    private ResourceService resourceService;
 
     public String createProfile() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         try {
-            registrationService.createProfile(name, email, password);
+            registrationService.sendEmailConfirmation(name, password, email);
             facesContext.getExternalContext().getFlash().setKeepMessages(true);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getResource("J6"), null));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration is not finished yet. "
+                + "Please check your email", null));
             return "login?faces-redirect=true";
-        } catch (DataIntegrityViolationException e) {
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, getResource("J22"), null));
+        } catch (DataIntegrityViolationException | JViewerBusinessException e) {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "User with that name or email is already exist.",
+                null));
+        } catch (MessagingException e) {
+            throw new JViewerBusinessException("Could not send email message", e);
         }
+        password = null;
         return null;
     }
 
@@ -61,22 +65,10 @@ public class RegistrationDialog implements Serializable {
     }
 
     //
-    // Helper methods
-    //
-
-    private String getResource(String resourceId) {
-        return resourceService.getValue(Locale.ENGLISH, resourceId);
-    }
-
-    //
     // Dependency Injection
     //
 
     public void setRegistrationService(RegistrationService registrationService) {
         this.registrationService = registrationService;
-    }
-
-    public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
     }
 }

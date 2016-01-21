@@ -14,7 +14,7 @@ public interface MailService {
      * @param recipient recipient of email.
      * @param subject   subject of the message.
      * @param content   text of the message.
-     * @throws MessagingException if the sending has failed.
+     * @throws MessagingException if the sending was failed.
      */
     void sendMessage(String recipient, String subject, String content) throws MessagingException;
 }

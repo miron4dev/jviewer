@@ -47,10 +47,6 @@
             <property-name>registrationService</property-name>
             <value>#{registrationService}</value>
         </managed-property>
-        <managed-property>
-            <property-name>resourceService</property-name>
-            <value>#{resourceService}</value>
-        </managed-property>
     </managed-bean>
 
     <managed-bean>
