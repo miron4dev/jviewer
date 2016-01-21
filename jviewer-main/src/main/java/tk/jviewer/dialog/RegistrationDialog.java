@@ -2,8 +2,8 @@ package tk.jviewer.dialog;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import tk.jviewer.model.LocaleManagedBean;
-import tk.jviewer.service.RegistrationService;
-import tk.jviewer.service.ResourceService;
+import tk.jviewer.business.api.RegistrationService;
+import tk.jviewer.business.api.ResourceService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

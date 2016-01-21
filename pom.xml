@@ -27,6 +27,7 @@
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
         <module>jviewer-web</module>
+        <module>jviewer-business</module>
     </modules>
 
     <dependencyManagement>

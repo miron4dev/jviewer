@@ -7,7 +7,7 @@ import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
 import tk.jviewer.model.QuizResult;
 import tk.jviewer.model.TakeQuizManagedBean;
-import tk.jviewer.service.QuizService;
+import tk.jviewer.business.api.QuizService;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;

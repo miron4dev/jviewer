@@ -18,7 +18,7 @@
                 <property name="database" value="POSTGRESQL"/>
             </bean>
         </property>
-        <property name="packagesToScan" value="tk.jviewer.entity" />
+        <property name="packagesToScan" value="tk.jviewer.business.model" />
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

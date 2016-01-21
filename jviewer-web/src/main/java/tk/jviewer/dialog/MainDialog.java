@@ -2,11 +2,11 @@ package tk.jviewer.dialog;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-import tk.jviewer.entity.NewsEntity;
-import tk.jviewer.entity.RoomEntity;
+import tk.jviewer.business.model.NewsEntity;
+import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
-import tk.jviewer.service.NewsService;
+import tk.jviewer.business.api.NewsService;
 
 import javax.faces.context.FacesContext;
 import java.io.IOException;

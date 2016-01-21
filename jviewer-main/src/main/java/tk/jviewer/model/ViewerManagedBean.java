@@ -1,6 +1,6 @@
 package tk.jviewer.model;
 
-import tk.jviewer.entity.RoomEntity;
+import tk.jviewer.business.model.RoomEntity;
 
 /**
  * Contains state of the Viewer dialog.

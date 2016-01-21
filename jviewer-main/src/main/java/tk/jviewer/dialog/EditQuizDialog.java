@@ -5,7 +5,7 @@ import tk.jviewer.model.AnswerType;
 import tk.jviewer.model.EditQuizManagedBean;
 import tk.jviewer.model.Question;
 import tk.jviewer.model.Quiz;
-import tk.jviewer.service.QuizService;
+import tk.jviewer.business.api.QuizService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;

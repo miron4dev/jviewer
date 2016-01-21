@@ -21,6 +21,21 @@
             <artifactId>jviewer-jc-wsc</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-business-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-business-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tk.jviewer</groupId>
+            <artifactId>jviewer-business-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- UI -->
         <dependency>
@@ -84,10 +99,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>

@@ -3,8 +3,8 @@ package tk.jviewer.dialog;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.springframework.dao.DataAccessException;
-import tk.jviewer.entity.RoomEntity;
-import tk.jviewer.service.RoomService;
+import tk.jviewer.business.model.RoomEntity;
+import tk.jviewer.business.api.RoomService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

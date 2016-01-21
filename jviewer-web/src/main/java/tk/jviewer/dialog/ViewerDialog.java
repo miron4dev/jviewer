@@ -2,7 +2,7 @@ package tk.jviewer.dialog;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import tk.jviewer.entity.RoomEntity;
+import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.Permission;
 import tk.jviewer.security.SecurityService;

@@ -2,14 +2,14 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
-import tk.jviewer.entity.RoomEntity;
+import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.model.Quiz;
 import tk.jviewer.model.EditQuizManagedBean;
 import tk.jviewer.model.TakeQuizManagedBean;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
-import tk.jviewer.service.ManagementService;
-import tk.jviewer.service.QuizService;
+import tk.jviewer.business.api.ManagementService;
+import tk.jviewer.business.api.QuizService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

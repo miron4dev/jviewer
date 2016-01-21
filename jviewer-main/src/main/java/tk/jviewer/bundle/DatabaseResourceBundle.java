@@ -1,7 +1,7 @@
 package tk.jviewer.bundle;
 
 import org.springframework.web.context.ContextLoader;
-import tk.jviewer.service.ResourceService;
+import tk.jviewer.business.api.ResourceService;
 
 import java.util.Enumeration;
 import java.util.Locale;
