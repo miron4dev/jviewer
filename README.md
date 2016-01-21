@@ -44,9 +44,9 @@ Links to download JViewer are available <a href="http://jviewer.tk:8080/download
           username="postgres" password="databasePassword" maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
     ```
 2. Replace "secret" with a real value for the keystorePass, "postgres" and "secret" with a real data to your database. Url also could be different.
-3. Create the "keystore" directory inside the ${catalina.home} and put jviewer.tk.jks key file inside
+3. Create the "keystore" directory inside ${catalina.home} and put jviewer.tk.jks key file inside
 4. Download <a href="https://jdbc.postgresql.org/download.html" target="_blank">PostgreSQL JDBC42 driver</a> and put it inside ${catalina.home}/lib directory. 
-5. Add jviewer.properties file inside the ${catalina.home}/conf directory with next content:
+5. Add jviewer.properties file inside ${catalina.home}/conf directory with next content:
      ```
      security.encryptPassword='replace by the real secret value'
      
