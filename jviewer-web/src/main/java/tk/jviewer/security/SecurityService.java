@@ -58,7 +58,7 @@ public class SecurityService implements AuthenticationProvider {
     }
 
     private void handleAuthenticationFailed(String username) {
-        throw new BadCredentialsException("User data is invalid! Name: "  + username);
+        throw new BadCredentialsException("User data is invalid! Name: " + username);
     }
 
     @Override
@@ -67,14 +67,12 @@ public class SecurityService implements AuthenticationProvider {
     }
 
     /**
-     * Returns true if authenticated user has specified permission.
+     * Returns true if the current user has ADMIN permission.
      *
-     * @param permission permissions.
      * @return see description.
      */
-    public static boolean userHasPermission(Permission permission) {
-        UserProfile profile = getCurrentProfile();
-        return profile != null && profile.hasPermission(permission);
+    public static boolean isAdmin() {
+        return userHasPermission(Permission.ADMIN);
     }
 
     /**
@@ -116,6 +114,17 @@ public class SecurityService implements AuthenticationProvider {
             return (UserProfile) principal;
         }
         return null;
+    }
+
+    /**
+     * Returns true if authenticated user has specified permission.
+     *
+     * @param permission permissions.
+     * @return see description.
+     */
+    private static boolean userHasPermission(Permission permission) {
+        UserProfile profile = getCurrentProfile();
+        return profile != null && profile.hasPermission(permission);
     }
 
     //

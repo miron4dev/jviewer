@@ -15,4 +15,11 @@ public interface NewsService {
      * @return see description.
      */
     List<NewsEntity> getNews();
+
+    /**
+     * Adds the new news.
+     *
+     * @param news news to be added.
+     */
+    void addNews(NewsEntity news);
 }

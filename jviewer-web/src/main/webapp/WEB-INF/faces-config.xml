@@ -83,6 +83,16 @@
         </managed-property>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>addNewsTag</managed-bean-name>
+        <managed-bean-class>tk.jviewer.tag.AddNewsTag</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>newsService</property-name>
+            <value>#{newsService}</value>
+        </managed-property>
+    </managed-bean>
+
     <factory>
         <exception-handler-factory>
             org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory

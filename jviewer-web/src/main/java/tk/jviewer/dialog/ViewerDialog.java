@@ -4,7 +4,6 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.model.ViewerManagedBean;
-import tk.jviewer.security.Permission;
 import tk.jviewer.security.SecurityService;
 
 import java.io.ByteArrayInputStream;
@@ -46,7 +45,7 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public boolean hasEditPermissions() {
-        return SecurityService.userHasPermission(Permission.ADMIN);
+        return SecurityService.isAdmin();
     }
 
     /**

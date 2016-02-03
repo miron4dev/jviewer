@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html">
+
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.tag.AddNewsTag"/>
+</composite:interface>
+
+<composite:implementation>
+    <p:messages/>
+
+    <p:inputText value="#{cc.attrs.bean.topic}" placeholder="Topic" required="true" requiredMessage="News topic is empty"
+        style="width: 98%" styleClass="Blue Fs18"/><br/><br/>
+
+    <pe:ckEditor value="#{cc.attrs.bean.text}" required="true" requiredMessage="News text is empty"
+        customConfig="resources/custom/ckeditor_config.js" width="100%"/><br/>
+
+    <h:panelGroup layout="block" style="text-align: center">
+        <p:commandButton icon="fa fa-check" styleClass="Wid50" value="Submit" action="#{cc.attrs.bean.submit}"
+            update="@form" process="@form"/>
+    </h:panelGroup>
+</composite:implementation>
+
+</html>

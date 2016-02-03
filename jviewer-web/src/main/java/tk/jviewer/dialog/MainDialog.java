@@ -46,6 +46,13 @@ public class MainDialog implements Serializable {
     }
 
     /**
+     * @see SecurityService#isAdmin()
+     */
+    public boolean isAdmin() {
+        return SecurityService.isAdmin();
+    }
+
+    /**
      * @see SecurityService#getUsername()
      */
     public String getUsername() {

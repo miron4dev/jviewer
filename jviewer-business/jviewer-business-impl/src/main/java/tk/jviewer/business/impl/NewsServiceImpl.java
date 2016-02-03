@@ -13,6 +13,7 @@ import java.util.List;
  * Implements {@link NewsService}.
  */
 @Component("newsService")
+@Transactional
 public class NewsServiceImpl implements NewsService {
 
     @PersistenceContext
@@ -23,5 +24,10 @@ public class NewsServiceImpl implements NewsService {
     @SuppressWarnings("unchecked")
     public List<NewsEntity> getNews() {
         return em.createQuery("SELECT e from NewsEntity e").getResultList();
+    }
+
+    @Override
+    public void addNews(NewsEntity news) {
+        em.persist(news);
     }
 }

@@ -2,6 +2,8 @@ package tk.jviewer.business.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
@@ -15,6 +17,7 @@ import java.util.Calendar;
 public class NewsEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -63,10 +66,10 @@ public class NewsEntity {
     @Override
     public String toString() {
         return "News{" +
-                "topic='" + topic + '\'' +
-                ", text='" + text + '\'' +
-                ", date='" + date + '\'' +
-                ", author='" + author + '\'' +
-                '}';
+            "topic='" + topic + '\'' +
+            ", text='" + text + '\'' +
+            ", date='" + date + '\'' +
+            ", author='" + author + '\'' +
+            '}';
     }
 }
