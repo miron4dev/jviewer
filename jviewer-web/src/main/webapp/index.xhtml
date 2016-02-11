@@ -35,13 +35,9 @@
         <h:panelGroup styleClass="Container50 Responsive100" style="margin: 0 auto; float: none !important;" layout="block">
             <h:panelGroup styleClass="Container100" layout="block">
                 <h:panelGroup styleClass="ContainerIndent" layout="block">
-                    <p:dataList id="newsList" value="#{mainDialog.news}" var="var" varStatus="status" paginator="true"
-                        rows="5" paginatorPosition="bottom" itemStyleClass="listWithoutPoints">
-                        <p:panel header="#{var.topic}" style="margin-bottom:20px" footer="#{var.date} by #{var.author}"
-                            styleClass="newsPanel">
-                            <h:outputText value="#{var.text}" escape="false" styleClass="fixRussianFont"/>
-                        </p:panel>
-                    </p:dataList>
+                    <h:form>
+                        <tk:newsList id="newsList" bean="#{newsListTag}"/>
+                    </h:form>
                     <br/>
                     <h:form>
                         <tk:addNews bean="#{addNewsTag}" rendered="#{mainDialog.admin}"/>
@@ -49,5 +45,12 @@
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
     </ui:define>
 </ui:composition>

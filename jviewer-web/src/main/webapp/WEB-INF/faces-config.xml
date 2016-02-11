@@ -14,10 +14,6 @@
         <managed-bean-class>tk.jviewer.dialog.MainDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
-            <property-name>newsService</property-name>
-            <value>#{newsService}</value>
-        </managed-property>
-        <managed-property>
             <property-name>viewerManagedBean</property-name>
             <value>#{viewerManagedBean}</value>
         </managed-property>
@@ -86,6 +82,16 @@
     <managed-bean>
         <managed-bean-name>addNewsTag</managed-bean-name>
         <managed-bean-class>tk.jviewer.tag.AddNewsTag</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>newsService</property-name>
+            <value>#{newsService}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>newsListTag</managed-bean-name>
+        <managed-bean-class>tk.jviewer.tag.NewsListTag</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>newsService</property-name>

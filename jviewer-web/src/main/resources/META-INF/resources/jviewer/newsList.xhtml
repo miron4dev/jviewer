@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.tag.NewsListTag"/>
+</composite:interface>
+
+<composite:implementation>
+    <p:dataList value="#{cc.attrs.bean.news}" var="var" varStatus="status" paginator="true" rows="5" paginatorPosition="bottom"
+        itemStyleClass="listWithoutPoints" styleClass="newsList">
+        <p:panel header="#{var.topic}" footer="#{var.date} by #{var.author}" style="margin-bottom:20px" styleClass="newsPanel">
+
+            <h:outputText value="#{var.text}" escape="false" styleClass="fixRussianFont"/>
+
+            <c:if test="#{cc.attrs.bean.newsUpdateAvailable}">
+                <f:facet name="options">
+                    <p:menu>
+                        <p:submenu label="Settings">
+                            <p:menuitem value="Edit" icon="ui-icon-close" url="#"/>
+                            <p:menuitem value="Remove" icon="ui-icon-newwin" action="#{cc.attrs.bean.deleteNews(var)}">
+                                <p:confirm header="Confirmation" message="Are you sure that you want to delete this news?"/>
+                            </p:menuitem>
+                        </p:submenu>
+                    </p:menu>
+                </f:facet>
+            </c:if>
+        </p:panel>
+    </p:dataList>
+</composite:implementation>
+
+</html>

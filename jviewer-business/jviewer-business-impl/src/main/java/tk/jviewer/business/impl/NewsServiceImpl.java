@@ -30,4 +30,14 @@ public class NewsServiceImpl implements NewsService {
     public void addNews(NewsEntity news) {
         em.persist(news);
     }
+
+    @Override
+    public void updateNews(NewsEntity news) {
+        em.merge(news);
+    }
+
+    @Override
+    public void deleteNews(NewsEntity news) {
+        em.remove(em.contains(news) ? news : em.merge(news));
+    }
 }

@@ -2,18 +2,14 @@ package tk.jviewer.dialog;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-import tk.jviewer.business.model.NewsEntity;
 import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
-import tk.jviewer.business.api.NewsService;
 
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static tk.jviewer.model.JViewerUriPath.*;
@@ -26,17 +22,7 @@ public class MainDialog implements Serializable {
 
     private static final long serialVersionUID = 8687311151966287392L;
 
-    private NewsService newsService;
     private ViewerManagedBean viewerManagedBean;
-
-    /**
-     * @see NewsService#getNews()
-     */
-    public List<NewsEntity> getNews() {
-        List<NewsEntity> result = newsService.getNews();
-        Collections.sort(result, (o1, o2) -> o1.getDate().getTime() < o2.getDate().getTime() ? 1 : -1);
-        return result;
-    }
 
     /**
      * @see SecurityService#isAuthenticated()
@@ -94,10 +80,6 @@ public class MainDialog implements Serializable {
     //
     // Dependency Injection
     //
-
-    public void setNewsService(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     public void setViewerManagedBean(ViewerManagedBean viewerManagedBean) {
         this.viewerManagedBean = viewerManagedBean;
