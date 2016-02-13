@@ -23,7 +23,7 @@ public class AddNewsTag {
      */
     public void submit() throws IOException {
         newsService.addNews(new NewsEntity(topic, text, getUsername()));
-        FacesContext.getCurrentInstance().getExternalContext().redirect(JViewerUriPath.INDEX_PAGE.getUri());
+        FacesContext.getCurrentInstance().getExternalContext().redirect(JViewerUriPath.NEWS_PAGE.getUri());
     }
 
     /**

@@ -6,7 +6,7 @@ package tk.jviewer.model;
 public enum JViewerUriPath {
 
     LOGIN_PAGE("login.xhtml"),
-    INDEX_PAGE("index.xhtml"),
+    NEWS_PAGE("news.xhtml"),
     VIEWER_PAGE("viewer.xhtml");
 
     private static final String FACES_REDIRECT_PARAMETER = "?faces-redirect=true";

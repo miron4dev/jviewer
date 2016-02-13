@@ -9,7 +9,7 @@
 
     <security:http>
         <security:form-login login-page="/login.xhtml"/>
-        <security:logout logout-success-url="/index.xhtml" />
+        <security:logout logout-success-url="/news.xhtml" />
         <security:intercept-url pattern="/login.xhtml" access="isAnonymous()"/>
         <security:intercept-url pattern="/registration.xhtml" access="isAnonymous()"/>
         <security:intercept-url pattern="/viewer.xhtml" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"/>

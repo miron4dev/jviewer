@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static tk.jviewer.model.JViewerUriPath.*;
-import static tk.jviewer.model.JViewerUriPath.INDEX_PAGE;
+import static tk.jviewer.model.JViewerUriPath.NEWS_PAGE;
 
 /**
  * Main dialog backing bean.
@@ -51,7 +51,7 @@ public class MainDialog implements Serializable {
      */
     public String logout() {
         SecurityService.logout();
-        return INDEX_PAGE.getJsfUri();
+        return NEWS_PAGE.getJsfUri();
     }
 
     /**

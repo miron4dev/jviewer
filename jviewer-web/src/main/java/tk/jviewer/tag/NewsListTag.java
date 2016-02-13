@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static tk.jviewer.model.JViewerUriPath.INDEX_PAGE;
+import static tk.jviewer.model.JViewerUriPath.NEWS_PAGE;
 
 /**
  * News List Tag backing bean.
@@ -49,7 +49,7 @@ public class NewsListTag {
      */
     public void deleteNews(NewsEntity news) throws IOException {
         newsService.deleteNews(news);
-        FacesContext.getCurrentInstance().getExternalContext().redirect(JViewerUriPath.INDEX_PAGE.getJsfUri());
+        FacesContext.getCurrentInstance().getExternalContext().redirect(JViewerUriPath.NEWS_PAGE.getJsfUri());
     }
 
     /**
@@ -78,7 +78,7 @@ public class NewsListTag {
         NewsEntity news = (NewsEntity) event.getObject();
         newsService.updateNews(news);
         editNewsManagedBean.setSelectedNews(null);
-        FacesContext.getCurrentInstance().getExternalContext().redirect(INDEX_PAGE.getUri());
+        FacesContext.getCurrentInstance().getExternalContext().redirect(NEWS_PAGE.getUri());
     }
 
     /**

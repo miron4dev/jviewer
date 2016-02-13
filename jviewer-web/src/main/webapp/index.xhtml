@@ -1,56 +1,349 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:tk="http://jviewer.tk"
-    template="/WEB-INF/template.xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="head">
-        <h:outputStylesheet library="custom" name="main.css"/>
-    </ui:define>
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Java Viewer Application</title>
 
-    <ui:define name="content">
-        <h:panelGroup styleClass="Container100" layout="block" rendered="#{mainDialog.authenticated}">
-            <h:panelGroup styleClass="ContainerIndent" layout="block">
-                <h:form>
-                    <p:splitButton value="Welcome, #{mainDialog.username}" icon="fa fa-slideshare" styleClass="Fleft">
-                        <p:menuitem value="My Settings" icon="fa fa-cogs" disabled="true"/>
-                        <p:menuitem value="Uploaded Codes" icon="fa fa-cloud-upload" disabled="true"/>
-                        <p:menuitem value="Download Codes" icon="fa fa-cloud-download" disabled="true"/>
-                    </p:splitButton>
-                </h:form>
+        <style>
+            #menubutton{height:60px; width:25px; float:left; display:block; text-align:center; cursor:pointer; margin-left:20px;}
+            #menubutton i{color:#fff; font-size:20px; margin:20px auto 0px auto; vertical-align:middle; display:block;}
+            #menubutton:hover i, #menubutton:active i, #menubutton:focus i{color:rgba(255,255,255,0.7);}
+            #menubody{width:270px; height:auto; background-color:#fff; position:absolute; overflow:hidden; border-radius:5px; margin-top:50px; display:none;
+                      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+                      -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+                      -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);}
+            #menubody.active{display:block;}
+            #menubody li{display:block; padding:0px;}
+            #menubody li a{display:block; padding:15px 20px; color:#567a84; font-size:16px;}
+            #menubody li a:hover, #menubody li a:active, #menubody li a:focus{background-color:#f2f2f2;}
+        </style>
+    </h:head>
 
-                <div class="EmptyBox10 ShowOnMobile"></div>
-                <p:commandButton value="Rooms" icon="fa fa-list-alt" actionListener="#{mainDialog.openRoomList}"
-                    styleClass="Fright FloatNoneOnMobile">
-                    <p:ajax event="dialogReturn" listener="#{mainDialog.onRoomChosen}"/>
-                </p:commandButton>
-                <p:button value="Code Editor" icon="fa fa-cubes" disabled="true"
-                    styleClass="Fright BrownButton FloatNoneOnMobile" />
-                <p:button value="Write message" icon="fa fa-send" disabled="true"
-                    styleClass="Fright GreenButton FloatNoneOnMobile"/>
-            </h:panelGroup>
-        </h:panelGroup>
+    <h:body style="margin: 0px; background-color:#fff;" styleClass="BlueBody PopupMenu">
 
-        <h:panelGroup styleClass="Container50 Responsive100" style="margin: 0 auto; float: none !important;" layout="block">
-            <h:panelGroup styleClass="Container100" layout="block">
-                <h:panelGroup styleClass="ContainerIndent" layout="block">
-                    <h:form>
-                        <tk:newsList id="newsList" bean="#{newsListTag}"/>
-                    </h:form>
-                    <br/>
-                    <h:form>
-                        <tk:addNews bean="#{addNewsTag}" rendered="#{mainDialog.admin}"/>
-                    </h:form>
-                </h:panelGroup>
-            </h:panelGroup>
-        </h:panelGroup>
+        <div class="Container100 PosFixed BlueBack" style="z-index:999;">
+            <div class="EmptyBox5"></div>
+            <div class="Wid90 OvHidden MarAuto">
+                <a href="news.xhtml">
+                    <h:graphicImage name="logo-white.png" library="custom" style="height:60px; float:left;"/>
+                </a>
 
-        <h:form>
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-            </p:confirmDialog>
-        </h:form>
-    </ui:define>
-</ui:composition>
+                <a id="menubutton"><i class="fa fa-bars"></i></a>
+                <ul class="" style="padding:0px;" id="menubody">
+                    <li class=""><a href="news.xhtml" class="">Check the news</a></li>
+                    <li class=""><a href="#jviewer-learning" class=""> Start Learning</a></li>
+                    <li class=""><a href="#jviewer-tryNow" class=""> Try Now !</a></li>
+                    <li class=""><a href="#jviewer-features" class="">Features</a></li>
+                    <li class=""><a href="#jviewer-team" class="">JViewer Team</a></li>
+                </ul>
+            </div>
+            <div class="EmptyBox5"></div>
+        </div>
+
+        <!-- -->
+
+        <div class="Container100  BlueBack" style="padding:10rem 0px;">
+
+            <div class="Wid90 OvHidden MarAuto">
+                <div class="Container100">
+                    <div class="EmptyBox90"></div>
+                    <h1 class="FontAdamantiumSemiBold Fs50 WhiteBlue TexAlCenter">Everything is simple with JViewer</h1>
+                    <div class="EmptyBox20"></div>
+                    <span class="DispBlock Fs20 FontAdamantiumRegular White TexAlCenter">JViewer is  webinar platform for conferences about HTML, JavaScript, CSS and Java</span>
+                    <div class="EmptyBox40"></div>
+                    <div class="Wid50 MarAuto ui-fluid Responsive100">
+                        <div class="Container50 Responsive100">
+                            <div class="ContainerIndent">
+                                <p:button value="Create Free Account" styleClass="GreenButton Fs20" outcome="/registration.xhtml"/>
+                            </div>
+                        </div>
+                        <div class="Container50 Responsive100">
+                            <div class="ContainerIndent">
+                                <p:button value="Login" styleClass="OrangeButton Fs20" outcome="/login.xhtml"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="EmptyBox20 ShowOnMobile"></div>
+                    <div class="EmptyBox120 ShowOnDesktop"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- -->
+
+        <div class="Container100 " id="jviewer-learning" style="background-color:#F0F2F5; padding:0px 3rem; box-sizing:border-box;">
+
+            <div class="EmptyBox80"></div>
+
+            <h1 class="FontAdamantiumRegular Fs30 BoldGray TexAlCenter">Start Learning</h1>
+            <div class="EmptyBox30"></div>
+
+            <div class="Wid90 OvHidden MarAuto">
+                <div class="Container100">
+
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <i class="icon-calculator LeadenGreen Fs60 DispBlock Fleft"></i>
+                            <div class="Container10 Responsive50"><div class="ContainerIndent"></div></div>
+                            <div class="Container70 Responsive50">
+                                <h2 class="BoldGray FontAdamantiumSemiBold Fs30">Java</h2>
+                                <div class="EmptyBox20"></div>
+                                <span class="BoldGray Fs14 FontAdamantiumLight">Learn the fundamentals of the Java programming language.</span>
+                                <div class="EmptyBox30"></div>
+                            </div>
+                            <div class="EmptyBox30"></div>
+                        </div>
+                    </div>
+
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <i class="icon-windows LeadenGreen Fs60 DispBlock Fleft"></i>
+                            <div class="Container10 Responsive50"><div class="ContainerIndent"></div></div>
+                            <div class="Container70 Responsive50">
+                                <h2 class="BoldGray FontAdamantiumSemiBold Fs30">JavaScript</h2>
+                                <div class="EmptyBox20"></div>
+                                <span class="BoldGray Fs14 FontAdamantiumLight">Spend some time with this powerful scripting language and
+                                    learn to build lightweight applications with enhanced user interfaces..</span>
+                                <div class="EmptyBox30"></div>
+                            </div>
+                            <div class="EmptyBox30"></div>
+                        </div>
+                    </div>
+
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <i class="icon-newspaper LeadenGreen Fs60 DispBlock Fleft"></i>
+                            <div class="Container10 Responsive50"><div class="ContainerIndent"></div></div>
+                            <div class="Container70 Responsive50">
+                                <h2 class="BoldGray FontAdamantiumSemiBold Fs30">HTML / CSS</h2>
+                                <div class="EmptyBox20"></div>
+                                <span class="BoldGray Fs14 FontAdamantiumLight">Learn the fundamentals of design, front-end development,
+                                    and crafting user experiences that are easy on the eyes..</span>
+                                <div class="EmptyBox30"></div>
+                            </div>
+                            <div class="EmptyBox30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="EmptyBox50"></div>
+
+        </div>
+
+        <!-- -->
+
+        <div class="Container100 OrangeBack" id="jviewer-tryNow" style="padding:0px 3rem; box-sizing:border-box;">
+
+            <div class="EmptyBox80"></div>
+
+            <h1 class="FontAdamantiumRegular Fs30 White TexAlCenter">Try Now !</h1>
+            <div class="EmptyBox30"></div>
+
+            <div class="Wid90 OvHidden MarAuto">
+                <div class="Container100">
+
+                    <div class="Wid70 WidAutoOnMobile MarAuto White Fs24 TexAlCenter FontAdamantiumLight">
+                        Create your free account to get access to all JViewer features!
+                        <div class="EmptyBox20"></div>
+                        <p:button value="Create Free Account Now" styleClass="GreenButton" outcome="/registration.xhtml"/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="EmptyBox50"></div>
+
+        </div>
+
+        <!-- -->
+
+        <div class="Container100 " id="jviewer-features" style="padding:0px 3rem; box-sizing:border-box;">
+
+            <div class="EmptyBox80"></div>
+
+            <h1 class="FontAdamantiumRegular Fs30 BoldGray TexAlCenter">Features</h1>
+            <div class="EmptyBox30"></div>
+
+            <div class="Wid90 MarAuto">
+                <div class="Container20 Responsive TexAlCenter">
+                    <div class="ContainerIndent">
+                        <div class="Container100">
+                            <i class="icon-safe Green Wid100" style="font-size:4rem;"></i>
+                            <div class="Wid100 OvHidden" style="height:2rem;"></div>
+                            <div class="FontAdamantiumSemiBold Red" style="font-size:1.6rem;">Study in a separate room</div>
+                            <div class="Wid100 OvHidden" style="height:1rem;"></div>
+                            <div class="FontAdamantiumRegular BoldGray Fs14">JViewer allows to create and use separate
+                                rooms for studying programming.</div>
+                            <div class="Wid100 OvHidden" style="height:3rem;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Container20 Responsive TexAlCenter">
+                    <div class="ContainerIndent">
+                        <div class="Container100">
+                            <i class="icon-heart-fill Green Wid100" style="font-size:4rem;"></i>
+                            <div class="Wid100 OvHidden" style="height:2rem;"></div>
+                            <div class="FontAdamantiumSemiBold Red" style="font-size:1.6rem;">Code demo</div>
+                            <div class="Wid100 OvHidden" style="height:1rem;"></div>
+                            <div class="FontAdamantiumRegular BoldGray Fs14">You can demonstrate entered code
+                                and result of this code in real time.</div>
+                            <div class="Wid100 OvHidden" style="height:3rem;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Container20 Responsive TexAlCenter">
+                    <div class="ContainerIndent">
+                        <div class="Container100">
+                            <i class="icon-task Green Wid100" style="font-size:4rem;"></i>
+                            <div class="Wid100 OvHidden" style="height:2rem;"></div>
+                            <div class="FontAdamantiumSemiBold Red" style="font-size:1.6rem;">HTML5 &amp; CSS3</div>
+                            <div class="Wid100 OvHidden" style="height:1rem;"></div>
+                            <div class="FontAdamantiumRegular BoldGray Fs14">You can learn how to create websites by
+                                structuring and styling your pages with the last HTML and CSS versions.</div>
+                            <div class="Wid100 OvHidden" style="height:3rem;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Container20 Responsive TexAlCenter">
+                    <div class="ContainerIndent">
+                        <div class="Container100">
+                            <i class="icon-windows Green Wid100" style="font-size:4rem;"></i>
+                            <div class="Wid100 OvHidden" style="height:2rem;"></div>
+                            <div class="FontAdamantiumSemiBold Red" style="font-size:1.6rem;">Cross-Browser</div>
+                            <div class="Wid100 OvHidden" style="height:1rem;"></div>
+                            <div class="FontAdamantiumRegular BoldGray Fs14">JViewer works with the all browsers identically.
+                                So, you can use your favourite browser without any problem.</div>
+                            <div class="Wid100 OvHidden" style="height:3rem;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Container20 Responsive TexAlCenter">
+                    <div class="ContainerIndent">
+                        <div class="Container100">
+                            <i class="icon-iphone Green Wid100" style="font-size:4rem;"></i>
+                            <div class="Wid100 OvHidden" style="height:2rem;"></div>
+                            <div class="FontAdamantiumSemiBold Red" style="font-size:1.6rem;">Responsive</div>
+                            <div class="Wid100 OvHidden" style="height:1rem;"></div>
+                            <div class="FontAdamantiumRegular BoldGray Fs14">JViewer supports laptors and mobile phones.
+                                You can use it any time.</div>
+                            <div class="Wid100 OvHidden" style="height:3rem;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="EmptyBox50"></div>
+        </div>
+
+        <!-- -->
+        <div class="Container100 " id="jviewer-team" style="background-color:#F0F2F5; padding:0px 3rem; box-sizing:border-box;">
+
+            <div class="EmptyBox80"></div>
+
+            <h1 class="FontAdamantiumRegular Fs30 BoldGray TexAlCenter">JViewer Team</h1>
+            <div class="EmptyBox30"></div>
+            <div class="Wid80 MarAuto">
+
+                <!-- Change Container100 if a new entry will be added -->
+                <div class="Container100 Responsive50">
+                    <div class="ContainerIndent">
+                        <div class="Container100 TexAlCenter">
+                            <div class="EmptyBox20"></div>
+                            <h:graphicImage name="myphoto.jpg" library="custom" style="width:150px; height:150px;"/>
+                            <div class="EmptyBox20"></div>
+                            <span class="FontAdamantiumSemiBold DispBlock BoldGray">Evgeny Mironenko</span>
+                            <div class="EmptyBox20"></div>
+                            <p:button value="Contact" styleClass="BlueButton MarAuto" style="max-width:250px;" outcome="/about.xhtml"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="EmptyBox50"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="Container100 BoldGrayBack">
+            <div class="Container100">
+                <div class="ContainerIndent OvHidden">
+                    <h:graphicImage name="logo-white.png" styleClass="Fleft" library="custom" style="height:50px;"/>
+                    <span class="DispInlBlock FontAdamantiumLight White Fs12 Fright HoverEffect TexAlRight">emironen0@gmail.com
+                        <br/><br/> Copyright © 2016 <i class="icon-primitive-dot Fs10 White"></i> All rights reserved.</span>
+                </div>
+            </div>
+
+            <div class="EmptyBox30"></div>
+        </div>
+
+        <h:outputStylesheet name="css/core-layout.css" library="adamantium-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="adamantium-layout" />
+        <h:outputStylesheet name="css/animate.css" library="adamantium-layout" />
+        <h:outputStylesheet name="css/adamantium-layout.css" library="adamantium-layout" />
+        <h:outputStylesheet name="css/adamantium-font.css" library="adamantium-layout" />
+        
+        <script>
+            // FNC for detecting for click outside of any elements ============== 
+            $.fn.clickOff = function (callback, selfDestroy) {
+                var clicked = false;
+                var parent = this;
+                var destroy = selfDestroy || true;
+
+                parent.click(function () {
+                    clicked = true;
+                });
+
+                $(document).click(function (event) {
+                    if (!clicked) {
+                        callback(parent, event);
+                    }
+                    if (destroy) {
+                    }
+                    ;
+                    clicked = false;
+                });
+            };
+
+            var menubtn = $(document.getElementById("menubutton")),
+                    menubody = $(document.getElementById("menubody")),
+                    menustatus = true,
+                    menuButtonClick = false;
+
+            menubtn.on("click", function () {
+                menuButtonClick = true;
+
+                if (menustatus) {
+                    menubody.addClass('active');
+                    menustatus = false;
+                } else {
+                    menubody.removeClass('active');
+                    menustatus = true;
+                }
+            });
+
+            menubody.clickOff(function (e) {
+                if (menuButtonClick) {
+                    menuButtonClick = false;
+                }
+                else {
+                    menubody.removeClass('active');
+                    menustatus = true;
+                }
+            });
+        </script>
+    </h:body>
+
+</html>

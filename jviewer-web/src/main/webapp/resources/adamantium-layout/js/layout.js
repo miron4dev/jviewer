@@ -59,10 +59,12 @@ var Adamantium = {
                 menuitem.removeClass('active-menu-parent');
                 menuitemLink.removeClass('active-menu').next('ul').removeClass('active-menu');
                 $this.removeMenuitem(menuitem.attr('id'));
+                $this.menubarActive = false;
             }
             else {
-                var activeSibling = menuitem.siblings('.active-menu-parent');
-                if(activeSibling.length) {
+                var activeSiblings = $this.findActiveSiblings(menuitem);
+                for(var i = 0; i< activeSiblings.length; i++) {
+                    var activeSibling = activeSiblings[i];
                     activeSibling.removeClass('active-menu-parent');
                     $this.removeMenuitem(activeSibling.attr('id'));
 
@@ -77,6 +79,7 @@ var Adamantium = {
                 menuitem.addClass('active-menu-parent');
                 menuitemLink.addClass('active-menu').next('ul').addClass('active-menu');
                 $this.addMenuitem(menuitem.attr('id'));
+                $this.menubarActive = true;
             }
 
             if(menuitemLink.next().is('ul')) {
@@ -93,12 +96,33 @@ var Adamantium = {
                 $this.menuWrapper.perfectScrollbar("update");
             }
         })
+        .on('mouseenter', function() {
+            if($this.menuWrapper.hasClass('layout-menu-cover-left')) {
+                return;
+            }
+            
+            var menuitemLink = $(this),
+                menuitem = menuitemLink.parent(),
+                isTopMenu = document.documentElement.clientWidth > 960 && document.documentElement.clientHeight > 560;
+
+            if($this.menubarActive && isTopMenu && menuitem.closest('ul').hasClass('layout-menu') && !menuitem.hasClass('active-menu-parent')) {
+                var prevMenuLink = menuitem.parent().find('a.active-menu');
+                
+                prevMenuLink.removeClass('active-menu').next('ul.active-menu').removeClass('active-menu');
+                prevMenuLink.closest('li').removeClass('active-menu-parent');
+                $this.removeMenuitem(prevMenuLink.closest('li').attr('id'));
+                menuitem.addClass('active-menu-parent');
+                menuitemLink.addClass('active-menu').next('ul[role="menu"]').addClass('active-menu');
+            }
+           
+        })
         .clickOff(function(e) {
             if($this.menuButtonClick) {
                 $this.menuButtonClick = false;
             } else {
                 $this.menuButton.removeClass('active-menu');
                 $this.menuWrapper.removeClass('active-menu');
+                $this.menubarActive = false;
             }
         });
         
@@ -215,6 +239,20 @@ var Adamantium = {
         }
     },
     
+    findActiveSiblings: function(menuitem) {
+        var $this = this,
+            siblings = menuitem.siblings('li'),
+            activeSiblings = [];
+            
+        siblings.each(function () {
+            if ($.inArray($(this).attr('id'), $this.expandedMenuitems) !== -1 || $(this).hasClass('active-menu-parent')) {
+                activeSiblings.push($(this));
+            }
+        });
+
+        return activeSiblings;
+    },
+    
     removeMenuitem: function(id) {        
         this.expandedMenuitems = $.grep(this.expandedMenuitems, function(value) {
             return value !== id;
@@ -274,4 +312,15 @@ var Adamantium = {
 
 $(function() {
    Adamantium.init();
+});
+
+/* Issue #924 is fixed for 5.3+ and 6.0. (compatibility with 5.3) */
+PrimeFaces.widget.Dialog = PrimeFaces.widget.Dialog.extend({
+    enableModality: function () {
+        this._super();
+        $(document.body).children(this.jqId + '_modal').addClass('ui-dialog-mask');
+    },
+    syncWindowResize: function () {
+
+    }
 });

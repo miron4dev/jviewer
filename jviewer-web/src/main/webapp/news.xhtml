@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:tk="http://jviewer.tk"
+    template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="custom" name="main.css"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:panelGroup styleClass="Container100" layout="block" rendered="#{mainDialog.authenticated}">
+            <h:panelGroup styleClass="ContainerIndent" layout="block">
+                <h:form>
+                    <p:splitButton value="Welcome, #{mainDialog.username}" icon="fa fa-slideshare" styleClass="Fleft">
+                        <p:menuitem value="My Settings" icon="fa fa-cogs" disabled="true"/>
+                        <p:menuitem value="Uploaded Codes" icon="fa fa-cloud-upload" disabled="true"/>
+                        <p:menuitem value="Download Codes" icon="fa fa-cloud-download" disabled="true"/>
+                    </p:splitButton>
+                </h:form>
+
+                <div class="EmptyBox10 ShowOnMobile"></div>
+                <p:commandButton value="Rooms" icon="fa fa-list-alt" actionListener="#{mainDialog.openRoomList}"
+                    styleClass="Fright FloatNoneOnMobile">
+                    <p:ajax event="dialogReturn" listener="#{mainDialog.onRoomChosen}"/>
+                </p:commandButton>
+                <p:button value="Code Editor" icon="fa fa-cubes" disabled="true"
+                    styleClass="Fright BrownButton FloatNoneOnMobile" />
+                <p:button value="Write message" icon="fa fa-send" disabled="true"
+                    styleClass="Fright GreenButton FloatNoneOnMobile"/>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="Container50 Responsive100" style="margin: 0 auto; float: none !important;" layout="block">
+            <h:panelGroup styleClass="Container100" layout="block">
+                <h:panelGroup styleClass="ContainerIndent" layout="block">
+                    <h:form>
+                        <tk:newsList id="newsList" bean="#{newsListTag}"/>
+                    </h:form>
+                    <br/>
+                    <h:form>
+                        <tk:addNews bean="#{addNewsTag}" rendered="#{mainDialog.admin}"/>
+                    </h:form>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
