@@ -11,6 +11,7 @@ import tk.jviewer.security.SecurityService;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +24,9 @@ import static tk.jviewer.model.JViewerUriPath.NEWS_PAGE;
 /**
  * News List Tag backing bean.
  */
-public class NewsListTag {
+public class NewsListTag implements Serializable {
+
+    private static final long serialVersionUID = 5917522340588970225L;
 
     private final List<NewsEntity> availableNews = new ArrayList<>();
 

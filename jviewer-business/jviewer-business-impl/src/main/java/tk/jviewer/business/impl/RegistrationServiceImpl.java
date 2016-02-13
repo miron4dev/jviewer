@@ -15,7 +15,12 @@ import tk.jviewer.business.model.UserEntity;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.net.MalformedURLException;
@@ -62,12 +67,33 @@ public class RegistrationServiceImpl implements RegistrationService, Serializabl
     @Override
     @Transactional
     public void sendEmailConfirmation(String name, String password, String email) throws MessagingException {
-        UserEntity user = em.find(UserEntity.class, name);
-        if (user != null) {
+        if (isUserExists(name, email)) {
             throw new JViewerBusinessException(USER_ALREADY_EXIST);
         }
         String link = generateLink(name, email, password);
         mailService.sendMessage(email, MAIL_SUBJECT, MessageFormat.format(MAIL_TEXT, name, link));
+    }
+
+    /**
+     * Returns true if user with the specified name OR email is already exist.
+     *
+     * @param name  name of user.
+     * @param email email of user.
+     * @return see description.
+     */
+    private boolean isUserExists(String name, String email) {
+        if (em.find(UserEntity.class, name) != null) {
+            return true;
+        }
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> query = cb.createQuery(UserEntity.class);
+        Root<UserEntity> user = query.from(UserEntity.class);
+        query.where(cb.equal(user.get("email"), email));
+        try {
+            return em.createQuery(query).getSingleResult() != null;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 
     /**
