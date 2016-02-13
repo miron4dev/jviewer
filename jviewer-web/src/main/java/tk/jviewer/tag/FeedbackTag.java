@@ -28,6 +28,8 @@ public class FeedbackTag implements Serializable {
     public void submit() {
         try {
             feedbackService.sendFeedback(name, email, text);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Thank you for your feedback!", null));
         } catch (MessagingException e) {
             logger.error("Exception occurred during sending a feedback", e);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
