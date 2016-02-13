@@ -33,16 +33,26 @@ public class AddNewsTag {
         return SecurityService.getUsername();
     }
 
+    /**
+     * Returns a topic of the news.
+     *
+     * @return see description.
+     */
     public String getTopic() {
         return topic;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
+    /**
+     * Returns a text of the news.
+     *
+     * @return see description.
+     */
     public String getText() {
         return text;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public void setText(String text) {

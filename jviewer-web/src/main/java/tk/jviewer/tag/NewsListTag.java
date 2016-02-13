@@ -1,15 +1,24 @@
 package tk.jviewer.tag;
 
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import tk.jviewer.business.api.NewsService;
 import tk.jviewer.business.model.NewsEntity;
 import tk.jviewer.model.JViewerUriPath;
+import tk.jviewer.model.EditNewsManagedBean;
 import tk.jviewer.security.SecurityService;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static tk.jviewer.model.JViewerUriPath.INDEX_PAGE;
 
 /**
  * News List Tag backing bean.
@@ -19,6 +28,7 @@ public class NewsListTag {
     private final List<NewsEntity> availableNews = new ArrayList<>();
 
     private NewsService newsService;
+    private EditNewsManagedBean editNewsManagedBean;
 
     @PostConstruct
     public void init() {
@@ -35,12 +45,40 @@ public class NewsListTag {
     }
 
     /**
-     * @return index page for the navigation.
      * @see NewsService#deleteNews(NewsEntity)
      */
-    public String deleteNews(NewsEntity news) {
+    public void deleteNews(NewsEntity news) throws IOException {
         newsService.deleteNews(news);
-        return JViewerUriPath.INDEX_PAGE.getJsfUri();
+        FacesContext.getCurrentInstance().getExternalContext().redirect(JViewerUriPath.INDEX_PAGE.getJsfUri());
+    }
+
+    /**
+     * Opens the Edit News dialog based on the specified selected news.
+     *
+     * @param news news for edition.
+     */
+    public void openEditDialog(NewsEntity news) {
+        editNewsManagedBean.setSelectedNews(news);
+        Map<String, Object> options = new HashMap<>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        options.put("contentHeight", "540px");
+        options.put("height", "520px");
+        RequestContext.getCurrentInstance().openDialog("editNewsDialog", options, null);
+    }
+
+    /**
+     * On news update event.
+     *
+     * @param event select event.
+     * @throws IOException if the redirect to index page was failed.
+     */
+    public void onNewsUpdate(SelectEvent event) throws IOException {
+        NewsEntity news = (NewsEntity) event.getObject();
+        newsService.updateNews(news);
+        editNewsManagedBean.setSelectedNews(null);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(INDEX_PAGE.getUri());
     }
 
     /**
@@ -58,5 +96,9 @@ public class NewsListTag {
 
     public void setNewsService(NewsService newsService) {
         this.newsService = newsService;
+    }
+
+    public void setEditNewsManagedBean(EditNewsManagedBean editNewsManagedBean) {
+        this.editNewsManagedBean = editNewsManagedBean;
     }
 }

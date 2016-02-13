@@ -33,7 +33,18 @@ public class NewsEntity {
     @Column(name = "author", nullable = false)
     private String author;
 
+    /**
+     * Default constructor. It is mandatory for the Hibernate.
+     */
     public NewsEntity() {
+    }
+
+    public NewsEntity(Integer id, String topic, String text, String author) {
+        this.id = id;
+        this.topic = topic;
+        this.text = text;
+        this.date = new Date(Calendar.getInstance().getTime().getTime());
+        this.author = author;
     }
 
     public NewsEntity(String topic, String text, String author) {

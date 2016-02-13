@@ -97,6 +97,20 @@
             <property-name>newsService</property-name>
             <value>#{newsService}</value>
         </managed-property>
+        <managed-property>
+            <property-name>editNewsManagedBean</property-name>
+            <value>#{editNewsManagedBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>editNewsDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.EditNewsDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>managedBean</property-name>
+            <value>#{editNewsManagedBean}</value>
+        </managed-property>
     </managed-bean>
 
     <factory>
