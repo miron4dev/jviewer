@@ -30,7 +30,10 @@
                             <div class="EmptyBox40"></div>
                             <div class="Wid80 Fs30 FontAdamantiumBold Red MarAuto">Error Exception Occured!</div>
                             <div class="EmptyBox10"></div>
-                            <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">Please contact system administrator.</div>
+                            <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">
+                                Current time: <h:outputText value="#{currentDate}"><f:convertDateTime pattern="HH:mm:ss dd.MM.yyyy" type="date" /></h:outputText>
+                                Please contact with system administrator.
+                            </div>
                         </div>
                         <div class="Separator"></div>
                         <p:button value="Back To Main Page" icon="fa fa-sign-in" href="/news.xhtml" styleClass="RedButton"/>
