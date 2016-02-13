@@ -282,7 +282,8 @@
                 <div class="ContainerIndent OvHidden">
                     <h:graphicImage name="logo-white.png" styleClass="Fleft" library="custom" style="height:50px;"/>
                     <span class="DispInlBlock FontAdamantiumLight White Fs12 Fright HoverEffect TexAlRight">emironen0@gmail.com
-                        <br/><br/> Copyright © 2016 <i class="icon-primitive-dot Fs10 White"></i> All rights reserved.</span>
+                        <br/><br/> Copyright © <h:outputText value="#{currentDate}"><f:convertDateTime pattern="yyyy" type="date" /></h:outputText>
+                        <i class="icon-primitive-dot Fs10 White"></i> All rights reserved.</span>
                 </div>
             </div>
 
