@@ -21,7 +21,6 @@
     <inceptionYear>2013</inceptionYear>
 
     <modules>
-        <module>jviewer-info</module>
         <module>jviewer-main</module>
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
