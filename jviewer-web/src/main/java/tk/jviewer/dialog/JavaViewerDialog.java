@@ -57,6 +57,7 @@ public class JavaViewerDialog extends ViewerDialog {
 
     /**
      * Returns the result of content compilation in HTML format.
+     * DON'T REMOVE, BECAUSE IT IS USED BY JAVASCRIPT!
      * @return see description.
      */
     public String getFormattedResult() {
