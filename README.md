@@ -1,7 +1,7 @@
 JViewer
 =======
 
-It is a webinar platform for conferences about HTML, JavaScript, CSS and Java, which allows to:
+It is a webinar platform for the conferences about HTML, JavaScript, CSS and Java, which allows to:
 - create separate rooms (Web and Java)
 - demonstrate entered code and result of this code in real time
 - get tested on specific questions of topic
@@ -15,14 +15,6 @@ Technologies and frameworks, which are used:
 - PostgreSQL
 - Maven
 - JMX
-
-## Available platforms
-- Windows
-- Linux
-- MAC OS
-
-## Download
-Links to download JViewer are available <a href="http://jviewer.tk:8080/download.xhtml" target="_blank">here</a>
 
 ## Configure Tomcat locally
 1. Add the next connector into the ${catalina.home}/conf/server.xml:
