@@ -15,6 +15,5 @@
 
     <import resource="classpath:/META-INF/orm-applicationContext.xml"/>
     <import resource="classpath:/META-INF/security-applicationContext.xml"/>
-    <import resource="classpath:/META-INF/model-applicationContext.xml"/>
 
 </beans>
