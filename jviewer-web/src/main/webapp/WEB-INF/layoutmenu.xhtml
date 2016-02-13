@@ -8,7 +8,7 @@
     <div id="layout-menu-cover" class="layout-menu-cover-top Animated05" >
         <h:form id="menuform">
             <pm:menu>
-                <p:menuitem id="rm_main" value=" Main page" icon="icon-home" outcome="/index"/>
+                <p:menuitem id="rm_main" value=" Main page" icon="icon-home" outcome="/index" rendered="#{!mainDialog.authenticated}"/>
                 <p:menuitem id="rm_news" value=" News" icon="icon-newspaper" outcome="/news"/>
                 <p:menuitem id="rm_login" value=" Login" icon="icon-unlock-stroke" outcome="/login" rendered="#{!mainDialog.authenticated}"/>
                 <p:menuitem id="rm_registration" value=" Registration" icon="icon-user2" outcome="/registration" rendered="#{!mainDialog.authenticated}"/>
