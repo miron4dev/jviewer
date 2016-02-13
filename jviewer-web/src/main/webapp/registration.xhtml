@@ -38,7 +38,9 @@
                                     requiredMessage="Name is empty" styleClass="Wid90 TexAlCenter"/>
                                 <div class="EmptyBox10"></div>
                                 <p:inputText placeholder="Email" value="#{registrationDialog.email}" required="true"
-                                    requiredMessage="Email is empty" styleClass="Wid90 TexAlCenter"/>
+                                    requiredMessage="Email is empty" styleClass="Wid90 TexAlCenter">
+                                    <f:validator validatorId="emailValidator"/>
+                                </p:inputText>
                                 <div class="EmptyBox10"></div>
                                 <p:inputText placeholder="Password" value="#{registrationDialog.password}" required="true"
                                     requiredMessage="Password is empty" type="password" styleClass="Wid90 TexAlCenter">

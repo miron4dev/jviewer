@@ -21,7 +21,8 @@
     <inceptionYear>2013</inceptionYear>
 
     <modules>
-        <module>jviewer-main</module>
+        <!-- TODO: remove legacy artifact -->
+        <!--<module>jviewer-main</module>-->
         <module>jviewer-refresh-lib</module>
         <module>jviewer-console</module>
         <module>jviewer-jc</module>
