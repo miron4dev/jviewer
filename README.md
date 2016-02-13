@@ -44,3 +44,4 @@ Technologies and frameworks, which are used:
      
      security.encryptSalt='replace by the real salt value'
      ```
+6. Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank">Java Cryptography Extension (JCE)</a>
