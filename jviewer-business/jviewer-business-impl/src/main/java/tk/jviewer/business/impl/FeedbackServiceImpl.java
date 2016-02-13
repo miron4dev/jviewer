@@ -16,7 +16,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     private static final String ADMIN_EMAIL = "emironen0@gmail.com";
     private static final String MAIL_SUBJECT = "New JViewer Feedback";
-    private static final String MAIL_TEXT = "Dear user,\n You've got a new JViewer feedback from the user with name: {0}, email: {1}\n" +
+    private static final String MAIL_TEXT = "Dear user,\nYou''ve got a new JViewer feedback from the user with name: {0}, email: {1}\n" +
         "Text of the feedback:\n{2}";
 
     @Autowired
