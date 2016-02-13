@@ -30,12 +30,6 @@
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>aboutDialog</managed-bean-name>
-        <managed-bean-class>tk.jviewer.dialog.AboutDialog</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
         <managed-bean-name>registrationDialog</managed-bean-name>
         <managed-bean-class>tk.jviewer.dialog.RegistrationDialog</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
@@ -110,6 +104,16 @@
         <managed-property>
             <property-name>managedBean</property-name>
             <value>#{editNewsManagedBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>feedbackTag</managed-bean-name>
+        <managed-bean-class>tk.jviewer.tag.FeedbackTag</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>feedbackService</property-name>
+            <value>#{feedbackServiceImpl}</value>
         </managed-property>
     </managed-bean>
 

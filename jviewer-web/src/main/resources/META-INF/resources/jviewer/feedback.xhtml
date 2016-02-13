@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="tk.jviewer.tag.FeedbackTag"/>
+</composite:interface>
+
+<composite:implementation>
+    <p:messages styleClass="Wid90"/>
+
+    <p:inputText placeholder="Name" styleClass="Wid90" required="true" requiredMessage="Name is empty"
+        value="#{cc.attrs.bean.name}"/>
+
+    <div class="EmptyBox10"></div>
+    <p:inputText placeholder="Email" styleClass="Wid90" required="true" requiredMessage="Email is empty"
+        value="#{cc.attrs.bean.email}"/>
+
+    <div class="EmptyBox10"></div>
+    <p:inputTextarea placeholder="Your Message" styleClass="Wid90" required="true" requiredMessage="Text is empty"
+        value="#{cc.attrs.bean.text}"/>
+
+    <div class="EmptyBox30"></div>
+    <p:commandButton value="Submit" action="#{cc.attrs.bean.submit}" icon="fa fa-check" process="@form" update="@form"
+        styleClass="Wid40"/>
+</composite:implementation>
+
+</html>

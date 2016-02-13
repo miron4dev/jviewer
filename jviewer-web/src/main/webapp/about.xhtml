@@ -2,6 +2,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
+    xmlns:tk="http://jviewer.tk"
     template="/WEB-INF/template.xhtml">
 
     <ui:define name="head">
@@ -70,30 +71,10 @@
                     </div>
                     <div class="SeparatorFull"></div>
                     <div class="EmptyBox20"></div>
-                    <p:messages autoUpdate="true" styleClass="Wid90"/>
                     <h:form>
-                        <p:inputText placeholder="Name" styleClass="Wid90" required="true"
-                            requiredMessage="Name is empty"
-                            value="#{aboutDialog.name}"/>
-
-                        <div class="EmptyBox10"></div>
-                        <p:inputText placeholder="Email" styleClass="Wid90" required="true"
-                            requiredMessage="Email is empty"
-                            value="#{aboutDialog.email}"/>
-
-                        <div class="EmptyBox10"></div>
-                        <p:inputTextarea placeholder="Your Message" styleClass="Wid90" required="true"
-                            requiredMessage="Text is empty"
-                            value="#{aboutDialog.text}"/>
-
-                        <div class="EmptyBox30"></div>
-                        <p:commandButton value="Submit" action="#{aboutDialog.feedback}" icon="fa fa-check"
-                            styleClass="Wid40"/>
-
-                        <div class="EmptyBox10 ShowOnMobile"></div>
+                        <tk:feedback bean="#{feedbackTag}"/>
                     </h:form>
-
-                    <div class="EmptyBox10"></div>
+                    <div class="EmptyBox20 ShowOnMobile"></div>
                 </div>
             </div>
         </div>
