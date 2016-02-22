@@ -24,6 +24,7 @@
                     <applicationName>JViewer App</applicationName>
                     <defaultLibBundleDir>lib/</defaultLibBundleDir>
                     <skinnyWars>true</skinnyWars>
+                    <earSourceDirectory>${basedir}/src/main/resources</earSourceDirectory>
                     <modules>
                         <webModule>
                             <groupId>tk.jviewer</groupId>
@@ -42,6 +43,20 @@
                         </webModule>
                     </modules>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>analyze</id>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                        <configuration>
+                            <failOnWarning>false</failOnWarning>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

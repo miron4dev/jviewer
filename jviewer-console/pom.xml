@@ -16,7 +16,6 @@
         <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-core</artifactId>
-            <version>${jolokia.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
