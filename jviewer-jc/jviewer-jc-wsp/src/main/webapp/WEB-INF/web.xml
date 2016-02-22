@@ -5,8 +5,7 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>jc</display-name>
-
+    <display-name>JViewer Java Compiler Web Service</display-name>
 
     <servlet>
         <servlet-name>CXFServlet</servlet-name>

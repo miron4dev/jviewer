@@ -2,15 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>tk.jviewer</groupId>
         <artifactId>jviewer-jc</artifactId>
         <version>2.0-SNAPSHOT</version>
     </parent>
-    <packaging>war</packaging>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jviewer-jc-wsp</artifactId>
+    <packaging>war</packaging>
+
+    <name>JViewer - Java Compiler Web Service Provider</name>
 
     <dependencies>
         <!-- JViewer -->
@@ -64,26 +66,4 @@
             <artifactId>spring-test</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${war.plugin.version}</version>
-                <configuration>
-                    <failOnMissingWebXml>true</failOnMissingWebXml>
-                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <configuration>
-                    <url>${tomcat.url}</url>
-                    <server>TomcatServer</server>
-                    <path>/jc</path>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
