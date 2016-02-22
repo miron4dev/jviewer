@@ -19,8 +19,8 @@ Technologies and frameworks, which are used:
 ## Configure WildFly locally
 1. Create the "keystore" directory inside standalone/configuration and put jviewer.tk.jks inside.
 2. Copy integration/modules directory into root of your WildFly AS.
-3. Put changed integration/standalone.xml into standalone/configuration directory of your WildFly AS.
-- Change the keystore and key password in SSL block.
+3. Put changed integration/standalone.xml into standalone/configuration directory of your WildFly AS and open it in your favorite editor.
+4. Change the keystore and key password in SSL block:
 ```xml
 <security-realm name="JViewerRealm">
 	<server-identities>
@@ -30,7 +30,7 @@ Technologies and frameworks, which are used:
 	/server-identities>
 </security-realm>
 ```
-- Change the database username and password in security block.
+5. Change the database username and password in security block:
 ```xml
 <datasource jndi-name="java:jboss/datasources/jviewer" pool-name="jviewer" enabled="true" use-java-context="true">
 	<connection-url>jdbc:postgresql://localhost:5432/jviewer</connection-url>
@@ -41,9 +41,9 @@ Technologies and frameworks, which are used:
 	</security>
 </datasource>
 ```	
-4. Add jviewer.properties file inside standalone/configuration directory with next content:
+6. Add jviewer.properties file inside standalone/configuration directory with next content:
 ```
 security.encryptPassword='replace by the real secret value'
 security.encryptSalt='replace by the real salt value'
 ```
-5. Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank">Java Cryptography Extension (JCE)</a>
+7. Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank">Java Cryptography Extension (JCE)</a>
