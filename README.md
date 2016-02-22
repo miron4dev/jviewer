@@ -16,32 +16,35 @@ Technologies and frameworks, which are used:
 - Maven
 - JMX
 
-## Configure Tomcat locally
-1. Add the next connector into the ${catalina.home}/conf/server.xml:
-
+## Configure WildFly locally
+1. Create the "keystore" directory inside standalone/configuration and put jviewer.tk.jks inside.
+2. Copy integration/modules directory into root of your WildFly AS.
+3. Put changed integration/standalone.xml into standalone/configuration directory of your WildFly AS.
+- Change the keystore and key password in SSL block.
     ```
-    <Connector port="8443" SSLEnabled="true" protocol="org.apache.coyote.http11.Http11NioProtocol"
-            maxThreads="150" scheme="https" secure="true"
-            clientAuth="false" sslProtocol="TLS"
-            keystoreFile="${catalina.home}/keystore/jviewer.tk.jks" keystorePass="secret" keystoreType="JKS"
-            keyAlias="tomcat"/>
+      <security-realm name="JViewerRealm">
+                <server-identities>
+                    <ssl>
+                        <keystore path="keystore/jviewer.tk.jks" relative-to="jboss.server.config.dir" keystore-password="changeit" alias="tomcat" key-password="changeit"/>
+                    </ssl>
+                </server-identities>
+            </security-realm>
     ```
-    and next jndi resource inside ```<GlobalNamingResources>``` block:
-    
-     ```
-    <Resource name="jdbc/jviewer" auth="Container"
-          type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
-		  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-          url="jdbc:postgresql://localhost:5432/jviewer"
-          username="postgres" password="databasePassword" maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
+- Change the database username and password in security block.
     ```
-2. Replace "secret" with a real value for the keystorePass, "postgres" and "secret" with a real data to your database. Url also could be different.
-3. Create the "keystore" directory inside ${catalina.home} and put jviewer.tk.jks key file inside
-4. Download <a href="https://jdbc.postgresql.org/download.html" target="_blank">PostgreSQL JDBC42 driver</a> and put it inside ${catalina.home}/lib directory.
-5. Add jviewer.properties file inside ${catalina.home}/conf directory with next content:
+	<datasource jndi-name="java:jboss/datasources/jviewer" pool-name="jviewer" enabled="true" use-java-context="true">
+	    <connection-url>jdbc:postgresql://localhost:5432/jviewer</connection-url>
+            <driver>postgresql</driver>
+            <security>
+                <user-name>changeit</user-name>
+                <password>changeit</password>
+            </security>
+        </datasource>
+    ```	
+4. Add jviewer.properties file inside standalone/configuration directory with next content:
      ```
      security.encryptPassword='replace by the real secret value'
      
      security.encryptSalt='replace by the real salt value'
      ```
-6. Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank">Java Cryptography Extension (JCE)</a>
+5. Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank">Java Cryptography Extension (JCE)</a>
