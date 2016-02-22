@@ -156,27 +156,4 @@
             <artifactId>javax.el-api</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>true</failOnMissingWebXml>
-                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <packagingExcludes>%regex[WEB-INF/lib/(?!(${war.packaging.excludes})).*.jar]</packagingExcludes>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <properties>
-        <war.packaging.excludes>adamantium-theme</war.packaging.excludes>
-    </properties>
 </project>
