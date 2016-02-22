@@ -47,7 +47,7 @@ Technologies and frameworks, which are used:
 </datasource>
 ```
 ## Security
-1. Add jviewer.properties file inside standalone/configuration directory with next content
+* Add jviewer.properties file inside standalone/configuration directory with next content
 ```
 security.encryptPassword='replace by the real secret value'
 security.encryptSalt='replace by the real salt value'
