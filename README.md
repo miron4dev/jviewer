@@ -23,11 +23,11 @@ Technologies and frameworks, which are used:
 4. Change the keystore and key password in SSL block
 ```xml
 <security-realm name="JViewerRealm">
-    <server-identities>
-	    <ssl>
-	    	<keystore path="keystore/jviewer.tk.jks" relative-to="jboss.server.config.dir" keystore-password="changeit" alias="tomcat" key-password="changeit"/>
-			</ssl>
-		</server-identities>
+	<server-identities>
+		<ssl>
+			<keystore path="keystore/jviewer.tk.jks" relative-to="jboss.server.config.dir" keystore-password="changeit" alias="tomcat" key-password="changeit"/>
+		</ssl>
+	</server-identities>
 </security-realm>
 ```
 5. Change the database username and password in security block
