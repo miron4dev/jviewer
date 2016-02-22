@@ -26,8 +26,8 @@ Technologies and frameworks, which are used:
     <server-identities>
 	    <ssl>
 	    	<keystore path="keystore/jviewer.tk.jks" relative-to="jboss.server.config.dir" keystore-password="changeit" alias="tomcat" key-password="changeit"/>
-		</ssl>
-	/server-identities>
+			</ssl>
+		</server-identities>
 </security-realm>
 ```
 5. Change the database username and password in security block
