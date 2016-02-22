@@ -20,7 +20,7 @@ Technologies and frameworks, which are used:
 1. Create the "keystore" directory inside standalone/configuration and put jviewer.tk.jks inside.
 2. Copy integration/modules directory into root of your WildFly AS.
 3. Put changed integration/standalone.xml into standalone/configuration directory of your WildFly AS and open it in your favorite editor.
-  1. Change the keystore and key password in SSL block
+  * Change the keystore and key password in SSL block
 ```xml
 <security-realm name="JViewerRealm">
 	<server-identities>
@@ -30,7 +30,7 @@ Technologies and frameworks, which are used:
 	/server-identities>
 </security-realm>
 ```
-  2. Change the database username and password in security block
+  * Change the database username and password in security block
 ```xml
 <datasource jndi-name="java:jboss/datasources/jviewer" pool-name="jviewer" enabled="true" use-java-context="true">
 	<connection-url>jdbc:postgresql://localhost:5432/jviewer</connection-url>
