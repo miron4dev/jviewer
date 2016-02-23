@@ -25,7 +25,7 @@
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>roomService</property-name>
-            <value>#{roomService}</value>
+            <value>#{roomServiceImpl}</value>
         </managed-property>
     </managed-bean>
 
