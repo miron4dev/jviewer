@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pe="http://primefaces.org/ui/extensions">
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Account Settings</title>
 
@@ -46,16 +45,12 @@
                         requiredMessage="Confirm password is empty" type="password" styleClass="Wid90 TexAlCenter"/>
 
                     <div class="EmptyBox30"></div>
-                    <p:commandButton value="Request the admin permissions"
-                        action="#{editProfileDialog.sendAdminRequest}"
-                        immediate="true"
-                        rendered="#{not editProfileDialog.admin}"/>
+                    <p:commandButton value="Change password" action="#{editProfileDialog.sendChangePasswordRequest}"
+                        styleClass="OrangeButton Fs20"/>
 
-                    <p:commandButton value="Change password" immediate="true" styleClass="OrangeButton Fs20"/>
+                    <p:commandButton value="Request the admin permissions" action="#{editProfileDialog.sendAdminRequest}"
+                        immediate="true" rendered="#{not editProfileDialog.admin}"/>
                 </p:panelGrid>
-            </p:tab>
-            <p:tab title="Avatar">
-                <pe:gravatar value="#{editProfileDialog.email}"/>
             </p:tab>
         </p:tabView>
     </h:form>

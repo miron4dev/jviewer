@@ -12,6 +12,7 @@ public interface UpdateProfileService {
      *
      * @param username name of the user that requires the permissions.
      * @param email    email of the user that requires the permissions.
+     * @throws MessagingException if could not send the email.
      */
     void sendAdminRequest(String username, String email) throws MessagingException;
 
@@ -21,4 +22,21 @@ public interface UpdateProfileService {
      * @param encryptedData encrypted name of the user that will get the permissions.
      */
     void makeAdmin(String encryptedData);
+
+    /**
+     * Sends a request to change the password.
+     *
+     * @param username    name of the user that requires to change password.
+     * @param email       email of the user that requires to change password.
+     * @param newPassword new password.
+     * @throws MessagingException if could not send the email.
+     */
+    void sendChangePasswordRequest(String username, String email, String newPassword) throws MessagingException;
+
+    /**
+     * Change the user password.
+     *
+     * @param encryptedData encrypted name of the user and new password.
+     */
+    void changePassword(String encryptedData);
 }

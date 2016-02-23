@@ -57,6 +57,21 @@ public class EditProfileDialog implements Serializable {
         }
     }
 
+    /**
+     * Sends the request to change password.
+     */
+    public void sendChangePasswordRequest() {
+        try {
+            updateProfileService.sendChangePasswordRequest(getUsername(), getEmail(), password);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Confirmation message has been sent to your e-mail.", null));
+        } catch (MessagingException e) {
+            logger.error("Exception occurred during sending the change password request", e);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                "Could not send the message because of connection problem. Please contact with your system administrator.", null));
+        }
+    }
+
     public String getPassword() {
         return password;
     }
