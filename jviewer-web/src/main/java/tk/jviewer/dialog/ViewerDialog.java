@@ -2,7 +2,7 @@ package tk.jviewer.dialog;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import tk.jviewer.business.model.RoomEntity;
+import tk.jviewer.model.UIRoomAdaptor;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
 
@@ -27,7 +27,7 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public String getRoomName() {
-        return viewerManagedBean.getCurrentRoom().getName();
+        return getCurrentRoom().getName();
     }
 
     /**
@@ -35,8 +35,8 @@ public class ViewerDialog implements Serializable {
      *
      * @return see description.
      */
-    public RoomEntity.Type getRoomType() {
-        return viewerManagedBean.getCurrentRoom().getType();
+    public UIRoomAdaptor.Type getRoomType() {
+        return getCurrentRoom().getType();
     }
 
     /**
@@ -45,11 +45,12 @@ public class ViewerDialog implements Serializable {
      * @return see description.
      */
     public boolean hasEditPermissions() {
-        return SecurityService.isAdmin();
+        return SecurityService.isAdmin() || getCurrentRoom().isPrivateRoom();
     }
 
     /**
      * Returns the downloadable result in html format.
+     *
      * @return see description.
      */
     public StreamedContent getFile() {
@@ -58,6 +59,7 @@ public class ViewerDialog implements Serializable {
 
     /**
      * Returns the result of code execution. It is used only for export and can contain not the last value!
+     *
      * @return see description.
      */
     public String getResult() {
@@ -66,10 +68,20 @@ public class ViewerDialog implements Serializable {
 
     /**
      * Sets the result of code execution.
+     *
      * @param result escaped html, which is ready to be downloaded.
      */
     public void setResult(String result) {
         this.result = result;
+    }
+
+    /**
+     * Returns the current room.
+     *
+     * @return see description.
+     */
+    private UIRoomAdaptor getCurrentRoom() {
+        return viewerManagedBean.getCurrentRoom();
     }
 
     //

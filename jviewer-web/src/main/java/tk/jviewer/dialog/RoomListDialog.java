@@ -2,10 +2,10 @@ package tk.jviewer.dialog;
 
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
-import org.springframework.dao.DataAccessException;
 import tk.jviewer.business.model.JViewerBusinessException;
 import tk.jviewer.business.model.RoomEntity;
 import tk.jviewer.business.api.RoomService;
+import tk.jviewer.model.UIRoomAdaptor;
 import tk.jviewer.security.SecurityService;
 
 import javax.annotation.PostConstruct;
@@ -27,12 +27,12 @@ public class RoomListDialog implements Serializable {
     private static final long serialVersionUID = 8681579858580912746L;
     private static final Logger logger = Logger.getLogger(MainDialog.class);
 
-    private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(RoomEntity.Type.values()).map(Enum::name).collect(Collectors.toList());
+    private static final List<String> POSSIBLE_ROOM_TYPES = Stream.of(UIRoomAdaptor.Type.values()).map(Enum::name).collect(Collectors.toList());
 
-    private List<RoomEntity> availableRooms;
+    private List<UIRoomAdaptor> availableRooms;
 
     private String roomName;
-    private RoomEntity.Type roomType;
+    private UIRoomAdaptor.Type roomType;
 
     private RoomService roomService;
 
@@ -41,7 +41,10 @@ public class RoomListDialog implements Serializable {
      */
     @PostConstruct
     public void init() {
-        availableRooms = retrieveAvailableRooms();
+        availableRooms = new ArrayList<>();
+        for (RoomEntity room : retrieveAvailableRooms()) {
+            availableRooms.add(new UIRoomAdaptor(room.getName(), room.getType()));
+        }
     }
 
     /**
@@ -49,7 +52,7 @@ public class RoomListDialog implements Serializable {
      *
      * @return see description.
      */
-    public List<RoomEntity> getAvailableRooms() {
+    public List<UIRoomAdaptor> getAvailableRooms() {
         return availableRooms;
     }
 
@@ -67,7 +70,7 @@ public class RoomListDialog implements Serializable {
      *
      * @param room viewer room.
      */
-    public void chooseRoom(RoomEntity room) {
+    public void chooseRoom(UIRoomAdaptor room) {
         RequestContext.getCurrentInstance().closeDialog(room);
     }
 
@@ -76,9 +79,9 @@ public class RoomListDialog implements Serializable {
      *
      * @param room room to be deleted.
      */
-    public void deleteRoom(RoomEntity room) {
+    public void deleteRoom(UIRoomAdaptor room) {
         try {
-            roomService.deleteRoom(room);
+            roomService.deleteRoom(new RoomEntity(room.getName(), room.getType()));
             init();
         } catch (Exception e) {
             logger.error("Could not delete the room", e);
@@ -122,7 +125,7 @@ public class RoomListDialog implements Serializable {
      *
      * @return see description.
      */
-    public RoomEntity.Type getRoomType() {
+    public UIRoomAdaptor.Type getRoomType() {
         return roomType;
     }
 
@@ -130,7 +133,7 @@ public class RoomListDialog implements Serializable {
         this.roomName = roomName;
     }
 
-    public void setRoomType(RoomEntity.Type roomType) {
+    public void setRoomType(UIRoomAdaptor.Type roomType) {
         this.roomType = roomType;
     }
 
@@ -146,7 +149,7 @@ public class RoomListDialog implements Serializable {
     private List<RoomEntity> retrieveAvailableRooms() {
         try {
             return roomService.getRooms();
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             logger.error("Cannot find available rooms", e);
             addMessage(SEVERITY_ERROR, "Could not retrieve the list of rooms, because of system error. Please refer to your system administrator");
             return new ArrayList<>();

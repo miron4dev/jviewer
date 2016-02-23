@@ -28,8 +28,7 @@
         <pe:javascript event="change" execute="notify()"/>
     </pe:codeMirror>
     <br/>
-    <p:commandButton id="export-btn" value="#{msg['J69']}" ajax="false" icon="ui-icon-arrowthick-1-s"
-        disabled="#{!cc.attrs.bean.fileAvailable}">
+    <p:commandButton id="export-btn" value="#{msg['J69']}" ajax="false" icon="ui-icon-arrowthick-1-s">
         <p:fileDownload value="#{cc.attrs.bean.file}"/>
     </p:commandButton>
     <iframe id="result" frameBorder="0" width="1900" height="300" src=""></iframe>

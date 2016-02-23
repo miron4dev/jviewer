@@ -14,21 +14,25 @@
             <h:panelGroup styleClass="ContainerIndent" layout="block">
                 <h:form>
                     <p:splitButton value="Welcome, #{mainDialog.username}" icon="fa fa-slideshare" styleClass="Fleft">
-                        <p:menuitem value="My Settings" icon="fa fa-cogs" action="#{mainDialog.editProfile}"/>
-                        <p:menuitem value="Uploaded Codes" icon="fa fa-cloud-upload" disabled="true"/>
-                        <p:menuitem value="Download Codes" icon="fa fa-cloud-download" disabled="true"/>
+                        <p:menuitem value="My Settings" action="#{mainDialog.editProfile}" icon="fa fa-cogs" process="@this"
+                            immediate="true"/>
+                        <p:menuitem value="Logout" action="#{mainDialog.logout}" icon="fa fa-lock" process="@this"
+                            immediate="true"/>
                     </p:splitButton>
                 </h:form>
 
                 <div class="EmptyBox10 ShowOnMobile"></div>
                 <p:commandButton value="Rooms" icon="fa fa-list-alt" actionListener="#{mainDialog.openRoomList}"
-                    styleClass="Fright FloatNoneOnMobile">
+                    immediate="true" process="@this" styleClass="Fright FloatNoneOnMobile">
                     <p:ajax event="dialogReturn" listener="#{mainDialog.onRoomChosen}"/>
                 </p:commandButton>
-                <p:button value="Code Editor" icon="fa fa-cubes" disabled="true"
-                    styleClass="Fright BrownButton FloatNoneOnMobile" />
-                <p:button value="Write message" icon="fa fa-send" disabled="true"
-                    styleClass="Fright GreenButton FloatNoneOnMobile"/>
+                <p:commandButton value="Java Code Editor" icon="fa fa-cubes" action="#{mainDialog.gotoJavaRoom}"
+                    immediate="true" process="@this" styleClass="Fright BrownButton FloatNoneOnMobile" />
+                <p:commandButton value="Web Code Editor" icon="fa fa-cubes" action="#{mainDialog.gotoWebRoom}"
+                    immediate="true" process="@this" styleClass="Fright GreenButton FloatNoneOnMobile" />
+                <!-- Uncomment in case of demand -->
+                <!--<p:button value="Write message" icon="fa fa-send" disabled="true"-->
+                    <!--styleClass="Fright GreenButton FloatNoneOnMobile"/>-->
             </h:panelGroup>
         </h:panelGroup>
 

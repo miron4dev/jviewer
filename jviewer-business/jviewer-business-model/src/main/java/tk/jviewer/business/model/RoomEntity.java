@@ -25,7 +25,6 @@ public class RoomEntity {
     private String name;
 
     @Column(name = "type", nullable = false)
-
     @org.hibernate.annotations.Type(type = "roomTypeConverter")
     private Type type;
 

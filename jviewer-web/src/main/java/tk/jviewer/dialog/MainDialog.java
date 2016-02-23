@@ -2,7 +2,7 @@ package tk.jviewer.dialog;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-import tk.jviewer.business.model.RoomEntity;
+import tk.jviewer.model.UIRoomAdaptor;
 import tk.jviewer.model.ViewerManagedBean;
 import tk.jviewer.security.SecurityService;
 
@@ -55,6 +55,20 @@ public class MainDialog implements Serializable {
     }
 
     /**
+     * Navigates to the private WEB room.
+     */
+    public void gotoWebRoom() throws IOException {
+        gotoPrivateRoom(UIRoomAdaptor.Type.HTML);
+    }
+
+    /**
+     * Navigates to the private Java room.
+     */
+    public void gotoJavaRoom() throws IOException {
+        gotoPrivateRoom(UIRoomAdaptor.Type.JAVA);
+    }
+
+    /**
      * Opens Room List dialog.
      */
     public void openRoomList() {
@@ -73,8 +87,6 @@ public class MainDialog implements Serializable {
         options.put("resizable", false);
         options.put("draggable", false);
         options.put("modal", true);
-//        options.put("contentHeight", "420px");
-//        options.put("height", "400px");
         RequestContext.getCurrentInstance().openDialog("editProfile", options, null);
     }
 
@@ -85,7 +97,20 @@ public class MainDialog implements Serializable {
      * @throws IOException if the redirect to viewer page was failed.
      */
     public void onRoomChosen(SelectEvent event) throws IOException {
-        RoomEntity room = (RoomEntity) event.getObject();
+        UIRoomAdaptor room = (UIRoomAdaptor) event.getObject();
+        viewerManagedBean.setCurrentRoom(room);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(VIEWER_PAGE.getUri());
+    }
+
+    /**
+     * Navigates to the private room.
+     *
+     * @param type type of the room.
+     * @throws IOException if the redirect to viewer page was failed.
+     */
+    private void gotoPrivateRoom(UIRoomAdaptor.Type type) throws IOException {
+        UIRoomAdaptor room = new UIRoomAdaptor(type);
+        room.setPrivateRoom(true);
         viewerManagedBean.setCurrentRoom(room);
         FacesContext.getCurrentInstance().getExternalContext().redirect(VIEWER_PAGE.getUri());
     }
