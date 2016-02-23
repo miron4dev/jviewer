@@ -297,6 +297,15 @@
         <easymock.version>3.4</easymock.version>
         <shale.version>1.0.5</shale.version>
         <hamcrest.version>1.3</hamcrest.version>
+
+        <!-- Exclude from the scope of SkinnyWars -->
+        <war.packaging.excludes>adamantium-theme</war.packaging.excludes>
+
+        <!-- WildFly remote deploy -->
+        <wildfly.hostname>dummy</wildfly.hostname>
+        <wildfly.port>12345</wildfly.port>
+        <wildfly.username>dummy</wildfly.username>
+        <wildfly.password>dummy</wildfly.password>
     </properties>
 
     <build>
@@ -317,7 +326,7 @@
                 <configuration>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                    <packagingExcludes>%regex[WEB-INF/lib/(?!(${war.packaging.excludes})).*.jar]</packagingExcludes>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -342,6 +351,17 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.1.0.Alpha6</version>
+                <configuration>
+                    <hostname>${wildfly.hostname}</hostname>
+                    <port>${wildfly.port}</port>
+                    <username>${wildfly.username}</username>
+                    <password>${wildfly.password}</password>
+                </configuration>
             </plugin>
         </plugins>
     </build>
