@@ -28,8 +28,6 @@
     <inceptionYear>2013</inceptionYear>
 
     <modules>
-        <!-- TODO: remove legacy artifact -->
-        <!--<module>jviewer-main</module>-->
         <module>jviewer-web</module>
         <module>jviewer-jc</module>
         <module>jviewer-console</module>
