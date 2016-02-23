@@ -1,8 +1,9 @@
 package tk.jviewer.servlet;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import tk.jviewer.business.api.RegistrationService;
+import tk.jviewer.business.api.UpdateProfileService;
 
 import javax.faces.application.FacesMessage;
 import javax.servlet.ServletConfig;
@@ -16,15 +17,16 @@ import java.io.IOException;
 import static tk.jviewer.model.JViewerUriPath.LOGIN_PAGE;
 
 /**
- * Servlet for users registration. Users get link to this servlet by email.
+ * Servlet for granting the admin permissions. Admin get link to this servlet by email.
  */
-@WebServlet("/registration")
-public class RegistrationServlet extends HttpServlet implements EncryptedRedirectionServlet {
+@WebServlet("/makeadmin")
+public class MakeAdminServlet extends HttpServlet implements EncryptedRedirectionServlet {
 
-    private static final long serialVersionUID = -2403791510373217767L;
+    private static final long serialVersionUID = 582766960556597123L;
+    private static final Logger logger = Logger.getLogger(MakeAdminServlet.class);
 
     @Autowired
-    private RegistrationService registrationService;
+    private UpdateProfileService updateProfileService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -35,12 +37,13 @@ public class RegistrationServlet extends HttpServlet implements EncryptedRedirec
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            registrationService.createProfile(req.getQueryString());
+            updateProfileService.makeAdmin(req.getQueryString());
             req.getSession().setAttribute(SERVLET_RESULT, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Registration was successful. Now you can login.", null));
+                "Admin Access has been granted.", null));
         } catch (Exception e) {
+            logger.error("Could not give the admin permissions", e);
             req.getSession().setAttribute(SERVLET_RESULT, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Redirect link is outdated or incorrect. Registration has failed!", null));
+                "Redirect link is incorrect.", null));
         }
         resp.sendRedirect("/" + LOGIN_PAGE.getUri());
     }

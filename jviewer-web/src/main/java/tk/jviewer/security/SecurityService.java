@@ -48,7 +48,7 @@ public class SecurityService implements AuthenticationProvider {
         if (encoder.matches(password, userEntity.getPassword())) {
             authority = new SimpleGrantedAuthority(userEntity.getRole());
             List<Permission> permissions = ADMIN_ROLE.equals(userEntity.getRole()) ? Collections.singletonList(Permission.ADMIN) : new ArrayList<>();
-            user = new UserProfile(userEntity.getUsername(), permissions);
+            user = new UserProfile(userEntity.getUsername(), userEntity.getEmail(), permissions);
         } else {
             handleAuthenticationFailed(username);
             return null;
@@ -83,6 +83,16 @@ public class SecurityService implements AuthenticationProvider {
     public static String getUsername() {
         UserProfile profile = getCurrentProfile();
         return profile != null ? profile.getName() : StringUtils.EMPTY;
+    }
+
+    /**
+     * Returns the email of authenticated user.
+     *
+     * @return see description.
+     */
+    public static String getUserEmail() {
+        UserProfile profile = getCurrentProfile();
+        return profile != null ? profile.getEmail() : StringUtils.EMPTY;
     }
 
     /**

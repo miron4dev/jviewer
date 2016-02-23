@@ -36,7 +36,8 @@
                     <a class="menulink Animated05"><i class="icon-settings"></i> <span>Settings</span></a>
                     <ul style="margin-left:-145px;">
                         <li>
-                            <p:commandLink styleClass="FontAdamantiumBold" style="color: #666f77 !important;">
+                            <p:commandLink styleClass="FontAdamantiumBold" style="color: #666f77 !important;"
+                                action="#{mainDialog.editProfile}" immediate="true" process="@this">
                                 <i class="icon-users Fs18 Fleft MarRight10"></i>
                                 <h:outputText id="account-lnk-txt" value=" Account"/>
                             </p:commandLink>

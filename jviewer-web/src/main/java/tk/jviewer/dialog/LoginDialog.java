@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 import static tk.jviewer.model.JViewerUriPath.NEWS_PAGE;
-import static tk.jviewer.servlet.RegistrationServlet.REGISTRATION_RESULT;
+import static tk.jviewer.servlet.EncryptedRedirectionServlet.SERVLET_RESULT;
 
 /**
  * Login Dialog backing bean.
@@ -30,10 +30,10 @@ public class LoginDialog implements Serializable {
 
     public void init() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        FacesMessage facesMessage = (FacesMessage) session.getAttribute(REGISTRATION_RESULT);
+        FacesMessage facesMessage = (FacesMessage) session.getAttribute(SERVLET_RESULT);
         if (facesMessage != null) {
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-            session.setAttribute(REGISTRATION_RESULT, null);
+            session.setAttribute(SERVLET_RESULT, null);
         }
     }
 

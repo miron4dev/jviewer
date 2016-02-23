@@ -66,6 +66,19 @@ public class MainDialog implements Serializable {
     }
 
     /**
+     * Opens Edit Profile dialog.
+     */
+    public void editProfile() {
+        Map<String, Object> options = new HashMap<>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+//        options.put("contentHeight", "420px");
+//        options.put("height", "400px");
+        RequestContext.getCurrentInstance().openDialog("editProfile", options, null);
+    }
+
+    /**
      * On room chosen listener.
      *
      * @param event select event.
