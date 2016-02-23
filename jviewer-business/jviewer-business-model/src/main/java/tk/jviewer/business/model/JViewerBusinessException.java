@@ -28,6 +28,7 @@ public class JViewerBusinessException extends RuntimeException {
     }
 
     public enum ErrorCode {
-        USER_ALREADY_EXIST
+        USER_ALREADY_EXIST,
+        USER_DOESNT_EXIST
     }
 }

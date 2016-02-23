@@ -127,6 +127,16 @@
         </managed-property>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>forgotPasswordDialog</managed-bean-name>
+        <managed-bean-class>tk.jviewer.dialog.ForgotPasswordDialog</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>updateProfileService</property-name>
+            <value>#{updateProfileServiceImpl}</value>
+        </managed-property>
+    </managed-bean>
+
     <factory>
         <exception-handler-factory>
             org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory

@@ -37,6 +37,15 @@ public interface UpdateProfileService {
      * Change the user password.
      *
      * @param encryptedData encrypted name of the user and new password.
+     * @return new password.
      */
-    void changePassword(String encryptedData);
+    String changePassword(String encryptedData);
+
+    /**
+     * Sends a request to reset the user password.
+     *
+     * @param email email of the user that requires to reset password.
+     * @throws MessagingException if could not send the email.
+     */
+    void sendResetPasswordRequest(String email) throws MessagingException;
 }

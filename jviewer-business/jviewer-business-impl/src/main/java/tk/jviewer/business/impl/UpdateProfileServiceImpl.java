@@ -1,5 +1,6 @@
 package tk.jviewer.business.impl;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,12 +9,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.jviewer.business.api.MailService;
 import tk.jviewer.business.api.UpdateProfileService;
+import tk.jviewer.business.model.JViewerBusinessException;
 import tk.jviewer.business.model.UserEntity;
 
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +27,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
+import static tk.jviewer.business.model.JViewerBusinessException.ErrorCode.USER_DOESNT_EXIST;
 
 /**
  * Implements {@link UpdateProfileService}.
@@ -40,6 +47,11 @@ public class UpdateProfileServiceImpl implements UpdateProfileService {
     private static final String CHANGE_PASSWORD_MAIL_SUBJECT = "JViewer. Change password request";
     private static final String CHANGE_PASSWORD_MAIL_TEXT = "Hello {0},\nTo change the password please follow this link {1}";
     private static final String CHANGE_PASSWORD_SERVLET_PATH = "/changepassword?";
+
+    private static final String RESET_PASSWORD_MAIL_SUBJECT = "JViewer. Reset password";
+    private static final String RESET_PASSWORD_MAIL_TEXT = "Hello {0},\nSomeone has requested to reset your password." +
+        " If it was you, please follow this link {1}, otherwise ignore this message";
+    private static final String RESET_PASSWORD_SERVLET_PATH = "/resetpassword?";
 
     @Autowired
     private MailService mailService;
@@ -76,11 +88,28 @@ public class UpdateProfileServiceImpl implements UpdateProfileService {
 
     @Override
     @Transactional
-    public void changePassword(String encryptedData) {
+    public String changePassword(String encryptedData) {
         String[] decryptedData = StringUtils.split(encryptor.decrypt(encryptedData), DATA_SEPARATOR);
+        String password = decryptedData[1];
+
         UserEntity userEntity = em.find(UserEntity.class, decryptedData[0]);
-        userEntity.setPassword(encoder.encode(decryptedData[1]));
+        userEntity.setPassword(encoder.encode(password));
         em.merge(userEntity);
+
+        return password;
+    }
+
+    @Override
+    public void sendResetPasswordRequest(String email) throws MessagingException {
+        String username = getUsernameByEmail(email);
+        if (username == null) {
+            throw new JViewerBusinessException(USER_DOESNT_EXIST);
+        }
+
+        String newPassword = RandomStringUtils.random(10, true, true);
+        String link = generateLink(Arrays.asList(username, newPassword), RESET_PASSWORD_SERVLET_PATH);
+
+        mailService.sendMessage(email, RESET_PASSWORD_MAIL_SUBJECT, MessageFormat.format(RESET_PASSWORD_MAIL_TEXT, username, link));
     }
 
     /**
@@ -96,6 +125,24 @@ public class UpdateProfileServiceImpl implements UpdateProfileService {
             return new URL(request.getScheme(), request.getServerName(), request.getServerPort(),
                 servletUrl + encryptor.encrypt(urlData)).toString();
         } catch (MalformedURLException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the username by email.
+     *
+     * @param email email of user.
+     * @return the username or null if user with specified email doesn't exist.
+     */
+    private String getUsernameByEmail(String email) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> query = cb.createQuery(UserEntity.class);
+        Root<UserEntity> user = query.from(UserEntity.class);
+        query.where(cb.equal(user.get("email"), email));
+        try {
+            return em.createQuery(query).getSingleResult().getUsername();
+        } catch (NoResultException e) {
             return null;
         }
     }
