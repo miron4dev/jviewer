@@ -1,0 +1,10 @@
+.loginback::after {
+    background: #0288d1 url("#{resource['adamantium-layout:images/loginback.svg']}") repeat scroll 0 0;
+    content: " ";
+    height: 300px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
